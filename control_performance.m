@@ -46,7 +46,7 @@ for k = 1:length(steps)
         sigma(k) = (min(y(k,:))-y_inf)/(y_inf-y(k,1))
     end    
     % volume
-    V(k) = sum((a*u(k,:)+b)*Ts) 
+    V(k) = sum((a*u(k,:)+b)*Ts) %ts?
     % settling time t_reg
     delta = 0.05*r(k,:); 
     
