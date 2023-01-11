@@ -1,5 +1,5 @@
 clc, close all, clear 
-load('ref_tracking26.mat')
+load('ref_tracking28.mat')
 %% plots
 figure(11)
 hold on; grid minor; box on
@@ -34,19 +34,19 @@ for k = 1:length(steps)
 end
 
 references = [ref(1);r(:,1)];
-dref = diff(references)  
+dref = diff(references); 
 for k = 1:length(steps)
     % ISE
-    ISE(k) = sum(((y(k,:)-r(k,:)).^2)*Ts)
+    ISE(k) = sum(((y(k,:)-r(k,:)).^2)*Ts);
     % maximal overshoot/undershoot
     y_inf = mean(y(k,end-100:end));
     if dref(k)>0
-        sigma(k) = (max(y(k,:))-y_inf)/(y_inf-y(k,1))
+        sigma(k) = (max(y(k,:))-y_inf)/(y_inf-y(k,1));
     else
-        sigma(k) = (min(y(k,:))-y_inf)/(y_inf-y(k,1))
+        sigma(k) = (min(y(k,:))-y_inf)/(y_inf-y(k,1));
     end    
     % volume
-    V(k) = sum((a*u(k,:)+b)*Ts) %ts?
+    V(k) = sum((a*u(k,:)+b)*Ts); 
     % settling time t_reg
     delta = 0.05*r(k,:); 
     
@@ -54,10 +54,13 @@ for k = 1:length(steps)
     plot(t,y(k,:))
     plot(t,r(k,:)-delta,'--',t,r(k,:)+delta,'--')
     
-    ie = find (abs(y(k,:)-r(k,:)) >= delta, 1, 'last')
-    T005(k) = t(ie)
+    ie = find (abs(y(k,:)-r(k,:)) >= delta, 1, 'last');
+    T005(k) = t(ie);
     plot(T005(k), y(k,ie),'*')
 end
 
-
+ISE
+sigma
+V
+T005
 
