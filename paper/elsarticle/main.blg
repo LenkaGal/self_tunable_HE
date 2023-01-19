@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+Reallocating 'name_of_file' (item size: 1) to 15 items.
+The style file: elsarticle-num.bst
+Reallocating 'name_of_file' (item size: 1) to 11 items.
+Database file #1: references.bib
+Warning--empty author and editor in pct23
+You've used 2 entries,
+            2952 wiz_defined-function locations,
+            681 strings with 5257 characters,
+and the built_in function-call counts, 503 in all, are:
+= -- 38
+> -- 6
+< -- 2
++ -- 3
+- -- 1
+* -- 23
+:= -- 71
+add.period$ -- 2
+call.type$ -- 2
+change.case$ -- 2
+chr.to.int$ -- 3
+cite$ -- 3
+duplicate$ -- 18
+empty$ -- 73
+format.name$ -- 1
+if$ -- 138
+int.to.chr$ -- 0
+int.to.str$ -- 2
+missing$ -- 3
+newline$ -- 14
+num.names$ -- 1
+pop$ -- 23
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 39
+stack$ -- 0
+substring$ -- 2
+swap$ -- 3
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 2
+width$ -- 3
+write$ -- 22
+(There was 1 warning)
