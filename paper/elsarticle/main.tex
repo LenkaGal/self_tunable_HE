@@ -209,7 +209,8 @@ The constraints are considered in the terms of manipulated variable, i.e.
 
 Note, the variable $u$ represents the manipulated variable in the deviation form. The values of feed temperature and voltage of the heating medium pump corresponding to zero steady state are respectively $T^\mathrm{s}$~=~35 $^{\circ}\mathrm{C}$ and $U^\mathrm{s}$~=~35\%.
 
-The penalty matrices of the problem TODO:ref were systematically tuned and the corresponding control was implemented on the laboratory heat exchanger for every MPC setup. The aim was to determine, which penalty matrix will be the tuned one. Based on observations, the most significant effect on the control trajectories had tuning the penalty matrix $Q_\mathrm{y}$, while still preserving a satisfactory control performance, i.e., without steady-state control error and significant oscillations around the setpoint. The boundary values of matrix $Q_\mathrm{y}$ were tuned as $Q_\mathrm{y, L}$ = 100 and $Q_\mathrm{y, U}$ = 1000. The built-in integrator was penalized with $Q_\mathrm{x2}$ = 1 and the manipulated variable with $R$ = 10. The prediction horizon $N$ was 20 steps long. The control results for both control setups are compared in Fig.~\ref{fig:CV_boundaries} for the controlled variable, and in Fig.~\ref{fig:MV_boundaries} for the manipulated variable.
+The penalty matrices of the problem TODO:ref were systematically tuned and the corresponding control was implemented on the laboratory heat exchanger for every MPC setup. The aim was to determine, which penalty matrix will be the tuned one. Based on observations, the most significant effect on the control trajectories had tuning the penalty matrix $Q_\mathrm{y}$, while still preserving a satisfactory control performance, i.e., without steady-state control error and significant oscillations around the setpoint. The boundary values of matrix $Q_\mathrm{y}$ were tuned as $Q_\mathrm{y, L}$ = 100 and $Q_\mathrm{y, U}$ = 1000. The built-in integrator was penalized with $Q_\mathrm{x2}$ = 1 and the manipulated variable with $R$ = 10. The prediction horizon $N$ was 20 steps long. The explicit model predictive controllers were constructed in MATLAB R2020b using the Multi-Parametric Toolbox 3~\cite{mpt_conf}. 
+The controllers were implemented to track a time-varying reference. For the first 200 seconds, the system was in the steady state. After that the reference changed its value twice upwards and twice downwards. The reference changes also acquired different sizes in order to examine the proposed tuning method as it is dependent on the size of the reference step change. The control results for both control setups are compared in Fig.~\ref{fig:CV_boundaries} for the controlled variable, and in Fig.~\ref{fig:MV_boundaries} for the manipulated variable.
     
 
 \begin{figure}
@@ -228,10 +229,6 @@ The penalty matrices of the problem TODO:ref were systematically tuned and the c
 	\end{center}
 \end{figure}
 
-The trajectories in Fig.~\ref{fig:CV_boundaries} show the non-symmetric nature of controlling the process of heat exchange mainly when observing the overshoots and undershoots. When applying the control associated with the lower bound $Q_\mathrm{y, L}$, significant undershoots are present when tracking the reference downwards, i.e., when the reference change is negative. On the contrary, when implementing the controller associated with $Q_\mathrm{y, U}$, the undershoots are negligible, but significant overshoots can be seen when tracking the reference upwards.
-
-These observations form the base for the strategy of self-tuning the penalty matrix $Q_\mathrm{y}$. The strategy follows the ideas summarized in Section~\ref{sec:self_tunable_new}.
-
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=0.8\textwidth]{images/MV_boundaries}
@@ -239,6 +236,18 @@ These observations form the base for the strategy of self-tuning the penalty mat
 		\label{fig:MV_boundaries}
 	\end{center}
 \end{figure}
+
+The trajectories in Fig.~\ref{fig:CV_boundaries} show the non-symmetric nature of controlling the process of heat exchange mainly when observing the overshoots and undershoots. When applying the control associated with the lower bound $Q_\mathrm{y, L}$, significant undershoots are present when tracking the reference downwards, i.e., when the reference change is negative. On the contrary, when implementing the controller associated with $Q_\mathrm{y, U}$, the undershoots are negligible, but significant overshoots can be seen when tracking the reference upwards.
+
+These observations form the base for the strategy of self-tuning the penalty matrix $Q_\mathrm{y}$. The strategy follows the ideas summarized in Section~\ref{sec:self_tunable_new}.
+
+TODO: dopisat strucne princip ladenia podla toho, ako bude spisana teoria v ~\ref{sec:self_tunable_new}. odkazat sa na rovnice atd...
+
+The control results of the selt-tunable technique compared to the boundary controllers can be seen in Fig.~\ref{fig:CV} for the controlled variable, and in Fig.~\ref{fig:MV} for the manipulated variable. It can be seen that the tuned controller combined the benefits of the two boundary controllers. The overshoots and undershoots were reduced, as in the first half of control the penalty matrix $Q_\mathrm{y}$ acquired value from the first half of the penalty interval. When tracking the reference with negative change, the penalty matrix acquired the values from the second half of the interval, i.e., closer to the upper bound $Q_\mathrm{y,U}$. 
+The similarity with the boundary controllers can be seen also on the manipulated variable trajectory. Note, the constraints on the input variable were satisfied as they were scaled based on the boundary controllers which are constructed considering the contraints. 
+
+TODO: what about state constraints?
+
 
 \begin{figure}
 	\begin{center}
@@ -256,12 +265,14 @@ These observations form the base for the strategy of self-tuning the penalty mat
 	\end{center}
 \end{figure}
 
+The control performance was also investigated quantitatively. The Table~\ref{tab:control_performance} summarizes the evaluated control performance criteria for the tuned and two boundary controllers. The control performance is evaluated for every reference step change respectively. The criteria are integral square error $ISE$, maximal overshoot/undershoot $\sigma_{\mathrm{max}}$, settling time $t_{\epsilon}$ for 5\%-neighbourhood of the reference value, and the volume of the heating medium utilized for the corresponding control. To provide better readability of the results, the best (i.e. minimal) values are written in bold. 
+
 \begin{table}[h!]
 	\begin{center}
 		\caption{Control performance criteria.}
 		\label{tab:control_performance}
 		\begin{tabular}{c|c|c|c|c|c} 
-			Reference step change & $Q_\mathrm{y}$ & ISE [$^{\circ}\mathrm{C}^2$\,s] & $\sigma_{\mathrm{max}}$\,[\%] & $t_{\epsilon}$\,[s] & $V$\,[l] \\
+			Reference step change & $Q_\mathrm{y}$ & $ISE$ [$^{\circ}\mathrm{C}^2$\,s] & $\sigma_{\mathrm{max}}$\,[\%] & $t_{\epsilon}$\,[s] & $V$\,[l] \\
 			\hline
 			\multirow{2}{*}{1} & 1000 & 714 & 33.50 & 16.5 & \textbf{2.12} \\
 			    & 100 & 867 & 16.65 & 12.5 & 2.36 \\ 
@@ -281,6 +292,32 @@ These observations form the base for the strategy of self-tuning the penalty mat
 		\end{tabular}
 	\end{center}
 \end{table}
+
+It can be seen in Table~\ref{tab:control_performance}, that real-time tuning of the controller helped to improve two to three criteria when tracking each reference value. The cost for this is the energy associated with control. Although the integral square error, maximal overshoot/undershoot and settling time decreased, the volume of consumed heating medium did not. Nevertheless, the average deterioration in the terms of consumed heating medium is approximately 17\%. 
+
+The improvement or deterioration in percentage of using the tunable controller relative to the second best setup is summarized in Table~\ref{tab:improvement} for every reference step change separately. The negative numbers represent deterioration compared to the best controller setup in the corresponding reference tracking. 
+
+\begin{table}[h!]
+	\begin{center}
+		\caption{Improvement or deterioration of the control performance in percentage.}
+		\label{tab:improvement}
+		\begin{tabular}{c|c|c|c|c} 
+			Reference step change & $ISE$ & $\sigma_{\mathrm{max}}$ & $t_{\epsilon}$ & $V$ \\
+			\hline
+			1 & 5.04 & 8.77 & 24.00 & -12.26 \\ 
+			\hline
+			2 & 32.05 & 17.72 & -90.00 & -34.54 \\ 
+			\hline
+			3 & 24.08 & -29.97 & 0 & -4.48 \\ 
+			\hline
+			4 & 5.57 & 10.53 & 17.78 & -18.28  
+		\end{tabular}
+	\end{center}
+\end{table}
+
+It can be seen that implementing a tunable controller leads to improved control performance in many criteria. Utilizing a controller with a scalable aggressivity according to the operating conditions leads in general to higher accuracy, lower overshoot and faster achieving the reference value. %It should be also noted that the deterioration of every criterium is calculated subject to the best out of \textit{two} other controllers. It follows that the evaluation is strict as in practice only one controller would be available.
+Although the volume of the heating medium is not saved in this control scenario, the improved control performance may lead to other benefits. 
+TODO: krajsie skomentovat vyhody zlepsenia kvality riadenia
 
 \section{Conclusion}
 \label{sec:conclusion}

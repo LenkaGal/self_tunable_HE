@@ -12,4 +12,8 @@
 B.~G. Liptak, Instrument Engineers' Handbook, 4th Edition, Vol. 2: Process
   Control and Optimization, CRC Press, London, 2005.
 
+\bibitem{mpt_conf}
+M.~Herceg, M.~Kvasnica, C.~Jones, M.~Morari, Multi-parametric toolbox 3.0, in:
+  European Control Conference, 2013, pp. 502--510.
+
 \end{thebibliography}
