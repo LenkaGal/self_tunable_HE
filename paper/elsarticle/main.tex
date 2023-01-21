@@ -151,14 +151,75 @@ max 250 words!
 %% main text
 \section{Introduction}
 \label{sec:introduction}
-
+ 
+(skor intro?)The benefit in form of lower computational complexity in the control phase comes hand in hand with a drawback. The size of the parametric solution may be so large, that it becomes impractical to utilize for two reasons: (i) memory footprint is higher than the available memory size of the control unit, (ii) the computational time associated with finding the optimal control action is higher than the available time period for control action implementation. Although this control strategy has its challenges, it is still very beneficial for practical usage for its benefits. 
 
 \section{Preliminaries}
 \label{sec:preliminaries}
+In this section, the theoretical background necessary for this work is summarized. First, the explicit model predictive control is recalled. Next, the tunable technique of the approximated explicit model predictive control is introduced. Last but not least, the self-tunable technique of the approximated explicit MPC is presented.
 
 \subsection{Explicit model predictive control}
 \label{sec:eMPC}
 TODO: remark, ze sme si vedomi aj delta-u formulacie, ale vedie na zlozitejsie eMPC
+
+Explicit model predictive control~\cite{Bemporad_automatica} represents a parametric solution of the model predictive control which makes it suitable for online implementation. As the explicit solution is available, it is not necessary to solve the optimization problem in every control step. As this work deals with practical implementation, let us consider the optimization problem in the following form:
+
+\begin{subequations}
+	\label{eq:mpc_problem}
+	\begin{eqnarray}
+		\label{eq:mpc_problem_cost}
+		\min_{u_0,u_{1},\ldots,u_{N-1}} &~& \! \sum_{k=0}^{N-1} \! \left( (y_k-y_\mathrm{ref})^{\intercal} Q_\mathrm{y} (y_k-y_\mathrm{ref}) + u_{k}^{\intercal} R u_{k} + x_{\mathrm{I},k}^{\intercal} Q_\mathrm{x} x_{\mathrm{I},k} \right)  \\
+		\label{eq:mpc_problem_prediction_model_x}
+		\mathrm{s.t.\!:} &~& \widetilde{x}_{k+1} = \widetilde{A}\,\widetilde{x}_{k} + \widetilde{B}\,u_{k}, \\
+		\label{eq:mpc_problem_prediction_model_y}
+		&~& y_{k} = \widetilde{C}\,\widetilde{x}_{k}, \\
+		\label{eq:mpc_problem_input_constraints}
+		&~& u_{k} \in \mathcal{U}, \\
+		\label{eq:mpc_problem_state_constraints}
+		&~& y_{k} \in \mathcal{Y}, \\
+		\label{eq:mpc_problem_initial_coindition}
+		&~& \widetilde{x}_{0} = \theta, \\
+		\label{eq:mpc_problem_k_range}
+		&~& k = 0,1,\ldots, N-1,
+	\end{eqnarray}
+\end{subequations}
+
+where $k$ denotes the step of the prediction horizon $N$. The parameter $\theta \in \Theta$ in Eq.~\eqref{eq:mpc_problem_initial_coindition} represents the initial condition of the optimization problem for which it is parametrically precomputed. The prediction model in~\eqref{eq:mpc_problem_prediction_model_x}--\eqref{eq:mpc_problem_prediction_model_y} has the form of extended linear time-invariant (LTI) system for given extended state matrix $\widetilde{A} \in \mathbb{R}^{n_{\mathrm{x}} \times n_{\mathrm{x}}}$, extended input matrix $\widetilde{B} \in \mathbb{R}^{n_{\mathrm{x}} \times n_{\mathrm{u}}}$ and extended output matrix $\widetilde{C} \in \mathbb{R}^{n_{\mathrm{y}} \times n_{\mathrm{x}}}$. Variables $\widetilde{x} \in \mathbb{R}^{n_{\mathrm{x}}}$, $u \in \mathbb{R}^{n_{\mathrm{u}}}$, $y \in \mathbb{R}^{n_{\mathrm{y}}}$ are vectors of corresponding extended system states, control inputs and system outputs, respectively. The sets $\mathcal{U} \subseteq \mathbb{R}^{n_{\mathrm{u}}}$, $\mathcal{Y} \subseteq \mathbb{R}^{n_{\mathrm{x}}}$ are sets of physical constraints on inputs and outputs, respectively. The penalty matrix $Q_\mathrm{y} \in \mathbb{R}^{n_{\mathrm{y}} \times n_{\mathrm{y}}}$ penalizes the squarred control error, i.e., the deviation between the output and output reference value $y_\mathrm{ref}$. The matrix $R \in \mathbb{R}^{n_{\mathrm{u}} \times n_{\mathrm{u}}}$ penalizes the squarred value of control inputs. To obtain the offset-free control results, the built-in integrator was included in the state-space model, see e.q.~\cite{Ruscio_MPC_integral}. The value of integrator is also penalized in the cost function with the penalty matrix $Q_\mathrm{x} \in \mathbb{R}^{n_{\mathrm{y}} \times n_{\mathrm{y}}}$.
+
+The model extended with the built-in integrator in~\eqref{eq:mpc_problem_prediction_model_x}--\eqref{eq:mpc_problem_prediction_model_y} can be rewritten as:
+
+\begin{subequations}
+	\begin{eqnarray} 
+		\label{eq:mpc_extended_model_x} 
+		\widetilde{x}_{k+1} &=& \begin{bmatrix} x_{k+1} \\ 	x_{\mathrm{I},k+1}\end{bmatrix} = \begin{bmatrix} A & \textit{0} \\ -T_\mathrm{s} C & I \end{bmatrix} \begin{bmatrix} x_{k} \\ x_{\mathrm{I},k} \end{bmatrix} + \begin{bmatrix} B \\ I \end{bmatrix} u_{k}, \\
+		\label{eq:mpc_extended_model_y}
+		y_k &=& \begin{bmatrix} C & \textit{0} \end{bmatrix} \begin{bmatrix} x_{k} \\ x_{\mathrm{I},k} \end{bmatrix},
+	\end{eqnarray}
+\end{subequations}
+
+where $x_{\mathrm{I}} \in \mathbb{R}^{n_{\mathrm{y}}}$ is the integral of the control error, $T_\mathrm{s}$ denotes the sampling time and matrices $A$, $B$, $C$ are well-known linear time-invariant state-space matrices that form the extended model. Thanks to this extension and penalization in the cost function in Eq.~\eqref{eq:mpc_problem_cost}, not only the control error are penalized, but also its integral, which leads to similar results as incorporating integral part in PID controller.
+
+Solving the MPC quadratic optimization problem in Eq.~\eqref{eq:mpc_problem} parametrically leads to explicit solution in the form of piece-wise affine control law consisting of $r$ critical regions:
+
+\begin{eqnarray}
+\label{eq:PWA_control_law}
+u(\theta) = \left\{ 
+\begin{matrix}
+	F_{1} \, \theta + g_{1} & \mathrm{if} & \quad \theta \in \mathcal{R}_1, \\
+	F_{2} \, \theta + g_{2} & \mathrm{else}\,\,\mathrm{if} &\quad \theta \in \mathcal{R}_2, \\
+	\vdots & \\
+	F_{r} \, \theta + g_{r} & \mathrm{else}\,\,\mathrm{if} & \quad \theta \in \mathcal{R}_{r}, \\
+\end{matrix}
+\right.
+\end{eqnarray}
+where $F_{i}$ and $g_{i}$ respectively are the slope and affine section of the corresponding control law. The piece-wise affine function from Eq.~\eqref{eq:PWA_control_law} is stored and used in the online, i.e., control phase. Based on identifying the critical region where the parameter $\theta$ belongs, the optimal control input is calculated based on the associated control law.
+
+Note, many other formulations of the optimization problems are elaborated, mainly in the terms of cost functions. Also, the incremental (velocity) formulation of the state-space model is common, but leads to further extendsion of the vector of parameters $\theta$ and therefore the explicit MPC complexity increases. Another option for offset-free tracking is also disturbance observer. For such an overview see e.g. ...TODO. 
+Klauco reference governors? minimovka zdroje
+
+
+
+      
 
 \subsection{Tunable explicit model predictive control}
 \label{sec:tunable}
@@ -209,7 +270,7 @@ The constraints are considered in the terms of manipulated variable, i.e.
 
 Note, the variable $u$ represents the manipulated variable in the deviation form. The values of feed temperature and voltage of the heating medium pump corresponding to zero steady state are respectively $T^\mathrm{s}$~=~35 $^{\circ}\mathrm{C}$ and $U^\mathrm{s}$~=~35\%.
 
-The penalty matrices of the problem TODO:ref were systematically tuned and the corresponding control was implemented on the laboratory heat exchanger for every MPC setup. The aim was to determine, which penalty matrix will be the tuned one. Based on observations, the most significant effect on the control trajectories had tuning the penalty matrix $Q_\mathrm{y}$, while still preserving a satisfactory control performance, i.e., without steady-state control error and significant oscillations around the setpoint. The boundary values of matrix $Q_\mathrm{y}$ were tuned as $Q_\mathrm{y, L}$ = 100 and $Q_\mathrm{y, U}$ = 1000. The built-in integrator was penalized with $Q_\mathrm{x2}$ = 1 and the manipulated variable with $R$ = 10. The prediction horizon $N$ was 20 steps long. The explicit model predictive controllers were constructed in MATLAB R2020b using the Multi-Parametric Toolbox 3~\cite{mpt_conf}. 
+The penalty matrices of the problem Eq.~\eqref{eq:mpc_problem} were systematically tuned and the corresponding control was implemented on the laboratory heat exchanger for every MPC setup. The aim was to determine, which penalty matrix will be the tuned one. Based on observations, the most significant effect on the control trajectories had tuning the penalty matrix $Q_\mathrm{y}$, while still preserving a satisfactory control performance, i.e., without steady-state control error and significant oscillations around the setpoint. The boundary values of matrix $Q_\mathrm{y}$ were tuned as $Q_\mathrm{y, L}$ = 100 and $Q_\mathrm{y, U}$ = 1000. The built-in integrator was penalized with $Q_\mathrm{x2}$ = 1 and the manipulated variable with $R$ = 10. The prediction horizon $N$ was 20 steps long. The explicit model predictive controllers were constructed in MATLAB R2020b using the Multi-Parametric Toolbox 3~\cite{mpt_conf}. 
 The controllers were implemented to track a time-varying reference. For the first 200 seconds, the system was in the steady state. After that the reference changed its value twice upwards and twice downwards. The reference changes also acquired different sizes in order to examine the proposed tuning method as it is dependent on the size of the reference step change. The control results for both control setups are compared in Fig.~\ref{fig:CV_boundaries} for the controlled variable, and in Fig.~\ref{fig:MV_boundaries} for the manipulated variable.
     
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.11.16)  20 JAN 2023 13:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.11.16)  21 JAN 2023 14:24
 entering extended mode
 **./main.tex
 (main.tex
@@ -440,7 +440,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.182 
+l.166 
        [1
 
 
@@ -448,17 +448,22 @@ l.182
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.214 
-       [2pdfTeX warning (ext4): destination with the same identifier (name{equa
-tion.4.1}) has been already used, duplicate ignored
+l.197 	\end{eqnarray}
+                      [2pdfTeX warning (ext4): destination with the same identi
+fier (name{equation.2.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.214 
-      ]
-<images/HE.png, id=80, 722.7pt x 542.901pt>
+l.197 	\end{eqnarray}
+                     ] [3pdfTeX warning (ext4): destination with the same ident
+ifier (name{equation.2.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.239 \section
+              {Results and discussion}] [4]
+<images/HE.png, id=109, 722.7pt x 542.901pt>
 File: images/HE.png Graphic file (type png)
 <use images/HE.png>
-Package pdftex.def Info: images/HE.png  used on input line 218.
+Package pdftex.def Info: images/HE.png  used on input line 279.
 (pdftex.def)             Requested size: 312.00119pt x 234.37897pt.
 Package epstopdf Info: Source file: <images/CV_boundaries.eps>
 (epstopdf)                    date: 2023-01-19 17:13:54
@@ -469,17 +474,17 @@ Package epstopdf Info: Source file: <images/CV_boundaries.eps>
 (epstopdf)                    size: 81655 bytes
 (epstopdf)             Command: <epstopdf --outfile=images/CV_boundaries-eps-co
 nverted-to.pdf images/CV_boundaries.eps>
-(epstopdf)             \includegraphics on input line 226.
+(epstopdf)             \includegraphics on input line 287.
 Package epstopdf Info: Output file is already uptodate.
 
 
 pdfTeX warning: pdflatex.exe (file ./images/CV_boundaries-eps-converted-to.pdf)
 : PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<images/CV_boundaries-eps-converted-to.pdf, id=82, 421.575pt x 316.18124pt>
+<images/CV_boundaries-eps-converted-to.pdf, id=111, 421.575pt x 316.18124pt>
 File: images/CV_boundaries-eps-converted-to.pdf Graphic file (type pdf)
 <use images/CV_boundaries-eps-converted-to.pdf>
 Package pdftex.def Info: images/CV_boundaries-eps-converted-to.pdf  used on inp
-ut line 226.
+ut line 287.
 (pdftex.def)             Requested size: 312.00119pt x 234.00423pt.
 Package epstopdf Info: Source file: <images/MV_boundaries.eps>
 (epstopdf)                    date: 2023-01-19 17:13:22
@@ -490,26 +495,26 @@ Package epstopdf Info: Source file: <images/MV_boundaries.eps>
 (epstopdf)                    size: 79055 bytes
 (epstopdf)             Command: <epstopdf --outfile=images/MV_boundaries-eps-co
 nverted-to.pdf images/MV_boundaries.eps>
-(epstopdf)             \includegraphics on input line 234.
+(epstopdf)             \includegraphics on input line 295.
 Package epstopdf Info: Output file is already uptodate.
 
 
 pdfTeX warning: pdflatex.exe (file ./images/MV_boundaries-eps-converted-to.pdf)
 : PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<images/MV_boundaries-eps-converted-to.pdf, id=83, 421.575pt x 316.18124pt>
+<images/MV_boundaries-eps-converted-to.pdf, id=112, 421.575pt x 316.18124pt>
 File: images/MV_boundaries-eps-converted-to.pdf Graphic file (type pdf)
 <use images/MV_boundaries-eps-converted-to.pdf>
 Package pdftex.def Info: images/MV_boundaries-eps-converted-to.pdf  used on inp
-ut line 234.
+ut line 295.
 (pdftex.def)             Requested size: 312.00119pt x 234.00423pt.
 
-Overfull \hbox (1.72787pt too wide) in paragraph at lines 242--243
+Overfull \hbox (1.72787pt too wide) in paragraph at lines 303--304
 []\OT1/cmr/m/n/12 These ob-ser-va-tions form the base for the strat-egy of self
 -tuning the penalty
  []
 
-[3 <./images/HE.png>] [4 <./images/CV_boundaries-eps-converted-to.pdf>]
-[5 <./images/MV_boundaries-eps-converted-to.pdf>]
+[5] [6 <./images/HE.png>] [7 <./images/CV_boundaries-eps-converted-to.pdf>]
+[8 <./images/MV_boundaries-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <images/CV.eps>
 (epstopdf)                    date: 2023-01-19 17:11:22
 (epstopdf)                    size: 412583 bytes
@@ -518,16 +523,16 @@ Package epstopdf Info: Source file: <images/CV.eps>
 (epstopdf)                    size: 105545 bytes
 (epstopdf)             Command: <epstopdf --outfile=images/CV-eps-converted-to.
 pdf images/CV.eps>
-(epstopdf)             \includegraphics on input line 254.
+(epstopdf)             \includegraphics on input line 315.
 Package epstopdf Info: Output file is already uptodate.
 
 
 pdfTeX warning: pdflatex.exe (file ./images/CV-eps-converted-to.pdf): PDF inclu
 sion: found PDF version <1.7>, but at most version <1.5> allowed
-<images/CV-eps-converted-to.pdf, id=110, 421.575pt x 316.18124pt>
+<images/CV-eps-converted-to.pdf, id=146, 421.575pt x 316.18124pt>
 File: images/CV-eps-converted-to.pdf Graphic file (type pdf)
 <use images/CV-eps-converted-to.pdf>
-Package pdftex.def Info: images/CV-eps-converted-to.pdf  used on input line 254
+Package pdftex.def Info: images/CV-eps-converted-to.pdf  used on input line 315
 .
 (pdftex.def)             Requested size: 312.00119pt x 234.00423pt.
 Package epstopdf Info: Source file: <images/MV.eps>
@@ -538,50 +543,54 @@ Package epstopdf Info: Source file: <images/MV.eps>
 (epstopdf)                    size: 108902 bytes
 (epstopdf)             Command: <epstopdf --outfile=images/MV-eps-converted-to.
 pdf images/MV.eps>
-(epstopdf)             \includegraphics on input line 262.
+(epstopdf)             \includegraphics on input line 323.
 Package epstopdf Info: Output file is already uptodate.
 
 
 pdfTeX warning: pdflatex.exe (file ./images/MV-eps-converted-to.pdf): PDF inclu
 sion: found PDF version <1.7>, but at most version <1.5> allowed
-<images/MV-eps-converted-to.pdf, id=111, 421.575pt x 316.18124pt>
+<images/MV-eps-converted-to.pdf, id=147, 421.575pt x 316.18124pt>
 File: images/MV-eps-converted-to.pdf Graphic file (type pdf)
 <use images/MV-eps-converted-to.pdf>
-Package pdftex.def Info: images/MV-eps-converted-to.pdf  used on input line 262
+Package pdftex.def Info: images/MV-eps-converted-to.pdf  used on input line 323
 .
 (pdftex.def)             Requested size: 312.00119pt x 234.00423pt.
-[6 <./images/CV-eps-converted-to.pdf>] [7 <./images/MV-eps-converted-to.pdf>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[8] (main.bbl) [9] (main.aux)
+[9 <./images/CV-eps-converted-to.pdf>] [10 <./images/MV-eps-converted-to.pdf>]
+[11] (main.bbl) [12] (main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: B11FD3BFDC91CD694724846495BB7086;644.
  ) 
 Here is how much of TeX's memory you used:
- 7837 strings out of 480258
- 114298 string characters out of 2891276
- 425704 words of memory out of 3000000
- 24174 multiletter control sequences out of 15000+200000
- 543417 words of font info for 61 fonts, out of 3000000 for 9000
+ 7866 strings out of 480258
+ 114914 string characters out of 2891276
+ 426396 words of memory out of 3000000
+ 24193 multiletter control sequences out of 15000+200000
+ 544118 words of font info for 63 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 80i,11n,85p,944b,431s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 80i,14n,85p,1801b,431s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\lgalc\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
 1200.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/
 Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program File
 s/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX/fon
-ts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX/fonts/type1/publ
-ic/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/c
-m/cmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><
-C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Fil
-es/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fo
-nts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX/fonts/type1/pub
-lic/amsfonts/cm/cmti10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts
-/cm/cmti12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmti7.pf
-b>
-Output written on main.pdf (11 pages, 6504641 bytes).
+ts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX/fonts/type1/publ
+ic/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/c
+m/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><
+C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Fi
+les/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX/fon
+ts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/publi
+c/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/c
+m/cmsy6.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><
+C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program F
+iles/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX/
+fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Program Files/MiKTeX/fonts/type1/p
+ublic/amsfonts/symbols/msam10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/a
+msfonts/symbols/msbm10.pfb>
+Output written on main.pdf (14 pages, 6558889 bytes).
 PDF statistics:
- 194 PDF objects out of 1000 (max. 8388607)
- 33 named destinations out of 1000 (max. 500000)
+ 247 PDF objects out of 1000 (max. 8388607)
+ 42 named destinations out of 1000 (max. 500000)
  98 words of extra memory for PDF output out of 10000 (max. 10000000)
 

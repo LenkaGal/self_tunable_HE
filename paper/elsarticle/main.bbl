@@ -5,6 +5,14 @@
 \expandafter\ifx\csname href\endcsname\relax
   \def\href#1#2{#2} \def\path#1{#1}\fi
 
+\bibitem{Bemporad_automatica}
+A.~Bemporad, M.~Morari, V.~Dua, E.~N. Pistikopoulos, The explicit linear
+  quadratic regulator for constrained systems, Automatica 38 (2002) 3--20.
+
+\bibitem{Ruscio_MPC_integral}
+D.~D. Ruscio, Model predictive control with integral action: A simple mpc
+  algorithm, Modeling, Identification and Control 34~(3) (2013) 119--129.
+
 \bibitem{pct23}
 {Introduction Manual, PCT23-MkII Process Plant Trainer}, Armfield, 2007.
 
