@@ -156,12 +156,10 @@ max 250 words!
 
 \section{Preliminaries}
 \label{sec:preliminaries}
-In this section, the theoretical background necessary for this work is summarized. First, the explicit model predictive control is recalled. Next, the tunable technique of the approximated explicit model predictive control is introduced. Last but not least, the self-tunable technique of the approximated explicit MPC is presented.
+In this section, the theoretical background necessary for this work is summarized. First, the explicit model predictive control is recalled. Next, the tunable technique of the approximated explicit model predictive control is introduced. Last but not least, the ideas of self-tunable technique of the approximated explicit MPC are presented.
 
 \subsection{Explicit model predictive control}
 \label{sec:eMPC}
-TODO: remark, ze sme si vedomi aj delta-u formulacie, ale vedie na zlozitejsie eMPC
-
 Explicit model predictive control~\cite{Bemporad_automatica} represents a parametric solution of the model predictive control which makes it suitable for online implementation. As the explicit solution is available, it is not necessary to solve the optimization problem in every control step. As this work deals with practical implementation, let us consider the optimization problem in the following form:
 
 \begin{subequations}
@@ -184,7 +182,7 @@ Explicit model predictive control~\cite{Bemporad_automatica} represents a parame
 	\end{eqnarray}
 \end{subequations}
 
-where $k$ denotes the step of the prediction horizon $N$. The parameter $\theta \in \Theta$ in Eq.~\eqref{eq:mpc_problem_initial_coindition} represents the initial condition of the optimization problem for which it is parametrically precomputed. The prediction model in~\eqref{eq:mpc_problem_prediction_model_x}--\eqref{eq:mpc_problem_prediction_model_y} has the form of extended linear time-invariant (LTI) system for given extended state matrix $\widetilde{A} \in \mathbb{R}^{n_{\mathrm{x}} \times n_{\mathrm{x}}}$, extended input matrix $\widetilde{B} \in \mathbb{R}^{n_{\mathrm{x}} \times n_{\mathrm{u}}}$ and extended output matrix $\widetilde{C} \in \mathbb{R}^{n_{\mathrm{y}} \times n_{\mathrm{x}}}$. Variables $\widetilde{x} \in \mathbb{R}^{n_{\mathrm{x}}}$, $u \in \mathbb{R}^{n_{\mathrm{u}}}$, $y \in \mathbb{R}^{n_{\mathrm{y}}}$ are vectors of corresponding extended system states, control inputs and system outputs, respectively. The sets $\mathcal{U} \subseteq \mathbb{R}^{n_{\mathrm{u}}}$, $\mathcal{Y} \subseteq \mathbb{R}^{n_{\mathrm{x}}}$ are sets of physical constraints on inputs and outputs, respectively. The penalty matrix $Q_\mathrm{y} \in \mathbb{R}^{n_{\mathrm{y}} \times n_{\mathrm{y}}}$ penalizes the squarred control error, i.e., the deviation between the output and output reference value $y_\mathrm{ref}$. The matrix $R \in \mathbb{R}^{n_{\mathrm{u}} \times n_{\mathrm{u}}}$ penalizes the squarred value of control inputs. To obtain the offset-free control results, the built-in integrator was included in the state-space model, see e.q.~\cite{Ruscio_MPC_integral}. The value of integrator is also penalized in the cost function with the penalty matrix $Q_\mathrm{x} \in \mathbb{R}^{n_{\mathrm{y}} \times n_{\mathrm{y}}}$.
+where $k$ denotes the step of the prediction horizon $N$. The parameter $\theta \in \Theta$ in Eq.~\eqref{eq:mpc_problem_initial_coindition} represents the initial condition of the optimization problem for which it is parametrically precomputed. Variables $\widetilde{x} \in \mathbb{R}^{n_{\widetilde{\mathrm{x}}}}$, $u \in \mathbb{R}^{n_{\mathrm{u}}}$, $y \in \mathbb{R}^{n_{\mathrm{y}}}$ are vectors of corresponding extended system states, control inputs and system outputs, respectively. The prediction model in~\eqref{eq:mpc_problem_prediction_model_x}--\eqref{eq:mpc_problem_prediction_model_y} has the form of extended linear time-invariant (LTI) system for given extended state matrix $\widetilde{A} \in \mathbb{R}^{n_{\widetilde{\mathrm{x}}} \times n_{\widetilde{\mathrm{x}}}}$, extended input matrix $\widetilde{B} \in \mathbb{R}^{n_{\widetilde{\mathrm{x}}} \times n_{\mathrm{u}}}$ and extended output matrix $\widetilde{C} \in \mathbb{R}^{n_{\mathrm{y}} \times n_{\widetilde{\mathrm{x}}}}$. The sets $\mathcal{U} \subseteq \mathbb{R}^{n_{\mathrm{u}}}$, $\mathcal{Y} \subseteq \mathbb{R}^{n_{\mathrm{y}}}$ are sets of physical constraints on inputs and outputs, respectively. The penalty matrix $Q_\mathrm{y} \in \mathbb{R}^{n_{\mathrm{y}} \times n_{\mathrm{y}}}$ penalizes the squarred control error, i.e., the deviation between the output and output reference value $y_\mathrm{ref}$. The matrix $R \in \mathbb{R}^{n_{\mathrm{u}} \times n_{\mathrm{u}}}$ penalizes the squarred value of control inputs. To obtain the offset-free control results, the built-in integrator was included in the state-space model, see e.q.~\cite{Ruscio_MPC_integral}. The value of integrator is also penalized in the cost function with the penalty matrix $Q_\mathrm{x} \in \mathbb{R}^{n_{\mathrm{y}} \times n_{\mathrm{y}}}$.
 
 The model extended with the built-in integrator in~\eqref{eq:mpc_problem_prediction_model_x}--\eqref{eq:mpc_problem_prediction_model_y} can be rewritten as:
 
@@ -215,14 +213,27 @@ u(\theta) = \left\{
 where $F_{i}$ and $g_{i}$ respectively are the slope and affine section of the corresponding control law. The piece-wise affine function from Eq.~\eqref{eq:PWA_control_law} is stored and used in the online, i.e., control phase. Based on identifying the critical region where the parameter $\theta$ belongs, the optimal control input is calculated based on the associated control law.
 
 Note, many other formulations of the optimization problems are elaborated, mainly in the terms of cost functions. Also, the incremental (velocity) formulation of the state-space model is common, but leads to further extendsion of the vector of parameters $\theta$ and therefore the explicit MPC complexity increases. Another option for offset-free tracking is also disturbance observer. For such an overview see e.g. ...TODO. 
-Klauco reference governors? minimovka zdroje
-
-
-
+Klauco reference governors? minimovka zdroje + dizertacka str.33
       
 
 \subsection{Tunable explicit model predictive control}
 \label{sec:tunable}
+
+\begin{subequations}
+	\begin{eqnarray}
+	\label{eq:tunable_matrices}
+		&~& R = (1-\rho)R_\mathrm{L} + \rho R_\mathrm{H}, \\
+		&~& Q_\mathrm{x} = (1-\rho)Q_\mathrm{x,L} + \rho Q_\mathrm{x,H}, \\
+		&~& Q_\mathrm{y} = (1-\rho)Q_\mathrm{y,L} + \rho Q_\mathrm{y,H},
+	\end{eqnarray}
+\end{subequations}
+
+\begin{subequations}
+	\begin{eqnarray}
+		\label{eq:tunable_u}
+		u = (1-\rho)u_\mathrm{L} + \rho u_\mathrm{H},
+	\end{eqnarray}
+\end{subequations}
 
 \subsection{Self-tunable explicit model predictive control}
 \label{sec:self_tunable}
