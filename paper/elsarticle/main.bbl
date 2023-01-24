@@ -13,6 +13,21 @@ A.~Bemporad, M.~Morari, V.~Dua, E.~N. Pistikopoulos, The explicit linear
 D.~D. Ruscio, Model predictive control with integral action: A simple mpc
   algorithm, Modeling, Identification and Control 34~(3) (2013) 119--129.
 
+\bibitem{Klauco_tunable}
+M.~Klau\v{c}o, M.~Kvasnica, Towards on-line tunable explicit mpc using
+  interpolation, in: Preprints of the 6th IFAC Conference on Nonlinear Model
+  Predictive Controle, IFAC, Madison, Wisconsin, USA, 2018.
+
+\bibitem{Oravec_tunable}
+J.~Oravec, M.~Klau\v{c}o, Real-time tunable approximated explicit mpc,
+  Automatica 142 (2022) 110315.
+
+\bibitem{self_tunable}
+L.~Gal\v{c}\'ikov\'a, M.~Horv\'athov\'a, J.~Oravec, M.~Bako\v{s}ov\'a,
+  Self-tunable approximated explicit model predictive control of a heat
+  exchanger, Chemical Engineering Transactions, 2022, Vol. 94~(94) (2022)
+  1015--1020.
+
 \bibitem{pct23}
 {Introduction Manual, PCT23-MkII Process Plant Trainer}, Armfield, 2007.
 

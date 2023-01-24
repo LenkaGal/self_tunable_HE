@@ -51,6 +51,9 @@
 \usepackage{amsthm}
 \usepackage{amsmath}
 
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{remark}[theorem]{Remark}
+
 %% The lineno packages adds line numbers. Start line numbering with
 %% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
 %% for the whole article with \linenumbers.
@@ -161,7 +164,6 @@ In this section, the theoretical background necessary for this work is summarize
 \subsection{Explicit model predictive control}
 \label{sec:eMPC}
 Explicit model predictive control~\cite{Bemporad_automatica} represents a parametric solution of the model predictive control which makes it suitable for online implementation. As the explicit solution is available, it is not necessary to solve the optimization problem in every control step. As this work deals with practical implementation, let us consider the optimization problem in the following form:
-
 \begin{subequations}
 	\label{eq:mpc_problem}
 	\begin{eqnarray}
@@ -185,7 +187,6 @@ Explicit model predictive control~\cite{Bemporad_automatica} represents a parame
 where $k$ denotes the step of the prediction horizon $N$. The parameter $\theta \in \Theta$ in Eq.~\eqref{eq:mpc_problem_initial_coindition} represents the initial condition of the optimization problem for which it is parametrically precomputed. Variables $\widetilde{x} \in \mathbb{R}^{n_{\widetilde{\mathrm{x}}}}$, $u \in \mathbb{R}^{n_{\mathrm{u}}}$, $y \in \mathbb{R}^{n_{\mathrm{y}}}$ are vectors of corresponding extended system states, control inputs and system outputs, respectively. The prediction model in~\eqref{eq:mpc_problem_prediction_model_x}--\eqref{eq:mpc_problem_prediction_model_y} has the form of extended linear time-invariant (LTI) system for given extended state matrix $\widetilde{A} \in \mathbb{R}^{n_{\widetilde{\mathrm{x}}} \times n_{\widetilde{\mathrm{x}}}}$, extended input matrix $\widetilde{B} \in \mathbb{R}^{n_{\widetilde{\mathrm{x}}} \times n_{\mathrm{u}}}$ and extended output matrix $\widetilde{C} \in \mathbb{R}^{n_{\mathrm{y}} \times n_{\widetilde{\mathrm{x}}}}$. The sets $\mathcal{U} \subseteq \mathbb{R}^{n_{\mathrm{u}}}$, $\mathcal{Y} \subseteq \mathbb{R}^{n_{\mathrm{y}}}$ are sets of physical constraints on inputs and outputs, respectively. The penalty matrix $Q_\mathrm{y} \in \mathbb{R}^{n_{\mathrm{y}} \times n_{\mathrm{y}}}$ penalizes the squarred control error, i.e., the deviation between the output and output reference value $y_\mathrm{ref}$. The matrix $R \in \mathbb{R}^{n_{\mathrm{u}} \times n_{\mathrm{u}}}$ penalizes the squarred value of control inputs. To obtain the offset-free control results, the built-in integrator was included in the state-space model, see e.q.~\cite{Ruscio_MPC_integral}. The value of integrator is also penalized in the cost function with the penalty matrix $Q_\mathrm{x} \in \mathbb{R}^{n_{\mathrm{y}} \times n_{\mathrm{y}}}$.
 
 The model extended with the built-in integrator in~\eqref{eq:mpc_problem_prediction_model_x}--\eqref{eq:mpc_problem_prediction_model_y} can be rewritten as:
-
 \begin{subequations}
 	\begin{eqnarray} 
 		\label{eq:mpc_extended_model_x} 
@@ -198,7 +199,6 @@ The model extended with the built-in integrator in~\eqref{eq:mpc_problem_predict
 where $x_{\mathrm{I}} \in \mathbb{R}^{n_{\mathrm{y}}}$ is the integral of the control error, $T_\mathrm{s}$ denotes the sampling time and matrices $A$, $B$, $C$ are well-known linear time-invariant state-space matrices that form the extended model. Thanks to this extension and penalization in the cost function in Eq.~\eqref{eq:mpc_problem_cost}, not only the control error are penalized, but also its integral, which leads to similar results as incorporating integral part in PID controller.
 
 Solving the MPC quadratic optimization problem in Eq.~\eqref{eq:mpc_problem} parametrically leads to explicit solution in the form of piece-wise affine control law consisting of $r$ critical regions:
-
 \begin{eqnarray}
 \label{eq:PWA_control_law}
 u(\theta) = \left\{ 
@@ -218,32 +218,81 @@ Klauco reference governors? minimovka zdroje + dizertacka str.33
 
 \subsection{Tunable explicit model predictive control}
 \label{sec:tunable}
+The aggressivity of the controller and whole nature of the control can be influenced by tuning the penalty matrices in the optimization problem~\eqref{eq:mpc_problem}. When the optimization problem is precomputed offline to obtain the parametric solution, it is not possible to tune the controller afterwards. As the operation conditions and demands on controller setup may differ throughout control, the ability to adjust the controller aggressivity can be very beneficial.
 
+The idea of approximated tunable explicit MPC comes from the work ~\cite{Klauco_tunable}, where the control action is calculated based on linear interpolation between two boundary control actions. These control actions result from evaluating two boundary explicit MPCs. The boundary explicit controllers have the same structure and setup, except one of the penalty matrices -- the tuned one. The boundary matrices are diagonal square matrices such that $\lambda_{i,\mathrm{L}} \le \lambda_{i,\mathrm{U}}$, $\forall i = 1,\dots,s$, where $\lambda$ denotes the vector of penalty matrix eigenvalues, $L$ and $U$ denote the lower and upper boundary setup respectively, and $s$ is the rank of the tuned penalty matrix.
+
+When considering the penalty matrices from cost function~\eqref{eq:mpc_problem_cost}, the penalty matrices are scaled in the following way:
 \begin{subequations}
-	\begin{eqnarray}
 	\label{eq:tunable_matrices}
-		&~& R = (1-\rho)R_\mathrm{L} + \rho R_\mathrm{H}, \\
-		&~& Q_\mathrm{x} = (1-\rho)Q_\mathrm{x,L} + \rho Q_\mathrm{x,H}, \\
-		&~& Q_\mathrm{y} = (1-\rho)Q_\mathrm{y,L} + \rho Q_\mathrm{y,H},
+	\begin{eqnarray}
+		\label{eq:tunable_R}
+		&~& R = (1-\rho)R_\mathrm{L} + \rho R_\mathrm{U}, \\
+		\label{eq:tunable_Qx}
+		&~& Q_\mathrm{x} = (1-\rho)Q_\mathrm{x,L} + \rho Q_\mathrm{x,U}, \\
+		\label{eq:tunable_Qy}
+		&~& Q_\mathrm{y} = (1-\rho)Q_\mathrm{y,L} + \rho Q_\mathrm{y,U},
 	\end{eqnarray}
 \end{subequations}
 
+where $\rho$ represents the scaling parameter and $0 \le \rho \le 1$ holds. Based on~\eqref{eq:tunable_matrices}, it is possible to choose online any controller setup from the lower to the upper boundary of the tuned matrix. Note, it is practical to tune only one matrix, i.e., to store only two controllers corresponding to the boundary matrices. To determine which penalty matrix should be tuned, it is suggested to examine the control results subject to the specific system and to try systematic tuning of all the penalty matrices.
+
+When the scaling parameter $\rho$ is determined based on the current control conditions, the optimal control action is evaluated using the two optimal controllers. Based on the boundary control actions, the interpolated, i.e., tuned control action is calculated:
 \begin{subequations}
 	\begin{eqnarray}
 		\label{eq:tunable_u}
-		u = (1-\rho)u_\mathrm{L} + \rho u_\mathrm{H},
+		u = (1-\rho)u_\mathrm{L} + \rho u_\mathrm{U},
 	\end{eqnarray}
 \end{subequations}
 
+where $u_\mathrm{L}$ and $u_\mathrm{U}$ denote the optimal control actions from the lower and upper boundary controller respectively. The tuning of the controller online comes with a cost of storing and evaluating two explicit controllers. Nevertheless, the ability to tune the controller may be more important in many practical applications.
+
+Note, the concept of explicit MPC tuning can be applied also to other MPC formulations, based on the current specific needs. In this paper, the penalty matrices of cost function~\eqref{eq:mpc_problem_cost} are considered, as it is necessary to satisfy offset-free reference tracking.
+
+\begin{remark}
+	If stability guarantee and recursive feasibility is required, it is suggested to follow the instructions from \cite{Oravec_tunable}. In order to satisfy the requirements, the study introduces a procedure of choosing the terminal penalty and terminal set in the two boundary controllers. 
+\end{remark}
+
 \subsection{Self-tunable explicit model predictive control}
 \label{sec:self_tunable}
+The advantage of tunable controller brings a question of how to design the logic of tuning the scaling parameter $\rho$. In this section, the idea of online self-tuning is summarized~\cite{self_tunable}. The concept of self-tuning provides the possibility to adjust the aggressiveness of the controller without the necessity to intervene and tune the penalty matrices during control. 
 
+The need for real-time controller tuning often arises from tracking a time-varying reference. The work~\cite{self_tunable} focuses on adjusting the penalty matrix when the reference value is changed. The further the reference value is from the steady state, the more aggressive controller is tuned. The idea behind the suggested scaling liest in compensation of the nonlinear behavior of the system.  
+
+The procedure of tuning the controller is based on evaluating the difference between the reference and the steady state, and using this deviation to scale the value of control action. First, the maximal absolute value of reference which can be set during control is defined. This value can be determined based on the general knowledge of future reference values. Another suggestion is to set the maximal deviation $d_{\max}$ simply based on the constraints on system outputs: 
+\begin{eqnarray}
+	\label{eq:d_max}
+	d_{\max} = \max(\vert y_{\min} \vert, y_{\max}),
+\end{eqnarray}
+
+where $y_{\min}$ and $y_{\max}$ are respectively lower and upper bound on the output variable. Using the information about the maximal possible deviation $d_{\max}$, the scaling parameter $\rho$ can be calculated as the ration between the current reference value and the maximal deviation:  
+
+\begin{eqnarray}
+	\label{eq:rho_self_tunable}
+	\rho = \frac{\vert y_{\mathrm{ref}} \vert}{d_{\max}}.
+\end{eqnarray}
+
+Based on Eq.~\eqref{eq:rho_self_tunable}, the property $0 \le \rho \le 1$ holds, as $\vert y_{\mathrm{ref}} \vert \le d_{\max}$. As a result, the parameter $\rho$ represents a way how to normalize the deviation from steady state and is exploited to scale the penalty matrix or at the end of the day, the control action. 
+
+When considering tuning the control action based on Eq.~\eqref{eq:tunable_u}, a higher value of scaling parameter $\rho$ leads to approaching the upper boundary controller and vice versa. When tuning e.g. the matrix $Q_\mathrm{y}$ penalizing the control error, a higher ratio $\rho$ would lead to more aggressive control actions. When controlling to the reference values closer to the steady state, the parameter $rho$ decreases and the control becomes sluggish.
+
+\begin{remark}
+	The parameter $d_{\max}$ is vector in general, as it depends on the size of system outputs. If $d_{\max}$ is scalar, the paramter $\rho$ is scalar as well and can be directly utilized to scale the control action. If multiple outputs are controlled, it is suggested to calculate the scaling parameter based on the maximal ratio:
+	\begin{eqnarray}
+		\label{eq:rho_max}
+		\rho = \max \left( \frac{\vert y_{\mathrm{ref}} \vert}{d_{\max}} \right).
+	\end{eqnarray}	
+\end{remark}
+
+Note, the relations \eqref{eq:rho_self_tunable} and \eqref{eq:rho_max} operate with the absolute value of the reference. It is not taken into account, whether the reference change was positive or negative, i.e., whether it changed upwards or downwards. As many plants have non-symmetric behavior, the positivity or negativity of the reference change could be considered in the controller tuning to increase the control performance.
+    
 
 \section{Methodology}
 \label{sec:methodology}
 
 \subsection{Self-tunable technique for systems with asymmetric behavior}
 \label{sec:self_tunable_new}
+TODO: rozdelit dva spominane pristpy? dat dva navody?
 
 TODO: spomenut, ze to je vhodne celkovo aj pre klasicke online MPC
 

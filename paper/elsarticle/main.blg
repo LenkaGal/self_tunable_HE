@@ -5,46 +5,48 @@ Reallocating 'name_of_file' (item size: 1) to 15 items.
 The style file: elsarticle-num.bst
 Reallocating 'name_of_file' (item size: 1) to 11 items.
 Database file #1: references.bib
+Warning--empty pages in Klauco_tunable
+Warning--there's a number but no volume in self_tunable
 Warning--empty author and editor in pct23
-You've used 5 entries,
+You've used 8 entries,
             2952 wiz_defined-function locations,
-            702 strings with 5728 characters,
-and the built_in function-call counts, 1499 in all, are:
-= -- 130
-> -- 36
+            723 strings with 6286 characters,
+and the built_in function-call counts, 2354 in all, are:
+= -- 204
+> -- 63
 < -- 3
-+ -- 15
-- -- 10
-* -- 86
-:= -- 199
-add.period$ -- 5
-call.type$ -- 5
-change.case$ -- 5
++ -- 26
+- -- 18
+* -- 149
+:= -- 312
+add.period$ -- 8
+call.type$ -- 8
+change.case$ -- 8
 chr.to.int$ -- 3
-cite$ -- 6
-duplicate$ -- 53
-empty$ -- 190
-format.name$ -- 12
-if$ -- 407
+cite$ -- 11
+duplicate$ -- 80
+empty$ -- 297
+format.name$ -- 23
+if$ -- 632
 int.to.chr$ -- 0
-int.to.str$ -- 5
-missing$ -- 6
-newline$ -- 23
-num.names$ -- 4
-pop$ -- 42
+int.to.str$ -- 8
+missing$ -- 9
+newline$ -- 32
+num.names$ -- 7
+pop$ -- 66
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 111
+skip$ -- 163
 stack$ -- 0
-substring$ -- 63
-swap$ -- 14
+substring$ -- 108
+swap$ -- 16
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 1
-while$ -- 9
-width$ -- 6
-write$ -- 47
-(There was 1 warning)
+warning$ -- 3
+while$ -- 14
+width$ -- 9
+write$ -- 71
+(There were 3 warnings)
