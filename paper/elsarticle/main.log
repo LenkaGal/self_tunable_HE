@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.11.16)  24 JAN 2023 16:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.11.16)  25 JAN 2023 16:39
 entering extended mode
 **./main.tex
 (main.tex
@@ -336,38 +336,40 @@ LaTeX Info: Redefining \[ on input line 2923.
 LaTeX Info: Redefining \] on input line 2924.
 )
 \c@theorem=\count288
+\c@corollary=\count289
+\c@definition=\count290
  (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
 
 ("C:\Program Files\MiKTeX\tex/context/base/mkii\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count289
+\scratchcounter=\count291
 \scratchdimen=\dimen165
 \scratchbox=\box57
-\nofMPsegments=\count290
-\nofMParguments=\count291
+\nofMPsegments=\count292
+\nofMParguments=\count293
 \everyMPshowfont=\toks31
-\MPscratchCnt=\count292
+\MPscratchCnt=\count294
 \MPscratchDim=\dimen166
-\MPnumerator=\count293
-\makeMPintoPDFobject=\count294
+\MPnumerator=\count295
+\makeMPintoPDFobject=\count296
 \everyMPtoPDFconversion=\toks32
 ) ("C:\Program Files\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty"
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -390,7 +392,7 @@ File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: pdftex.def on input line 147.
 )
-Package hyperref Info: Link coloring ON on input line 64.
+Package hyperref Info: Link coloring ON on input line 66.
 
 ("C:\Program Files\MiKTeX\tex/latex/hyperref\nameref.sty"
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
@@ -401,11 +403,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ("C:\Program Files\MiKTeX\tex/generic/gettitlestring\gettitlestring.sty"
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count295
+\c@section@level=\count297
 )
-LaTeX Info: Redefining \ref on input line 64.
-LaTeX Info: Redefining \pageref on input line 64.
-LaTeX Info: Redefining \nameref on input line 64.
+LaTeX Info: Redefining \ref on input line 66.
+LaTeX Info: Redefining \pageref on input line 66.
+LaTeX Info: Redefining \nameref on input line 66.
 
 (main.out) (main.out)
 \@outlinefile=\write4
@@ -415,20 +417,20 @@ LaTeX Info: Redefining \nameref on input line 64.
 
 Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 150.
+(hyperref)                removing `\textasciicaron' on input line 152.
 
 [1
 
 {C:/Users/lgalc/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] [2
 
 ]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 150
+LaTeX Font Info:    Trying to load font information for U+msa on input line 152
 .
 
 ("C:\Program Files\MiKTeX\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 150
+LaTeX Font Info:    Trying to load font information for U+msb on input line 152
 .
 
 ("C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd"
@@ -442,7 +444,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.169 	\begin{eqnarray}
+l.171 	\begin{eqnarray}
                         [1
 
 
@@ -450,19 +452,19 @@ l.169 	\begin{eqnarray}
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.200 
+l.202 
        [2pdfTeX warning (ext4): destination with the same identifier (name{equa
 tion.2.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.200 
+l.202 
       pdfTeX warning (ext4): destination with the same identifier (name{equatio
 n.2.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.200 
+l.202 
       ] [3]
-Overfull \hbox (4.40007pt too wide) in paragraph at lines 225--228
+Overfull \hbox (4.40007pt too wide) in paragraph at lines 227--230
 []\OT1/cmr/m/n/12 When con-sid-er-ing the penalty ma-tri-ces from cost func-tio
 n [], the penalty
  []
@@ -471,47 +473,52 @@ pdfTeX warning (ext4): destination with the same identifier (name{equation.2.1}
 ) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.228 	\begin{eqnarray}
+l.230 	\begin{eqnarray}
                        pdfTeX warning (ext4): destination with the same identif
 ier (name{equation.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.228 	\begin{eqnarray}
+l.230 	\begin{eqnarray}
                        pdfTeX warning (ext4): destination with the same identif
 ier (name{equation.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.228 	\begin{eqnarray}
+l.230 	\begin{eqnarray}
                        pdfTeX warning (ext4): destination with the same identif
 ier (name{equation.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.228 	\begin{eqnarray}
+l.230 	\begin{eqnarray}
                        pdfTeX warning (ext4): destination with the same identif
 ier (name{equation.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.242 	\begin{eqnarray}
+l.244 	\begin{eqnarray}
                        pdfTeX warning (ext4): destination with the same identif
 ier (name{equation.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.242 	\begin{eqnarray}
+l.244 	\begin{eqnarray}
                        pdfTeX warning (ext4): destination with the same identif
 ier (name{equation.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.242 	\begin{eqnarray}
+l.244 	\begin{eqnarray}
                        pdfTeX warning (ext4): destination with the same identif
 ier (name{equation.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.242 	\begin{eqnarray}
+l.244 	\begin{eqnarray}
                         [4] [5] [6]
-<images/HE.png, id=138, 722.7pt x 542.901pt>
+Underfull \hbox (badness 10000) in paragraph at lines 317--321
+
+ []
+
+[7] [8] [9]
+<images/HE.png, id=176, 722.7pt x 542.901pt>
 File: images/HE.png Graphic file (type png)
 <use images/HE.png>
-Package pdftex.def Info: images/HE.png  used on input line 339.
+Package pdftex.def Info: images/HE.png  used on input line 394.
 (pdftex.def)             Requested size: 312.00119pt x 234.37897pt.
 Package epstopdf Info: Source file: <images/CV_boundaries.eps>
 (epstopdf)                    date: 2023-01-19 17:13:54
@@ -522,17 +529,17 @@ Package epstopdf Info: Source file: <images/CV_boundaries.eps>
 (epstopdf)                    size: 81655 bytes
 (epstopdf)             Command: <epstopdf --outfile=images/CV_boundaries-eps-co
 nverted-to.pdf images/CV_boundaries.eps>
-(epstopdf)             \includegraphics on input line 347.
+(epstopdf)             \includegraphics on input line 402.
 Package epstopdf Info: Output file is already uptodate.
 
 
 pdfTeX warning: pdflatex.exe (file ./images/CV_boundaries-eps-converted-to.pdf)
 : PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<images/CV_boundaries-eps-converted-to.pdf, id=140, 421.575pt x 316.18124pt>
+<images/CV_boundaries-eps-converted-to.pdf, id=178, 421.575pt x 316.18124pt>
 File: images/CV_boundaries-eps-converted-to.pdf Graphic file (type pdf)
 <use images/CV_boundaries-eps-converted-to.pdf>
 Package pdftex.def Info: images/CV_boundaries-eps-converted-to.pdf  used on inp
-ut line 347.
+ut line 402.
 (pdftex.def)             Requested size: 312.00119pt x 234.00423pt.
 Package epstopdf Info: Source file: <images/MV_boundaries.eps>
 (epstopdf)                    date: 2023-01-19 17:13:22
@@ -543,25 +550,34 @@ Package epstopdf Info: Source file: <images/MV_boundaries.eps>
 (epstopdf)                    size: 79055 bytes
 (epstopdf)             Command: <epstopdf --outfile=images/MV_boundaries-eps-co
 nverted-to.pdf images/MV_boundaries.eps>
-(epstopdf)             \includegraphics on input line 355.
+(epstopdf)             \includegraphics on input line 410.
 Package epstopdf Info: Output file is already uptodate.
 
 
 pdfTeX warning: pdflatex.exe (file ./images/MV_boundaries-eps-converted-to.pdf)
 : PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<images/MV_boundaries-eps-converted-to.pdf, id=141, 421.575pt x 316.18124pt>
+<images/MV_boundaries-eps-converted-to.pdf, id=179, 421.575pt x 316.18124pt>
 File: images/MV_boundaries-eps-converted-to.pdf Graphic file (type pdf)
 <use images/MV_boundaries-eps-converted-to.pdf>
 Package pdftex.def Info: images/MV_boundaries-eps-converted-to.pdf  used on inp
-ut line 355.
+ut line 410.
 (pdftex.def)             Requested size: 312.00119pt x 234.00423pt.
-[7] [8 <./images/HE.png>] [9 <./images/CV_boundaries-eps-converted-to.pdf>]
-[10 <./images/MV_boundaries-eps-converted-to.pdf>]
-Overfull \hbox (1.72787pt too wide) in paragraph at lines 363--364
+
+LaTeX Warning: Reference `sec:self_tunable_new' on page 10 undefined on input l
+ine 418.
+
+
+Overfull \hbox (1.72787pt too wide) in paragraph at lines 418--419
 []\OT1/cmr/m/n/12 These ob-ser-va-tions form the base for the strat-egy of self
 -tuning the penalty
  []
 
+
+LaTeX Warning: Reference `sec:self_tunable_new' on page 10 undefined on input l
+ine 420.
+
+[10 <./images/HE.png>] [11 <./images/CV_boundaries-eps-converted-to.pdf>]
+[12 <./images/MV_boundaries-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <images/CV.eps>
 (epstopdf)                    date: 2023-01-19 17:11:22
 (epstopdf)                    size: 412583 bytes
@@ -570,16 +586,16 @@ Package epstopdf Info: Source file: <images/CV.eps>
 (epstopdf)                    size: 105545 bytes
 (epstopdf)             Command: <epstopdf --outfile=images/CV-eps-converted-to.
 pdf images/CV.eps>
-(epstopdf)             \includegraphics on input line 375.
+(epstopdf)             \includegraphics on input line 430.
 Package epstopdf Info: Output file is already uptodate.
 
 
 pdfTeX warning: pdflatex.exe (file ./images/CV-eps-converted-to.pdf): PDF inclu
 sion: found PDF version <1.7>, but at most version <1.5> allowed
-<images/CV-eps-converted-to.pdf, id=175, 421.575pt x 316.18124pt>
+<images/CV-eps-converted-to.pdf, id=204, 421.575pt x 316.18124pt>
 File: images/CV-eps-converted-to.pdf Graphic file (type pdf)
 <use images/CV-eps-converted-to.pdf>
-Package pdftex.def Info: images/CV-eps-converted-to.pdf  used on input line 375
+Package pdftex.def Info: images/CV-eps-converted-to.pdf  used on input line 430
 .
 (pdftex.def)             Requested size: 312.00119pt x 234.00423pt.
 Package epstopdf Info: Source file: <images/MV.eps>
@@ -590,31 +606,35 @@ Package epstopdf Info: Source file: <images/MV.eps>
 (epstopdf)                    size: 108902 bytes
 (epstopdf)             Command: <epstopdf --outfile=images/MV-eps-converted-to.
 pdf images/MV.eps>
-(epstopdf)             \includegraphics on input line 383.
+(epstopdf)             \includegraphics on input line 438.
 Package epstopdf Info: Output file is already uptodate.
 
 
 pdfTeX warning: pdflatex.exe (file ./images/MV-eps-converted-to.pdf): PDF inclu
 sion: found PDF version <1.7>, but at most version <1.5> allowed
-<images/MV-eps-converted-to.pdf, id=176, 421.575pt x 316.18124pt>
+<images/MV-eps-converted-to.pdf, id=205, 421.575pt x 316.18124pt>
 File: images/MV-eps-converted-to.pdf Graphic file (type pdf)
 <use images/MV-eps-converted-to.pdf>
-Package pdftex.def Info: images/MV-eps-converted-to.pdf  used on input line 383
+Package pdftex.def Info: images/MV-eps-converted-to.pdf  used on input line 438
 .
 (pdftex.def)             Requested size: 312.00119pt x 234.00423pt.
+[13 <./images/CV-eps-converted-to.pdf>] [14 <./images/MV-eps-converted-to.pdf>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[11] [12 <./images/CV-eps-converted-to.pdf>] [13 <./images/MV-eps-converted-to.
-pdf>] [14] (main.bbl) [15] (main.aux)
+[15] (main.bbl) [16] (main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B11FD3BFDC91CD694724846495BB7086;644.
+(rerunfilecheck)             Checksum: 2FE20D7102BB53811075EACB7B74A1FE;752.
+
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
- 7905 strings out of 480258
- 115466 string characters out of 2891276
- 427074 words of memory out of 3000000
- 24219 multiletter control sequences out of 15000+200000
+ 7935 strings out of 480258
+ 115878 string characters out of 2891276
+ 427540 words of memory out of 3000000
+ 24239 multiletter control sequences out of 15000+200000
  544118 words of font info for 63 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  80i,14n,85p,1861b,431s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -636,9 +656,9 @@ TeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX/fonts/ty
 pe1/public/amsfonts/cm/cmti7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/am
 sfonts/symbols/msam10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/
 symbols/msbm10.pfb>
-Output written on main.pdf (17 pages, 6583267 bytes).
+Output written on main.pdf (18 pages, 6595380 bytes).
 PDF statistics:
- 288 PDF objects out of 1000 (max. 8388607)
- 55 named destinations out of 1000 (max. 500000)
- 98 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 313 PDF objects out of 1000 (max. 8388607)
+ 65 named destinations out of 1000 (max. 500000)
+ 106 words of extra memory for PDF output out of 10000 (max. 10000000)
 
