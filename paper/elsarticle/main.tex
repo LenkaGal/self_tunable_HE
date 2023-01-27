@@ -177,11 +177,12 @@ The paper is organized as follows...
 % \section{Preliminaries}
 \label{sec:preliminaries}
 
-In this section, the theoretical backgrounds necessary for the proposed method  work is summarized. First, the explicit model predictive control is recalled. Next, the tunable technique of the approximated explicit model predictive control is introduced. Last but not least, the ideas of self-tunable technique of the approximated explicit MPC are presented.
+In this section, the theoretical backgrounds necessary for the proposed method is summarized. First, the explicit model predictive control is briefly recalled. Next, the tunable technique of the approximated explicit model predictive control is introduced. Finally, the ideas of self-tunable technique of the approximated explicit MPC are presented.
 
 \subsection{Explicit model predictive control}
 \label{sec:eMPC}
-Explicit model predictive control~\cite{Bemporad_automatica} represents a parametric solution of the model predictive control which makes it suitable for online implementation. As the explicit solution is available, it is not necessary to solve the optimization problem in every control step. As this work deals with practical implementation, let us consider the optimization problem in the following form:
+
+Explicit model predictive control~\cite{Bemporad_automatica} utilizes a parametric solution of the model predictive control introducing its application range towards the systems with the fast dynamics. Moreover, the explicit solution enables providing a rigorous analysis and certification of the closed-loop system stability, constraints satisfaction, etc. As the explicit solution is available, real-time solving of the optimization problem in every control step is omitted. As this work deals with the industrial-oriented implementation, consider the optimization problem in the following form:
 \begin{subequations}
 	\label{eq:mpc_problem}
 	\begin{eqnarray}
@@ -201,22 +202,31 @@ Explicit model predictive control~\cite{Bemporad_automatica} represents a parame
 		&~& k = 0,1,\ldots, N-1,
 	\end{eqnarray}
 \end{subequations}
+where $k$ denotes the step of the prediction horizon $N$. 
+%
+To obtain the offset-free control results, the built-in integrator was included in the state-space model, e.g., see~\cite{Ruscio_MPC_integral}. 
+The prediction model in~\eqref{eq:mpc_problem_prediction_model_x}--\eqref{eq:mpc_problem_prediction_model_y} has the form of augmented linear time-invariant (LTI) system for given augmented state matrix $\widetilde{A} \in \mathbb{R}^{n_{\widetilde{\mathrm{x}}} \times n_{\widetilde{\mathrm{x}}}}$, augmented input matrix $\widetilde{B} \in \mathbb{R}^{n_{\widetilde{\mathrm{x}}} \times n_{\mathrm{u}}}$ and augmented output matrix $\widetilde{C} \in \mathbb{R}^{n_{\mathrm{y}} \times n_{\widetilde{\mathrm{x}}}}$. 
+%
+Variables $\widetilde{x} \in \mathbb{R}^{n_{\widetilde{\mathrm{x}}}}$, $u \in \mathbb{R}^{n_{\mathrm{u}}}$, $y \in \mathbb{R}^{n_{\mathrm{y}}}$ are vectors of corresponding augmented system states, control inputs and system outputs, respectively. 
+%
+The sets $\mathcal{U} \subseteq \mathbb{R}^{n_{\mathrm{u}}}$, $\mathcal{Y} \subseteq \mathbb{R}^{n_{\mathrm{y}}}$ are convex polytopic sets of physical constraints on inputs and outputs, respectively. The penalty matrix $Q_\mathrm{y} \in \mathbb{R}^{n_{\mathrm{y}} \times n_{\mathrm{y}}}$ penalizes the squarred control error, i.e., the deviation between the output and output reference value $y_\mathrm{ref}$. The matrix $R \in \mathbb{R}^{n_{\mathrm{u}} \times n_{\mathrm{u}}}$ penalizes the squarred value of control inputs. 
+%
+The value of integrator is also penalized in the cost function with the penalty matrix $Q_\mathrm{x} \in \mathbb{R}^{n_{\mathrm{y}} \times n_{\mathrm{y}}}$. 
+%
+The parameter $\theta \in \Theta$ in Eq.~\eqref{eq:mpc_problem_initial_coindition} represents the initial condition of the optimization problem for which it is parametrically pre-computed. 
 
-where $k$ denotes the step of the prediction horizon $N$. The parameter $\theta \in \Theta$ in Eq.~\eqref{eq:mpc_problem_initial_coindition} represents the initial condition of the optimization problem for which it is parametrically precomputed. Variables $\widetilde{x} \in \mathbb{R}^{n_{\widetilde{\mathrm{x}}}}$, $u \in \mathbb{R}^{n_{\mathrm{u}}}$, $y \in \mathbb{R}^{n_{\mathrm{y}}}$ are vectors of corresponding extended system states, control inputs and system outputs, respectively. The prediction model in~\eqref{eq:mpc_problem_prediction_model_x}--\eqref{eq:mpc_problem_prediction_model_y} has the form of extended linear time-invariant (LTI) system for given extended state matrix $\widetilde{A} \in \mathbb{R}^{n_{\widetilde{\mathrm{x}}} \times n_{\widetilde{\mathrm{x}}}}$, extended input matrix $\widetilde{B} \in \mathbb{R}^{n_{\widetilde{\mathrm{x}}} \times n_{\mathrm{u}}}$ and extended output matrix $\widetilde{C} \in \mathbb{R}^{n_{\mathrm{y}} \times n_{\widetilde{\mathrm{x}}}}$. The sets $\mathcal{U} \subseteq \mathbb{R}^{n_{\mathrm{u}}}$, $\mathcal{Y} \subseteq \mathbb{R}^{n_{\mathrm{y}}}$ are sets of physical constraints on inputs and outputs, respectively. The penalty matrix $Q_\mathrm{y} \in \mathbb{R}^{n_{\mathrm{y}} \times n_{\mathrm{y}}}$ penalizes the squarred control error, i.e., the deviation between the output and output reference value $y_\mathrm{ref}$. The matrix $R \in \mathbb{R}^{n_{\mathrm{u}} \times n_{\mathrm{u}}}$ penalizes the squarred value of control inputs. To obtain the offset-free control results, the built-in integrator was included in the state-space model, see e.q.~\cite{Ruscio_MPC_integral}. The value of integrator is also penalized in the cost function with the penalty matrix $Q_\mathrm{x} \in \mathbb{R}^{n_{\mathrm{y}} \times n_{\mathrm{y}}}$.
-
-The model extended with the built-in integrator in~\eqref{eq:mpc_problem_prediction_model_x}--\eqref{eq:mpc_problem_prediction_model_y} can be rewritten as:
+The augmented model of the controlled system with the built-in integrator in~\eqref{eq:mpc_problem_prediction_model_x}--\eqref{eq:mpc_problem_prediction_model_y} us rewritten as follows:
 \begin{subequations}
 	\begin{eqnarray} 
-		\label{eq:mpc_extended_model_x} 
+		\label{eq:mpc_augmented_model_x} 
 		\widetilde{x}_{k+1} &=& \begin{bmatrix} x_{k+1} \\ 	x_{\mathrm{I},k+1}\end{bmatrix} = \begin{bmatrix} A & \textit{0} \\ -T_\mathrm{s} C & I \end{bmatrix} \begin{bmatrix} x_{k} \\ x_{\mathrm{I},k} \end{bmatrix} + \begin{bmatrix} B \\ I \end{bmatrix} u_{k}, \\
-		\label{eq:mpc_extended_model_y}
+		\label{eq:mpc_augmented_model_y}
 		y_k &=& \begin{bmatrix} C & \textit{0} \end{bmatrix} \begin{bmatrix} x_{k} \\ x_{\mathrm{I},k} \end{bmatrix},
 	\end{eqnarray}
 \end{subequations}
+where $x_{\mathrm{I}} \in \mathbb{R}^{n_{\mathrm{y}}}$ is the integral of the control error, $T_\mathrm{s}$ denotes the sampling time and matrices $A$, $B$, $C$ are well-known the state-space matrices that form the augmented LTI model. As the consequence of this extension and penalization in the cost function in Eq.~\eqref{eq:mpc_problem_cost}, not only the control error are penalized, but also its integral, which leads to analogous offset-free reference tracking results as incorporating integral part in PID controller.
 
-where $x_{\mathrm{I}} \in \mathbb{R}^{n_{\mathrm{y}}}$ is the integral of the control error, $T_\mathrm{s}$ denotes the sampling time and matrices $A$, $B$, $C$ are well-known linear time-invariant state-space matrices that form the extended model. Thanks to this extension and penalization in the cost function in Eq.~\eqref{eq:mpc_problem_cost}, not only the control error are penalized, but also its integral, which leads to similar results as incorporating integral part in PID controller.
-
-Solving the MPC quadratic optimization problem in Eq.~\eqref{eq:mpc_problem} parametrically leads to explicit solution in the form of piece-wise affine control law consisting of $r$ critical regions:
+Parametric solution of the optimization problem of the quadratic programming (QP) in~\eqref{eq:mpc_problem}, leads to the explicit solution in the form of piece-wise affine (PWA) control law defined above the domain consisting of $r$ critical regions:
 \begin{eqnarray}
 \label{eq:PWA_control_law}
 u(\theta) = \left\{ 
@@ -228,14 +238,18 @@ u(\theta) = \left\{
 \end{matrix}
 \right.
 \end{eqnarray}
-where $F_{i}$ and $g_{i}$ respectively are the slope and affine section of the corresponding control law. The piece-wise affine function from Eq.~\eqref{eq:PWA_control_law} is stored and used in the online, i.e., control phase. Based on identifying the critical region where the parameter $\theta$ belongs, the optimal control input is calculated based on the associated control law.
+where $F_{i} \in \mathbb{R}^{n_{\mathrm{u}} \times n_{\mathrm{x}}}$ and $g_{i}  \in \mathbb{R}^{n_{\mathrm{u}}}$ respectively are the slope and affine section of the corresponding control law. The PWA function defined in Eq.~\eqref{eq:PWA_control_law} is stored and recalled in the online phase, i.e., during the real-time control. Based on identifying the specific critical region $\mathcal{R}_{i}$, where the parameter $\theta$ belongs, the optimal control input is calculated based on the associated control law in~\eqref{eq:PWA_control_law}.
 
-Note, many other formulations of the optimization problems are elaborated, mainly in the terms of cost functions. Also, the incremental (velocity) formulation of the state-space model is common, but leads to further extendsion of the vector of parameters $\theta$ and therefore the explicit MPC complexity increases. Another option for offset-free tracking is also disturbance observer. For such an overview see e.g. ...TODO. 
+Note, many other formulations of the optimization problems for the explicit MPC design, were mainly in the terms of the definition of the cost functions in~\eqref{eq:mpc_problem_cost}. Also, the incremental (velocity) formulation of the state-space model is common, but leads to further extension of the vector of parameters $\theta$ and therefore also the complexity of the explicit MPC controller increases. Another option for offset-free tracking is introducing the disturbance estimation. For such an overview see e.g. 
+
+\textcolor{red}{TODO: Please, fix}
+
+...TODO. 
 Klauco reference governors? minimovka zdroje + dizertacka str.33
       
-
 \subsection{Tunable explicit model predictive control}
 \label{sec:tunable}
+
 The aggressivity of the controller and whole nature of the control can be influenced by tuning the penalty matrices in the optimization problem~\eqref{eq:mpc_problem}. When the optimization problem is precomputed offline to obtain the parametric solution, it is not possible to tune the controller afterwards. As the operation conditions and demands on controller setup may differ throughout control, the ability to adjust the controller aggressivity can be very beneficial.
 
 The idea of approximated tunable explicit MPC comes from the work ~\cite{Klauco_tunable}, where the control action is calculated based on linear interpolation between two boundary control actions. These control actions result from evaluating two boundary explicit MPCs. The boundary explicit controllers have the same structure and setup, except one of the penalty matrices -- the tuned one. The boundary matrices are diagonal square matrices such that $\lambda_{i,\mathrm{L}} \le \lambda_{i,\mathrm{U}}$, $\forall i = 1,\dots,s$, where $\lambda$ denotes the vector of penalty matrix eigenvalues, $L$ and $U$ denote the lower and upper boundary setup respectively, and $s$ is the rank of the tuned penalty matrix.
@@ -526,11 +540,11 @@ This research is funded by the European Union’s Horizon Europe under grant no.
 \begin{center}
 	\begin{tabular}{ l l }
 $A$ & system state matrix \\
-$\widetilde{A}$ & extended system state matrix \\
+$\widetilde{A}$ & augmented system state matrix \\
 $B$ & system input matrix \\
-$\widetilde{B}$ & extended system input matrix \\
+$\widetilde{B}$ & augmented system input matrix \\
 $C$ & system output matrix \\
-$\widetilde{C}$ & extended system output matrix \\
+$\widetilde{C}$ & augmented system output matrix \\
 $d_{\max}$ & maximal deviation from the steady state \\
 TODO & odlisit max size of reference step change \\
 $F$ & slope of the affine control law \\
@@ -540,7 +554,7 @@ $k$ & step of the prediction horizon \\
 $N$ & prediction horizon \\
 $n_{\mathrm{u}}$ & size of system inputs \\
 $n_{\mathrm{y}}$ & size of system outputs \\
-$n_{\widetilde{\mathrm{x}}}$ & size of extended system states \\
+$n_{\widetilde{\mathrm{x}}}$ & size of augmented system states \\
 $Q_{\mathrm{x}}$ & penalty matrix of the built-in integrator \\
 $Q_{\mathrm{x,L}}$ & lower bound on the penalty matrix of the built-in integrator \\
 $Q_{\mathrm{x,U}}$ & upper bound on the penalty matrix of the built-in integrator \\
@@ -572,7 +586,7 @@ $U^{\mathrm{s}}$ & steady state of voltage, \% \\
 $\mathcal{U}$ & set of control inputs \\
 $V$ & volume of heating medium, l \\
 $x$ & system states \\
-$\widetilde{x}$ & extended system states \\
+$\widetilde{x}$ & augmented system states \\
 $x_{\mathrm{I}}$ & system states corresponding to the built-in integrator \\
 $y$ & system outputs \\
 $y_\mathrm{\max}$ & maximal value of system outputs \\
