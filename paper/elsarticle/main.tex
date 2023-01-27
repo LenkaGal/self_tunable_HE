@@ -92,7 +92,7 @@
 %%             country={}}
 %% \fntext[label3]{}
 
-\title{Self-tunable approximated explicit MPC: Heat exchanger implementation}
+\title{Self-tunable approximated explicit MPC: Heat exchanger implementation and analysys}
 %\title{Self-tunable approximated explicit MPC: Implementation on a heat exchanger with a non-symmetric behavior}
 
 %% use optional labels to link authors explicitly to addresses:
@@ -504,6 +504,76 @@ TODO: krajsie skomentovat vyhody zlepsenia kvality riadenia
 \section{Conclusion}
 \label{sec:conclusion}
 This paper deals with the experimental implementation of tunable approximated explicit model predictive control and provides a technique for self-tuning controller design. Based on the current reference value, the tuning parameter is scaled using linear interpolation. The previously published paper related to the self-tunable explicit MPC suggested tuning based on the distance of the reference value from the steady state. This paper presents a novel idea of tuning based on the size of reference step change. The tuning procedures aim to compensate for the nonlinear behavior of the controlled system. The tuning parameter is updated when the reference changes. It is calculated as the ratio between the size of the reference change and the maximal possible size of the reference change, which is specified before operation. Another novel contribution comes with splitting the interval of tuning parameter into two ranges, while both ranges are assigned to different operating conditions. The proposed method is implemented on a laboratory heat exchanger with nonlinear and non-symmetric behavior. The non-symmetry makes the plant a suitable candidate for splitting the interval of the tuning parameter. The decision criterium is negativity or positivity of reference change. When the reference changed upwards, the control input was tuned in the first part of the interval and approached the boundary controller associated with the lower bound on the penalty matrix. On the contrary, when the reference changed downwards, the control input was tuned to approach the control input from the boundary controller with the upper bound on the penalty matrix. To investigate the control results properly, the control performance was evaluated quantitatively. Compared to control with only one controller, the self-tunable technique helped to decrease the maximal overshoots/undershoots, integral square error, and settling time.
+
+\section*{Acknowledgements}
+This research is funded by the European Union’s Horizon Europe under grant no. 101079342 (Fostering Opportunities Towards Slovak Excellence in Advanced Control for Smart Industries). The authors gratefully acknowledge the contribution of the Scientific Grant Agency of the Slovak Republic under the grants 1/0545/20, 1/0297/22, the Slovak Research and Development Agency under the project APVV-20-0261. 
+
+\section*{Nomenclature}
+
+\subsection{Abbreviations}
+\noindent  \textit{MPC}: model predictive control \\
+\textit{ISE}: integral square error \\
+\textit{LTI}: linear time-invariant \\
+
+\subsection{Symbols}
+\noindent $A$: system state matrix \\
+$\widetilde{A}$: extended system state matrix \\
+$B$: system input matrix \\
+$\widetilde{B}$: extended system input matrix \\
+$C$: system output matrix \\
+$\widetilde{C}$: extended system output matrix \\
+$d_{\max}$: maximal deviation from the steady state \\
+TODO: odlisit max size of reference step change \\
+$F$: slope of the affine control law \\
+$g$: section of the affine control law \\
+$I$: identity matrix \\	
+$k$: step of the prediction horizon \\
+$N$: prediction horizon \\
+$n_{\mathrm{u}}$: size of system inputs \\
+$n_{\mathrm{y}}$: size of system outputs \\
+$n_{\widetilde{\mathrm{x}}}$: size of extended system states \\
+$Q_{\mathrm{x}}$: penalty matrix of the built-in integrator \\
+$Q_{\mathrm{x,L}}$: lower bound on the penalty matrix of the built-in integrator \\
+$Q_{\mathrm{x,U}}$: upper bound on the penalty matrix of the built-in integrator \\
+$Q_{\mathrm{y}}$: penalty matrix of the control error \\
+$Q_{\mathrm{y,L}}$: lower bound on the penalty matrix of the control error \\
+$Q_{\mathrm{y,U}}$: upper bound on the penalty matrix of the control error \\
+$R$: penalty matrix of system inputs \\
+$R_{\mathrm{L}}$: lower bound on the penalty matrix of system inputs \\
+$R_{\mathrm{U}}$: upper bound on the penalty matrix of system inputs \\
+$\mathcal{R}$: critical region \\
+$\mathbb{R}$: Euclidean space of real numbers \\
+$t$: time, s \\
+$t_{\epsilon}$: settling time, s \\
+$T$: temperature, $^{\circ}\mathrm{C}$ \\
+$T_{\mathrm{s}}$: sampling time, s \\
+$T^{\mathrm{s}}$: steady state of temperature, $^{\circ}\mathrm{C}$ \\
+$u$: control inputs \\
+$u_{\mathrm{L}}$: control inputs asscociated with the lower boundary controller\\
+$u_{\mathrm{U}}$: control inputs asscociated with the upper boundary controller\\
+$U$: voltage, \% \\
+$U^{\mathrm{s}}$: steady state of voltage, \% \\
+$\mathcal{U}$: set of control inputs \\
+$V$: volume of heating medium, l \\
+$x$: system states \\
+$\widetilde{x}$: extended system states \\
+$x_{\mathrm{I}}$: system states corresponding to the built-in integrator \\
+$y$: system outputs \\
+$y_\mathrm{\max}$: maximal value of system outputs \\
+$y_\mathrm{\min}$: minimal value of system outputs \\
+$y_\mathrm{ref}$: reference value of system outputs \\	
+$\mathcal{Y}$: set of system outputs \\
+\textit{0}: zero matrix
+
+\subsection{Greek letters}
+\noindent $\Delta_\mathrm{ref}$: size of the reference change, $^{\circ}\mathrm{C}$ \\
+$\rho$:	tuning factor \\
+$\widetilde{\rho}$: scaled tuning factor \\
+$\rho_{\mathrm{s}}$: splitting value of the tuning factor \\
+$\sigma_{\max}$: maximal overshoot, \% \\
+$\theta$: parameter of optimization problem \\
+$\Theta$: set of parameter values
+
 
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections
