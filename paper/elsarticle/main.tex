@@ -169,7 +169,11 @@ The tunable approximated explicit model predictive control (MPC) comes with the 
 
 The main benefit in form of lower computational complexity in the control phase comes hand in hand with a non-negligible drawback. The size of the parametric solution may increase to the value that prevents its real-time implementation for two reasons: (i) memory footprint is higher than the available memory size of the control unit, and (ii) the computational time associated with finding the optimal control action is higher than the available time period for control action implementation. Although this control strategy has its challenges, it is still very beneficial for practical usage for its benefits. 
 
-[TODO: Please, write a paper structure]
+\textcolor{red}{[TODO: Please, clearly point out the main contributions]}
+
+This work directly extends our results presented in~\cite{self_tunable}, where the basic principles of the self-tunable approximated explicit MPC were introduced. Compared to~\cite{self_tunable}, we...
+
+\textcolor{red}{[TODO: Please, write a paper structure]}
 
 The paper is organized as follows...
 
@@ -242,7 +246,7 @@ where $F_{i} \in \mathbb{R}^{n_{\mathrm{u}} \times n_{\mathrm{x}}}$ and $g_{i}  
 
 Note, many other formulations of the optimization problems for the explicit MPC design, were mainly in the terms of the definition of the cost functions in~\eqref{eq:mpc_problem_cost}. Also, the incremental (velocity) formulation of the state-space model is common, but leads to further extension of the vector of parameters $\theta$ and therefore also the complexity of the explicit MPC controller increases. Another option for offset-free tracking is introducing the disturbance estimation. For such an overview see e.g. 
 
-\textcolor{red}{TODO: Please, fix}
+\textcolor{red}{[TODO: Please, fix.]}
 
 ...TODO. 
 Klauco reference governors? minimovka zdroje + dizertacka str.33
@@ -250,39 +254,37 @@ Klauco reference governors? minimovka zdroje + dizertacka str.33
 \subsection{Tunable explicit model predictive control}
 \label{sec:tunable}
 
-The aggressivity of the controller and whole nature of the control can be influenced by tuning the penalty matrices in the optimization problem~\eqref{eq:mpc_problem}. When the optimization problem is precomputed offline to obtain the parametric solution, it is not possible to tune the controller afterwards. As the operation conditions and demands on controller setup may differ throughout control, the ability to adjust the controller aggressivity can be very beneficial.
+The aggressivity of the controller and whole nature of the control is influenced by appropriate fine tuning of the penalty matrices in the optimization problem~\eqref{eq:mpc_problem}. When the multi-parametric QP (mp-QP) problem is precomputed offline to obtain the corresponding parametric solution, it is not possible to tune the controller afterwards without trading off a significant increase of the controller complexity or the performance loss. As the operation conditions and requirementson controller setup may differ throughout control, the ability to adjust the controller aggressivity can be very beneficial.
 
-The idea of approximated tunable explicit MPC comes from the work ~\cite{Klauco_tunable}, where the control action is calculated based on linear interpolation between two boundary control actions. These control actions result from evaluating two boundary explicit MPCs. The boundary explicit controllers have the same structure and setup, except one of the penalty matrices -- the tuned one. The boundary matrices are diagonal square matrices such that $\lambda_{i,\mathrm{L}} \le \lambda_{i,\mathrm{U}}$, $\forall i = 1,\dots,s$, where $\lambda$ denotes the vector of penalty matrix eigenvalues, $L$ and $U$ denote the lower and upper boundary setup respectively, and $s$ is the rank of the tuned penalty matrix.
+The idea of approximated tunable explicit MPC comes from the work ~\cite{Klauco_tunable}, where the control action is calculated based on linear interpolation between two boundary control actions. These control actions result from evaluating two boundary explicit MPCs. The boundary explicit controllers have the same structure and setup, except one of the penalty matrices -- the tuned one. The boundary penalty matrices are diagonal square matrices such that $\lambda_{i,\mathrm{L}} \le \lambda_{i,\mathrm{U}}$, $\forall i = 1,\dots,s$, where $\lambda$ denotes the vector of eigenvalues of the penalty matrix, $s$ is the rank of the tuned penalty matrix, and $L$, $U$ denote the lower and upper boundary setup respectively.
 
-When considering the penalty matrices from cost function~\eqref{eq:mpc_problem_cost}, the penalty matrices are scaled in the following way:
+When considering the penalty matrices in cost function~\eqref{eq:mpc_problem_cost}, these penalty matrices are scaled in the following way:
 \begin{subequations}
 	\label{eq:tunable_matrices}
 	\begin{eqnarray}
 		\label{eq:tunable_R}
-		&~& R = (1-\rho)R_\mathrm{L} + \rho R_\mathrm{U}, \\
+		&~& R(t) = (1-\rho(t)) \, R_\mathrm{L} + \rho(t) \, R_\mathrm{U}, \\
 		\label{eq:tunable_Qx}
-		&~& Q_\mathrm{x} = (1-\rho)Q_\mathrm{x,L} + \rho Q_\mathrm{x,U}, \\
+		&~& Q_\mathrm{x}(t) = (1-\rho(t)) \, Q_\mathrm{x,L} + \rho(t) \, Q_\mathrm{x,U}, \\
 		\label{eq:tunable_Qy}
-		&~& Q_\mathrm{y} = (1-\rho)Q_\mathrm{y,L} + \rho Q_\mathrm{y,U},
+		&~& Q_\mathrm{y}(t) = (1-\rho(t)) \, Q_\mathrm{y,L} + \rho(t) \, Q_\mathrm{y,U},
 	\end{eqnarray}
 \end{subequations}
+where $\rho$ represents the tuning parameter such that $0 \le \rho \le 1$ holds. Based on the rules in~\eqref{eq:tunable_matrices}, it is possible to choose online any controller setup from the lower to the upper boundary of the tuned matrix. From the implementation point of view, it is preferred to tune just a single penalty matrix, i.e., to store only two controllers corresponding to the boundary values of the selected penalty matrix. To determine which penalty matrix in~\eqref{eq:tunable_matrices} should be tuned, it is suggested to judge the control performance subject to the specific system and systematically tune all of the penalty matrices.
 
-where $\rho$ represents the tuning parameter and $0 \le \rho \le 1$ holds. Based on~\eqref{eq:tunable_matrices}, it is possible to choose online any controller setup from the lower to the upper boundary of the tuned matrix. Note, it is practical to tune only one matrix, i.e., to store only two controllers corresponding to the boundary matrices. To determine which penalty matrix should be tuned, it is suggested to examine the control results subject to the specific system and to try systematic tuning of all the penalty matrices.
-
-When the tuning parameter $\rho$ is determined based on the current control conditions, the optimal control action is evaluated using the two optimal controllers. Based on the boundary control actions, the interpolated, i.e., tuned control action is calculated:
-\begin{subequations}
+When the tuning parameter $\rho$ is determined based on the current control conditions, the approximated optimal control action is evaluated using the two optimal controllers. Based on the boundary control actions, the interpolated, i.e., tuned control action is calculated using the convex combination:
+%\begin{subequations}
 	\begin{eqnarray}
 		\label{eq:tunable_u}
-		u = (1-\rho)u_\mathrm{L} + \rho u_\mathrm{U},
+		u(t) = (1-\rho(t)) \, u_\mathrm{L} + \rho(t) \, u_\mathrm{U},
 	\end{eqnarray}
-\end{subequations}
+%\end{subequations}
+where $u_\mathrm{L}$ and $u_\mathrm{U}$ denote the optimal control actions from the lower and upper boundary controller respectively. The online tuning of the controller online comes with a cost of storing and evaluating two explicit controllers. Nevertheless, the ability to tune the controller may be more important in many practical applications.
 
-where $u_\mathrm{L}$ and $u_\mathrm{U}$ denote the optimal control actions from the lower and upper boundary controller respectively. The tuning of the controller online comes with a cost of storing and evaluating two explicit controllers. Nevertheless, the ability to tune the controller may be more important in many practical applications.
-
-Note, the concept of explicit MPC tuning can be applied also to other MPC formulations, based on the current specific needs. In this paper, the penalty matrices of cost function~\eqref{eq:mpc_problem_cost} are considered, as it is necessary to satisfy offset-free reference tracking.
+We point out, the concept of explicit MPC tuning is applicable for a wide class of MPC design formulations, based on the current specific needs. Without loss of generality, hereafter, we consider the penalty matrices of cost function~\eqref{eq:mpc_problem_cost}, as it is necessary to satisfy offset-free reference tracking.
 
 \begin{remark}
-	If stability guarantee and recursive feasibility is required, it is suggested to follow the instructions from \cite{Oravec_tunable}. In order to satisfy the requirements, the study introduces a procedure of choosing the terminal penalty and terminal set in the two boundary controllers. 
+	If the asymptotic stability and recursive feasibility guarantees are required, we refer the reader to follow the instructions from \cite{Oravec_tunable}. In order to satisfy these requirements, the study introduces a procedure of computing the common terminal penalty and terminal set for the two boundary controllers. 
 \end{remark}
 
 \subsection{Self-tunable explicit model predictive control}
@@ -532,7 +534,9 @@ TODO: krajsie skomentovat vyhody zlepsenia kvality riadenia
 This paper deals with the experimental implementation of tunable approximated explicit model predictive control and provides a technique for self-tuning controller design. Based on the current reference value, the tuning parameter is scaled using linear interpolation. The previously published paper related to the self-tunable explicit MPC suggested tuning based on the distance of the reference value from the steady state. This paper presents a novel idea of tuning based on the size of reference step change. The tuning procedures aim to compensate for the nonlinear behavior of the controlled system. The tuning parameter is updated when the reference changes. It is calculated as the ratio between the size of the reference change and the maximal possible size of the reference change, which is specified before operation. Another novel contribution comes with splitting the interval of tuning parameter into two ranges, while both ranges are assigned to different operating conditions. The proposed method is implemented on a laboratory heat exchanger with nonlinear and asymmetric behavior. The non-symmetry makes the plant a suitable candidate for splitting the interval of the tuning parameter. The decision criterium is negativity or positivity of reference change. When the reference changed upwards, the control input was tuned in the first part of the interval and approached the boundary controller associated with the lower bound on the penalty matrix. On the contrary, when the reference changed downwards, the control input was tuned to approach the control input from the boundary controller with the upper bound on the penalty matrix. To investigate the control results properly, the control performance was evaluated quantitatively. Compared to control with only one controller, the self-tunable technique helped to decrease the maximal overshoots/undershoots, integral square error, and settling time.
 
 \section*{Acknowledgements}
-This research is funded by the European Union’s Horizon Europe under grant no. 101079342 (Fostering Opportunities Towards Slovak Excellence in Advanced Control for Smart Industries). The authors gratefully acknowledge the contribution of the Scientific Grant Agency of the Slovak Republic under the grants 1/0545/20, 1/0297/22, the Slovak Research and Development Agency under the project APVV-20-0261. 
+
+The authors gratefully acknowledge the contribution of the Scientific Grant Agency of the Slovak Republic under the grants 1/0545/20, 1/0297/22, the Slovak Research and Development Agency under the project APVV-20-0261. 
+This research is funded by the European Union’s Horizon Europe under grant no. 101079342 (Fostering Opportunities Towards Slovak Excellence in Advanced Control for Smart Industries). 
 
 \section*{Nomenclature}
 
