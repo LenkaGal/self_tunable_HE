@@ -267,11 +267,11 @@ When considering the penalty matrices in cost function~\eqref{eq:mpc_problem_cos
 	\label{eq:tunable_matrices}
 	\begin{eqnarray}
 		\label{eq:tunable_R}
-		&~& R(t) = (1-\rho(t)) \, R_\mathrm{L} + \rho(t) \, R_\mathrm{U}, \\
+		&~& R(k) = (1-\rho(k)) \, R_\mathrm{L} + \rho(k) \, R_\mathrm{U}, \\
 		\label{eq:tunable_Qx}
-		&~& Q_\mathrm{x}(t) = (1-\rho(t)) \, Q_\mathrm{x,L} + \rho(t) \, Q_\mathrm{x,U}, \\
+		&~& Q_\mathrm{x}(k) = (1-\rho(k)) \, Q_\mathrm{x,L} + \rho(k) \, Q_\mathrm{x,U}, \\
 		\label{eq:tunable_Qy}
-		&~& Q_\mathrm{y}(t) = (1-\rho(t)) \, Q_\mathrm{y,L} + \rho(t) \, Q_\mathrm{y,U},
+		&~& Q_\mathrm{y}(k) = (1-\rho(k)) \, Q_\mathrm{y,L} + \rho(k) \, Q_\mathrm{y,U},
 	\end{eqnarray}
 \end{subequations}
 where $\rho$ represents the tuning parameter such that $0 \le \rho \le 1$ holds. Based on the rules in~\eqref{eq:tunable_matrices}, it is possible to choose online any controller setup from the lower to the upper boundary of the tuned matrix. From the implementation point of view, it is preferred to tune just a single penalty matrix, i.e., to store only two controllers corresponding to the boundary values of the selected penalty matrix. To determine which penalty matrix in~\eqref{eq:tunable_matrices} should be tuned, it is suggested to judge the control performance subject to the specific system and systematically tune all of the penalty matrices.
@@ -280,7 +280,7 @@ When the tuning parameter $\rho$ is determined based on the current control cond
 %\begin{subequations}
 	\begin{eqnarray}
 		\label{eq:tunable_u}
-		u(t) = (1-\rho(t)) \, u_\mathrm{L} + \rho(t) \, u_\mathrm{U},
+		u(k) = (1-\rho(k)) \, u_\mathrm{L} + \rho(k) \, u_\mathrm{U},
 	\end{eqnarray}
 %\end{subequations}
 where $u_\mathrm{L}$ and $u_\mathrm{U}$ denote the optimal control actions from the lower and upper boundary controller respectively. The online tuning of the controller online comes with a cost of storing and evaluating two explicit controllers. Nevertheless, the ability to tune the controller may be more important in many practical applications.
@@ -320,7 +320,7 @@ When considering tuning the control action based on Eq.~\eqref{eq:tunable_u}, a 
 	The parameter $d_{\max}$ is vector in general, as it depends on the size of system outputs. If $d_{\max}$ is scalar, the parameter $\rho$ is scalar as well and can be directly utilized to scale the control action. If multiple outputs are controlled, it is suggested to calculate the tuning parameter based on the maximal ratio:
 	\begin{eqnarray}
 		\label{eq:rho_max}
-		\rho = \max \left( \frac{\vert y_{\mathrm{ref}} \vert}{d_{\max}} \right).
+		\rho(k) = \max \left( \frac{\vert y_{\mathrm{ref}}(k) \vert}{d_{\max}} \right).
 	\end{eqnarray}	
 \end{remark}
 
@@ -329,21 +329,20 @@ Note, the relations \eqref{eq:rho_self_tunable} and \eqref{eq:rho_max} operate w
 
 \section{Methodology}
 \label{sec:methodology}
-This section extends the ideas of self-tunable explicit MPC in order to improve the control performance. First, a different way of tuning parameter calculation is introduced. Furthermore, an extended self-tunable technique is presented to scale the tuning parameter for applications, when it is beneficial to exploit a specific range of the tuning parameter in different operating conditions. 
+This section extends the ideas of self-tunable explicit MPC in order to improve the control performance. First, a different way of tuning parameter calculation is introduced. Furthermore, an extended self-tunable technique is presented to scale the tuning parameter for industrial-oriented applications, when it is beneficial to exploit a specific range of the tuning parameter in different operating conditions. 
 
 
 \subsection{Tuning parameter based on the size of reference change}
 \label{sec:self_tunable_delta_ref}
-The approach of self-tunable explicit MPC in~\cite{self_tunable} suggested tuning based on the reference value distance from the steady state. The aim is to compensate the nonlinear behavior of system, when using a simple linear prediction model. This work provides another way of the tuning parameter calculation based on the size of reference change. When different sizes of reference step changes are made and the behavior of the closed-loop system is varying, it can be beneficial to inclue the size of the reference step change into the tuning procedure.
+The approach of self-tunable explicit MPC in~\cite{self_tunable} suggested tuning based on the current reference value distance from the steady state. The aim is to compensate the nonlinear behavior of system, when using a simple linear prediction model. This work provides also another useful way of the real-time evaluation of the tuning parameter $\rho$ based on the size of reference change. When different sizes of reference step changes are made and the behavior of the closed-loop system is varying, it can be beneficial to inclue the size of the reference step change into the tuning procedure.
 
-In this approach, the aggressivity is adjusted based on the ratio between the reference step change and the maximal reference step change that can be set during control operation:
+In this approach, the aggressivity is adjusted based on the ratio between the reference step change and the maximal reference step change that can be realized during control operation:
 \begin{eqnarray}
 	\label{eq:rho_delta_ref}
-	\rho = \frac{\vert \Delta_{\mathrm{ref}} \vert}{d_{\max}},
+	\rho(k) = \frac{\vert \Delta_{\mathrm{ref}}(k) \vert}{d_{\max}},
 \end{eqnarray} 
-
-where $\Delta_{\mathrm{ref}} = y_{\mathrm{ref},k}-y_{\mathrm{ref},k-1}$ is the size of the reference change. The denominator of Eq.~\eqref{eq:rho_delta_ref} is changed as well. In contrast to the maximal deviation from the steady state in Section~\ref{sec:self_tunable}, this approach introduces $d_{\max}$ as the maximal possible reference step. 
-Analogously to the original approach, the maximal reference step can be set based on the general knowledge of future reference values. Another option is to exploit the information about the system constraints and set the parameter $d_{\max}$ according to Eq.~\eqref{eq:d_max}. 
+where $\Delta_{\mathrm{ref}}(k) = y_{\mathrm{ref}}(k) - y_{\mathrm{ref}}(k-1)$ is the size of the reference step change. The denominator of Eq.~\eqref{eq:rho_delta_ref} is changed as well. In contrast to the maximal deviation from the steady state in Section~\ref{sec:self_tunable}, this approach introduces $d_{\max}$ as the maximal possible reference step change given by: $  d_{\max}(k) = \Vert \Delta_{\mathrm{ref}}(k) \Vert_{\infty} $. 
+Analogously to the original approach, the maximal reference step can be set based on the general knowledge of the expected future reference values. Another option is to exploit the information about the system constraints and set the parameter $d_{\max}$ according to Eq.~\eqref{eq:d_max}. 
  
 Note, only absolute value of $\Delta_{\mathrm{ref}}$ and $d_{\max}$ are considered in this procedure to ensure $\rho \ge 0$. 
 
@@ -358,9 +357,11 @@ Note, only absolute value of $\Delta_{\mathrm{ref}}$ and $d_{\max}$ are consider
 TODO: remark na nelinearnu interpolaciu \\
 TODO: zovseobecnit na viac usekov intervalu? \\
 
-This paper provides further extension of the self-tuning method proposed in~\cite{self_tunable}. The suggested technique of tuning is suitable e.g. for systems with asymmetric behavior, but can be used in any application, where ,,simple" tuning in the whole range of tuning parameter $\rho$ is not sufficient.
+This paper provides further extension of the self-tuning method proposed in~\cite{self_tunable}. The suggested technique of tuning is suitable, e.g., for systems with asymmetric behavior, but can be used in any application, where ``simple'' tuning in the whole range of tuning parameter $\rho$ is not sufficient.
 
-The tuning method is based on splitting the interval of the tuning parameter $\rho$ in order to utilize different parts of the interval in different operating conditions. The adjusted tuning parameter $\widetilde{\rho}$ is then utilized to scale the control input according to Eq.~\eqref{eq:tunable_u} instead of the original value of tuning parameter $\rho$.     
+The proposed self-tuning method is based on splitting the interval of the tuning parameter $\rho$ in order to utilize different parts of the interval in different operating conditions. Instead of the original value of tuning parameter $\rho$, the adjusted tuning parameter $\widetilde{\rho}$ is then utilized to scale the control input according to Eq.~\eqref{eq:tunable_u}.
+
+\textcolor{red}{[ TODO: Please, consider rearranging the following objects. Missing some formal requirements, such as: ``Given...'' ]}
 
 \begin{definition}
 	If the tuning parameter is scaled in the first part of the interval, i.e., $\langle 0, \rho_{\mathrm{s}} \rangle$, where $\rho_{\mathrm{s}}$ is the splitting value of the tuning parameter, the following relation is used to adjust the tuning parameter:
@@ -369,6 +370,8 @@ The tuning method is based on splitting the interval of the tuning parameter $\r
 		\widetilde{\rho} = \rho_{\mathrm{s}} \rho.
 	\end{eqnarray}
 \end{definition}
+
+\textcolor{red}{[ TODO: Please, consider spliting the Corollaries into the Lemma and Proof. ]}
 
 \begin{corollary}
 	The following outcomes result from Eq.~\eqref{eq:rho_up}. If $\rho=0$, then $\widetilde{\rho} = 0$. When considering the other extreme, i.e., $\rho=1$, then $\widetilde{\rho} = \rho_{\mathrm{s}}$. In such way, the parameter $\rho$ can be scaled in the first part of the interval up to the splitting value. Note, as the relation in Eq.~\eqref{eq:rho_up} is linear and $0 \le \rho \le 1$ holds, for $\widetilde{\rho}$ it is impossible to acquire other values than in the given interval of parameter $\rho$.   
@@ -386,10 +389,12 @@ The tuning method is based on splitting the interval of the tuning parameter $\r
 	The following outcomes result from Eq.~\eqref{eq:rho_down}. When $\rho=0$, $\widetilde{\rho} = \rho_{\mathrm{s}}$. When considering the other extreme, i.e., $\rho=1$, then $\widetilde{\rho} = 1$. In such way, the parameter $\rho$ can be scaled in the second part of the interval from to the splitting value up to 1. Note, as the relation in Eq.~\eqref{eq:rho_down} is linear and $0 \le \rho \le 1$ holds, for $\widetilde{\rho}$ it is impossible to acquire other values than in the given interval of parameter $\rho$.
 \end{corollary}
 
-The advantage of the proposed method remains in the self-tuning of the controller as in the approach from Section~\ref{sec:self_tunable}. Nevertheless, it is required to determine the splitting value of the tuning parameter $\rho_{\mathrm{s}}$ and assign the parts of the interval to the associated operating conditions.
+The advantage of the proposed method remains in the self-tuning of the controller as in the approach from Section~\ref{sec:self_tunable}. Nevertheless, it is required to appropriately determine the splitting value of the tuning parameter $\rho_{\mathrm{s}}$ and assign the parts of the interval to the associated operating conditions.
+
+\textcolor{red}{[ TODO: Please, consider rearranging the confusing Remark, as the task of the tuning is transformed into the Hessian updates. ]}
 
 \begin{remark}
-	Note, the suggested scaling method is suitable also for online MPC, as the optimization problem is solved in every control step. Therefore, it is possible to include the controller tuning in the procedure of computing the optimal control input. It should be also noted that with updating penalty matrices, the optimization problem has to be rebuilt into a form suitable for a solver, so sufficient computational time is required.  
+	Note, the suggested scaling method is suitable also for online MPC, as the optimization problem is solved in every control step. Therefore, it is possible to include the controller tuning in the procedure of computing the optimal control input. It should be also noted that with real-time updating penalty matrices, the optimization problem has to be rebuilt into a form suitable for a solver, so sufficient computational time is required.  
 \end{remark}
 
 \section{Results and discussion}
