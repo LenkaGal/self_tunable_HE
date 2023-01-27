@@ -130,6 +130,7 @@
 
 \textcolor{red}{[ TODO: Please, prevent using ``When...''-formulation to often. ]}
 
+\textcolor{red}{[ TODO: Please, make consistent notation of equations: Eq-based vs. non-Eq notation. ]}
 
 \textcolor{red}{[ TODO: Please, checkthe  word limit. ]}
 
@@ -170,6 +171,8 @@ The tunable approximated explicit model predictive control (MPC) comes with the 
 \label{sec:introduction}
  
 (len skopirovany text z jadra - hodil sa mi viac do Introduction, neskor mozno pouzijem) 
+
+\textcolor{red}{[ TODO: We need a well-elaborated introduction/review to strongly motivate our control approach. Please, take into account the industrial-oriented reviewers, mostly experts in the field of the chemical engineering (heat exchangers and energy balances). ]}
 
 The main benefit in form of lower computational complexity in the control phase comes hand in hand with a non-negligible drawback. The size of the parametric solution may increase to the value that prevents its real-time implementation for two reasons: (i) memory footprint is higher than the available memory size of the control unit, and (ii) the computational time associated with finding the optimal control action is higher than the available time period for control action implementation. Although this control strategy has its challenges, it is still very beneficial for practical usage for its benefits. 
 
@@ -353,6 +356,9 @@ Note, only absolute value of $\Delta_{\mathrm{ref}}$ and $d_{\max}$ are consider
 
 \subsection{Self-tunable technique for systems with asymmetric behavior}
 \label{sec:self_tunable_rho_scaling}
+
+\textcolor{red}{[ TODO: Please, fix. ]}
+
 \noindent TODO: co ak nepriama umera? \\
 TODO: remark na nelinearnu interpolaciu \\
 TODO: zovseobecnit na viac usekov intervalu? \\
@@ -402,7 +408,7 @@ The advantage of the proposed method remains in the self-tuning of the controlle
 
 In this section, the results of the proposed self-tuning method are analyzed using an experimental implementation. The self-tuning strategy utilizes tuning parameter based on the size of reference change (Section~\ref{sec:self_tunable_delta_ref}) and the scaling of tuning parameter based on splitting the interval of the parameter and assigning the interval parts to specific operating conditions (Section~\ref{sec:self_tunable_rho_scaling}).
 
-The plant on which the control was implemented and analyzed is a laboratory counter-current liquid-to-liquid plate heat exchanger Armfield Process Plant Trainer PCT23~\cite{pct23}, see Figure~\ref{fig:HE}. The cold feed as well as heating medium are transported to the heat exchanger by two peristaltic pumps. The flow rate of the feed of the cold medium (water) is constant, while the aim of control is to track the reference value of the cold medium temperature. Therefore, the controlled variable is the feed temperature $T$ at the outlet of the heat exchanger. The associated manipulated variable is the voltage $U$ corresponding to the power of the pump feeding the heat exchanger by the hot medium (water). The voltage is within the range of [$0-5$]\,V normalized into the relative values in percentage. The manipulated variable is constrained from 20\,\% to 100\,\% to respect the physical limitations of the operating conditions. As the heat exchange is a nonlinear and asymmetric process~\cite{Liptak}, this heat exchanger represents a suitable candidate for the presented controller tuning strategy.  
+The plant on which the control was implemented and analyzed is a laboratory-scaled counter-current liquid-to-liquid plate heat exchanger Armfield Process Plant Trainer PCT23~\cite{pct23}, see Figure~\ref{fig:HE}. The cold feed as well as heating medium are transported to the heat exchanger by two peristaltic pumps. The flow rate of the feed of the cold medium (water) is constant, while the aim of control is to track the reference value of the cold medium temperature. Therefore, the controlled variable is the feed temperature $T$ at the outlet of the heat exchanger. The associated manipulated variable is the voltage $U$ corresponding to the power of the pump feeding the heat exchanger by the hot medium (water). The voltage is within the range of [$0-5$]\,V normalized into the relative values in percentage. The manipulated variable is constrained from 20\,\% to 100\,\% to respect the physical limitations of the operating conditions. As the heat exchange is a nonlinear and asymmetric process~\cite{Liptak}, this heat exchanger represents a suitable candidate for the presented controller tuning strategy.  
 
 The matrices of the linear state-space model of the plant are
 \begin{subequations}
@@ -568,12 +574,12 @@ Compared to the considered non-self-tunable controllers, the generated control t
 For various operating conditions, the proposed self-tunable controller outperformed the conventional controllers in the means of the squared-error-based criterion ($ISE$) of the output temperature $T$ within a range $[5-30]$\,\%.  
 Together with the reduced overshoots and settling times, the achieved improvements of the control performance enables non-negligible energy savings when the precision and the operating time to ensure the product with the required properties. Although the analyzed extensive case study was realized considering the laboratory scaled heat exhcnager plant, the introduced self-tunable control policy enables significant reduction of the corresponding carbon footprint emissions in the industrial applications. 
 
-\section{Conclusion}
+\section{Conclusions}
 \label{sec:conclusion}
 
-This paper deals with the experimental implementation of tunable approximated explicit model predictive control and provides a technique for self-tuning controller design. Based on the current reference value, the tuning parameter is scaled using linear interpolation. The previously published paper related to the self-tunable explicit MPC suggested tuning based on the distance of the reference value from the steady state. This paper presents a novel idea of tuning based on the size of reference step change. The tuning procedures aim to compensate for the nonlinear behavior of the controlled system. The tuning parameter is updated when the reference changes. It is calculated as the ratio between the size of the reference change and the maximal possible size of the reference change, which is specified before operation. Another novel contribution comes with splitting the interval of tuning parameter into two ranges, while both ranges are assigned to different operating conditions. The proposed method is implemented on a laboratory heat exchanger with nonlinear and asymmetric behavior. The non-symmetry makes the plant a suitable candidate for splitting the interval of the tuning parameter. The decision criterium is negativity or positivity of reference change. When the reference changed upwards, the control input was tuned in the first part of the interval and approached the boundary controller associated with the lower bound on the penalty matrix. On the contrary, when the reference changed downwards, the control input was tuned to approach the control input from the boundary controller with the upper bound on the penalty matrix. To investigate the control results properly, the control performance was evaluated quantitatively. Compared to control with only one controller, the self-tunable technique helped to decrease the maximal overshoots/undershoots, integral square error, and settling time.
+This paper deals with the experimental implementation of the self-tunable approximated explicit model predictive control and provides a strategy for an effective self-tuning controller design. Based on the current reference value, the tuning parameter is scaled using linear interpolation. The previously published work related to the self-tunable explicit MPC suggested tuning just based on the distance of the reference value from the system steady-state value. This paper presents a novel idea of tuning based on the size of reference step change. The self-tuning algorithm aims to compensate for the nonlinear behavior of the controlled system. The self-tuning parameter is updated when the reference changes. It is calculated as the ratio between the size of the reference change and the maximal possible size of the reference change, which is specified before operation. Another novel contribution addresses the challenging control problem of the asymmetric system behaviour by splitting the interval of tuning parameter into two ranges, while both intervals are assigned to different operating conditions. The proposed method is implemented on a laboratory heat exchanger with nonlinear and asymmetric behavior. The non-symmetry makes the plant a suitable candidate for splitting the interval of the tuning parameter. The decision criterium is negativity or positivity of reference change. When the reference changed upwards, the control input was tuned in the first part of the interval and approached the boundary controller associated with the lower bound on the penalty matrix. On the contrary, when the reference changed downwards, the control input was tuned to approach the control input from the boundary controller with the upper bound on the penalty matrix. To investigate the control results properly, the control performance was evaluated also quantitatively. Compared to the conventional control strategy handling just a single controller, the self-tunable control approach decreased the sum-of-squared control error, maximal overshoots/undershoots, and settling time. As the consqquence, the self-tunable controllers enables significant energy savings and the corresponding reduction of the carbon footprint emissions in the industrial applications. 
 
-\section*{Acknowledgements}
+\section*{Acknowledgments}
 
 The authors gratefully acknowledge the contribution of the Scientific Grant Agency of the Slovak Republic under the grants 1/0545/20, 1/0297/22, the Slovak Research and Development Agency under the project APVV-20-0261. 
 This research is funded by the European Union’s Horizon Europe under grant no. 101079342 (Fostering Opportunities Towards Slovak Excellence in Advanced Control for Smart Industries). 
