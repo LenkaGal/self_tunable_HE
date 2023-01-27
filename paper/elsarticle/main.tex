@@ -65,95 +65,97 @@
 
 \begin{document}
 
-\begin{frontmatter}
-
-%% Title, authors and addresses
-
-%% use the tnoteref command within \title for footnotes;
-%% use the tnotetext command for theassociated footnote;
-%% use the fnref command within \author or \address for footnotes;
-%% use the fntext command for theassociated footnote;
-%% use the corref command within \author for corresponding author footnotes;
-%% use the cortext command for theassociated footnote;
-%% use the ead command for the email address,
-%% and the form \ead[url] for the home page:
-%% \title{Title\tnoteref{label1}}
-%% \tnotetext[label1]{}
-%% \author{Name\corref{cor1}\fnref{label2}}
-%% \ead{email address}
-%% \ead[url]{home page}
-%% \fntext[label2]{}
-%% \cortext[cor1]{}
-%% \affiliation{organization={},
-%%             addressline={},
-%%             city={},
-%%             postcode={},
-%%             state={},
-%%             country={}}
-%% \fntext[label3]{}
-
-\title{Self-tunable approximated explicit MPC: Heat exchanger implementation and analysys}
-%\title{Self-tunable approximated explicit MPC: Implementation on a heat exchanger with a non-symmetric behavior}
-
-%% use optional labels to link authors explicitly to addresses:
-%% \author[label1,label2]{}
-%% \affiliation[label1]{organization={},
-%%             addressline={},
-%%             city={},
-%%             postcode={},
-%%             state={},
-%%             country={}}
-%%
-%% \affiliation[label2]{organization={},
-%%             addressline={},
-%%             city={},
-%%             postcode={},
-%%             state={},
-%%             country={}}
-
-\author{Lenka Galčíková}
-\author{Juraj Oravec}
-\author{Petronela Belková}
-
-\affiliation{organization={Slovak University of Technology in Bratislava, Faculty of Chemical and Food Technology, Institute of Information Engineering, Automation, and Mathematics,},%Department and Organization
-            addressline={Radlinského 9}, 
-            city={Bratislava},
-            postcode={81237}, 
-%            state={Slovakia},
-            country={Slovakia}
-}
-
-\begin{abstract}
-%max 250 words!
+%% TODO: UNCOMMENT THIS SECTION TO COMPILE ALSO INITIAL PART OF THE PAPAER
+%
+%\begin{frontmatter}
+%
+%%% Title, authors and addresses
+%
+%%% use the tnoteref command within \title for footnotes;
+%%% use the tnotetext command for theassociated footnote;
+%%% use the fnref command within \author or \address for footnotes;
+%%% use the fntext command for theassociated footnote;
+%%% use the corref command within \author for corresponding author footnotes;
+%%% use the cortext command for theassociated footnote;
+%%% use the ead command for the email address,
+%%% and the form \ead[url] for the home page:
+%%% \title{Title\tnoteref{label1}}
+%%% \tnotetext[label1]{}
+%%% \author{Name\corref{cor1}\fnref{label2}}
+%%% \ead{email address}
+%%% \ead[url]{home page}
+%%% \fntext[label2]{}
+%%% \cortext[cor1]{}
+%%% \affiliation{organization={},
+%%%             addressline={},
+%%%             city={},
+%%%             postcode={},
+%%%             state={},
+%%%             country={}}
+%%% \fntext[label3]{}
+%
+%\title{Self-tunable approximated explicit MPC: Heat exchanger implementation and analysys}
+%%\title{Self-tunable approximated explicit MPC: Implementation on a heat exchanger with a non-symmetric behavior}
+%
+%%% use optional labels to link authors explicitly to addresses:
+%%% \author[label1,label2]{}
+%%% \affiliation[label1]{organization={},
+%%%             addressline={},
+%%%             city={},
+%%%             postcode={},
+%%%             state={},
+%%%             country={}}
+%%%
+%%% \affiliation[label2]{organization={},
+%%%             addressline={},
+%%%             city={},
+%%%             postcode={},
+%%%             state={},
+%%%             country={}}
+%
+%\author{Lenka Galčíková}
+%\author{Juraj Oravec}
+%\author{Petronela Belková}
+%
+%\affiliation{organization={Slovak University of Technology in Bratislava, Faculty of Chemical and Food Technology, Institute of Information Engineering, Automation, and Mathematics,},%Department and Organization
+%            addressline={Radlinského 9}, 
+%            city={Bratislava},
+%            postcode={81237}, 
+%%            state={Slovakia},
+%            country={Slovakia}
+%}
+%
+%\begin{abstract}
+%%max 250 words!
 The tunable approximated explicit model predictive control (MPC) comes with the benefits of real-time tunability without the necessity of solving the optimization problem online. This paper provides a self-tunable technique that does not require any further tuning or interventions of the control engineer during operation. Based on the current operating conditions, the tuning parameter adjusts itself and scales the control input using linear interpolation. The adjustment of the tuning parameter depends on the reference value, which makes this strategy suitable for reference tracking problems. Furthermore, a novel technique for scaling the tuning parameter is proposed. It provides to exploit different ranges of the tuning parameter assigned to specified operating conditions. The self-tunable explicit MPC was implemented on a laboratory heat exchanger with nonlinear and non-symmetric behavior. To ensure offset-free control, the built-in integrator was included in the explicit MPC. The asymmetric behavior of the plant was compensated by tuning the controller's aggressivity, as the negativity or positivity of reference change was considered in the tuning process. The control performance decreased maximal overshoots/undershoots, integral square error, and settling time compared to control with only one controller. 
-\end{abstract}
-
-%%Graphical abstract
-\begin{graphicalabstract}
-%\includegraphics{grabs}
-\end{graphicalabstract}
-
-%%Research highlights
-\begin{highlights}
-% 3-5 highlights, every one should not exceed 85 characters including spaces
-\item Self-tunable control technique does not need any intervention during control
-\item Tuning based on the operating conditions compensates the nonlinear plant behavior
-\item Implementation of the proposed tuning method on a laboratory heat exchanger 
-\item Control performance improved compared to utilizing only one explicit MPC
-\end{highlights}
-
-\begin{keyword}
-tunable explicit MPC \sep self-tunable technique \sep tuning parameter \sep heat exchanger \sep control performance
-%% keywords here, in the form: keyword \sep keyword
-
-%% PACS codes here, in the form: \PACS code \sep code
-
-%% MSC codes here, in the form: \MSC code \sep code
-%% or \MSC[2008] code \sep code (2000 is the default)
-
-\end{keyword}
-
-\end{frontmatter}
+%\end{abstract}
+%
+%%%Graphical abstract
+%\begin{graphicalabstract}
+%%\includegraphics{grabs}
+%\end{graphicalabstract}
+%
+%%%Research highlights
+%\begin{highlights}
+%% 3-5 highlights, every one should not exceed 85 characters including spaces
+%\item Self-tunable control technique does not need any intervention during control
+%\item Tuning based on the operating conditions compensates the nonlinear plant behavior
+%\item Implementation of the proposed tuning method on a laboratory heat exchanger 
+%\item Control performance improved compared to utilizing only one explicit MPC
+%\end{highlights}
+%
+%\begin{keyword}
+%tunable explicit MPC \sep self-tunable technique \sep tuning parameter \sep heat exchanger \sep control performance
+%%% keywords here, in the form: keyword \sep keyword
+%
+%%% PACS codes here, in the form: \PACS code \sep code
+%
+%%% MSC codes here, in the form: \MSC code \sep code
+%%% or \MSC[2008] code \sep code (2000 is the default)
+%
+%\end{keyword}
+%
+%\end{frontmatter}
 
 %% \linenumbers
 
@@ -510,70 +512,88 @@ This research is funded by the European Union’s Horizon Europe under grant no.
 
 \section*{Nomenclature}
 
-\subsection{Abbreviations}
-\noindent  \textit{MPC}: model predictive control \\
-\textit{ISE}: integral square error \\
-\textit{LTI}: linear time-invariant \\
+\subsection*{Symbols}
+\begin{center}
+	\begin{tabular}{ l l }
+$A$ & system state matrix \\
+$\widetilde{A}$ & extended system state matrix \\
+$B$ & system input matrix \\
+$\widetilde{B}$ & extended system input matrix \\
+$C$ & system output matrix \\
+$\widetilde{C}$ & extended system output matrix \\
+$d_{\max}$ & maximal deviation from the steady state \\
+TODO & odlisit max size of reference step change \\
+$F$ & slope of the affine control law \\
+$g$ & section of the affine control law \\
+$I$ & identity matrix \\	
+$k$ & step of the prediction horizon \\
+$N$ & prediction horizon \\
+$n_{\mathrm{u}}$ & size of system inputs \\
+$n_{\mathrm{y}}$ & size of system outputs \\
+$n_{\widetilde{\mathrm{x}}}$ & size of extended system states \\
+$Q_{\mathrm{x}}$ & penalty matrix of the built-in integrator \\
+$Q_{\mathrm{x,L}}$ & lower bound on the penalty matrix of the built-in integrator \\
+$Q_{\mathrm{x,U}}$ & upper bound on the penalty matrix of the built-in integrator \\
+$Q_{\mathrm{y}}$ & penalty matrix of the control error \\
+$Q_{\mathrm{y,L}}$ & lower bound on the penalty matrix of the control error \\
+$Q_{\mathrm{y,U}}$ & upper bound on the penalty matrix of the control error \\
+$R$ & penalty matrix of system inputs \\
+$R_{\mathrm{L}}$ & lower bound on the penalty matrix of system inputs \\
+$R_{\mathrm{U}}$ & upper bound on the penalty matrix of system inputs \\
+$\mathcal{R}$ & critical region \\
+$\mathbb{R}$ & Euclidean space of real numbers \\
+$t$ & time, s \\
+$t_{\epsilon}$ & settling time, s \\
+$T$ & temperature, $^{\circ}\mathrm{C}$ \\
+$T_{\mathrm{s}}$ & sampling time, s \\
+$T^{\mathrm{s}}$ & steady state of temperature, $^{\circ}\mathrm{C}$ \\
+$u$ & control inputs \\
+$u_{\mathrm{L}}$ & control inputs asscociated with the lower boundary controller\\
+$u_{\mathrm{U}}$ & control inputs asscociated with the upper boundary controller\\
+\end{tabular}
+\end{center}
 
-\subsection{Symbols}
-\noindent $A$: system state matrix \\
-$\widetilde{A}$: extended system state matrix \\
-$B$: system input matrix \\
-$\widetilde{B}$: extended system input matrix \\
-$C$: system output matrix \\
-$\widetilde{C}$: extended system output matrix \\
-$d_{\max}$: maximal deviation from the steady state \\
-TODO: odlisit max size of reference step change \\
-$F$: slope of the affine control law \\
-$g$: section of the affine control law \\
-$I$: identity matrix \\	
-$k$: step of the prediction horizon \\
-$N$: prediction horizon \\
-$n_{\mathrm{u}}$: size of system inputs \\
-$n_{\mathrm{y}}$: size of system outputs \\
-$n_{\widetilde{\mathrm{x}}}$: size of extended system states \\
-$Q_{\mathrm{x}}$: penalty matrix of the built-in integrator \\
-$Q_{\mathrm{x,L}}$: lower bound on the penalty matrix of the built-in integrator \\
-$Q_{\mathrm{x,U}}$: upper bound on the penalty matrix of the built-in integrator \\
-$Q_{\mathrm{y}}$: penalty matrix of the control error \\
-$Q_{\mathrm{y,L}}$: lower bound on the penalty matrix of the control error \\
-$Q_{\mathrm{y,U}}$: upper bound on the penalty matrix of the control error \\
-$R$: penalty matrix of system inputs \\
-$R_{\mathrm{L}}$: lower bound on the penalty matrix of system inputs \\
-$R_{\mathrm{U}}$: upper bound on the penalty matrix of system inputs \\
-$\mathcal{R}$: critical region \\
-$\mathbb{R}$: Euclidean space of real numbers \\
-$t$: time, s \\
-$t_{\epsilon}$: settling time, s \\
-$T$: temperature, $^{\circ}\mathrm{C}$ \\
-$T_{\mathrm{s}}$: sampling time, s \\
-$T^{\mathrm{s}}$: steady state of temperature, $^{\circ}\mathrm{C}$ \\
-$u$: control inputs \\
-$u_{\mathrm{L}}$: control inputs asscociated with the lower boundary controller\\
-$u_{\mathrm{U}}$: control inputs asscociated with the upper boundary controller\\
-$U$: voltage, \% \\
-$U^{\mathrm{s}}$: steady state of voltage, \% \\
-$\mathcal{U}$: set of control inputs \\
-$V$: volume of heating medium, l \\
-$x$: system states \\
-$\widetilde{x}$: extended system states \\
-$x_{\mathrm{I}}$: system states corresponding to the built-in integrator \\
-$y$: system outputs \\
-$y_\mathrm{\max}$: maximal value of system outputs \\
-$y_\mathrm{\min}$: minimal value of system outputs \\
-$y_\mathrm{ref}$: reference value of system outputs \\	
-$\mathcal{Y}$: set of system outputs \\
-\textit{0}: zero matrix
+%% Page - break
+
+\begin{center}
+	\begin{tabular}{ l l }
+$U$ & voltage, \% \\
+$U^{\mathrm{s}}$ & steady state of voltage, \% \\
+$\mathcal{U}$ & set of control inputs \\
+$V$ & volume of heating medium, l \\
+$x$ & system states \\
+$\widetilde{x}$ & extended system states \\
+$x_{\mathrm{I}}$ & system states corresponding to the built-in integrator \\
+$y$ & system outputs \\
+$y_\mathrm{\max}$ & maximal value of system outputs \\
+$y_\mathrm{\min}$ & minimal value of system outputs \\
+$y_\mathrm{ref}$ & reference value of system outputs \\	
+$\mathcal{Y}$ & set of system outputs \\
+\textit{0} & zero matrix
+\end{tabular}
+\end{center}
 
 \subsection{Greek letters}
-\noindent $\Delta_\mathrm{ref}$: size of the reference change, $^{\circ}\mathrm{C}$ \\
-$\rho$:	tuning factor \\
-$\widetilde{\rho}$: scaled tuning factor \\
-$\rho_{\mathrm{s}}$: splitting value of the tuning factor \\
-$\sigma_{\max}$: maximal overshoot, \% \\
-$\theta$: parameter of optimization problem \\
-$\Theta$: set of parameter values
+\begin{center}
+	\begin{tabular}{ l l }
+		$\Delta_\mathrm{ref}$ & size of the reference change, $^{\circ}\mathrm{C}$ \\
+		$\rho$:	tuning factor \\
+		$\widetilde{\rho}$ & scaled tuning factor \\
+		$\rho_{\mathrm{s}}$ & splitting value of the tuning factor \\
+		$\sigma_{\max}$ & maximal overshoot, \% \\
+		$\theta$ & parameter of optimization problem \\
+		$\Theta$ & set of parameter values
+	\end{tabular}
+\end{center}
 
+\subsection*{Abbreviations}
+\begin{center}
+	\begin{tabular}{ l l }
+		MPC & model predictive control \\
+		ISE & integral square error \\
+		LTI & linear time-invariant \\
+	\end{tabular}
+\end{center}
 
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections
