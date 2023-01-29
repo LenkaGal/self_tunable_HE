@@ -128,11 +128,15 @@
 		%\begin{abstract}
 			%%max 250 words!
 			
+			\textcolor{red}{[ TODO: Please, emphasize the chemical engineering viewpoint, especially in Sec.4. ]}
+			
+			\textcolor{red}{[ TODO: Please, extend the Control setup, as there is missing e.g., the initial laboratory temperature, the identification procedure of the system model, etc. ]}
+			
 			\textcolor{red}{[ TODO: Please, prevent using ``When...''-formulation to often. ]}
 			
 			\textcolor{red}{[ TODO: Please, make consistent notation of equations: Eq-based vs. non-Eq notation. ]}
 			
-			\textcolor{red}{[ TODO: Please, checkthe  word limit. ]}
+			\textcolor{red}{[ TODO: Please, check the word limit of Abstract. ]}
 			
 			The tunable approximated explicit model predictive control (MPC) comes with the benefits of real-time tunability without the necessity of solving the optimization problem online. This paper provides a novel self-tunable control policy that does not require any further tuning or interventions of the control engineer during operation. Based on the current operating conditions, the autonomous tuning parameter scales the control input using linear interpolation between the boundary optimal control actions. The adjustment of the tuning parameter depends on the current reference value, which makes this strategy suitable for reference tracking problems. Furthermore, a novel technique for scaling the tuning parameter is proposed. It provides to exploit different ranges of the tuning parameter assigned to specified operating conditions. The self-tunable explicit MPC was implemented on a laboratory heat exchanger with nonlinear and asymmetric behaviour. To ensure offset-free reference tracking control, the built-in integrator was included in the explicit MPC design. The asymmetric behaviour of the plant was compensated by tuning the controller's aggressiveness, as the negative or positive sign of reference change was considered in the tuning process. The designed self-tunable controller improved control performance by decreasing integral square error, maximal overshoots/undershoots, and settling time compared to the conventional control strategy based on a single (non-self-tunable) controller. 
 		%\end{abstract}
@@ -498,6 +502,34 @@
 	
 	The control performance was also investigated quantitatively. Table~\ref{tab:control_performance} summarizes the evaluated control performance criteria computed for the two boundary controllers and for the self-tuned controller. The control performance is evaluated for each reference step change separately. The considered quality criteria are: sum-of-squared based criterion -- integral squared error $ISE$, maximal overshoot/undershoot $\sigma_{\mathrm{max}}$, settling time $t_{\epsilon}$ for 5\,\%-neighbourhood of the reference temperature $T_{\mathrm{ref}}$, and the volume of the hot medium $V$ consumed for the corresponding control. To provide better readability of the computed results in Table~\ref{tab:control_performance}, the best values, i.e., the minimum values, are emphasized using a bold font style. 
 	
+	\textcolor{red}{[ TODO: How about the following table notation? ]}
+	
+	\begin{table}[h!]
+		\begin{center}
+			\caption{Control performance criteria.}
+			\label{tab:control_performance}
+			\begin{tabular}{c|c|c|c|c|c} 
+				Reference step change & Explicit MPC controller & $ISE$ [$^{\circ}\mathrm{C}^2$\,s] & $\sigma_{\mathrm{max}}$\,[\%] & $t_{\epsilon}$\,[s] & $V$\,[l] \\
+				\hline
+				\multirow{2}{*}{ 35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & aggressive & 714 & 33.50 & 16.5 & \textbf{2.12} \\
+				& damped & 867 & 16.65 & 12.5 & 2.36 \\ 
+				& self-tuned & \textbf{678} & \textbf{15.19} & \textbf{9.5} & 2.38 \\ 
+				\hline
+				\multirow{2}{*}{ 45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C } & aggressive & 365 & 47.20 & \textbf{5} & \textbf{2.49} \\
+				& damped & 606 & 23.25 & 26.5 & 3.19 \\ 
+				& self-tuned & \textbf{248} & \textbf{19.13} & 9.5 & 3.35 \\ 
+				\hline
+				\multirow{2}{*}{ 50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & aggressive & 245 & \textbf{18.92} & \textbf{6.5} & \textbf{2.00} \\
+				& damped & 398 & 79.64 & 31 & \textbf{2.00} \\ 
+				& self-tuned & \textbf{186} & 24.59 & \textbf{6.5} & 2.10 \\ 
+				\hline
+				\multirow{2}{*}{ 45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C } & aggressive & 1024 & 18.43 & 22.5 & 0.94 \\
+				& damped & 1402 & 41.87 & 90 & \textbf{0.93} \\ 
+				& self-tuned & \textbf{967} & \textbf{16.49} & \textbf{18.5} & 1.10 
+			\end{tabular}
+		\end{center}
+	\end{table}
+
 	\begin{table}[h!]
 		\begin{center}
 			\caption{Control performance criteria.}
