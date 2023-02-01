@@ -94,7 +94,7 @@
 			%%%             country={}}
 		%%% \fntext[label3]{}
 		%
-		%\title{Self-tunable approximated explicit MPC: Heat exchanger implementation and analyses}
+		%\title{Self-tunable approximated explicit MPC: Heat exchanger implementation and analysis}
 		%%\title{Self-tunable approximated explicit MPC: Implementation on a heat exchanger with an asymmetric behaviour}
 		%
 		%%% use optional labels to link authors explicitly to addresses:
@@ -164,17 +164,15 @@
 	\section{Introduction}
 	\label{sec:introduction}
 	
-	(len skopirovany text z jadra - hodil sa mi viac do Introduction, neskor mozno pouzijem) 
 	
-	\textcolor{red}{[ TODO: We need a well-elaborated introduction/review to strongly motivate our control approach. Please, take into account the industrial-oriented reviewers - mostly the experts in the field of chemical engineering (heat exchangers and energy balances). ]}
+
 	
-	The main benefit in form of lower computational complexity in the control phase comes hand in hand with a non-negligible drawback. The size of the parametric solution may increase to the value that prevents its real-time implementation for two reasons: (i) the memory footprint is higher than the available memory size of the control unit, and (ii) the computational time associated with finding the optimal control action is higher than the available time period for control action implementation. Although this control strategy has its challenges, it is still very beneficial for practical usage for its benefits. 
+	The main benefit in form of lower computational complexity in the control phase comes hand in hand with a non-negligible drawback. The size of the parametric solution may increase to the value that prevents its real-time implementation for two reasons: (i) the memory footprint is higher than the available memory size of the control unit, and (ii) the computational time associated with finding the optimal control action is higher than the available sample time for control action implementation. Although this control strategy has its challenges, it is still very beneficial for practical usage for its benefits. 
 	
-	\textcolor{red}{[ TODO: Please, clearly point out the main contributions. ]}
 	
-	This work directly extends our results presented in~\cite{self_tunable}, where the basic principles of the self-tunable approximated explicit MPC were introduced. Compared to~\cite{self_tunable}, we...
+	This work directly extends our results presented in~\cite{self_tunable}, where the basic principles of the self-tunable approximated explicit MPC were introduced. In this paper, a novel method of tuning parameter setup is introduced. Compared to~\cite{self_tunable}, the tuning method is based on the size of reference step change. Next, the idea of further scaling of the tuning parameter is elaborated. The interval of the tuning parameter is splitted at some value and every part of the interval corresponds to specific operating conditions specified by control engineer. In such way, e.g. the system's asymmetry can be compensated. Last but not least, the proposed tuning technique was implemented in a control of a laboratory plate heat exchanger. This work also provides the control performance evaluation and comparison with using only one non-tunable controller.    
 	
-	The paper is organized as follows. First, the theoretical backgorunds are presented. The topics of explicit MPC, tunable explicit MPC and an existing self-tunable technique are elaborated. Then, the novel proposed method of self-tunable procedure is explained. Finally, the results of the tuning implementation on a heat exchanger are discussed.
+	The paper is organized as follows. First, the theoretical backgorunds are presented. The topics of explicit MPC, tunable explicit MPC and an existing self-tunable technique are elaborated. Then, the novel proposed method of self-tunable procedure is explained. Finally, the results of the controller tuning implementation on a heat exchanger are discussed.
 	
 	\section{Theoretical backgrounds}
 	% \section{Preliminaries}
@@ -466,7 +464,7 @@
 	
 	The trajectories in Figure~\ref{fig:CV_boundaries} show the asymmetric nature of controlling the plant of plate heat exchange mainly when observing the overshoots and undershoots. When applying the control inputs associated with the lower bound $Q_\mathrm{y, L}$ in Eq.~\eqref{eq:mpc_problem_cost}, significant undershoots are present when tracking the reference downwards, i.e., when the reference change is negative. On the contrary, when implementing the controller associated with $Q_\mathrm{y, U}$ in Eq.~\eqref{eq:mpc_problem_cost}, the undershoots are negligible, but significant overshoots can be seen when tracking the reference upwards.
 	
-	These main experimental observations established the base for the strategy of self-tuning the penalty matrix $Q_\mathrm{y}$. The strategy follows the ideas summarized in Section~\ref{sec:self_tunable}. Therefore, utilizing the boundary controller with the penalty matrix $Q_\mathrm{y,L}$ is preferred when the reference changes upwards. On the contrary, the controller associated with $Q_\mathrm{y,U}$ is preferred for negative reference step changes. The splitting value of the tuning parameter was chosen in the middle of the interval, i.e., $\rho_{\mathrm{s}} = 0.5$. The remaining parameter that needed to be set was the maximal admissible size of the reference step change $d_{\max}$, which was experimentally determined to $15\,^{\circ}\mathrm{C}$. 
+	These main experimental observations established the base for the strategy of self-tuning the penalty matrix $Q_\mathrm{y}$. The strategy follows the ideas summarized in Section~\ref{sec:self_tunable}. Therefore, utilizing the boundary controller with the penalty matrix $Q_\mathrm{y,L}$ is preferred when the reference changes upwards. On the contrary, the controller associated with $Q_\mathrm{y,U}$ is preferred for negative reference step changes. The splitting value of the tuning parameter was chosen in the middle of the interval, i.e., $\rho_{\mathrm{s}} = 0.5$. The remaining parameter that needed to be set was the maximal admissible size of the reference step change $\Delta_{\max}$, which was experimentally determined to $15\,^{\circ}\mathrm{C}$. 
 	
 	The control results of the self-tunable technique compared to the boundary controllers can be seen in Figure~\ref{fig:CV} for the controlled variable, and in Figure~\ref{fig:MV} for the manipulated variable. It can be seen that the tuned controller combined the benefits of the two boundary controllers. The overshoots and undershoots were reduced, as in the first half of control the penalty matrix $Q_\mathrm{y}$ acquired value from the first half of the penalty interval. When tracking the reference with negative step change, the penalty matrix acquired the values from the second half of the interval, i.e., closer to the upper bound $Q_\mathrm{y,U}$. 
 	The similarity with the boundary controllers can be seen also on the manipulated variable profiles. Note, the constraints on the input variable were satisfied as they were scaled using linear interpolation based on the boundary controllers which are constructed considering the input constraints. 
