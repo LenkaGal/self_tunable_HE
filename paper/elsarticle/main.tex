@@ -53,6 +53,7 @@
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{remark}[theorem]{Remark}
+\newtheorem{lemma}{Lemma}[theorem]
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem{definition}{Definition}[section]
 
@@ -273,7 +274,7 @@
 	%\begin{subequations}
 		\begin{eqnarray}
 			\label{eq:tunable_u}
-			u(k) = (1-\rho(k)) \, u_\mathrm{L} + \rho(k) \, u_\mathrm{U},
+			u(k) = (1-\rho(k)) \, u_\mathrm{L}(k) + \rho(k) \, u_\mathrm{U}(k) ,
 		\end{eqnarray}
 		%\end{subequations}
 	where $u_\mathrm{L}$ and $u_\mathrm{U}$ denote the optimal control actions from the lower and upper boundary controller respectively. The online tuning of the controller online comes with the cost of storing and evaluating two explicit controllers. Nevertheless, the ability to tune the controller may be more important in many practical applications.
@@ -354,29 +355,67 @@
 	
 	The proposed self-tuning method is based on splitting the interval of the tuning parameter $\rho$ in order to utilize different parts of the interval in different operating conditions. Instead of the original value of tuning parameter $\rho$, the adjusted tuning parameter $\widetilde{\rho}$ is then utilized to scale the control input according to Eq.~\eqref{eq:tunable_u}.
 	
-	\textcolor{red}{[ TODO: Please, consider rearranging the following objects. Missing some formal requirements, such as: ``Given...'' ]}
+	%% TODO: DEF RULE/CONDITION GAMMA
 	
 	\begin{definition}
-		Given the current parameter value $\rho$. If the tuning parameter is scaled in the first part of the interval, i.e., $\langle 0, \rho_{\mathrm{s}} \rangle$, where $\rho_{\mathrm{s}}$ is the splitting value of the tuning parameter interval, the following relation is used to adjust the tuning parameter:
+		\label{def:rho_tilde}
+		Given the value of tuning parameter $\rho$, $0 \leq \rho \leq 1$, in control law~\eqref{eq:PWA_control_law}, the splitting value of the tuning parameter interval $\rho_{\mathrm{s}}$, $0 \leq \rho_{\mathrm{s}} \leq 1$, and the value of the decision parameter $\gamma$, $0 \leq \gamma \leq 1$. Then the scaling tuning parameter $\widetilde{\rho}$ is given by:		
 		\begin{eqnarray}
-			\label{eq:rho_up}
-			\widetilde{\rho} = \rho_{\mathrm{s}} \rho.
+			\label{eq:rho_tilde_def}
+			\widetilde{\rho} = \left\{ 
+			\begin{matrix}
+				\rho \, \rho_{\mathrm{s}} & \mathrm{if} & \quad \gamma \in \langle 0, \rho_{\mathrm{s}} ), \\
+				\rho \, (1-\rho_{\mathrm{s}}) + \rho_{\mathrm{s}}, & \mathrm{else}\,\,\mathrm{if} &\quad \gamma \in \langle \rho_{\mathrm{s}}, 1 \rangle,
+			\end{matrix}
+			\right.
 		\end{eqnarray}
-	\end{definition}
+		where $0 \leq \rho_{\mathrm{s}} \leq 1$ holds.
+		\end{definition}
+
+%\begin{definition}
+%		If the tuning parameter is scaled in the first part of the interval, i.e., $\langle 0, \rho_{\mathrm{s}} \rangle$, where $\rho_{\mathrm{s}}$ is the splitting value of the tuning parameter interval, the following relation is used to adjust the tuning parameter:
+%		\begin{eqnarray}
+%			\label{eq:rho_up}
+%			\widetilde{\rho} = \rho_{\mathrm{s}} \rho.
+%		\end{eqnarray}
+%		$\widetilde{\rho}$ such that $0 \leq \widetilde{\rho} \leq 1$ 
+%\end{definition}
+
+%	\begin{definition}
+%	Given the current parameter value $\rho$. If the tuning parameter is scaled in the second part of the interval, i.e., $\langle \rho_{\mathrm{s}}, 1 \rangle$, the following relation is used to adjust the tuning parameter:
+%	\begin{eqnarray}
+%		\label{eq:rho_down}
+%		\widetilde{\rho} = (1-\rho_{\mathrm{s}}) \rho + \rho_{\mathrm{s}}.
+%	\end{eqnarray}
+%	\end{definition}
 	
-	\textcolor{red}{[ TODO: Please, consider spliting the Corollaries into the Lemma and Proof. ]}
+	\begin{remark}
+		\label{rem:rho_tilde}
+		Note, the introduction of the splitting the scaling tuning parameter $\widetilde{\rho}$ into the tuning intervals in~\eqref{eq:rho_tilde_def} is not limited only for 2 intervals. If the nature of the controlled plant would benefit from splitting the operating range into more intervals, e.g., when the plant operates in the multiple steady-states values, then these intervals are simply determined by the corresponding values of $\rho_{\mathrm{s},i}$ for each interval. Next, the tuning rules in~\eqref{eq:rho_tilde_def} are adopted in the analogous way.
+	\end{remark}
 	
-	\begin{corollary}
-		The following outcomes result from Eq.~\eqref{eq:rho_up}. If $\rho=0$, then $\widetilde{\rho} = 0$. When considering the other extreme, i.e., $\rho=1$, then $\widetilde{\rho} = \rho_{\mathrm{s}}$. In such a way, the parameter $\rho$ can be scaled in the first part of the interval up to the splitting value. Note, as the relation in Eq.~\eqref{eq:rho_up} is linear and $0 \le \rho \le 1$ holds, for $\widetilde{\rho}$ it is impossible to acquire other values than in the given interval of parameter $\rho$.   
-	\end{corollary}
+	The following outcomes result from Eq.~\eqref{eq:rho_up}. 
 	
-	\begin{definition}
-		Given the current parameter value $\rho$. If the tuning parameter is scaled in the second part of the interval, i.e., $\langle \rho_{\mathrm{s}}, 1 \rangle$, the following relation is used to adjust the tuning parameter:
+	\begin{lemma}
+		\label{lem:PWA_control_law_interval}
+		% TODO: Convert to Lemma
+		Given control law in~\eqref{eq:PWA_control_law}, its approximation given by the convex combination in~\eqref{eq:tunable_u}, and given scaling tuning parameter $\widetilde{\rho}$ according Definition~\ref{def:rho_tilde}. Then the control law  approximated into the form:
 		\begin{eqnarray}
-			\label{eq:rho_down}
-			\widetilde{\rho} = (1-\rho_{\mathrm{s}}) \rho + \rho_{\mathrm{s}}.
+			\label{eq:PWA_control_law_interval}
+			u(k) = (1-\widetilde{\rho}(k)) \, u_\mathrm{L}(k) + \widetilde{\rho}(k) \, u_\mathrm{U}(k),
 		\end{eqnarray}
-	\end{definition}
+		preserves the closed-loop system stability and recursive feasibility of the original control law in~\eqref{eq:PWA_control_law}.
+		% 
+		% The following outcomes result from Eq.~\eqref{eq:rho_up}. If $\rho=0$, then $\widetilde{\rho} = 0$. When considering the other extreme, i.e., $\rho=1$, then $\widetilde{\rho} = \rho_{\mathrm{s}}$. In such a way, the parameter $\rho$ can be scaled in the first part of the interval up to the splitting value. Note, as the relation in Eq.~\eqref{eq:rho_up} is linear and $0 \le \rho \le 1$ holds, for $\widetilde{\rho}$ it is impossible to acquire other values than in the given interval of parameter $\rho$.
+	\end{lemma}
+	
+	\begin{proof}
+		\label{proof:rho_tilde}
+		. 
+	\end{proof}
+	
+	
+
 	
 	\begin{corollary}
 		The following outcomes result from Eq.~\eqref{eq:rho_down}. When $\rho=0$, $\widetilde{\rho} = \rho_{\mathrm{s}}$. When considering the other extreme, i.e., $\rho=1$, then $\widetilde{\rho} = 1$. In such a way, the parameter $\rho$ can be scaled in the second part of the interval from the splitting value up to 1. Note, as the relation in Eq.~\eqref{eq:rho_down} is linear and $0 \le \rho \le 1$ holds, for $\widetilde{\rho}$ it is impossible to acquire other values than in the given interval of parameter $\rho$.
