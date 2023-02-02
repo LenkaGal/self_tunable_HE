@@ -165,7 +165,9 @@
 	\section{Introduction}
 	\label{sec:introduction}
 	
-	TODO: Vyhnut sa pouzivaniu "we", "our" atd.
+	TODO: Vyhnut sa pouzivaniu "we", "our",...
+	
+	TODO: dopisat zaciatok uvodu o vymennikoch tepla, ladeni regulatorov vseobecne, gain-scheduling atd (neskor je pokryte MPC, MPC riadenie vymennikov tepla, eMPC, tunable eMPC a self-tunable)
 	
 	
 	%The main benefit in form of lower computational complexity in the control phase comes hand in hand with a non-negligible drawback. The size of the parametric solution may increase to the value that prevents its real-time implementation for two reasons: (i) the memory footprint is higher than the available memory size of the control unit, and (ii) the computational time associated with finding the optimal control action is higher than the available sample time for control action implementation. Although this control strategy has its challenges, it is still very beneficial for practical usage for its benefits. 
@@ -280,7 +282,7 @@
 	%\begin{subequations}
 		\begin{eqnarray}
 			\label{eq:tunable_u}
-			u(k) = (1-\rho(k)) \, u_\mathrm{L}(k) + \rho(k) \, u_\mathrm{U}(k) ,
+			u(k) = (1-\rho(k)) \, u_\mathrm{L}(k) + \rho(k) \, u_\mathrm{U}(k),
 		\end{eqnarray}
 		%\end{subequations}
 	where $u_\mathrm{L}$ and $u_\mathrm{U}$ denote the optimal control actions from the lower and upper boundary controller respectively. The online tuning of the controller online comes with the cost of storing and evaluating two explicit controllers. Nevertheless, the ability to tune the controller may be more important in many practical applications.
@@ -364,23 +366,23 @@
 	%% TODO: DEF RULE/CONDITION GAMMA
 	\begin{definition}[Decision function]
 		\label{def:gamma}
-		For given interval of tuning parameter $\rho$, $0 \leq \rho \leq 1$, let $\rho_{\mathrm{s}}$, $0 < \rho < 1$ be a boundary value splitting an interval into the two parts. Let $\gamma: \mathbb{R} \rightarrow \mathbb{R}$ be an arbitrary function such that $0 \leq \gamma \leq 1$ holds. Then the decision function $\gamma$ is constructed to assign its value either $\gamma \leq \rho_{\mathrm{s}}$ or $\gamma > \rho_{\mathrm{s}}$.
+		For given interval of tuning parameter $\rho$, $0 \leq \rho \leq 1$, let $\rho_{\mathrm{s}}$, $0 < \rho_{\mathrm{s}} < 1$ be a boundary value splitting the interval into two parts. Let $\gamma: \mathbb{R} \rightarrow \mathbb{R}$ be an arbitrary function such that $0 \leq \gamma \leq 1$ holds. Then the decision function $\gamma$ is constructed to assign its value either $\gamma \leq \rho_{\mathrm{s}}$ or $\gamma > \rho_{\mathrm{s}}$.
 	\end{definition}
-	Various decision functions $\gamma$ can be considered. In this work, we implemented and analyzed a decision function $\gamma$ according to~\eqref{eq:rho_max}, \eqref{eq:rho_delta_ref}.
-
+	\textcolor{red}{TODO: replace in the line above: $\gamma \ge \rho_{\mathrm{s}}$?}\\
+	Various decision functions $\gamma$ can be considered. In this work, the decision functions according to Eq.~\eqref{eq:rho_max} and Eq.~\eqref{eq:rho_delta_ref} are considered, while Eq.~\eqref{eq:rho_delta_ref} was implemented in the experimental case study.
+	
 	\begin{definition}[Scaling tuning parameter]
 		\label{def:rho_tilde}
-		Given the value of tuning parameter $\rho$, $0 \leq \rho \leq 1$, in control law~\eqref{eq:PWA_control_law}, the splitting value of the tuning parameter interval $\rho_{\mathrm{s}}$, $0 \leq \rho_{\mathrm{s}} \leq 1$, and the value of the value of the decision function $\gamma$, $0 \leq \gamma \leq 1$. Then the scaling tuning parameter $\widetilde{\rho}$ is given by:		
+		Given the value of tuning parameter $\rho$, $0 \leq \rho \leq 1$, in control law~\eqref{eq:PWA_control_law}, the splitting value of the tuning parameter interval $\rho_{\mathrm{s}}$, $0 < \rho_{\mathrm{s}} < 1$, and the value of the decision function $\gamma$, $0 < \gamma < 1$. Then the scaling tuning parameter $\widetilde{\rho}$ is given by:		
 		\begin{eqnarray}
 			\label{eq:rho_tilde_def}
 			\widetilde{\rho} = \left\{ 
 			\begin{matrix}
 				\rho \, \rho_{\mathrm{s}} & \mathrm{if} & \quad \gamma \in \langle 0, \rho_{\mathrm{s}} \rangle , \\
-				\rho \, (1-\rho_{\mathrm{s}}) + \rho_{\mathrm{s}}, & \mathrm{else}\,\,\mathrm{if} &\quad \gamma \in \langle \rho_{\mathrm{s}}, 1 \rangle,
+				\rho \, (1-\rho_{\mathrm{s}}) + \rho_{\mathrm{s}}, & \mathrm{else}\,\,\mathrm{if} &\quad \gamma \in \langle \rho_{\mathrm{s}}, 1 \rangle.
 			\end{matrix}
 			\right.
 		\end{eqnarray}
-		where $0 \leq \rho_{\mathrm{s}} \leq 1$ holds.
 		\end{definition}
 
 %\begin{definition}
@@ -430,15 +432,15 @@
 		It remains to prove that for any value of the scaling tuning parameter $\widetilde{\rho}$ according to the Definition~\ref{def:rho_tilde} the same results hold. 
 		The rest of the proof of Lemma~\ref{lem:PWA_control_law_interval} consists of two parts corresponding to each particular rule in~\eqref{eq:rho_tilde_def}. 
 		\\
-		First, we prove the Lemma~\ref{lem:PWA_control_law_interval} holds for any $\gamma \leq \rho_{\mathrm{s}}$. Substituting a lower bound $\rho=0$ into~\eqref{eq:rho_tilde_def} leads to
+		First, it is proved that the Lemma~\ref{lem:PWA_control_law_interval} holds for any $\gamma \leq \rho_{\mathrm{s}}$. Substituting a lower bound $\rho=0$ into~\eqref{eq:rho_tilde_def} leads to
 		$\widetilde{\rho} = 0$. 
 		For the upper bound value of $\rho=1$, from~\eqref{eq:rho_tilde_def} holds $\widetilde{\rho} = \rho_{\mathrm{s}} < 1$. Next, for any value $0 < \rho < 1$ evaluation of the linear rule in~\eqref{eq:rho_tilde_def} leads to the convex combination, i.e., $0 < \widetilde{\rho} < \rho_{\mathrm{s}} $ holds. 
-		Therefore, any value of $\widetilde{\rho}$ satisfy $0 \leq \widetilde{\rho} \leq \rho_{\mathrm{s}} < 1$. As the consequence, according to the Theorem~3.6 in~\cite{Oravec_tunable}, the asymptotic stability and recursive feasibility of the control law in~\eqref{eq:PWA_control_law_interval} are preserved. 
+		Therefore, any value of $\widetilde{\rho}$ satisfies $0 \leq \widetilde{\rho} \leq \rho_{\mathrm{s}} < 1$. As the consequence, according to the Theorem~3.6 in~\cite{Oravec_tunable}, the asymptotic stability and recursive feasibility of the control law in~\eqref{eq:PWA_control_law_interval} are preserved. 
 		\\
-		Secondly, we prove the Lemma~\ref{lem:PWA_control_law_interval} holds also for any $\gamma \geq \rho_{\mathrm{s}}$. Substituting a lower bound $\rho=0$ into~\eqref{eq:rho_tilde_def} leads to
+		Secondly, it is proved that the Lemma~\ref{lem:PWA_control_law_interval} holds also for any $\gamma \geq \rho_{\mathrm{s}}$. Substituting a lower bound $\rho=0$ into~\eqref{eq:rho_tilde_def} leads to
 		$\widetilde{\rho} = \rho_{\mathrm{s}}$. 
 		For the upper bound value of $\rho=1$, from~\eqref{eq:rho_tilde_def} holds $\widetilde{\rho} = 1$. Next, for any value $0 < \rho < 1$ evaluation of the linear rule in~\eqref{eq:rho_tilde_def} leads to the convex combination, i.e., $\rho_{\mathrm{s}} < \widetilde{\rho} < 1 $ holds. 
-		Therefore, any value of $\widetilde{\rho}$ satisfy $\rho_{\mathrm{s}} \leq \widetilde{\rho} \leq 1$. As the consequence, according to the Theorem~3.6 in~\cite{Oravec_tunable}, the asymptotic stability and recursive feasibility of the control law in~\eqref{eq:PWA_control_law_interval} are preserved. 
+		Therefore, any value of $\widetilde{\rho}$ satisfies $\rho_{\mathrm{s}} \leq \widetilde{\rho} \leq 1$. As the consequence, according to the Theorem~3.6 in~\cite{Oravec_tunable}, the asymptotic stability and recursive feasibility of the control law in~\eqref{eq:PWA_control_law_interval} are preserved. 
 		% The rest of the proof follows the proof of the Theorem~3.6 in~\cite{Oravec_tunable}. 
 	\end{proof}
 	
@@ -490,7 +492,7 @@
 		\label{eq:U_const}
 		20\% \le U \le 100\%.
 	\end{eqnarray}	
-	\textcolor{red}{To fully investigate the control performance of the pure self-tuning method, the constraints on the controlled variable in Eq.~\eqref{eq:mpc_problem_state_constraints} were omitted to prevent shaping the computed control inputs by taking into account the bounds on the controlled variable.} 
+	As the controlled system is naturally stable even if the maximal or minimal value of the manipulated variable is constantly applied, the constraints on the controlled variable in Eq.~\eqref{eq:mpc_problem_state_constraints} can be omitted. Another motivation to include the output/state constraints would be the necesity to retain the controlled variable in some comfort range, specified by operation requirements. As it was not the aim of the case study, this reason also lead to omitting the constraints in Eq.~\eqref{eq:mpc_problem_state_constraints} to fully investigate the control performance of the pure self-tuning method.		 
 	
 	The penalty matrices of the problem Eq.~\eqref{eq:mpc_problem} were systematically tuned and the corresponding control was implemented on the laboratory heat exchanger for each of the considered explicit MPC setups. 
 	First, the aim of tuning was to determine, which penalty matrix is the most suitable for real-time tuning. Based on the set of experimentally collected data, the most significant effect on the control trajectories had tuning the penalty matrix $Q_\mathrm{y}$, while still preserving a satisfactory control performance, i.e., without steady-state control error and significant oscillations around the reference value. Next, the boundary values of the tunable matrix $Q_\mathrm{y}$ were tuned as $Q_\mathrm{y, L}$ = 100 and $Q_\mathrm{y, U}$ = 1000. The built-in integrator was penalized with the fixed penalty matrix $Q_\mathrm{x}$ = 1 and the control input with the fixed penalty matrix $R$ = 10. The prediction horizon $N$ was set to 20 control steps. The explicit MPC controllers were constructed in MATLAB R2020b using the Multi-Parametric Toolbox 3~\cite{mpt_conf}. 
