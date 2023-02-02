@@ -360,6 +360,7 @@
 		\label{def:gamma}
 		For given interval of tuning parameter $\rho$, $0 \leq \rho \leq 1$, let $\rho_{\mathrm{s}}$, $0 < \rho < 1$ be a boundary value splitting an interval into the two parts. Let $\gamma: \mathbb{R} \rightarrow \mathbb{R}$ be an arbitrary function such that $0 \leq \gamma \leq 1$ holds. Then the decision function $\gamma$ is constructed to assign its value either $\gamma \leq \rho_{\mathrm{s}}$ or $\gamma > \rho_{\mathrm{s}}$.
 	\end{definition}
+	Various decision functions $\gamma$ can be considered. In this work, we implemented and analyzed a decision function $\gamma$ according to~\eqref{eq:rho_max}, \eqref{eq:rho_delta_ref}.
 
 	\begin{definition}[Scaling tuning parameter]
 		\label{def:rho_tilde}
@@ -421,16 +422,16 @@
 		It has been proven~\cite{Oravec_tunable} that for the asymptotic stable and recursive feasible pair of control inputs $(u_{\mathrm{L}}, u_{\mathrm{U}})$, the approximated control law in~\eqref{eq:PWA_control_law} preserves these properties for any $\rho$ satisfying $0 \leq \rho \leq 1$, see Theorem~3.6 in~\cite{Oravec_tunable}. 
 		% 
 		It remains to prove that for any value of the scaling tuning parameter $\widetilde{\rho}$ according to the Definition~\ref{def:rho_tilde} the same results hold. 
-		The rest of the proof of Lemma~\ref{lem:PWA_control_law_interval} consists of two parts. 
+		The rest of the proof of Lemma~\ref{lem:PWA_control_law_interval} consists of two parts corresponding to each particular rule in~\eqref{eq:rho_tilde_def}. 
 		\\
-		First, we prove the Lemma~\ref{lem:PWA_control_law_interval} holds for any $\gamma \leq \rho_{\mathrm{s}}$. Substituting a lower bound $\rho=0$ into~\eqref{eq:PWA_control_law_interval} leads to
+		First, we prove the Lemma~\ref{lem:PWA_control_law_interval} holds for any $\gamma \leq \rho_{\mathrm{s}}$. Substituting a lower bound $\rho=0$ into~\eqref{eq:rho_tilde_def} leads to
 		$\widetilde{\rho} = 0$. 
-		For the upper bound value of $\rho=1$, from~\eqref{eq:PWA_control_law_interval} holds $\widetilde{\rho} = \rho_{\mathrm{s}} < 1$. Next, for any value $0 < \rho < 1$ evaluation of~\eqref{eq:PWA_control_law} leads to the convex combination, i.e., $0 < \widetilde{\rho} < \rho_{\mathrm{s}} $ holds. 
+		For the upper bound value of $\rho=1$, from~\eqref{eq:rho_tilde_def} holds $\widetilde{\rho} = \rho_{\mathrm{s}} < 1$. Next, for any value $0 < \rho < 1$ evaluation of the linear rule in~\eqref{eq:rho_tilde_def} leads to the convex combination, i.e., $0 < \widetilde{\rho} < \rho_{\mathrm{s}} $ holds. 
 		Therefore, any value of $\widetilde{\rho}$ satisfy $0 \leq \widetilde{\rho} \leq \rho_{\mathrm{s}} < 1$. As the consequence, according to the Theorem~3.6 in~\cite{Oravec_tunable}, the asymptotic stability and recursive feasibility of the control law in~\eqref{eq:PWA_control_law_interval} are preserved. 
 		\\
-		Secondly, we prove the Lemma~\ref{lem:PWA_control_law_interval} holds also for any $\gamma \geq \rho_{\mathrm{s}}$. Substituting a lower bound $\rho=0$ into~\eqref{eq:PWA_control_law_interval} leads to
+		Secondly, we prove the Lemma~\ref{lem:PWA_control_law_interval} holds also for any $\gamma \geq \rho_{\mathrm{s}}$. Substituting a lower bound $\rho=0$ into~\eqref{eq:rho_tilde_def} leads to
 		$\widetilde{\rho} = \rho_{\mathrm{s}}$. 
-		For the upper bound value of $\rho=1$, from~\eqref{eq:PWA_control_law_interval} holds $\widetilde{\rho} = 1$. Next, for any value $0 < \rho < 1$ evaluation of~\eqref{eq:PWA_control_law} leads to the convex combination, i.e., $\rho_{\mathrm{s}} < \widetilde{\rho} < 1 $ holds. 
+		For the upper bound value of $\rho=1$, from~\eqref{eq:rho_tilde_def} holds $\widetilde{\rho} = 1$. Next, for any value $0 < \rho < 1$ evaluation of the linear rule in~\eqref{eq:rho_tilde_def} leads to the convex combination, i.e., $\rho_{\mathrm{s}} < \widetilde{\rho} < 1 $ holds. 
 		Therefore, any value of $\widetilde{\rho}$ satisfy $\rho_{\mathrm{s}} \leq \widetilde{\rho} \leq 1$. As the consequence, according to the Theorem~3.6 in~\cite{Oravec_tunable}, the asymptotic stability and recursive feasibility of the control law in~\eqref{eq:PWA_control_law_interval} are preserved. 
 		% The rest of the proof follows the proof of the Theorem~3.6 in~\cite{Oravec_tunable}. 
 	\end{proof}
