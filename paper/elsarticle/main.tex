@@ -165,13 +165,16 @@
 	\section{Introduction}
 	\label{sec:introduction}
 	
-	TODO: Vyhnut sa pouzivaniu "we", "our",...
-	
-	TODO: dopisat zaciatok uvodu o vymennikoch tepla, ladeni regulatorov vseobecne, gain-scheduling atd (neskor je pokryte MPC, MPC riadenie vymennikov tepla, eMPC, tunable eMPC a self-tunable)
+%	TODO: Vyhnut sa pouzivaniu "we", "our",...
+%	
+%	TODO: dopisat zaciatok uvodu o vymennikoch tepla, ladeni regulatorov vseobecne, gain-scheduling atd (neskor je pokryte MPC, MPC riadenie vymennikov tepla, eMPC, tunable eMPC a self-tunable)
 	
 	
 	%The main benefit in form of lower computational complexity in the control phase comes hand in hand with a non-negligible drawback. The size of the parametric solution may increase to the value that prevents its real-time implementation for two reasons: (i) the memory footprint is higher than the available memory size of the control unit, and (ii) the computational time associated with finding the optimal control action is higher than the available sample time for control action implementation. Although this control strategy has its challenges, it is still very beneficial for practical usage for its benefits. 
 	
+	The current crisis of energy resources emphasizes the long-term goal of achieving sustainable industrial production and optimal energy utilization. Moreover, minimizing the energy utilization directly reduces the corresponding CO$_{2}$ emissions. Therefore, sustainable industrial production is focused on the wide implementation of advanced control methods~\cite{MN20}. 
+	
+	The heat exchangers in their numerous variants integrated into the many industrial plants represent energy-demanding plants. From the control viewpoint, the controller design taking into account the nonlinear and asymmetric behaviour of the heat exchangers is a challenging task, see~\cite{RL20}. Although the conventional and widely-used PID controllers are robust and easy to tune, their control performance may not be sufficient when comes to energy savings. Various extensions built above the well-tuned PID controller were developed to compensate for the non-linear and asymmetric behaviour, often affected by the additional impact of the uncertain parameters originated e.g., in the fouling~\cite{MT19}. Such widely-used control strategies include, e.g., the robust control~\cite{DO15,WY18}, the gain-scheduling, multi-zone control, see~\cite{MF08,Liptak}, and references therein.
 	
 	One of the promising control strategies addressing all these issues in an optimal way came with the formation and tuning of the model predictive control (MPC), e.g., see~\cite{Morari_MPC}. MPC provides optimal control input based on the minimization of a specified cost function while considering a model of the system. Compared to linear quadratic controllers (LQR)~\cite{LQR}, model predictive control also includes constraints on the control input or process variables~\cite{Maciejowski_MPC}, and additional saturation is not necessary. Moreover, as the optimization problem is solved in every control step, MPC represents a receding horizon control policy~\cite{receding_horizon} having a significant benefit mainly in the terms of disturbance rejection. The model predictive control was intensively investigated in connection with heat exchangers. In~\cite{Vinaya_HE_MPC}, the authors developed a model predictive control for a shell and tube heat exchanger. In~\cite{Oravec_energy}, the control performance of the robust MPC implemented for a plate heat exchanger with soft constraints was analyzed. Four robust control strategies were presented and compared in~\cite{Oravec_HE_ATE}. A two-level control structure was applied on a heat exchanger network in~\cite{Gonzales_HE_MPC}. In this study, the low level of control was ensured by MPC and the high level by a supervisory online optimiser.       
 	
