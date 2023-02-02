@@ -165,11 +165,21 @@
 	\section{Introduction}
 	\label{sec:introduction}
 	
+	TODO: Vyhnut sa pouzivaniu "we", "our" atd.
 	
-
 	
-	The main benefit in form of lower computational complexity in the control phase comes hand in hand with a non-negligible drawback. The size of the parametric solution may increase to the value that prevents its real-time implementation for two reasons: (i) the memory footprint is higher than the available memory size of the control unit, and (ii) the computational time associated with finding the optimal control action is higher than the available sample time for control action implementation. Although this control strategy has its challenges, it is still very beneficial for practical usage for its benefits. 
+	%The main benefit in form of lower computational complexity in the control phase comes hand in hand with a non-negligible drawback. The size of the parametric solution may increase to the value that prevents its real-time implementation for two reasons: (i) the memory footprint is higher than the available memory size of the control unit, and (ii) the computational time associated with finding the optimal control action is higher than the available sample time for control action implementation. Although this control strategy has its challenges, it is still very beneficial for practical usage for its benefits. 
 	
+	
+	One of the promising control techniques came with the formation of model predictive control~\cite{Morari_MPC}. MPC provides optimal control input based on minimization of a specified cost function, while considering model of the system. Compared to linear quadratic controllers (LQR)~\cite{LQR}, model predictive control also includes constraints on the control input or process variables~\cite{Maciejowski_MPC}, so further saturation is not necessary. Moreover, as the optimization problem is solved in every control step, MPC represents a receding horizon control~\cite{receding_horizon} which has a significant benefit mainly in the terms of disturbance rejection.       
+	
+	The applicability of model predictive control expanded with the parametric solution of MPC optimization problem, known as explicit MPC~\cite{Bemporad_automatica}. As the MPC optimization problem is pre-solved offline, it does not need to be solved in the online (control) phase. Instead, a piece-wise affine (PWA) control law is evaluated to apply the optimal control action. The lower computational complexity makes the explicit MPC more suitable for practical implementation. Nevertheless, the explicit MPC is not tunable in default as the conventional approach from~\cite{Bemporad_automatica} considers the penalty matrices with fixed structure and values.
+	
+	The possibility to tune the explicit MPC online came with publishing of~\cite{Baric_tunable}. The tuning parameter penalizing the control inputs became a parameter, for which the optimal controller was precomputed. Nevertheless, the application was limited only for linear cost functions. To satisfy the demands for often-used quadratic cost functions, the approximated tunable explicit MPC was presented in~\cite{Klauco_tunable}. The technique is based on two explicit model predictive controllers which differ in the setup of one penalty matrix. The two explicit MPCs provide upper and lower boundary optimal controllers. Based on the evaluation of the two boundary control inputs, the tuned control input is calculated by linear interpolation. The follow-up work~\cite{Oravec_tunable} provided stability and recursive feasibility guarantees by proper choosing of the terminal penalty matrix and terminal set constraint~\cite{Mayne_stability}. Moreover, the strategy in~\cite{Oravec_tunable} extends the tuning ability based on \textit{any} penalty matrix and not just the input penalty.
+	
+	The idea of approximated tunable MPC with neural networks is presented in~\cite{Kis_NN_MPC}. To ensure the tuning property, the penalty matrices were included in the training process. As a result, it was possible to tune the neural network-based controller online, while mimicking the nearly optimal MPC. In~\cite{Kis_NN_MPC_corrector}, the neural network-based tunable controller MPC was extended with a corrector which steered the controller such that the contraints on the manipulated and process variables were satisfied. 
+	
+	The paper~\cite{self_tunable} pushes the idea of tunable explicit MPC further and deals with the issues of practical implementation. The procedure of self-tunable controller technique is presented. The controller's aggressivity is tuned based on the difference between the reference value and the steady state corresponding to the model linearization point. Tuning based on the distance from the steady state represented a way how to compensate the system's nonlinearity.
 	
 	This work directly extends our results presented in~\cite{self_tunable}, where the basic principles of the self-tunable approximated explicit MPC were introduced. In this paper, a novel method of tuning parameter setup is introduced. Compared to~\cite{self_tunable}, the tuning method is based on the size of reference step change. Next, the idea of further scaling of the tuning parameter is elaborated. The interval of the tuning parameter is splitted at some value and every part of the interval corresponds to specific operating conditions specified by control engineer. In such way, e.g. the system's asymmetry can be compensated. Last but not least, the proposed tuning technique was implemented in a control of a laboratory plate heat exchanger. This work also provides the control performance evaluation and comparison with using only one non-tunable controller.    
 	
@@ -228,7 +238,7 @@
 	\end{subequations}
 	where $x_{\mathrm{I}} \in \mathbb{R}^{n_{\mathrm{y}}}$ is the integral of the control error, $T_\mathrm{s}$ denotes the sampling time and matrices $A$, $B$, $C$ are well-known the state-space matrices that form the augmented LTI model. As the consequence of this extension and penalization in the cost function in Eq.~\eqref{eq:mpc_problem_cost}, not only the control error is penalized, but also an integrated value, which leads to analogous offset-free reference tracking results as incorporating an integral part in PID controller.
 	
-	The parametric solution of the optimization problem of the quadratic programming (QP) in Eq.~\eqref{eq:mpc_problem}, leads to the explicit solution in the form of piecewise affine (PWA) control law defined above the domain consisting of $r$ critical regions:
+	The parametric solution of the optimization problem of the quadratic programming (QP) in Eq.~\eqref{eq:mpc_problem}, leads to the explicit solution in the form of piecewise affine PWA control law defined above the domain consisting of $r$ critical regions:
 	\begin{eqnarray}
 		\label{eq:PWA_control_law}
 		u(\theta) = \left\{ 
@@ -242,12 +252,8 @@
 	\end{eqnarray}
 	where $F_{i} \in \mathbb{R}^{n_{\mathrm{u}} \times n_{\mathrm{x}}}$ and $g_{i}  \in \mathbb{R}^{n_{\mathrm{u}}}$ respectively are the slope and affine section of the corresponding control law. The PWA function defined in Eq.~\eqref{eq:PWA_control_law} is stored and recalled in the online phase, i.e., during the real-time control. Based on identifying the specific critical region $\mathcal{R}_{i}$, where the parameter $\theta$ belongs, the optimal control input is calculated based on the associated control law in Eq.~\eqref{eq:PWA_control_law}.
 	
-	Note, many other formulations of the optimization problems for the explicit MPC design, were mainly in the terms of the definition of the cost functions in Eq.~\eqref{eq:mpc_problem_cost}. Also, the incremental (velocity) formulation of the state-space model is common, but leads to further extension of the vector of parameters $\theta$ and therefore also the complexity of the explicit MPC controller increases. Another option for offset-free tracking is introducing disturbance estimation. For such an overview see e.g. 
-	
-	\textcolor{red}{[ TODO: Please, fix. ]}
-	
-	...TODO. 
-	Klauco reference governors? minimovka zdroje + dizertacka str.33
+	Note, many other formulations of the optimization problems for the explicit MPC design, were mainly in the terms of the definition of the cost functions in Eq.~\eqref{eq:mpc_problem_cost}. Also, the incremental (velocity) formulation of the state-space model is common, but leads to further extension of the vector of parameters $\theta$ and therefore also the complexity of the explicit MPC controller increases. Another option for offset-free tracking is introducing disturbance modelling and estimation. For such an overview see e.g.~\cite{Klauco_mpc} 
+
 	
 	\subsection{Tunable explicit model predictive control}
 	\label{sec:tunable}
@@ -338,7 +344,7 @@
 		\label{eq:rho_delta_ref}
 		\rho(k) = \frac{\vert \Delta_{\mathrm{ref}}(k) \vert}{\Delta_{\max}},
 	\end{eqnarray} 
-	where $\Delta_{\mathrm{ref}}(k) = y_{\mathrm{ref}}(k) - y_{\mathrm{ref}}(k-1)$ is the size of the reference step change. The denominator of Eq.~\eqref{eq:rho_delta_ref} is changed as well. In contrast to the maximal deviation from the steady state in Section~\ref{sec:self_tunable}, this approach introduces $\Delta_{\max}$ as the maximal possible reference step change given by: \textcolor{red}{$\Delta_{\max}(k) = \Vert \Delta_{\mathrm{ref}}(k) \Vert_{\infty} $}. 
+	where $\Delta_{\mathrm{ref}}(k) = y_{\mathrm{ref}}(k) - y_{\mathrm{ref}}(k-1)$ is the size of the reference step change. The denominator of Eq.~\eqref{eq:rho_delta_ref} is changed as well. In contrast to the maximal deviation from the steady state in Section~\ref{sec:self_tunable}, this approach introduces $\Delta_{\max}$ as the maximal possible reference step change given by: $\Delta_{\max} = \Vert \Delta_{\mathrm{ref}}(k) \Vert_{\infty}, \forall k \ge 0 $. 
 	Analogously to the original approach, the maximal reference step can be set based on the general knowledge of the expected future reference values. Another option is to exploit the information about the system constraints and set the parameter $\Delta_{\max}$ according to Eq.~\eqref{eq:d_max}. 
 	
 	Note, only the absolute value of $\Delta_{\mathrm{ref}}$ and $\Delta_{\max}$ are considered in this procedure to ensure $\rho \ge 0$. 
