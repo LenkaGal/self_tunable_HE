@@ -551,35 +551,61 @@
 		\end{center}
 	\end{figure}
 	
-	The control performance was also investigated quantitatively. Table~\ref{tab:control_performance} summarizes the evaluated control performance criteria computed for the two boundary controllers and for the self-tuned controller. The control performance is evaluated for each reference step change separately. The considered quality criteria are: sum-of-squared based criterion -- integral squared error $ISE$, maximal overshoot/undershoot $\sigma_{\mathrm{max}}$, settling time $t_{\epsilon}$ for 5\,\%-neighbourhood of the reference temperature $T_{\mathrm{ref}}$, and the volume of the hot medium $V$ consumed for the corresponding control. To provide better readability of the computed results in Table~\ref{tab:control_performance}, the best values, i.e., the minimum values, are emphasized using a bold font style. 
+	The control performance was also investigated quantitatively. Table~\ref{tab:control_performance} summarizes the evaluated control performance criteria computed for the two boundary controllers and for the self-tuned controller. The control performance is evaluated for each reference step change separately. The considered quality criteria are: sum-of-squared based criterion -- integral squared error $ISE$, maximal overshoot/undershoot $\sigma_{\mathrm{max}}$ and the settling time $t_{\epsilon}$ for 5\,\%-neighbourhood of the reference temperature $T_{\mathrm{ref}}$. To provide better readability of the computed results in Table~\ref{tab:control_performance}, the best values, i.e., the minimum values, are emphasized using a bold font style. 
 	
-	\begin{table}[h!]
-		\begin{center}
-			\caption{Control performance criteria.}
-			\label{tab:control_performance}
-			\begin{tabular}{c|c|c|c|c|c} 
-				Reference step change & $Q_\mathrm{y}$ & $ISE$ [$^{\circ}\mathrm{C}^2$\,s] & $\sigma_{\mathrm{max}}$\,[\%] & $t_{\epsilon}$\,[s] & $V$\,[l] \\
-				\hline
-				\multirow{2}{*}{ 35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 714 & 33.50 & 16.5 & \textbf{2.12} \\
-				& 100 & 867 & 16.65 & 12.5 & 2.36 \\ 
-				& self-tuned & \textbf{678} & \textbf{15.19} & \textbf{9.5} & 2.38 \\ 
-				\hline
-				\multirow{2}{*}{ 45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C } & 1000 & 365 & 47.20 & \textbf{5} & \textbf{2.49} \\
-				& 100 & 606 & 23.25 & 26.5 & 3.19 \\ 
-				& self-tuned & \textbf{248} & \textbf{19.13} & 9.5 & 3.35 \\ 
-				\hline
-				\multirow{2}{*}{ 50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 245 & \textbf{18.92} & \textbf{6.5} & \textbf{2.00} \\
-				& 100 & 398 & 79.64 & 31 & \textbf{2.00} \\ 
-				& self-tuned & \textbf{186} & 24.59 & \textbf{6.5} & 2.10 \\ 
-				\hline
-				\multirow{2}{*}{ 45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C } & 1000 & 1024 & 18.43 & 22.5 & 0.94 \\
-				& 100 & 1402 & 41.87 & 90 & \textbf{0.93} \\ 
-				& self-tuned & \textbf{967} & \textbf{16.49} & \textbf{18.5} & 1.10  
-			\end{tabular}
-		\end{center}
-	\end{table}
+%	\begin{table}[h!]
+%		\begin{center}
+%			\caption{Control performance criteria.}
+%			\label{tab:control_performance}
+%			\begin{tabular}{c|c|c|c|c|c} 
+%				Reference step change & $Q_\mathrm{y}$ & $ISE$ [$^{\circ}\mathrm{C}^2$\,s] & $\sigma_{\mathrm{max}}$\,[\%] & $t_{\epsilon}$\,[s] & $V$\,[l] \\
+%				\hline
+%				\multirow{2}{*}{ 35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 714 & 33.50 & 16.5 & \textbf{2.12} \\
+%				& 100 & 867 & 16.65 & 12.5 & 2.36 \\ 
+%				& self-tuned & \textbf{678} & \textbf{15.19} & \textbf{9.5} & 2.38 \\ 
+%				\hline
+%				\multirow{2}{*}{ 45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C } & 1000 & 365 & 47.20 & \textbf{5} & \textbf{2.49} \\
+%				& 100 & 606 & 23.25 & 26.5 & 3.19 \\ 
+%				& self-tuned & \textbf{248} & \textbf{19.13} & 9.5 & 3.35 \\ 
+%				\hline
+%				\multirow{2}{*}{ 50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 245 & \textbf{18.92} & \textbf{6.5} & \textbf{2.00} \\
+%				& 100 & 398 & 79.64 & 31 & \textbf{2.00} \\ 
+%				& self-tuned & \textbf{186} & 24.59 & \textbf{6.5} & 2.10 \\ 
+%				\hline
+%				\multirow{2}{*}{ 45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C } & 1000 & 1024 & 18.43 & 22.5 & 0.94 \\
+%				& 100 & 1402 & 41.87 & 90 & \textbf{0.93} \\ 
+%				& self-tuned & \textbf{967} & \textbf{16.49} & \textbf{18.5} & 1.10  
+%			\end{tabular}
+%		\end{center}
+%	\end{table}
+
+\begin{table}[h!]
+	\begin{center}
+		\caption{Control performance criteria.}
+		\label{tab:control_performance}
+		\begin{tabular}{c|c|c|c|c} 
+			Reference step change & $Q_\mathrm{y}$ & $ISE$ [$^{\circ}\mathrm{C}^2$\,s] & $\sigma_{\mathrm{max}}$\,[\%] & $t_{\epsilon}$\,[s]  \\
+			\hline
+			\multirow{2}{*}{ 35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 714 & 33.50 & 16.5 \\
+			& 100 & 867 & 16.65 & 12.5 \\ 
+			& self-tuned & \textbf{678} & \textbf{15.19} & \textbf{9.5}  \\ 
+			\hline
+			\multirow{2}{*}{ 45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C } & 1000 & 365 & 47.20 & \textbf{5} \\
+			& 100 & 606 & 23.25 & 26.5  \\ 
+			& self-tuned & \textbf{248} & \textbf{19.13} & 9.5  \\ 
+			\hline
+			\multirow{2}{*}{ 50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 245 & \textbf{18.92} & \textbf{6.5}  \\
+			& 100 & 398 & 79.64 & 31  \\ 
+			& self-tuned & \textbf{186} & 24.59 & \textbf{6.5}  \\ 
+			\hline
+			\multirow{2}{*}{ 45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C } & 1000 & 1024 & 18.43 & 22.5  \\
+			& 100 & 1402 & 41.87 & 90  \\ 
+			& self-tuned & \textbf{967} & \textbf{16.49} & \textbf{18.5}   
+		\end{tabular}
+	\end{center}
+\end{table}
 	
-	As can be seen in Table~\ref{tab:control_performance}, that real-time self-tuning of the explicit MPC controller helped to improve two to three criteria when tracking each reference value. The cost for this is the energy associated with control. Although the integral square error, maximal overshoot/undershoot and settling time decreased, the volume of consumed heating medium did not. Nevertheless, the average deterioration in the terms of consumed heating medium is approximately by~17\,\%. 
+	As can be seen in Table~\ref{tab:control_performance}, that real-time self-tuning of the explicit MPC controller helped to improve two to three criteria when tracking each reference value. The cost for this is the energy associated with control. 
 	
 	The relative improvement in the percentage, denoted by $\delta$, of using the self-tunable controller computed subject to the second best setup is summarized in Table~\ref{tab:improvement} for each reference step change separately. The negative numbers represent deterioration compared to the best controller setup in the corresponding reference tracking. 
 	
@@ -587,16 +613,16 @@
 		\begin{center}
 			\caption{Relative improvement of the control performance using the self-tunable explicit MPC controller.}
 			\label{tab:improvement}
-			\begin{tabular}{c|c|c|c|c} 
-				Reference step change & $\delta ISE$\,[\%] & $\delta \sigma_{\mathrm{max}}$\,[\%] & $\delta t_{\epsilon}$\,[\%] & $\delta V$\,[\%] \\
+			\begin{tabular}{c|c|c|c} 
+				Reference step change & $\delta ISE$\,[\%] & $\delta \sigma_{\mathrm{max}}$\,[\%] & $\delta t_{\epsilon}$\,[\%]  \\
 				\hline
-				35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C &  5 &  9 & 24 &$-12$ \\ 
+				35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C &  5 &  9 & 24 \\ 
 				% \hline
-				45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C & 32 & 18 &$-90$ & $-35$ \\ 
+				45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C & 32 & 18 &$-90$  \\ 
 				% \hline
-				50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C & 24 &$-30$& 0 &$-4$\\ 
+				50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C & 24 &$-30$& 0 \\ 
 				% \hline
-				45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C &  6 & 11 & 18 &$-18$  
+				45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C &  6 & 11 & 18   
 			\end{tabular}
 		\end{center}
 	\end{table}
@@ -617,12 +643,25 @@
 				%\end{tabular}
 			%\end{center}
 		%\end{table}
+		
+		\begin{table}[h!]
+			\begin{center}
+				\caption{Energy consumption evaluation.}
+				\label{tab:energy}
+				\begin{tabular}{c|c} 
+					$Q_\mathrm{y}$ & E\,[kJ]   \\
+					\hline
+					1000 &  883  \\ 
+					% \hline
+					100 & 938   \\ 
+					% \hline
+					self-tuned & 921   
+				\end{tabular}
+			\end{center}
+		\end{table}
 	
-	Implementing a self-tunable explicit MPC controller leads to improved control performance in the most analyzed quality criteria, see Table~\ref{tab:control_performance}. In general, utilizing a proposed controller with a scalable aggressiveness according to the operating conditions leads to higher accuracy (lower $ISE$), lower value of the overshoots (lower $\sigma_{\mathrm{max}}$), and faster achieving the reference value (lower $t_{\epsilon}$). %It should be also noted that the deterioration of every criterium is calculated subject to the best out of \textit{two} other controllers. It follows that the evaluation is strict as in practice only one controller would be available.
-	Although the volume of the hot medium $V$ is not reduced in the considered control scenario, the improved control performance may lead to other benefits. 
+	Implementing a self-tunable explicit MPC controller leads to improved control performance in the most analyzed quality criteria, see Table~\ref{tab:control_performance} and Table~\ref{tab:improvement}. In general, utilizing a proposed controller with a scalable aggressiveness according to the operating conditions leads to higher accuracy (lower $ISE$), lower value of the overshoots (lower $\sigma_{\mathrm{max}}$), and faster achieving the reference value (lower $t_{\epsilon}$). %It should be also noted that the deterioration of every criterium is calculated subject to the best out of \textit{two} other controllers. It follows that the evaluation is strict as in practice only one controller would be available.
 	
-	
-	\textcolor{red}{[ TODO: How about to simply omit the evaluation of the volume $V$ and write something around these lines: ]}
 	
 	Compared to the considered non-self-tunable controllers, the generated control trajectories and the computed quality criteria confirmed the improved control performance for the reference tracking control problem of the heat exchanger with the non-linear and asymmetric behaviour. 
 	For various operating conditions, the proposed self-tunable controller outperformed the conventional controllers in the means of the squared-error-based criterion ($ISE$) of the output temperature $T$ within a range $[5-32]$\,\%.  
@@ -687,8 +726,7 @@
 			$u_{\mathrm{U}}$ & control inputs associated with the upper boundary controller\\
 			$U$ & voltage, \% \\
 			$U^{\mathrm{s}}$ & steady state of voltage, \% \\
-			$\mathcal{U}$ & set of control inputs \\
-			$V$ & volume of heating medium, l \\
+			$\mathcal{U}$ & set of control inputs \\			
 			$x$ & system states \\
 			$\widetilde{x}$ & augmented system states \\
 			$x_{\mathrm{I}}$ & system states corresponding to the built-in integrator \\
