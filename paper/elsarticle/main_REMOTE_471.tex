@@ -665,20 +665,20 @@
 	Compared to the considered non-self-tunable controllers, the control trajectories and the evaluated quality criteria confirmed the improved control performance for the reference tracking control problem of the heat exchanger with the non-linear and asymmetric behavior. Implementing a self-tunable explicit MPC controller leads to improved control performance in the most analyzed quality criteria, see Table~\ref{tab:improvement}.	 
 	The squared-error-based criterion ($ISE$) improved in every control scenario within a range $[5-32]$\,\%, the maximal overshoots/undershoots $\sigma_{\mathrm{max}}$ reduced up to 18\,\%, and the settling time $t_{\epsilon}$ decreased up to 24\,\%.  
 	
-	To analyze the control more objectively, energy consumption was also investigated. More specifically, the power used to heat the heating medium was measured and summarized for the whole control but for every controller setup, respectively. The energy consumption $E$ necessary for every control as well as the relative improvement subject to every boundary controller can be seen in Table~\ref{tab:energy}.
+	To analyze the control more objectively, energy consumption was also investigated. More specifically, the power used to heat the heating medium was measured and summarized for the whole control but for every controller setup, respectively. The energy consumption $E$ necessary for every control can be seen in Table~\ref{tab:energy}.
 	
 	\begin{table}[h!]
 		\begin{center}
 			\caption{Energy consumption evaluation.}
 			\label{tab:energy}
-			\begin{tabular}{c|c|c} 
-				$Q_\mathrm{y}$ & E\,[kJ] & $\delta E\,[\%]$   \\
+			\begin{tabular}{c|c} 
+				$Q_\mathrm{y}$ & E\,[kJ]   \\
 				\hline
-				1000 &  883 & -4\\ 
+				1000 &  883  \\ 
 				% \hline
-				100 & 938 & 2 \\ 
+				100 & 938   \\ 
 				% \hline
-				self-tuned & 921 & -   
+				self-tuned & 921   
 			\end{tabular}
 		\end{center}
 	\end{table}
@@ -695,7 +695,7 @@
 	\label{sec:conclusion}
 	
 	This paper deals with the experimental implementation of the self-tunable approximated explicit model predictive control and provides a strategy for an effective self-tuning controller design. Based on the current reference value, the tuning parameter is scaled using linear interpolation. The previously published work related to the self-tunable explicit MPC suggested tuning based on the distance of the reference value from the system steady-state value. This paper presents a novel idea of tuning based on the size of reference step change. The self-tuning algorithm aims to compensate for the nonlinear behavior of the controlled system. The self-tuning parameter is updated when the reference changes. It is calculated as the ratio between the size of the reference change and the maximal possible size of the reference change, which is specified before operation. 
-	Another novel contribution addresses the challenging control problem of asymmetric system behavior by splitting the interval of tuning parameter into two ranges, while both intervals are assigned to different operating conditions. The proposed method is implemented on a laboratory heat exchanger with nonlinear and asymmetric behavior. The asymmetry makes the plant a suitable candidate for splitting the interval of the tuning parameter. The decision criterium is negativity or positivity of reference change. When the reference changed upwards, the control input was tuned in the first part of the interval and approached the boundary controller associated with the lower bound on the penalty matrix. On the contrary, when the reference changed downwards, the control input was tuned to approach the control input from the boundary controller with the upper bound on the penalty matrix. To investigate the control results properly, the control performance was evaluated also quantitatively. Compared to the conventional control strategy handling just a single controller, the self-tunable control approach decreased the integral squared control error up to 32\%, maximal overshoots/undershoots up to 18\%, and settling time up to 24\%. In addition, the energy consumption corresponding to every controller was evaluated as well. The value of consumed energy was between the two boundary controllers, i.e., the energy consumption did not deteriorate in general. With saving the energy compared to one of the boundary controllers, the control performance was significantly improved.  
+	Another novel contribution addresses the challenging control problem of asymmetric system behavior by splitting the interval of tuning parameter into two ranges, while both intervals are assigned to different operating conditions. The proposed method is implemented on a laboratory heat exchanger with nonlinear and asymmetric behavior. The asymmetry makes the plant a suitable candidate for splitting the interval of the tuning parameter. The decision criterium is negativity or positivity of reference change. When the reference changed upwards, the control input was tuned in the first part of the interval and approached the boundary controller associated with the lower bound on the penalty matrix. On the contrary, when the reference changed downwards, the control input was tuned to approach the control input from the boundary controller with the upper bound on the penalty matrix. To investigate the control results properly, the control performance was evaluated also quantitatively. Compared to the conventional control strategy handling just a single controller, the self-tunable control approach decreased the integral squared control error, maximal overshoots/undershoots, and settling time. In addition, the energy consumption corresponding to every controller was evaluated as well. The value of consumed energy was between the two boundary controllers, i.e., the energy consumption did not deteriorate in general. With saving energy compared to one of the boundary controllers, the control performance was significantly improved. 
 	
 	\section*{Acknowledgments}
 	

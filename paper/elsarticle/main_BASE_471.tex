@@ -128,9 +128,9 @@
 		%
 		%\begin{abstract}
 			%%max 250 words!		
-			
-			The tunable approximated explicit model predictive control (MPC) comes with the benefits of real-time tunability without the necessity of solving the optimization problem online. This paper provides a novel self-tunable control policy that does not require any further tuning or interventions of the control engineer during operation. Based on the current operating conditions, the autonomous tuning parameter scales the control input using linear interpolation between the boundary optimal control actions. The adjustment of the tuning parameter depends on the current reference value, which makes this strategy suitable for reference tracking problems. Furthermore, a novel technique for scaling the tuning parameter is proposed. It provides to exploit different ranges of the tuning parameter assigned to specified operating conditions. The self-tunable explicit MPC was implemented on a laboratory heat exchanger with nonlinear and asymmetric behavior. To ensure offset-free reference tracking control, the built-in integrator was included in the explicit MPC design. The asymmetric behavior of the plant was compensated by tuning the controller's aggressiveness, as the negative or positive sign of reference change was considered in the tuning process. The designed self-tunable controller improved control performance by decreasing integral squared error, maximal overshoots/undershoots and settling time compared to the conventional control strategy based on a single (not tuned) controller. 
-			%\end{abstract}
+		
+		The tunable approximated explicit model predictive control (MPC) comes with the benefits of real-time tunability without the necessity of solving the optimization problem online. This paper provides a novel self-tunable control policy that does not require any further tuning or interventions of the control engineer during operation. Based on the current operating conditions, the autonomous tuning parameter scales the control input using linear interpolation between the boundary optimal control actions. The adjustment of the tuning parameter depends on the current reference value, which makes this strategy suitable for reference tracking problems. Furthermore, a novel technique for scaling the tuning parameter is proposed. It provides to exploit different ranges of the tuning parameter assigned to specified operating conditions. The self-tunable explicit MPC was implemented on a laboratory heat exchanger with nonlinear and asymmetric behavior. To ensure offset-free reference tracking control, the built-in integrator was included in the explicit MPC design. The asymmetric behavior of the plant was compensated by tuning the controller's aggressiveness, as the negative or positive sign of reference change was considered in the tuning process. The designed self-tunable controller improved control performance by decreasing integral squared error, maximal overshoots/undershoots and settling time compared to the conventional control strategy based on a single (not tuned) controller. 
+		%\end{abstract}
 		%
 		%%%Graphical abstract
 		%\begin{graphicalabstract}
@@ -168,11 +168,13 @@
 	
 	%The main benefit in form of lower computational complexity in the control phase comes hand in hand with a non-negligible drawback. The size of the parametric solution may increase to the value that prevents its real-time implementation for two reasons: (i) the memory footprint is higher than the available memory size of the control unit, and (ii) the computational time associated with finding the optimal control action is higher than the available sample time for control action implementation. Although this control strategy has its challenges, it is still very beneficial for practical usage for its benefits. 
 	
-	The current crisis of energy resources emphasizes the long-term goal of achieving sustainable industrial production and optimal energy utilization. Moreover, minimizing the energy utilization directly reduces the corresponding CO$_{2}$ emissions. Therefore, sustainable industrial production is focused on the wide implementation of advanced control methods~\cite{MN20}. Recent survey on the applied thermal engineering focused on the energy saving and pollution reduction from the industrial perspective is provided in~\cite{YV16}.
+	The current crisis of energy resources emphasizes the long-term goal of achieving sustainable industrial production and optimal energy utilization. Moreover, minimizing the energy utilization directly reduces the corresponding CO$_{2}$ emissions. Therefore, sustainable industrial production is focused on the wide implementation of advanced control methods~\cite{MN20}. 
 	
-	The heat exchangers in their numerous variants are integrated into the many industrial plants as the heat transfer represents the crucial phenomena for all thermal energy applications~\cite{KV18}. Simultaneously, the heat exchangers are energy-demanding and resources-intensive plants. Moreover, from the control viewpoint, the controller design taking into account the nonlinear and asymmetric behaviour of the heat exchangers is a challenging task, see~\cite{RL20}. Although the conventional and widely-used proportional–integral–derivative (PID) controllers are robust and easy to tune, their control performance may not be sufficient when it comes to energy savings. Various extensions built above the well-tuned PID controller were developed to compensate for the nonlinear and asymmetric behavior, often affected by the additional impact of the uncertain parameters originated, e.g., in the fouling~\cite{MT19}. Such widely-used control strategies including, e.g., the robust control~\cite{WY18}, the gain-scheduling, self-tuning, adaptive and optimal control, see~\cite{MF08} for the rigorous mathematical modeling and controller design methods in general, and~\cite{Liptak} for the controller design tailored for the process control engineers. 
+	The heat exchangers, in their numerous variants integrated into many industrial plants, represent energy-demanding plants. From the control viewpoint, the controller design taking into account the nonlinear and asymmetric behavior of the heat exchangers is a challenging task, see~\cite{RL20}. Although the conventional and widely-used proportional–integral–derivative (PID) controllers are robust and easy to tune, their control performance may not be sufficient when it comes to energy savings. Various extensions built above the well-tuned PID controller were developed to compensate for the nonlinear and asymmetric behavior, often affected by the additional impact of the uncertain parameters originated, e.g., in the fouling~\cite{MT19}. Such widely-used control strategies include, e.g., the robust control~\cite{DO15,WY18}, the gain-scheduling, multi-zone control, see~\cite{MF08}, and references therein.
 	
-	One of the promising control strategies addressing all these issues in an optimal way came with the formation and tuning of the model predictive control (MPC), e.g., see~\cite{Morari_MPC}. MPC provides optimal control input based on the minimization of a specified cost function while considering a model of the system. Compared to linear quadratic controllers (LQR)~\cite{LQR}, model predictive control also includes constraints on the control input or process variables~\cite{Maciejowski_MPC}, and additional saturation is not necessary. Moreover, as the optimization problem is solved in every control step, MPC represents a receding horizon control policy~\cite{receding_horizon}, having a significant benefit mainly in the terms of disturbance rejection. The model predictive control was intensively investigated in connection with heat exchangers. In~\cite{Vinaya_HE_MPC}, the authors developed a model predictive control for a shell and tube heat exchanger. In~\cite{Oravec_energy}, the control performance of the robust MPC implemented for a plate heat exchanger with soft constraints was analyzed. Four robust control strategies were presented and compared in~\cite{Oravec_HE_ATE}. A two-level control structure was applied on a heat exchanger network in~\cite{Gonzales_HE_MPC}, where the low level of control was ensured by MPC and the high level by a supervisory online optimizer. The fast nonlinear MPC was designed to optimize the waste heat recovery~\cite{WC19}.  The multi-layer control designed in~\cite{DZ18} designed the MPC in the leader loop to optimize the thermal response to the improved control performance.      
+	TODO: nepouzivat nasobne referencie ako [4,5] vyssie
+	
+	One of the promising control strategies addressing all these issues in an optimal way came with the formation and tuning of the model predictive control (MPC), e.g., see~\cite{Morari_MPC}. MPC provides optimal control input based on the minimization of a specified cost function while considering a model of the system. Compared to linear quadratic controllers (LQR)~\cite{LQR}, model predictive control also includes constraints on the control input or process variables~\cite{Maciejowski_MPC}, and additional saturation is not necessary. Moreover, as the optimization problem is solved in every control step, MPC represents a receding horizon control policy~\cite{receding_horizon}, having a significant benefit mainly in the terms of disturbance rejection. The model predictive control was intensively investigated in connection with heat exchangers. In~\cite{Vinaya_HE_MPC}, the authors developed a model predictive control for a shell and tube heat exchanger. In~\cite{Oravec_energy}, the control performance of the robust MPC implemented for a plate heat exchanger with soft constraints was analyzed. Four robust control strategies were presented and compared in~\cite{Oravec_HE_ATE}. A two-level control structure was applied on a heat exchanger network in~\cite{Gonzales_HE_MPC}, where the low level of control was ensured by MPC and the high level by a supervisory online optimizer.       
 	
 	The applicability of model predictive control expanded with the parametric solution of the MPC optimization problem, known as explicit MPC~\cite{Bemporad_automatica}. As the MPC optimization problem is pre-solved offline, it does not need to be solved in the online phase, i.e., in real-time control. Instead, a piece-wise affine (PWA) control law is evaluated to apply the optimal control action in each control step. The lower computational complexity makes the explicit MPC more suitable for practical industrial implementation. Nevertheless, the explicit MPC is not tunable in default as the conventional approach in~\cite{Bemporad_automatica} considers the penalty matrices with fixed structure and values.
 	
@@ -187,6 +189,7 @@
 	The paper is organized as follows. First, the theoretical backgrounds are presented in Section~\ref{sec:preliminaries}, where the explicit MPC, the approximated tunable explicit MPC, and existing self-tunable methods are briefly elaborated. Then, the novel proposed method of self-tunable procedure is explained in detail in Section~\ref{sec:methodology}. Finally, the experimental results of the self-tuning controller implementation on a heat exchanger are discussed in Section~\ref{sec:results}, followed by the main conclusions in Section~\ref{sec:conclusion}.
 	
 	\section{Theoretical backgrounds}
+	% \section{Preliminaries}
 	\label{sec:preliminaries}
 	
 	In this section, the theoretical backgrounds necessary for the proposed method are summarized. First, the explicit model predictive control is briefly recalled. Next, the tunable technique of the approximated explicit model predictive control is introduced. Finally, the ideas of a self-tunable technique of the approximated explicit MPC are presented.
@@ -253,7 +256,7 @@
 	where $F_{i} \in \mathbb{R}^{n_{\mathrm{u}} \times n_{\mathrm{x}}}$ and $g_{i}  \in \mathbb{R}^{n_{\mathrm{u}}}$ respectively are the slope and affine section of the corresponding control law. The PWA function defined in Eq.~\eqref{eq:PWA_control_law} is stored and recalled in the online phase, i.e., during the real-time control. Based on identifying the specific critical region $\mathcal{R}_{i}$, where the parameter $\theta$ belongs, the optimal control input is calculated based on the associated control law in Eq.~\eqref{eq:PWA_control_law}.
 	
 	Note, many other formulations of the optimization problems for the explicit MPC design, were mainly in the terms of the definition of the cost functions in Eq.~\eqref{eq:mpc_problem_cost}. Also, the incremental (velocity) formulation of the state-space model is common, but leads to further extension of the vector of parameters $\theta$, and therefore also the complexity of the explicit MPC controller increases. Another option for offset-free tracking is introducing disturbance modeling and estimation. For such an overview see e.g.~\cite{Klauco_mpc} 
-	
+
 	
 	\subsection{Tunable explicit model predictive control}
 	\label{sec:tunable}
@@ -290,12 +293,12 @@
 	\begin{remark}
 		If the asymptotic stability and recursive feasibility guarantees are required, the reader is referred to follow the instructions from \cite{Oravec_tunable}. In order to satisfy these requirements, the study introduces a procedure for computing the common terminal penalty and terminal set for the two boundary controllers. 
 	\end{remark}
-	
+
 	\begin{remark}
 		Not only Eq.~\eqref{eq:tunable_u} needs to be chosen for interpolation of the control input. Another way of tuning the control input can be using some nonlinear relation for the interpolation. 
 	\end{remark}
-	
-	
+
+
 	
 	\subsection{Self-tunable explicit model predictive control}
 	\label{sec:self_tunable}	
@@ -380,38 +383,38 @@
 			\end{matrix}
 			\right.
 		\end{eqnarray}
-	\end{definition}
-	
-	%\begin{definition}
-		%		If the tuning parameter is scaled in the first part of the interval, i.e., $\langle 0, \rho_{\mathrm{s}} \rangle$, where $\rho_{\mathrm{s}}$ is the splitting value of the tuning parameter interval, the following relation is used to adjust the tuning parameter:
-		%		\begin{eqnarray}
-			%			\label{eq:rho_up}
-			%			\widetilde{\rho} = \rho_{\mathrm{s}} \rho.
-			%		\end{eqnarray}
-		%		$\widetilde{\rho}$ such that $0 \leq \widetilde{\rho} \leq 1$ 
-		%\end{definition}
-	
-	%	\begin{definition}
-		%	Given the current parameter value $\rho$. If the tuning parameter is scaled in the second part of the interval, i.e., $\langle \rho_{\mathrm{s}}, 1 \rangle$, the following relation is used to adjust the tuning parameter:
-		%	\begin{eqnarray}
-			%		\label{eq:rho_down}
-			%		\widetilde{\rho} = (1-\rho_{\mathrm{s}}) \rho + \rho_{\mathrm{s}}.
-			%	\end{eqnarray}
-		%	\end{definition}
+		\end{definition}
+
+%\begin{definition}
+%		If the tuning parameter is scaled in the first part of the interval, i.e., $\langle 0, \rho_{\mathrm{s}} \rangle$, where $\rho_{\mathrm{s}}$ is the splitting value of the tuning parameter interval, the following relation is used to adjust the tuning parameter:
+%		\begin{eqnarray}
+%			\label{eq:rho_up}
+%			\widetilde{\rho} = \rho_{\mathrm{s}} \rho.
+%		\end{eqnarray}
+%		$\widetilde{\rho}$ such that $0 \leq \widetilde{\rho} \leq 1$ 
+%\end{definition}
+
+%	\begin{definition}
+%	Given the current parameter value $\rho$. If the tuning parameter is scaled in the second part of the interval, i.e., $\langle \rho_{\mathrm{s}}, 1 \rangle$, the following relation is used to adjust the tuning parameter:
+%	\begin{eqnarray}
+%		\label{eq:rho_down}
+%		\widetilde{\rho} = (1-\rho_{\mathrm{s}}) \rho + \rho_{\mathrm{s}}.
+%	\end{eqnarray}
+%	\end{definition}
 	
 	\begin{remark}
-		\label{rem:rho_tilde}		
+	\label{rem:rho_tilde}		
 		The introduction of splitting the scaling tuning parameter $\widetilde{\rho}$ into the tuning intervals in~\eqref{eq:rho_tilde_def} is not limited only to two intervals. If the nature of the controlled plant would benefit from splitting the operating range into more intervals, e.g., when the plant operates in the multiple steady-states values, then these intervals are simply determined by the corresponding values of $\rho_{\mathrm{s}, i}$ for each part of the interval. Next, the tuning rules in~\eqref{eq:rho_tilde_def} are adopted in an analogous way.
 	\end{remark}
 	
 	The following outcomes result from Eq.~\eqref{eq:rho_tilde_def}. 
 	%	\begin{corollary}
-		% The following outcomes result from Eq.~\eqref{eq:rho_up}. If $\rho=0$, then $\widetilde{\rho} = 0$. When considering the other extreme, i.e., $\rho=1$, then $\widetilde{\rho} = \rho_{\mathrm{s}}$. In such a way, the parameter $\rho$ can be scaled in the first part of the interval up to the splitting value. Note, as the relation in Eq.~\eqref{eq:rho_up} is linear and $0 \le \rho \le 1$ holds, for $\widetilde{\rho}$ it is impossible to acquire other values than in the given interval of parameter $\rho$.		
-		%	\end{corollary}
+	% The following outcomes result from Eq.~\eqref{eq:rho_up}. If $\rho=0$, then $\widetilde{\rho} = 0$. When considering the other extreme, i.e., $\rho=1$, then $\widetilde{\rho} = \rho_{\mathrm{s}}$. In such a way, the parameter $\rho$ can be scaled in the first part of the interval up to the splitting value. Note, as the relation in Eq.~\eqref{eq:rho_up} is linear and $0 \le \rho \le 1$ holds, for $\widetilde{\rho}$ it is impossible to acquire other values than in the given interval of parameter $\rho$.		
+	%	\end{corollary}
 	%
 	%	\begin{corollary}
-		%		The following outcomes result from Eq.~\eqref{eq:rho_down}. When $\rho=0$, $\widetilde{\rho} = \rho_{\mathrm{s}}$. When considering the other extreme, i.e., $\rho=1$, then $\widetilde{\rho} = 1$. In such a way, the parameter $\rho$ can be scaled in the second part of the interval from the splitting value up to 1. Note, as the relation in Eq.~\eqref{eq:rho_down} is linear and $0 \le \rho \le 1$ holds, for $\widetilde{\rho}$ it is impossible to acquire other values than in the given interval of parameter $\rho$.
-		%	\end{corollary}
+	%		The following outcomes result from Eq.~\eqref{eq:rho_down}. When $\rho=0$, $\widetilde{\rho} = \rho_{\mathrm{s}}$. When considering the other extreme, i.e., $\rho=1$, then $\widetilde{\rho} = 1$. In such a way, the parameter $\rho$ can be scaled in the second part of the interval from the splitting value up to 1. Note, as the relation in Eq.~\eqref{eq:rho_down} is linear and $0 \le \rho \le 1$ holds, for $\widetilde{\rho}$ it is impossible to acquire other values than in the given interval of parameter $\rho$.
+	%	\end{corollary}
 	\begin{lemma}
 		\label{lem:PWA_control_law_interval}
 		Given control law in~\eqref{eq:PWA_control_law}, its approximation given by the convex combination in~\eqref{eq:tunable_u}, and given scaling tuning parameter $\widetilde{\rho}$ according Definition~\ref{def:rho_tilde}. Then the control law  approximated into the form:
@@ -421,7 +424,7 @@
 		\end{eqnarray}
 		preserves the closed-loop system stability and recursive feasibility of the original control law in~\eqref{eq:PWA_control_law}.
 	\end{lemma}
-	
+
 	\begin{proof}
 		\label{proof:rho_tilde}
 		It has been proven~\cite{Oravec_tunable} that for the asymptotic stable and recursive feasible pair of control inputs $(u_{\mathrm{L}}, u_{\mathrm{U}})$, the approximated control law in~\eqref{eq:PWA_control_law} preserves these properties for any $\rho$ satisfying $0 \leq \rho \leq 1$, see Theorem~3.6 in~\cite{Oravec_tunable}. 
@@ -444,258 +447,258 @@
 	\begin{remark}
 		The Lemma~\ref{lem:PWA_control_law_interval} can be extended subject to the multiple intervals in an analogous way following the Remark~\ref{rem:rho_tilde}.
 	\end{remark}
-	
+
 	The advantage of the proposed method remains in the self-tuning of the controller as in the approach from Section~\ref{sec:self_tunable}. Nevertheless, it is required to appropriately determine the splitting value of the tuning parameter $\rho_{\mathrm{s}}$ and assign the parts of the interval to the associated operating conditions.
-	
+		
 	\begin{remark}
 		Note, the suggested scaling method is suitable also for online MPC, as the optimization problem is solved in every control step. Therefore, it is possible to include the controller tuning in the procedure of computing the optimal control input.   
 	\end{remark}
-	
+
 	For a better insight into the proposed technique, the procedure of self-tuning is depicted in Fig.~\ref{fig:tuning}.
-	
+
 	\begin{figure}
-		\begin{center}
-			\includegraphics[width=\textwidth]{images/tuning}
-			\caption[Self-tuning scheme]{Self-tuning scheme.}
-			\label{fig:tuning}
-		\end{center}
+	\begin{center}
+		\includegraphics[width=\textwidth]{images/tuning}
+		\caption[Self-tuning scheme]{Self-tuning scheme.}
+		\label{fig:tuning}
+	\end{center}
 	\end{figure}
-	
+
 	
 	\section{Results and discussion}
-	\label{sec:results}
-	
-	In this section, the results of the proposed self-tuning method are analyzed by an experimental implementation. The self-tuning strategy utilizes tuning parameter calculation based on the size of reference change (Section~\ref{sec:self_tunable_delta_ref}) and the scaling of tuning parameter based on splitting the interval of the parameter and assigning the interval parts to specific operating conditions (Section~\ref{sec:self_tunable_rho_scaling}).
-	
-	The plant on which the control was implemented and analyzed is a laboratory-scaled counter-current liquid-to-liquid plate heat exchanger Armfield Process Plant Trainer PCT23~\cite{pct23}, see Figure~\ref{fig:HE}. The heat exchanger is 90 mm wide, 103 mm long, and 160 mm high. The heat exchange is performed between the cold feed (water) and the hot medium (water). The cold feed as well as the heating medium are transported to the heat exchanger by two peristaltic pumps with flexible tubing from silicon rubber. The flow rate of the feed is constant, while the aim of control is to track the reference value of the feed temperature. Therefore, the controlled variable is the feed temperature $T$ at the outlet of the heat exchanger. The temperature of the heated feed in the outlet stream was measured by the type K thermocouple. The associated manipulated variable is the voltage $U$ corresponding to the power of the pump feeding the heat exchanger by the hot medium. The voltage is within the range of [$0-5$]\,V normalized into the relative values in percentage. For further technical specifications of the laboratory heat exchanger, the reader is referred to~\cite{pct23}. As heat exchange is a nonlinear and asymmetric process~\cite{Liptak}, this heat exchanger represents a suitable candidate for the presented controller tuning strategy. The corresponding simplified closed-loop scheme can be seen in Figure~\ref{fig:CL}. Note, the ,,Self-tuning" block corresponds to the more detailed scheme in Figure~\ref{fig:tuning}.  
-	
-	The system was identified by experimental identification. More specifically, several step responses were obtained in the whole range of the input variable steps. Every step response was identified as a first-order system and the nominal transfer function was calculated. Finally, the transfer function was converted to the state-space model. The matrices of the discrete-time state-space model of the plant are
-	\begin{subequations}
-		\label{eq:model_A_B} 
-		\begin{eqnarray}
-			A = \begin{bmatrix}
-				0.839
-			\end{bmatrix}, \quad
-			B = \begin{bmatrix}
-				0.039
-			\end{bmatrix}, \quad
-			C = \begin{bmatrix}
-				1
-			\end{bmatrix}, 
-			%\quad
-			%D = \begin{bmatrix}
-				%0
-				%\end{bmatrix}.
-		\end{eqnarray}
-	\end{subequations}
-	considering the sampling time $T_\mathrm{s}$ = 1\,s. 
-	To respect the physical limitations of the operating conditions, the constraints are considered in the terms of control inputs
+\label{sec:results}
+
+In this section, the results of the proposed self-tuning method are analyzed by an experimental implementation. The self-tuning strategy utilizes tuning parameter calculation based on the size of reference change (Section~\ref{sec:self_tunable_delta_ref}) and the scaling of tuning parameter based on splitting the interval of the parameter and assigning the interval parts to specific operating conditions (Section~\ref{sec:self_tunable_rho_scaling}).
+
+The plant on which the control was implemented and analyzed is a laboratory-scaled counter-current liquid-to-liquid plate heat exchanger Armfield Process Plant Trainer PCT23~\cite{pct23}, see Figure~\ref{fig:HE}. The heat exchanger is 90 mm wide, 103 mm long, and 160 mm high. The heat exchange is performed between the cold feed (water) and the hot medium (water). The cold feed as well as the heating medium are transported to the heat exchanger by two peristaltic pumps with flexible tubing from silicon rubber. The flow rate of the feed is constant, while the aim of control is to track the reference value of the feed temperature. Therefore, the controlled variable is the feed temperature $T$ at the outlet of the heat exchanger. The temperature of the heated feed in the outlet stream was measured by the type K thermocouple. The associated manipulated variable is the voltage $U$ corresponding to the power of the pump feeding the heat exchanger by the hot medium. The voltage is within the range of [$0-5$]\,V normalized into the relative values in percentage. For further technical specifications of the laboratory heat exchanger, the reader is referred to~\cite{pct23}. As heat exchange is a nonlinear and asymmetric process~\cite{Liptak}, this heat exchanger represents a suitable candidate for the presented controller tuning strategy. The corresponding simplified closed-loop scheme can be seen in Figure~\ref{fig:CL}. Note, the ,,Self-tuning" block corresponds to the more detailed scheme in Figure~\ref{fig:tuning}.  
+
+The system was identified by experimental identification. More specifically, several step responses were obtained in the whole range of the input variable steps. Every step response was identified as a first-order system and the nominal transfer function was calculated. Finally, the transfer function was converted to the state-space model. The matrices of the discrete-time state-space model of the plant are
+\begin{subequations}
+	\label{eq:model_A_B} 
 	\begin{eqnarray}
-		\label{eq:u_const}
-		-15\% \le u \le 65\%,
+		A = \begin{bmatrix}
+			0.839
+		\end{bmatrix}, \quad
+		B = \begin{bmatrix}
+			0.039
+		\end{bmatrix}, \quad
+		C = \begin{bmatrix}
+			1
+		\end{bmatrix}, 
+		%\quad
+		%D = \begin{bmatrix}
+		%0
+		%\end{bmatrix}.
 	\end{eqnarray}
-	where the variable $u$ represents the control inputs in the deviation form. The values of feed temperature and voltage of the heating medium pump corresponding to zero steady states are respectively $T^\mathrm{s}$~=~35 $^{\circ}\mathrm{C}$ and $U^\mathrm{s}$~=~35\%. Therefore, the physical constraints on the manipulated variable are actually
-	\begin{eqnarray}
-		\label{eq:U_const}
-		20\% \le U \le 100\%.
-	\end{eqnarray}	
-	As the controlled system is naturally stable even if the maximal or minimal value of the manipulated variable is constantly applied, the constraints on the controlled variable in Eq.~\eqref{eq:mpc_problem_state_constraints} can be omitted. Another motivation to include the output/state constraints would be the necessity to retain the controlled variable in some comfort range, specified by operation requirements. As it was not the aim of the case study, this reason also leads to omitting the constraints in Eq.~\eqref{eq:mpc_problem_state_constraints} to fully investigate the control performance of the pure self-tuning method.		 
-	
-	The penalty matrices of the problem Eq.~\eqref{eq:mpc_problem} were systematically tuned and the corresponding control was implemented on the laboratory heat exchanger for each of the considered explicit MPC setups. 
-	First, the aim of tuning was to determine, which penalty matrix is the most suitable for real-time tuning. Based on the set of experimentally collected data, the most significant effect on the control trajectories had tuning the penalty matrix $Q_\mathrm{y}$, while still preserving a satisfactory control performance, i.e., without steady-state control error and significant oscillations around the reference value. Next, the boundary values of the tunable matrix $Q_\mathrm{y}$ were tuned as $Q_\mathrm{y, L}$ = 100 and $Q_\mathrm{y, U}$ = 1000. The built-in integrator was penalized with the fixed penalty matrix $Q_\mathrm{x}$ = 1 and the control input with the fixed penalty matrix $R$ = 10. The prediction horizon $N$ was set to 20 control steps. The explicit model predictive controllers were constructed in MATLAB R2020b using the Multi-Parametric Toolbox 3~\cite{mpt_conf}. 
-	
-	%The initial temperature of the feed was laboratory temperature, i.e., 23$^{\circ}\mathrm{C}$. The temperature of the heating medium was 70$^{\circ}\mathrm{C}$.
-	
-	The designed explicit model predictive controllers were implemented to track a time-varying PWC reference. 
-	For the initial 200 seconds, the reference temperature was the steady-state value. After that, the reference changed its value twice upwards and twice downwards. The reference changes also acquired different sizes in order to examine the proposed tuning method as it is dependent on the size of the reference step change. Specifically, the reference temperature values were $T_{\mathrm{ref}}$ = 35$^{\circ}\mathrm{C}$, 45$^{\circ}\mathrm{C}$, 50$^{\circ}\mathrm{C}$, 45$^{\circ}\mathrm{C}$, 35$^{\circ}\mathrm{C}$.
-	
-	Besides the control design of two boundary explicit MPCs, it was necessary to keep the temperature of the heating medium constant. The heating medium was transported back to the heater after leaving the heat exchanger, i.e., the volume of the heating medium was recycled during the whole operation. The temperature of the heating medium was maintained on the value 70$^{\circ}\mathrm{C}$ with a simple proportional controller with proportional gain $P = 20$. The control input from the proportional controller was the electric power which could acquire the values in the range [$0-2$]\,kW and was also normalized to percentage.
-	
-	The control profiles generated for both considered boundary control setups are compared in Figure~\ref{fig:CV_boundaries} for the controlled variable, and in Figure~\ref{fig:MV_boundaries} for the control inputs. 
-	Note, the constructed explicit MPC controller computed control inputs to respect the constraints on the control inputs and they need not be truncated afterward.		
-	
-	\begin{figure}
-		\begin{center}
-			\includegraphics[width=0.8\textwidth]{images/HE}
-			\caption[Heat exchanger Armfield Process Plant Trainer PCT23]{Laboratory heat exchanger Armfield Process Plant Trainer PCT23: feed pump\,(1), heating medium pump\,(2), feed tanks\,(3), heater for heating medium\,(4), heat exchanger\,(5).}
-			\label{fig:HE}
-		\end{center}
-	\end{figure}
-	
-	\begin{figure}
-		\begin{center}
-			\includegraphics[width=\textwidth]{images/cl}
-			\caption[Closed-loop scheme]{Closed-loop scheme.}
-			\label{fig:CL}
-		\end{center}
-	\end{figure}
-	
-	\begin{figure}
-		\begin{center}
-			\includegraphics[width=0.8\textwidth]{images/CV_boundaries}
-			\caption{Controlled variable trajectory for two boundary controllers. The solid lines represent the controlled temperature $T$ and the dashed line represents the reference value $T_{\mathrm{ref}}$.}
-			\label{fig:CV_boundaries}
-		\end{center}
-	\end{figure}
-	
-	\begin{figure}
-		\begin{center}
-			\includegraphics[width=0.8\textwidth]{images/MV_boundaries}
-			\caption{Manipulated variable trajectory for two boundary controllers. The solid lines represent the voltage $U$ and the dashed lines represent the constraints.}
-			\label{fig:MV_boundaries}
-		\end{center}
-	\end{figure}
-	
-	The trajectories in Figure~\ref{fig:CV_boundaries} show the asymmetric nature of controlling the plant of plate heat exchange mainly when observing the overshoots and undershoots. When applying the control inputs associated with the lower bound $Q_\mathrm{y, L}$ in Eq.~\eqref{eq:mpc_problem_cost}, significant undershoots are present when tracking the reference downwards, i.e., when the reference change is negative. On the contrary, when implementing the controller associated with $Q_\mathrm{y, U}$ in Eq.~\eqref{eq:mpc_problem_cost}, the undershoots are negligible, but significant overshoots can be seen when tracking the reference upwards.
-	
-	These main experimental observations established the base for the strategy of self-tuning the penalty matrix $Q_\mathrm{y}$. The strategy follows the ideas summarized in Section~\ref{sec:methodology}. Therefore, utilizing the boundary controller with the penalty matrix $Q_\mathrm{y, L}$ is preferred when the reference changes upwards. On the contrary, the controller associated with $Q_\mathrm{y, U}$ is preferred for negative reference step changes. The splitting value of the tuning parameter was chosen in the middle of the interval, i.e., $\rho_{\mathrm{s}} = 0.5$. The remaining parameter that needed to be set was the maximal admissible size of the reference step change $\Delta_{\max}$, which was determined to $15\,^{\circ}\mathrm{C}$ as the investigated range of controlled temperature was [$35-50$]$^{\circ}\mathrm{C}$. 
-	
-	The control results of the self-tunable technique compared to the boundary controllers can be seen in Figure~\ref{fig:CV} for the controlled variable, and in Figure~\ref{fig:MV} for the manipulated variable. It can be seen that the tuned controller combined the benefits of the two boundary controllers. The overshoots and undershoots were reduced, as in the first half of control the penalty matrix $Q_\mathrm{y}$ acquired value from the first half of the penalty interval. When tracking the reference with negative step change, the penalty matrix acquired the values from the second half of the interval, i.e., closer to the upper bound $Q_\mathrm{y, U}$. 
-	The similarity with the boundary controllers can be seen also on the manipulated variable profiles. Note, the constraints on the input variable were satisfied as they were scaled using linear interpolation based on the boundary controllers which are constructed considering the input constraints. 
-	
-	\begin{figure}
-		\begin{center}
-			\includegraphics[width=0.8\textwidth]{images/CV}
-			\caption{Controlled variable trajectory for two boundary controllers and the tuned one. The solid lines represent the controlled temperature $T$ and the dashed line represents the reference value $^{\circ}\mathrm{C}$.}
-			\label{fig:CV}
-		\end{center}
-	\end{figure}
-	
-	\begin{figure}
-		\begin{center}
-			\includegraphics[width=0.8\textwidth]{images/MV}
-			\caption{Manipulated variable trajectory for two boundary controllers and the tuned one. The solid lines represent the voltage $U$ and the dashed lines represent the constraints.}
-			\label{fig:MV}
-		\end{center}
-	\end{figure}
-	
-	The control performance was also investigated quantitatively. Table~\ref{tab:control_performance} summarizes the evaluated control performance criteria computed for the two boundary controllers and the self-tuned controller. The control performance is evaluated for each reference step change separately. The considered quality criteria are: sum-of-squared based criterion -- integral squared error $ISE$, maximal overshoot/undershoot $\sigma_{\mathrm{max}}$ and the settling time $t_{\epsilon}$ for 5\,\%-neighbourhood of the reference temperature $T_{\mathrm{ref}}$. To provide better readability of the computed results in Table~\ref{tab:control_performance}, the best values, i.e., the minimum values, are emphasized using a bold font style. 
-	
-	%	\begin{table}[h!]
-		%		\begin{center}
-			%			\caption{Control performance criteria.}
-			%			\label{tab:control_performance}
-			%			\begin{tabular}{c|c|c|c|c|c} 
-				%				Reference step change & $Q_\mathrm{y}$ & $ISE$ [$^{\circ}\mathrm{C}^2$\,s] & $\sigma_{\mathrm{max}}$\,[\%] & $t_{\epsilon}$\,[s] & $V$\,[l] \\
-				%				\hline
-				%				\multirow{2}{*}{ 35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 714 & 33.50 & 16.5 & \textbf{2.12} \\
-				%				& 100 & 867 & 16.65 & 12.5 & 2.36 \\ 
-				%				& self-tuned & \textbf{678} & \textbf{15.19} & \textbf{9.5} & 2.38 \\ 
-				%				\hline
-				%				\multirow{2}{*}{ 45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C } & 1000 & 365 & 47.20 & \textbf{5} & \textbf{2.49} \\
-				%				& 100 & 606 & 23.25 & 26.5 & 3.19 \\ 
-				%				& self-tuned & \textbf{248} & \textbf{19.13} & 9.5 & 3.35 \\ 
-				%				\hline
-				%				\multirow{2}{*}{ 50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 245 & \textbf{18.92} & \textbf{6.5} & \textbf{2.00} \\
-				%				& 100 & 398 & 79.64 & 31 & \textbf{2.00} \\ 
-				%				& self-tuned & \textbf{186} & 24.59 & \textbf{6.5} & 2.10 \\ 
-				%				\hline
-				%				\multirow{2}{*}{ 45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C } & 1000 & 1024 & 18.43 & 22.5 & 0.94 \\
-				%				& 100 & 1402 & 41.87 & 90 & \textbf{0.93} \\ 
-				%				& self-tuned & \textbf{967} & \textbf{16.49} & \textbf{18.5} & 1.10  
-				%			\end{tabular}
-			%		\end{center}
-		%	\end{table}
-	
-	\begin{table}[h!]
-		\begin{center}
-			\caption{Control performance criteria.}
-			\label{tab:control_performance}
-			\begin{tabular}{c|c|c|c|c} 
-				Reference step change & $Q_\mathrm{y}$ & $ISE$ [$^{\circ}\mathrm{C}^2$\,s] & $\sigma_{\mathrm{max}}$\,[\%] & $t_{\epsilon}$\,[s]  \\
-				\hline
-				\multirow{2}{*}{ 35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 714 & 33.50 & 16.5 \\
-				& 100 & 867 & 16.65 & 12.5 \\ 
-				& self-tuned & \textbf{678} & \textbf{15.19} & \textbf{9.5}  \\ 
-				\hline
-				\multirow{2}{*}{ 45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C } & 1000 & 365 & 47.20 & \textbf{5} \\
-				& 100 & 606 & 23.25 & 26.5  \\ 
-				& self-tuned & \textbf{248} & \textbf{19.13} & 9.5  \\ 
-				\hline
-				\multirow{2}{*}{ 50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 245 & \textbf{18.92} & \textbf{6.5}  \\
-				& 100 & 398 & 79.64 & 31  \\ 
-				& self-tuned & \textbf{186} & 24.59 & \textbf{6.5}  \\ 
-				\hline
-				\multirow{2}{*}{ 45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C } & 1000 & 1024 & 18.43 & 22.5  \\
-				& 100 & 1402 & 41.87 & 90  \\ 
-				& self-tuned & \textbf{967} & \textbf{16.49} & \textbf{18.5}   
-			\end{tabular}
-		\end{center}
-	\end{table}
-	
-	As can be seen in Table~\ref{tab:control_performance}, the real-time self-tuning of the explicit MPC controller helped to improve two to three criteria when tracking each reference value. 	
-	The relative improvement in the percentage, denoted by $\delta$, of using the self-tunable controller computed subject to the second best setup is summarized in Table~\ref{tab:improvement} for each reference step change separately. The negative numbers represent deterioration compared to the best controller setup in the corresponding reference tracking. 
-	
-	\begin{table}[h!]
-		\begin{center}
-			\caption{Relative improvement of the control performance using the self-tunable explicit MPC controller.}
-			\label{tab:improvement}
-			\begin{tabular}{c|c|c|c} 
-				Reference step change & $\delta ISE$\,[\%] & $\delta \sigma_{\mathrm{max}}$\,[\%] & $\delta t_{\epsilon}$\,[\%]  \\
-				\hline
-				35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C &  5 &  9 & 24 \\ 
-				% \hline
-				45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C & 32 & 18 &$-90$  \\ 
-				% \hline
-				50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C & 24 &$-30$& 0 \\ 
-				% \hline
-				45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C &  6 & 11 & 18   
-			\end{tabular}
-		\end{center}
-	\end{table}
-	%\begin{table}[h!]
-		%\begin{center}
-			%\caption{Relative improvement of the control performance using the self-tunable explicit MPC controller.}
-			%\label{tab:improvement}
-			%\begin{tabular}{c|c|c|c|c} 
-				%Reference step change & $\Delta ISE$\,[\%] & $\Delta \sigma_{\mathrm{max}}$\,[\%] & $\Delta t_{\epsilon}$\,[\%] & $\Delta V$\,[\%] \\
-				%\hline
-				%35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C & 5.04 & 8.77 & 24.00 & -12.26 \\ 
-				%\hline
-				%45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C & 32.05 & 17.72 & -90.00 & -34.54 \\ 
-				%\hline
-				%45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C & 24.08 & -29.97 & 0 & -4.48 \\ 
-				%\hline
-				%45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C & 5.57 & 10.53 & 17.78 & -18.28  
-				%\end{tabular}
-			%\end{center}
-		%\end{table}
-	
-	
-	Compared to the considered non-self-tunable controllers, the control trajectories and the evaluated quality criteria confirmed the improved control performance for the reference tracking control problem of the heat exchanger with the non-linear and asymmetric behavior. Implementing a self-tunable explicit MPC controller leads to improved control performance in the most analyzed quality criteria, see Table~\ref{tab:improvement}.	 
-	The squared-error-based criterion ($ISE$) improved in every control scenario within a range $[5-32]$\,\%, the maximal overshoots/undershoots $\sigma_{\mathrm{max}}$ reduced up to 18\,\%, and the settling time $t_{\epsilon}$ decreased up to 24\,\%.  
-	
-	To analyze the control more objectively, energy consumption was also investigated. More specifically, the power used to heat the heating medium was measured and summarized for the whole control but for every controller setup, respectively. The energy consumption $E$ necessary for every control as well as the relative improvement subject to every boundary controller can be seen in Table~\ref{tab:energy}.
-	
-	\begin{table}[h!]
-		\begin{center}
-			\caption{Energy consumption evaluation.}
-			\label{tab:energy}
-			\begin{tabular}{c|c|c} 
-				$Q_\mathrm{y}$ & E\,[kJ] & $\delta E\,[\%]$   \\
-				\hline
-				1000 &  883 & -4\\ 
-				% \hline
-				100 & 938 & 2 \\ 
-				% \hline
-				self-tuned & 921 & -   
-			\end{tabular}
-		\end{center}
-	\end{table}
-	
-	It can be seen in Table~\ref{tab:energy}, that utilizing the self-tuned controller leads to energy consumption which acquires value between the energy consumptions associated with the boundary controllers. Although it is not the minimum one, the energy is still saved compared to the boundary controller with $Q_\mathrm{y} = 100$. Note, though the controller with $Q_\mathrm{y} = 1000$ leads to minimum energy consumption, using this single non-tuned controller does not lead to such control performance improvement.
-	
-	In general, utilizing the proposed controller with a scalable aggressiveness according to the operating conditions leads to higher accuracy (lower $ISE$), lower value of the overshoots (lower $\sigma_{\mathrm{max}}$), and faster achieving the reference value (lower $t_{\epsilon}$), while the control does not suffer in the terms of energy consumption. 
-	
-	
-	
-	%	Together with the reduced overshoots and settling times, the achieved improvements in the control performance enable non-negligible energy savings when the precision and the operating time ensure the product with the required properties.  
-	
-	\section{Conclusions}
-	\label{sec:conclusion}
-	
+\end{subequations}
+considering the sampling time $T_\mathrm{s}$ = 1\,s. 
+To respect the physical limitations of the operating conditions, the constraints are considered in the terms of control inputs
+\begin{eqnarray}
+	\label{eq:u_const}
+	-15\% \le u \le 65\%,
+\end{eqnarray}
+where the variable $u$ represents the control inputs in the deviation form. The values of feed temperature and voltage of the heating medium pump corresponding to zero steady states are respectively $T^\mathrm{s}$~=~35 $^{\circ}\mathrm{C}$ and $U^\mathrm{s}$~=~35\%. Therefore, the physical constraints on the manipulated variable are actually
+\begin{eqnarray}
+	\label{eq:U_const}
+	20\% \le U \le 100\%.
+\end{eqnarray}	
+As the controlled system is naturally stable even if the maximal or minimal value of the manipulated variable is constantly applied, the constraints on the controlled variable in Eq.~\eqref{eq:mpc_problem_state_constraints} can be omitted. Another motivation to include the output/state constraints would be the necessity to retain the controlled variable in some comfort range, specified by operation requirements. As it was not the aim of the case study, this reason also leads to omitting the constraints in Eq.~\eqref{eq:mpc_problem_state_constraints} to fully investigate the control performance of the pure self-tuning method.		 
+
+The penalty matrices of the problem Eq.~\eqref{eq:mpc_problem} were systematically tuned and the corresponding control was implemented on the laboratory heat exchanger for each of the considered explicit MPC setups. 
+First, the aim of tuning was to determine, which penalty matrix is the most suitable for real-time tuning. Based on the set of experimentally collected data, the most significant effect on the control trajectories had tuning the penalty matrix $Q_\mathrm{y}$, while still preserving a satisfactory control performance, i.e., without steady-state control error and significant oscillations around the reference value. Next, the boundary values of the tunable matrix $Q_\mathrm{y}$ were tuned as $Q_\mathrm{y, L}$ = 100 and $Q_\mathrm{y, U}$ = 1000. The built-in integrator was penalized with the fixed penalty matrix $Q_\mathrm{x}$ = 1 and the control input with the fixed penalty matrix $R$ = 10. The prediction horizon $N$ was set to 20 control steps. The explicit model predictive controllers were constructed in MATLAB R2020b using the Multi-Parametric Toolbox 3~\cite{mpt_conf}. 
+
+%The initial temperature of the feed was laboratory temperature, i.e., 23$^{\circ}\mathrm{C}$. The temperature of the heating medium was 70$^{\circ}\mathrm{C}$.
+
+The designed explicit model predictive controllers were implemented to track a time-varying PWC reference. 
+For the initial 200 seconds, the reference temperature was the steady-state value. After that, the reference changed its value twice upwards and twice downwards. The reference changes also acquired different sizes in order to examine the proposed tuning method as it is dependent on the size of the reference step change. Specifically, the reference temperature values were $T_{\mathrm{ref}}$ = 35$^{\circ}\mathrm{C}$, 45$^{\circ}\mathrm{C}$, 50$^{\circ}\mathrm{C}$, 45$^{\circ}\mathrm{C}$, 35$^{\circ}\mathrm{C}$.
+
+Besides the control design of two boundary explicit MPCs, it was necessary to keep the temperature of the heating medium constant. The heating medium was transported back to the heater after leaving the heat exchanger, i.e., the volume of the heating medium was recycled during the whole operation. The temperature of the heating medium was maintained on the value 70$^{\circ}\mathrm{C}$ with a simple proportional controller with proportional gain $P = 20$. The control input from the proportional controller was the electric power which could acquire the values in the range [$0-2$]\,kW and was also normalized to percentage.
+
+The control profiles generated for both considered boundary control setups are compared in Figure~\ref{fig:CV_boundaries} for the controlled variable, and in Figure~\ref{fig:MV_boundaries} for the control inputs. 
+Note, the constructed explicit MPC controller computed control inputs to respect the constraints on the control inputs and they need not be truncated afterward.		
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{images/HE}
+		\caption[Heat exchanger Armfield Process Plant Trainer PCT23]{Laboratory heat exchanger Armfield Process Plant Trainer PCT23: feed pump\,(1), heating medium pump\,(2), feed tanks\,(3), heater for heating medium\,(4), heat exchanger\,(5).}
+		\label{fig:HE}
+	\end{center}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=\textwidth]{images/cl}
+		\caption[Closed-loop scheme]{Closed-loop scheme.}
+		\label{fig:CL}
+	\end{center}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{images/CV_boundaries}
+		\caption{Controlled variable trajectory for two boundary controllers. The solid lines represent the controlled temperature $T$ and the dashed line represents the reference value $T_{\mathrm{ref}}$.}
+		\label{fig:CV_boundaries}
+	\end{center}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{images/MV_boundaries}
+		\caption{Manipulated variable trajectory for two boundary controllers. The solid lines represent the voltage $U$ and the dashed lines represent the constraints.}
+		\label{fig:MV_boundaries}
+	\end{center}
+\end{figure}
+
+The trajectories in Figure~\ref{fig:CV_boundaries} show the asymmetric nature of controlling the plant of plate heat exchange mainly when observing the overshoots and undershoots. When applying the control inputs associated with the lower bound $Q_\mathrm{y, L}$ in Eq.~\eqref{eq:mpc_problem_cost}, significant undershoots are present when tracking the reference downwards, i.e., when the reference change is negative. On the contrary, when implementing the controller associated with $Q_\mathrm{y, U}$ in Eq.~\eqref{eq:mpc_problem_cost}, the undershoots are negligible, but significant overshoots can be seen when tracking the reference upwards.
+
+These main experimental observations established the base for the strategy of self-tuning the penalty matrix $Q_\mathrm{y}$. The strategy follows the ideas summarized in Section~\ref{sec:methodology}. Therefore, utilizing the boundary controller with the penalty matrix $Q_\mathrm{y, L}$ is preferred when the reference changes upwards. On the contrary, the controller associated with $Q_\mathrm{y, U}$ is preferred for negative reference step changes. The splitting value of the tuning parameter was chosen in the middle of the interval, i.e., $\rho_{\mathrm{s}} = 0.5$. The remaining parameter that needed to be set was the maximal admissible size of the reference step change $\Delta_{\max}$, which was determined to $15\,^{\circ}\mathrm{C}$ as the investigated range of controlled temperature was [$35-50$]$^{\circ}\mathrm{C}$. 
+
+The control results of the self-tunable technique compared to the boundary controllers can be seen in Figure~\ref{fig:CV} for the controlled variable, and in Figure~\ref{fig:MV} for the manipulated variable. It can be seen that the tuned controller combined the benefits of the two boundary controllers. The overshoots and undershoots were reduced, as in the first half of control the penalty matrix $Q_\mathrm{y}$ acquired value from the first half of the penalty interval. When tracking the reference with negative step change, the penalty matrix acquired the values from the second half of the interval, i.e., closer to the upper bound $Q_\mathrm{y, U}$. 
+The similarity with the boundary controllers can be seen also on the manipulated variable profiles. Note, the constraints on the input variable were satisfied as they were scaled using linear interpolation based on the boundary controllers which are constructed considering the input constraints. 
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{images/CV}
+		\caption{Controlled variable trajectory for two boundary controllers and the tuned one. The solid lines represent the controlled temperature $T$ and the dashed line represents the reference value $^{\circ}\mathrm{C}$.}
+		\label{fig:CV}
+	\end{center}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{images/MV}
+		\caption{Manipulated variable trajectory for two boundary controllers and the tuned one. The solid lines represent the voltage $U$ and the dashed lines represent the constraints.}
+		\label{fig:MV}
+	\end{center}
+\end{figure}
+
+The control performance was also investigated quantitatively. Table~\ref{tab:control_performance} summarizes the evaluated control performance criteria computed for the two boundary controllers and the self-tuned controller. The control performance is evaluated for each reference step change separately. The considered quality criteria are: sum-of-squared based criterion -- integral squared error $ISE$, maximal overshoot/undershoot $\sigma_{\mathrm{max}}$ and the settling time $t_{\epsilon}$ for 5\,\%-neighbourhood of the reference temperature $T_{\mathrm{ref}}$. To provide better readability of the computed results in Table~\ref{tab:control_performance}, the best values, i.e., the minimum values, are emphasized using a bold font style. 
+
+%	\begin{table}[h!]
+%		\begin{center}
+%			\caption{Control performance criteria.}
+%			\label{tab:control_performance}
+%			\begin{tabular}{c|c|c|c|c|c} 
+%				Reference step change & $Q_\mathrm{y}$ & $ISE$ [$^{\circ}\mathrm{C}^2$\,s] & $\sigma_{\mathrm{max}}$\,[\%] & $t_{\epsilon}$\,[s] & $V$\,[l] \\
+%				\hline
+%				\multirow{2}{*}{ 35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 714 & 33.50 & 16.5 & \textbf{2.12} \\
+%				& 100 & 867 & 16.65 & 12.5 & 2.36 \\ 
+%				& self-tuned & \textbf{678} & \textbf{15.19} & \textbf{9.5} & 2.38 \\ 
+%				\hline
+%				\multirow{2}{*}{ 45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C } & 1000 & 365 & 47.20 & \textbf{5} & \textbf{2.49} \\
+%				& 100 & 606 & 23.25 & 26.5 & 3.19 \\ 
+%				& self-tuned & \textbf{248} & \textbf{19.13} & 9.5 & 3.35 \\ 
+%				\hline
+%				\multirow{2}{*}{ 50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 245 & \textbf{18.92} & \textbf{6.5} & \textbf{2.00} \\
+%				& 100 & 398 & 79.64 & 31 & \textbf{2.00} \\ 
+%				& self-tuned & \textbf{186} & 24.59 & \textbf{6.5} & 2.10 \\ 
+%				\hline
+%				\multirow{2}{*}{ 45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C } & 1000 & 1024 & 18.43 & 22.5 & 0.94 \\
+%				& 100 & 1402 & 41.87 & 90 & \textbf{0.93} \\ 
+%				& self-tuned & \textbf{967} & \textbf{16.49} & \textbf{18.5} & 1.10  
+%			\end{tabular}
+%		\end{center}
+%	\end{table}
+
+\begin{table}[h!]
+	\begin{center}
+		\caption{Control performance criteria.}
+		\label{tab:control_performance}
+		\begin{tabular}{c|c|c|c|c} 
+			Reference step change & $Q_\mathrm{y}$ & $ISE$ [$^{\circ}\mathrm{C}^2$\,s] & $\sigma_{\mathrm{max}}$\,[\%] & $t_{\epsilon}$\,[s]  \\
+			\hline
+			\multirow{2}{*}{ 35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 714 & 33.50 & 16.5 \\
+			& 100 & 867 & 16.65 & 12.5 \\ 
+			& self-tuned & \textbf{678} & \textbf{15.19} & \textbf{9.5}  \\ 
+			\hline
+			\multirow{2}{*}{ 45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C } & 1000 & 365 & 47.20 & \textbf{5} \\
+			& 100 & 606 & 23.25 & 26.5  \\ 
+			& self-tuned & \textbf{248} & \textbf{19.13} & 9.5  \\ 
+			\hline
+			\multirow{2}{*}{ 50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 245 & \textbf{18.92} & \textbf{6.5}  \\
+			& 100 & 398 & 79.64 & 31  \\ 
+			& self-tuned & \textbf{186} & 24.59 & \textbf{6.5}  \\ 
+			\hline
+			\multirow{2}{*}{ 45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C } & 1000 & 1024 & 18.43 & 22.5  \\
+			& 100 & 1402 & 41.87 & 90  \\ 
+			& self-tuned & \textbf{967} & \textbf{16.49} & \textbf{18.5}   
+		\end{tabular}
+	\end{center}
+\end{table}
+
+As can be seen in Table~\ref{tab:control_performance}, the real-time self-tuning of the explicit MPC controller helped to improve two to three criteria when tracking each reference value. 	
+The relative improvement in the percentage, denoted by $\delta$, of using the self-tunable controller computed subject to the second best setup is summarized in Table~\ref{tab:improvement} for each reference step change separately. The negative numbers represent deterioration compared to the best controller setup in the corresponding reference tracking. 
+
+\begin{table}[h!]
+	\begin{center}
+		\caption{Relative improvement of the control performance using the self-tunable explicit MPC controller.}
+		\label{tab:improvement}
+		\begin{tabular}{c|c|c|c} 
+			Reference step change & $\delta ISE$\,[\%] & $\delta \sigma_{\mathrm{max}}$\,[\%] & $\delta t_{\epsilon}$\,[\%]  \\
+			\hline
+			35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C &  5 &  9 & 24 \\ 
+			% \hline
+			45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C & 32 & 18 &$-90$  \\ 
+			% \hline
+			50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C & 24 &$-30$& 0 \\ 
+			% \hline
+			45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C &  6 & 11 & 18   
+		\end{tabular}
+	\end{center}
+\end{table}
+%\begin{table}[h!]
+%\begin{center}
+%\caption{Relative improvement of the control performance using the self-tunable explicit MPC controller.}
+%\label{tab:improvement}
+%\begin{tabular}{c|c|c|c|c} 
+%Reference step change & $\Delta ISE$\,[\%] & $\Delta \sigma_{\mathrm{max}}$\,[\%] & $\Delta t_{\epsilon}$\,[\%] & $\Delta V$\,[\%] \\
+%\hline
+%35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C & 5.04 & 8.77 & 24.00 & -12.26 \\ 
+%\hline
+%45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C & 32.05 & 17.72 & -90.00 & -34.54 \\ 
+%\hline
+%45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C & 24.08 & -29.97 & 0 & -4.48 \\ 
+%\hline
+%45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C & 5.57 & 10.53 & 17.78 & -18.28  
+%\end{tabular}
+%\end{center}
+%\end{table}
+
+
+Compared to the considered non-self-tunable controllers, the control trajectories and the evaluated quality criteria confirmed the improved control performance for the reference tracking control problem of the heat exchanger with the non-linear and asymmetric behavior. Implementing a self-tunable explicit MPC controller leads to improved control performance in the most analyzed quality criteria, see Table~\ref{tab:improvement}.	 
+The squared-error-based criterion ($ISE$) improved in every control scenario within a range $[5-32]$\,\%, the maximal overshoots/undershoots $\sigma_{\mathrm{max}}$ reduced up to 18\,\%, and the settling time $t_{\epsilon}$ decreased up to 24\,\%.  
+
+To analyze the control more objectively, energy consumption was also investigated. More specifically, the power used to heat the heating medium was measured and summarized for the whole control but for every controller setup, respectively. The energy consumption $E$ necessary for every control can be seen in Table~\ref{tab:energy}.
+
+\begin{table}[h!]
+	\begin{center}
+		\caption{Energy consumption evaluation.}
+		\label{tab:energy}
+		\begin{tabular}{c|c} 
+			$Q_\mathrm{y}$ & E\,[kJ]   \\
+			\hline
+			1000 &  883  \\ 
+			% \hline
+			100 & 938   \\ 
+			% \hline
+			self-tuned & 921   
+		\end{tabular}
+	\end{center}
+\end{table}
+
+It can be seen in Table~\ref{tab:energy}, that utilizing the self-tuned controller leads to energy consumption which acquires value between the energy consumptions associated with the boundary controllers. Although it is not the minimum one, the energy is still saved compared to the boundary controller with $Q_\mathrm{y} = 100$. Note, though the controller with $Q_\mathrm{y} = 1000$ leads to minimum energy consumption, using this single non-tuned controller does not lead to such control performance improvement.
+
+In general, utilizing the proposed controller with a scalable aggressiveness according to the operating conditions leads to higher accuracy (lower $ISE$), lower value of the overshoots (lower $\sigma_{\mathrm{max}}$), and faster achieving the reference value (lower $t_{\epsilon}$), while the control does not suffer in the terms of energy consumption. 
+
+
+
+%	Together with the reduced overshoots and settling times, the achieved improvements in the control performance enable non-negligible energy savings when the precision and the operating time ensure the product with the required properties.  
+
+\section{Conclusions}
+\label{sec:conclusion}
+
 	This paper deals with the experimental implementation of the self-tunable approximated explicit model predictive control and provides a strategy for an effective self-tuning controller design. Based on the current reference value, the tuning parameter is scaled using linear interpolation. The previously published work related to the self-tunable explicit MPC suggested tuning based on the distance of the reference value from the system steady-state value. This paper presents a novel idea of tuning based on the size of reference step change. The self-tuning algorithm aims to compensate for the nonlinear behavior of the controlled system. The self-tuning parameter is updated when the reference changes. It is calculated as the ratio between the size of the reference change and the maximal possible size of the reference change, which is specified before operation. 
-	Another novel contribution addresses the challenging control problem of asymmetric system behavior by splitting the interval of tuning parameter into two ranges, while both intervals are assigned to different operating conditions. The proposed method is implemented on a laboratory heat exchanger with nonlinear and asymmetric behavior. The asymmetry makes the plant a suitable candidate for splitting the interval of the tuning parameter. The decision criterium is negativity or positivity of reference change. When the reference changed upwards, the control input was tuned in the first part of the interval and approached the boundary controller associated with the lower bound on the penalty matrix. On the contrary, when the reference changed downwards, the control input was tuned to approach the control input from the boundary controller with the upper bound on the penalty matrix. To investigate the control results properly, the control performance was evaluated also quantitatively. Compared to the conventional control strategy handling just a single controller, the self-tunable control approach decreased the integral squared control error up to 32\%, maximal overshoots/undershoots up to 18\%, and settling time up to 24\%. In addition, the energy consumption corresponding to every controller was evaluated as well. The value of consumed energy was between the two boundary controllers, i.e., the energy consumption did not deteriorate in general. With saving the energy compared to one of the boundary controllers, the control performance was significantly improved.  
+	Another novel contribution addresses the challenging control problem of asymmetric system behavior by splitting the interval of tuning parameter into two ranges, while both intervals are assigned to different operating conditions. The proposed method is implemented on a laboratory heat exchanger with nonlinear and asymmetric behavior. The asymmetry makes the plant a suitable candidate for splitting the interval of the tuning parameter. The decision criterium is negativity or positivity of reference change. When the reference changed upwards, the control input was tuned in the first part of the interval and approached the boundary controller associated with the lower bound on the penalty matrix. On the contrary, when the reference changed downwards, the control input was tuned to approach the control input from the boundary controller with the upper bound on the penalty matrix. To investigate the control results properly, the control performance was evaluated also quantitatively. Compared to the conventional control strategy handling just a single controller, the self-tunable control approach decreased the integral squared control error, maximal overshoots/undershoots, and settling time. In addition, the energy consumption corresponding to every controller was evaluated as well. The value of consumed energy was between the two boundary controllers, i.e., the energy consumption did not deteriorate in general. With saving energy compared to one of the boundary controllers, the control performance was significantly improved. 
 	
 	\section*{Acknowledgments}
 	
@@ -705,7 +708,7 @@
 	\section*{Nomenclature}
 	
 	\subsection*{Symbols}
-	%	\begin{center}
+%	\begin{center}
 		\begin{tabular}{ l l }
 			$A$ & system state matrix \\
 			$\widetilde{A}$ & augmented system state matrix \\
@@ -742,11 +745,11 @@
 			$T^{\mathrm{s}}$ & steady state of temperature, $^{\circ}\mathrm{C}$ \\
 			$u$ & control inputs \\
 		\end{tabular}
-		%	\end{center}
+%	\end{center}
 	
 	%% Page - break
 	
-	%	\begin{center}
+%	\begin{center}
 		\begin{tabular}{ l l }
 			$u_{\mathrm{L}}$ & control inputs associated with the lower boundary controller\\
 			$u_{\mathrm{U}}$ & control inputs associated with the upper boundary controller\\
@@ -763,10 +766,10 @@
 			$\mathcal{Y}$ & set of system outputs \\
 			\textit{0} & zero matrix
 		\end{tabular}
-		%	\end{center}
+%	\end{center}
 	
 	\subsection{Greek letters}
-	%	\begin{center}
+%	\begin{center}
 		\begin{tabular}{ l l }
 			$\delta$ & relative improvement, \% \\
 			$\Delta_\mathrm{max}$ & maximal size of the reference change, $^{\circ}\mathrm{C}$  \\
@@ -778,10 +781,10 @@
 			$\theta$ & parameter of optimization problem \\
 			$\Theta$ & set of parameter values
 		\end{tabular}
-		%	\end{center}
+%	\end{center}
 	
 	\subsection*{Abbreviations}
-	%	\begin{center}
+%	\begin{center}
 		\begin{tabular}{ l l }
 			ISE  & integral squared error \\
 			LTI  & linear time-invariant (system) \\
@@ -794,7 +797,7 @@
 			QP   & quadratic programming (problem) \\
 			SISO & single-input and single-output (system) \\
 		\end{tabular}
-		%	\end{center}
+%	\end{center}
 	
 	%% The Appendices part is started with the command \appendix;
 	%% appendix sections are then done as normal sections
