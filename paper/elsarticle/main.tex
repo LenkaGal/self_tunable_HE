@@ -96,7 +96,7 @@
 		%%% \fntext[label3]{}
 		%
 		%\title{Self-tunable approximated explicit MPC: Heat exchanger implementation and analysis}
-		%%\title{Self-tunable approximated explicit MPC: Implementation on a heat exchanger with an asymmetric behaviour}
+		%%\title{Self-tunable approximated explicit MPC: Implementation on a heat exchanger with an asymmetric behavior}
 		%
 		%%% use optional labels to link authors explicitly to addresses:
 		%%% \author[label1,label2]{}
@@ -115,8 +115,8 @@
 			%%%             country={}}
 		%
 		%\author{Lenka Galčíková}
-		%\author{Juraj Oravec}
 		%\author{Petronela Belková}
+		%\author{Juraj Oravec}
 		%
 		%\affiliation{organization={Slovak University of Technology in Bratislava, Faculty of Chemical and Food Technology, Institute of Information Engineering, Automation, and Mathematics,},%Department and Organization
 			%            addressline={Radlinského 9}, 
@@ -141,7 +141,7 @@
 		%\begin{highlights}
 			%% 3-5 highlights, every one should not exceed 85 characters including spaces
 			%\item Self-tunable control technique does not need any intervention during control
-			%\item Tuning based on the operating conditions compensates the nonlinear plant behaviour
+			%\item Tuning based on the operating conditions compensates for the nonlinear plant behavior
 			%\item Implementation of the proposed tuning method on a laboratory heat exchanger 
 			%\item Control performance improved compared to utilizing only one explicit MPC
 			%\end{highlights}
@@ -367,9 +367,8 @@
 	%% TODO: DEF RULE/CONDITION GAMMA
 	\begin{definition}[Decision function]
 		\label{def:gamma}
-		For a given interval of tuning parameter $\rho$, $0 \leq \rho \leq 1$, let $\rho_{\mathrm{s}}$, $0 < \rho_{\mathrm{s}} < 1$ be a boundary value splitting the interval into two parts. Let $\gamma: \mathbb{R} \rightarrow \mathbb{R}$ be an arbitrary function such that $0 \leq \gamma \leq 1$ holds. Then the decision function $\gamma$ is constructed to assign its value either $\gamma \leq \rho_{\mathrm{s}}$ or $\gamma > \rho_{\mathrm{s}}$.
+		For a given interval of tuning parameter $\rho$, $0 \leq \rho \leq 1$, let $\rho_{\mathrm{s}}$, $0 < \rho_{\mathrm{s}} < 1$ be a boundary value splitting the interval into two parts. Let $\gamma: \mathbb{R} \rightarrow \mathbb{R}$ be an arbitrary function such that $0 \leq \gamma \leq 1$ holds. Then the decision function $\gamma$ is constructed to assign its value either $\gamma \leq \rho_{\mathrm{s}}$ or $\gamma \ge \rho_{\mathrm{s}}$.
 	\end{definition}
-	\textcolor{red}{TODO: replace in the line above: $\gamma \ge \rho_{\mathrm{s}}$?}\\
 	Various decision functions $\gamma$ can be considered. In this work, the decision functions according to Eq.~\eqref{eq:rho_max} and Eq.~\eqref{eq:rho_delta_ref} are considered, while Eq.~\eqref{eq:rho_delta_ref} was implemented in the experimental case study.
 	
 	\begin{definition}[Scaling tuning parameter]
@@ -459,7 +458,7 @@
 
 	\begin{figure}
 	\begin{center}
-		\includegraphics[width=\textwidth]{images/CL/tuning}
+		\includegraphics[width=\textwidth]{images/tuning}
 		\caption[Self-tuning scheme]{Self-tuning scheme.}
 		\label{fig:tuning}
 	\end{center}
@@ -528,7 +527,7 @@ Note, the constructed explicit MPC controller computed control inputs to respect
 
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=\textwidth]{images/CL/CL}
+		\includegraphics[width=\textwidth]{images/cl}
 		\caption[Closed-loop scheme]{Closed-loop scheme.}
 		\label{fig:CL}
 	\end{center}
