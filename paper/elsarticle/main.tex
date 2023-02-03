@@ -467,7 +467,7 @@
 	
 	In this section, the results of the proposed self-tuning method are analyzed by an experimental implementation. The self-tuning strategy utilizes tuning parameter calculation based on the size of reference change (Section~\ref{sec:self_tunable_delta_ref}) and the scaling of tuning parameter based on splitting the interval of the parameter and assigning the interval parts to specific operating conditions (Section~\ref{sec:self_tunable_rho_scaling}).
 	
-	The plant on which the control was implemented and analyzed is a laboratory-scaled counter-current liquid-to-liquid plate heat exchanger Armfield Process Plant Trainer PCT23~\cite{pct23}, see Figure~\ref{fig:HE}. The heat exchanger is 90 mm wide, 103 mm long, and 160 mm high. The heat exchange is performed between the cold feed (water) and the hot medium (water). The cold feed as well as the heating medium are transported to the heat exchanger by two peristaltic pumps with flexible tubing from silicon rubber. The flow rate of the feed is constant, while the aim of control is to track the reference value of the feed temperature. Therefore, the controlled variable is the feed temperature $T$ at the outlet of the heat exchanger. The temperature of the heated feed in the outlet stream was measured by the type K thermocouple. The associated manipulated variable is the voltage $U$ corresponding to the power of the pump feeding the heat exchanger by the hot medium. The voltage is within the range of [$0-5$]\,V normalized into the relative values in percentage. For further technical specifications of the laboratory heat exchanger, the reader is referred to~\cite{pct23}. As heat exchange is a nonlinear and asymmetric process~\cite{Liptak}, this heat exchanger represents a suitable candidate for the presented controller tuning strategy. The corresponding simplified closed-loop scheme can be seen in Figure~\ref{fig:CL}. Note, the ,,Self-tuning" block corresponds to the more detailed scheme in Figure~\ref{fig:tuning}.  
+	The plant on which the control was implemented and analyzed is a laboratory-scaled counter-current liquid-to-liquid plate heat exchanger Armfield Process Plant Trainer PCT23~\cite{pct23}, see Figure~\ref{fig:HE}. The heat exchanger is 90\,mm wide, 103\,mm long, and 160\,mm high. The heat exchange is performed between the cold feed (water) and the hot medium (water). The cold feed as well as the heating medium are transported to the heat exchanger by two peristaltic pumps with flexible tubing from silicon rubber. The flow rate of the feed is constant, while the aim of control is to track the reference value of the feed temperature. Therefore, the controlled variable is the feed temperature $T$ at the outlet of the heat exchanger. The temperature of the heated feed in the outlet stream was measured by the type K thermocouple. The associated manipulated variable is the voltage $U$ corresponding to the power of the pump feeding the heat exchanger by the hot medium. The voltage is within the range of [$0-5$]\,V normalized into the relative values in percentage. For further technical specifications of the laboratory heat exchanger, the reader is referred to~\cite{pct23}. As heat exchange is a nonlinear and asymmetric process~\cite{Liptak}, this heat exchanger represents a suitable candidate for the presented controller tuning strategy. The corresponding illustrative scheme of the implemented closed-loop control setup is in Figure~\ref{fig:CL}, where the ``self-tuning'' block substitutes the more detailed scheme in Figure~\ref{fig:tuning}.  
 	
 	The system was identified by experimental identification. More specifically, several step responses were obtained in the whole range of the input variable steps. Every step response was identified as a first-order system and the nominal transfer function was calculated. Finally, the transfer function was converted to the state-space model. The matrices of the discrete-time state-space model of the plant are
 	\begin{subequations}
@@ -502,7 +502,7 @@
 	As the controlled system is naturally stable even if the maximal or minimal value of the manipulated variable is constantly applied, the constraints on the controlled variable in Eq.~\eqref{eq:mpc_problem_state_constraints} can be omitted. Another motivation to include the output/state constraints would be the necessity to retain the controlled variable in some comfort range, specified by operation requirements. As it was not the aim of the case study, this reason also leads to omitting the constraints in Eq.~\eqref{eq:mpc_problem_state_constraints} to fully investigate the control performance of the pure self-tuning method.		 
 	
 	The penalty matrices of the problem Eq.~\eqref{eq:mpc_problem} were systematically tuned and the corresponding control was implemented on the laboratory heat exchanger for each of the considered explicit MPC setups. 
-	First, the aim of tuning was to determine, which penalty matrix is the most suitable for real-time tuning. Based on the set of experimentally collected data, the most significant effect on the control trajectories had tuning the penalty matrix $Q_\mathrm{y}$, while still preserving a satisfactory control performance, i.e., without steady-state control error and significant oscillations around the reference value. Next, the boundary values of the tunable matrix $Q_\mathrm{y}$ were tuned as $Q_\mathrm{y, L}$ = 100 and $Q_\mathrm{y, U}$ = 1000. The built-in integrator was penalized with the fixed penalty matrix $Q_\mathrm{x}$ = 1 and the control input with the fixed penalty matrix $R$ = 10. The prediction horizon $N$ was set to 20 control steps. The explicit model predictive controllers were constructed in MATLAB R2020b using the Multi-Parametric Toolbox 3~\cite{mpt_conf}. 
+	First, the aim of tuning was to determine, which penalty matrix is the most suitable for real-time tuning. Based on the set of experimentally collected data, the most significant effect on the control trajectories had tuning the penalty matrix $Q_\mathrm{y}$, while still preserving a satisfactory control performance, i.e., without steady-state control error and significant oscillations around the reference value. Next, the boundary values of the tunable matrix $Q_\mathrm{y}$ were tuned as $Q_\mathrm{y, L}$ = 100 and $Q_\mathrm{y, U}$ = 1\,000. The built-in integrator was penalized with the fixed penalty matrix $Q_\mathrm{x}$ = 1 and the control input with the fixed penalty matrix $R$ = 10. The prediction horizon $N$ was set to 20 control steps. The explicit model predictive controllers were constructed in MATLAB R2020b using the Multi-Parametric Toolbox 3~\cite{mpt_conf}. 
 	
 	%The initial temperature of the feed was laboratory temperature, i.e., 23$^{\circ}\mathrm{C}$. The temperature of the heating medium was 70$^{\circ}\mathrm{C}$.
 	
@@ -525,7 +525,7 @@
 	\begin{figure}
 		\begin{center}
 			\includegraphics[width=\textwidth]{images/cl}
-			\caption[Closed-loop scheme]{Closed-loop scheme.}
+			\caption[Scheme of the implemented closed-loop control setup.]{Closed-loop scheme.}
 			\label{fig:CL}
 		\end{center}
 	\end{figure}
@@ -665,29 +665,27 @@
 	Compared to the considered non-self-tunable controllers, the control trajectories and the evaluated quality criteria confirmed the improved control performance for the reference tracking control problem of the heat exchanger with the non-linear and asymmetric behavior. Implementing a self-tunable explicit MPC controller leads to improved control performance in the most analyzed quality criteria, see Table~\ref{tab:improvement}.	 
 	The squared-error-based criterion ($ISE$) improved in every control scenario within a range $[5-32]$\,\%, the maximal overshoots/undershoots $\sigma_{\mathrm{max}}$ reduced up to 18\,\%, and the settling time $t_{\epsilon}$ decreased up to 24\,\%.  
 	
-	To analyze the control more objectively, energy consumption was also investigated. More specifically, the power used to heat the heating medium was measured and summarized for the whole control but for every controller setup, respectively. The energy consumption $E$ necessary for every control as well as the relative improvement subject to every boundary controller can be seen in Table~\ref{tab:energy}.
+	To analyze the control from the environmental viewpoint, the energy consumption was also investigated. Technically, the total power supply utilized to heat the heating medium was measured and summarized for the whole control but for each controller setup, respectively. The total energy consumption $E$ consumed by each controller as well as the relative improvement subject to each boundary controller is summarized in Table~\ref{tab:energy}.
 	
 	\begin{table}[h!]
 		\begin{center}
-			\caption{Energy consumption evaluation.}
+			\caption{Evaluation of the total energy consumption.}
 			\label{tab:energy}
 			\begin{tabular}{c|c|c} 
 				$Q_\mathrm{y}$ & E\,[kJ] & $\delta E\,[\%]$   \\
 				\hline
-				1000 &  883 & -4\\ 
+				1000 &  883 & $-4$\\ 
 				% \hline
-				100 & 938 & 2 \\ 
+				100 & 938 & $2$ \\ 
 				% \hline
-				self-tuned & 921 & -   
+				self-tuned & 921 & $-$
 			\end{tabular}
 		\end{center}
 	\end{table}
 	
-	It can be seen in Table~\ref{tab:energy}, that utilizing the self-tuned controller leads to energy consumption which acquires value between the energy consumptions associated with the boundary controllers. Although it is not the minimum one, the energy is still saved compared to the boundary controller with $Q_\mathrm{y} = 100$. Note, though the controller with $Q_\mathrm{y} = 1000$ leads to minimum energy consumption, using this single non-tuned controller does not lead to such control performance improvement.
+	It can be seen in Table~\ref{tab:energy}, that utilizing the self-tuned controller leads to energy consumption which acquires value between the energy consumption corresponding to the boundary controllers. Although it is not the minimum one, the energy is still saved compared to the boundary controller with $Q_\mathrm{y} = 100$. Note, though the controller with $Q_\mathrm{y} = 1\,000$ leads to minimum energy consumption, using this single non-tunable controller does not ensured the required control performance. As for the test bed served the laboratory-scaled heat exchanger plant, the greater energy savings are expected for the industrial-scaled plants. 
 	
-	In general, utilizing the proposed controller with a scalable aggressiveness according to the operating conditions leads to higher accuracy (lower $ISE$), lower value of the overshoots (lower $\sigma_{\mathrm{max}}$), and faster achieving the reference value (lower $t_{\epsilon}$), while the control does not suffer in the terms of energy consumption. 
-	
-	
+	In general, utilizing the proposed controller with a scalable aggressiveness according to the operating conditions leads to higher accuracy (lower $ISE$), lower value of the overshoots (reduced $\sigma_{\mathrm{max}}$), and faster achieving the reference value (decreased $t_{\epsilon}$), while the control performance does not suffer in the terms of energy consumption. 
 	
 	%	Together with the reduced overshoots and settling times, the achieved improvements in the control performance enable non-negligible energy savings when the precision and the operating time ensure the product with the required properties.  
 	
