@@ -1,0 +1,65 @@
+Od: Energy <em@editorialmanager.com>
+Date: št 20. 4. 2023 o 11:47
+Subject: Your Submission
+To: Lenka Galčíková <lenka.galcikova@stuba.sk>
+
+
+Ms. Ref. No.: EGY-D-23-01230
+Title: Self-tunable approximated explicit MPC: Heat exchanger implementation and analysis
+Energy
+
+Dear Ing. Galčíková,
+
+The review of your paper is now complete, and the Reviewers' reports are shown below. They conclude that your paper is not suitable for publication. Consequently, I regret to inform you that this paper was not accepted for publication in ENERGY.
+
+Reviewers' suggestions may be of assistance to you in the preparation of future papers
+
+
+Thank you very much for expressing your interest in ENERGY.
+
+Sincerely,
+
+Dr. Alexandra Elena Plesu Popescu
+Guest Editor
+Energy
+
+ 
+
+Comments from Editors and Reviewers:
+
+ 
+
+Reviewer responses to questions:
+
+ 
+
+Reviewers’ comments on the manuscript:
+
+Reviewer #1: 1. For the self-unable approximated explicit MPC method proposed in this paper, it is lack of a critical point, that is, the robustness verification of the algorithm in the case of unmeasurable disturbance and model mismatch.
+2. Compared with conventional online MPC, what are the advantages of the proposed method in terms of control performance and computational cost?
+3. What is the significance of using the scaling tuning parameter structure for segmented processing? And why is the value of ρs set to 0.5?
+4. The paper mentions that "As heat exchange is a nonlinear and asymmetric process", and "so every step response was identified as a first-order system and the nominal transfer function was calculated". However, only a first-order discrete-time state-space model, i.e., equation (12a), is given in the paper, and it is not specified at which operating point this model was approximately linearized. In addition, models for other operating points are missing.
+5. What is the rationale for choosing Qy,L=100 and Qy,U=1000? And why are the steady-state values of the two control inputs different when a reference step input is added at the operating point of Ts = 45℃ and Us = 40%? How does the resulting controller saturation affect the control performance?
+6. The paper only compares the control performance of the system under three cases: Qy=100, Qy=1000, and tuned Qy (two explicit MPC), and does not compare it with only one explicit MPC, as mentioned in the highlights.
+7. From the description, equation (8) and equation (9) are equivalent. Why?
+8. The paper does not mention the meaning of uR(k) in Figure 1 and Figure 3.
+
+
+
+Reviewer #2: In the manuscript under review, the authors presented the design and implementation of MPC control of a heat transfer process with a self-tuning policy. Explicit model predictive control (proposed by Bemporad et al.) was used to design the control algorithm. In order to obtain offset-free control results, the approach used an embedded integrator. The authors presented the theoretical basis of this algorithm. There was proposed original way to determine the tuning parameter. The scaling of the control signal between two boundary optimal control actions is used for the self-tuning procedure. The manuscript presents a practical application of this approach to MPC self-tuning in a heat exchanger experimental system. Despite the correct technical side (organization and composition) of the presented article, I found significant flaws in it.
+
+1. Heat exchanger used in experiment is quite small size unit. I have not found information on flow values or ranges in which manipulated flow is varying. Consequently it is difficult even to briefly evaluate time constants. There is an information (pg. 14, line 27) that experimental step change responses were identified as first-order. Unfortunately there is no results of such identification. Therefore it is difficult to assess the correctness of chosen sampling time Ts=1s.
+2. There is definitely something wrong with the presented results. One can observe that two compared boundary controllers give almost the same process value at steady states in Fig. 4. Respective Fig. 5 presents manipulated value, but between 800s and 1400s those values are significantly different. The same unusual result is observed for results of experiment presented in figures 6 and 7. Thus, arises a question: how is it possible? There is only one possibility in my opinion - one of disturbance values has changed during the experiment. Authors claim that the temperature of hot medium is maintained constant at 70°C, however it seems to me difficult (if almost not possible) using only proportional controller (which is not offset-free algorithm). I have not found information if the feed of cold medium was stabilized and constant. Authors should repeat those experiments and find the source of problem. It might be also some malfunction of peristaltic pump (I mean that MV value U[%] might not correspond to the real flow value). It is difficult to judge this issue, because there is no time evolution plots of flows and input cold and hot water temperatures.
+3. Basing on above remark (2) it is not clear how energy consumption (table 3) is calculated in presence of uncertain results of experiments and possible presence of disturbance/-s. Thus this result is questionable.
+4. In my opinion, the experimental test scenario is not complete. A complete test of any control algorithm should include not only setpoint changes, but also disturbance changes. The experiments presented here include only the scenario of setpoint step changes.
+5. Self-tuning procedure combined with outputs of two boundary controllers seems to be some kind of filter, since it is calculated on the base of yref(k) and yref(k-1). This idea of self-tuning algorithm should be compared to the one with filtering yref value as an input to one arbitrarly tuned MPC controller. Such research might give the answer which approach has better performance and which one is simpler in implementation.
+6. Minor remark: in figure 3 manipulated value "u(k)/voltage" does not look proper as input value for heat exchanger. The pump should be visualized on this scheme since it is crucial final control element that transforms manipulated value (voltage) to physical input change (flow) in technological unit. In other words: voltage is not an input to the heat exchanger.
+
+Authors should revise the research (correct and repeat experiments) and supplement this manuscript with copmarison to another algorithm to visualise superiority of proposed approach.
+
+
+For further assistance, please visit our customer support site at http://help.elsevier.com/app/answers/list/p/7923 Here you can search for solutions on a range of topics, find answers to frequently asked questions and learn more about EM via interactive tutorials. You will also find our 24/7 support contact details should you need any further assistance from one of our customer support representatives.
+
+#AU_EGY#
+
+To ensure this email reaches the intended recipient, please do not delete the above code
