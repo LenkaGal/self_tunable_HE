@@ -16,9 +16,9 @@ xlim([0 3000])
 
 %% Paper
 close all, clear
-load('ref_tracking23.mat') %1 -> Q_y = 1000
+load('ref_tracking30.mat') %1 -> Q_y = 1000
 from = 801;
-to = 6000;
+to = 5800;
 time = out.ScopeData(1:to-from+1,1);
 ref = out.ScopeData(from:to,4);
 input1 = out.ScopeData(from:to,3);
