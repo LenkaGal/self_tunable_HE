@@ -25,11 +25,11 @@ function result = MPC_fcn_yref_tunable(x0,yref,dref,rho_prev) % interpolated con
     elseif dref < 0 %reference step change downwards
                     %we want R=[500; 1000] -> we scale rho=[rho_middle; 1]=[4/9; 1]
         rho_real = abs(dref/dmax); %real ratio that needs to be scaled for our purposes
-        rho = 4/9+(5/9*rho_real); %rho=(1-rho_middle)*rho_real+rho_middle
+        rho = 0.5+(0.5*rho_real); %rho=(1-rho_middle)*rho_real+rho_middle
     else %reference step change upwards
          %we want R=[100; 500] -> we scale rho=[0; rho_middle]=[0; 4/9]
         rho_real = dref/dmax; %real ratio that needs to be scaled for our purposes
-        rho = 4/9*rho_real; %rho=rho_middle*rho_real
+        rho = 0.5*rho_real; %rho=rho_middle*rho_real
     end  
           
     

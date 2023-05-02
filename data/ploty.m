@@ -24,7 +24,7 @@ ref = out.ScopeData(from:to,4);
 input1 = out.ScopeData(from:to,3);
 output1 = out.ScopeData(from:to,2);
 
-load('ref_tracking24.mat') %2 -> Q_y = 100
+load('ref_tracking32.mat') %2 -> Q_y = 100
 input2 = out.ScopeData(from:to,3);
 output2 = out.ScopeData(from:to,2);
 
