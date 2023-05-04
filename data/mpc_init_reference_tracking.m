@@ -38,8 +38,8 @@ Ce = [Cd zeros(1,nx)];
 De = 0;
 
 %%
-us = 35;
-ys = 35;
+us = 30;
+ys = 50;
 
 model = LTISystem('A', Ae, 'B', Be, 'C', Ce, 'D', De);
 % model.y.min = 20-ys;

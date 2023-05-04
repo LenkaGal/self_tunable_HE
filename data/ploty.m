@@ -16,7 +16,7 @@ xlim([0 3000])
 
 %% Paper
 close all, clear
-tuned = 1; %default - for boundary controllers
+tuned = 0; %default - for boundary controllers
 load('ref_tracking31.mat') %1 -> Q_y = 1000
 from = 801;
 to = 6000;
@@ -25,7 +25,7 @@ ref = out.ScopeData(from:to,4);
 input1 = out.ScopeData(from:to,3);
 output1 = out.ScopeData(from:to,2);
 
-load('ref_tracking32.mat') %2 -> Q_y = 100
+load('ref_tracking33.mat') %2 -> Q_y = 100
 input2 = out.ScopeData(from:to,3);
 output2 = out.ScopeData(from:to,2);
 
