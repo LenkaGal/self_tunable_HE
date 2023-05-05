@@ -52,7 +52,7 @@ model.y.reference = 'free';
 %
 Q = [0 0; 0 1];
 model.x.penalty = QuadFunction(Q);
-Qy = 100;
+Qy = 1000;
 model.y.penalty = QuadFunction(Qy);
 R = 10;
 model.u.penalty = QuadFunction(R);
