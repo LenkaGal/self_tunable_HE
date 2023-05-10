@@ -50,9 +50,9 @@ model.u.max = 100-us;
 model.y.with('reference');
 model.y.reference = 'free';
 %
-Q = [0 0; 0 1];
+Q = [0 0; 0 0.8];
 model.x.penalty = QuadFunction(Q);
-Qy = 1000;
+Qy = 100;
 model.y.penalty = QuadFunction(Qy);
 R = 10;
 model.u.penalty = QuadFunction(R);

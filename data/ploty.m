@@ -1,12 +1,12 @@
-load('ref_tracking23.mat')
+load('ref_tracking38.mat')
 %% Ordinary plots
 % close all
-figure(1)
+figure(5)
 hold on; grid minor; box on
 plot(out.ScopeData(:,1),out.ScopeData(:,3),'LineWidth',1.5)
 xlim([0 3000])
 
-figure(2)
+figure(6)
 hold on; grid minor; box on
 plot(out.ScopeData(:,1),out.ScopeData(:,2),'LineWidth',1.5)
 plot(out.ScopeData(:,1),out.ScopeData(:,4),'LineWidth',1.5)
@@ -17,15 +17,15 @@ xlim([0 3000])
 %% Paper
 close all, clear
 tuned = 0; %default - for boundary controllers
-load('ref_tracking36.mat') %1 -> Q_y = 1000
+load('ref_tracking35.mat') %1 -> Q_y = 1000
 from = 801;
-to = 4000;
+to = 6000;
 time = out.ScopeData(1:to-from+1,1);
 ref = out.ScopeData(from:to,4);
 input1 = out.ScopeData(from:to,3);
 output1 = out.ScopeData(from:to,2);
 
-load('ref_tracking36.mat') %2 -> Q_y = 100
+load('ref_tracking34.mat') %2 -> Q_y = 100
 input2 = out.ScopeData(from:to,3);
 output2 = out.ScopeData(from:to,2);
 
