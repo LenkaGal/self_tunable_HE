@@ -82,7 +82,7 @@ t = out.ScopeData(1:5000,1);
 Qt = [];
 for i = 1:length(Q)
     if i == 1
-        Qt = [Qt; Q(i)*ones(200,1)];
+        Qt = [Qt; Q(i)*ones(400,1)];
     else
         Qt = [Qt; Q(i)*ones(1200,1)];
     end
@@ -190,7 +190,7 @@ t = out.ScopeData(1:5000,1);
 Qt = [];
 for i = 1:length(Q)
     if i == 1
-        Qt = [Qt; Q(i)*ones(200,1)];
+        Qt = [Qt; Q(i)*ones(400,1)];
     else
         Qt = [Qt; Q(i)*ones(1200,1)];
     end
@@ -320,7 +320,7 @@ axis([0 2600 0 1100])
 set(gca, 'TickLabelInterpreter','latex','FontSize', fs)
 xlabel('$t$ [s]')
 ylabel('$Q_{\mathrm{y}}$','FontSize', fs)
-% legend('$Q_\mathrm{y}$ tuned', '$Q_\mathrm{y,L}, Q_\mathrm{y,U}$ ', 'Interpreter','latex', 'FontSize', fs) 
+legend('$Q_\mathrm{y}$ tuned', '$Q_\mathrm{y,L}, Q_\mathrm{y,U}$ ', 'Interpreter','latex', 'FontSize', fs) 
 
 %% rho
 ro = [0, 0.333, 0.167, 0.667, 0.833];
