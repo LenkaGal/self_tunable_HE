@@ -137,20 +137,18 @@
 			%\end{graphicalabstract}
 		%
 		%%Research highlights
-		\begin{highlights}
+%		\begin{highlights}
 			% 3-5 highlights, every one should not exceed 85 characters including spaces
-			\item Self-tunable control technique does not need any intervention during control
-			\item Tuning based on operating conditions compensates for the nonlinear plant behavior
-			\item Implementation of the proposed tuning method on a laboratory heat exchanger 
-			\item Control performance improved compared to utilizing explicit MPC with constant setup
-			\end{highlights}
+%			\item Self-tunable control technique does not need any intervention during control
+%			\item Tuning based on operating conditions compensates for the nonlinear plant behavior
+%			\item Implementation of the proposed tuning method on a laboratory heat exchanger 
+%			\item Control performance improved compared to utilizing explicit MPC with constant setup
+%			\end{highlights}
 		
 		\begin{keyword}
 			tunable explicit MPC \sep self-tunable technique \sep tuning parameter \sep heat exchanger \sep control performance
 			%% keywords here, in the form: keyword \sep keyword
-			
 			%% PACS codes here, in the form: \PACS code \sep code
-			
 			%% MSC codes here, in the form: \MSC code \sep code
 			%% or \MSC[2008] code \sep code (2000 is the default)
 			
@@ -164,9 +162,7 @@
 	\section{Introduction}
 	\label{sec:introduction}
 	
-	
-	%The main benefit in form of lower computational complexity in the control phase comes hand in hand with a non-negligible drawback. The size of the parametric solution may increase to the value that prevents its real-time implementation for two reasons: (i) the memory footprint is higher than the available memory size of the control unit, and (ii) the computational time associated with finding the optimal control action is higher than the available sample time for control action implementation. Although this control strategy has its challenges, it is still very beneficial for practical usage for its benefits. 
-	
+
 	The current crisis of energy resources emphasizes the long-term goal of achieving sustainable industrial production and optimal energy utilization. Moreover, minimizing the energy utilization directly reduces the corresponding CO$_{2}$ emissions. Therefore, sustainable industrial production is focused on the wide implementation of advanced control methods~\cite{MN20}. A recent survey on applied thermal engineering focused on energy saving and pollution reduction from the industrial perspective is provided in~\cite{YV16}.
 	
 	The heat exchangers in their numerous variants are integrated into many industrial plants as the heat transfer represents the crucial phenomena for all thermal energy applications~\cite{KV18}. Simultaneously, the heat exchangers are energy-demanding and resource-intensive plants. Moreover, from the control viewpoint, the controller design taking into account the nonlinear and asymmetric behavior of the heat exchangers is a challenging task, see~\cite{RL20}. What should be also considered, is a choice of the controlled variable, as the outlet stream temperature does not have to be always the efficient one. In~\cite{JIN_CV}, the idea is to optimize the controlled variable of counter flow heat exchanger. A new controlled variable named as heat exchanger comprehensive effectiveness is introduced, based on maximizing the amount of heat exchange and minimizing the irreversible loss. 
@@ -730,7 +726,7 @@ In general, utilizing the proposed controller with a scalable aggressiveness acc
 	\section*{Acknowledgments}
 	
 	The authors gratefully acknowledge the contribution of the Scientific Grant Agency of the Slovak Republic under the grants 1/0545/20, 1/0297/22, and the Slovak Research and Development Agency under the project APVV-20-0261. 
-	This research is funded by the European Union’s Horizon Europe under grant no. 101079342 (Fostering Opportunities Towards Slovak Excellence in Advanced Control for Smart Industries). 
+	This research is funded by the European Union’s Horizon Europe under grant no. 101079342 (Fostering Opportunities Towards Slovak Excellence in Advanced Control for Smart Industries). L.~Galčíková acknowledges the STU Grant scheme for Support of Young Researchers.  
 	
 	\section*{Nomenclature}
 	
