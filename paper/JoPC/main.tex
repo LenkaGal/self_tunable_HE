@@ -522,7 +522,23 @@ which corresponds to the range of temperature values which are achievable in the
 The penalty matrices of the problem in Eq.~\eqref{eq:mpc_problem} were systematically tuned and the corresponding control was implemented on the laboratory heat exchanger for each of the considered explicit MPC setups. 
 First, the aim of tuning was to determine, which penalty matrix is the most suitable for real-time tuning. Based on the set of experimentally collected data, the most significant effect on the control trajectories had tuning the penalty matrix $Q_\mathrm{y}$, while still preserving a satisfactory control performance, i.e., without steady-state control error and significant oscillations around the reference value. Next, the boundary values of the tunable matrix $Q_\mathrm{y}$ were tuned as $Q_\mathrm{y, L}$ = 100 and $Q_\mathrm{y, U}$ = 1\,000. The built-in integrator was penalized with the fixed penalty matrix $Q_\mathrm{I}$ = 1 and the control input with the fixed penalty matrix $R$ = 10. The prediction horizon $N$ was set to 20 control steps. The explicit model predictive controllers were constructed in MATLAB R2020b using the Multi-Parametric Toolbox 3~\cite{mpt_conf}. 
 
-The explicit MPC corresponding to the penalty matrix $Q_\mathrm{y, U}$ contains 1\,680 critical regions, and the explicit MPC with the penalty matrix $Q_\mathrm{y, L}$ contains 409 critical regions. The corresponding polytopic partitions can be seen in Fig.~{ref} and Fig.~{ref}. To store the parametric solution associated with the upper boundary explicit MPC, 17.49 MB of memory space is required. Storing the lower boundary explicit MPC, one needs 4.33 MB of memory space. 
+The explicit MPC corresponding to the penalty matrix $Q_\mathrm{y, U}$ contains 1\,680 critical regions, and the explicit MPC with the penalty matrix $Q_\mathrm{y, L}$ contains 409 critical regions. The corresponding polytopic partitions can be seen in Fig.~\ref{fig:partition_U} for the upper boundary controller and Fig.~\ref{fig:partition_L} for the lower boundary controller. To store the parametric solution associated with the upper boundary explicit MPC, 17.49 MB of memory space is required. Storing the lower boundary explicit MPC, one needs 4.33 MB of memory space. 
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{images/partition_U}
+		\caption{Polytopic partition of the upper boundary explicit MPC.}
+		\label{fig:partition_U}
+	\end{center}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{images/partition_L}
+		\caption{Polytopic partition of the lower boundary explicit MPC.}
+	\label{fig:partition_L}
+\end{center}
+\end{figure}
 
 %The initial temperature of the feed was laboratory temperature, i.e., 23$^{\circ}\mathrm{C}$. The temperature of the heating medium was 70$^{\circ}\mathrm{C}$.
 
@@ -574,7 +590,6 @@ These main experimental observations established the base for the strategy of co
 
 The setup of the tuning factor can be associated with tuning of the penalty matrix $Q_{\mathrm{y}}$ according to Eq.~\eqref{eq:tunable_Qy}. The evolution of the penalty matrix $Q_{\mathrm{y}}$ during control is depicted in Figure~\ref{fig:Q}. Note, the penalty matrix evolution in Figure~\ref{fig:Q} does not correspond to tuning of the optimal MPC, but serves for a deeper insight into the association of the interpolated control inputs with the optimal explicit MPC setup.   
 
-
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=0.8\textwidth]{images/rho}
@@ -590,6 +605,8 @@ The setup of the tuning factor can be associated with tuning of the penalty matr
 		\label{fig:Q}
 	\end{center}
 \end{figure}
+
+The control input is applied to the system each second, so there is a possible concern regarding the speed at which two explicit MPCs are evaluated. By analyzing the computational speed, it was concluded that the approximate control input can be generated in an average time of 0.01 seconds, which is 100 times faster than the sampling time.
 
 The control results of the self-tunable technique compared to the boundary controllers can be seen in Figure~\ref{fig:CV} for the controlled variable, and in Figure~\ref{fig:MV} for the manipulated variable. It can be seen that the tuned controller combined the benefits of the two boundary controllers. The overshoots and undershoots were reduced, as in the first half of control the penalty matrix $Q_\mathrm{y}$ acquired value from the first half of the penalty interval. When tracking the reference with negative step change, the penalty matrix acquired the values from the second half of the interval, i.e., closer to the upper bound $Q_\mathrm{y, U}$. 
 The similarity with the boundary controllers can be seen also on the manipulated variable profiles. Note, the constraints on the input variable were satisfied as they were scaled using linear interpolation based on the boundary controllers which are constructed considering the input constraints. 

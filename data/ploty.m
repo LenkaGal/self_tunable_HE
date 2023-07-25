@@ -353,3 +353,28 @@ set(gca, 'TickLabelInterpreter','latex','FontSize', fs)
 xlabel('$t$ [s]')
 ylabel('$\widetilde{\rho}$','FontSize', fs)
 legend('$\widetilde{\rho}$', '$\rho_\mathrm{s}$ ', 'Interpreter','latex', 'FontSize', fs) 
+%% Partitions
+load('expmpc_L.mat')
+load('expmpc_U.mat')
+%%
+set(0,'defaulttextinterpreter','latex')
+fs = 13;
+
+figure(1)
+expmpc_L.partition.plot
+
+set(gca, 'TickLabelInterpreter','latex','FontSize', fs)
+xlabel('$x$','FontSize', fs)
+ylabel('$x_{\mathrm{I}}$','FontSize', fs)
+zlabel('$y_{\mathrm{ref}}$','FontSize', fs)
+axis tight
+
+
+figure(2)
+expmpc_U.partition.plot
+
+set(gca, 'TickLabelInterpreter','latex','FontSize', fs)
+xlabel('$x$','FontSize', fs)
+ylabel('$x_{\mathrm{I}}$','FontSize', fs)
+zlabel('$y_{\mathrm{ref}}$','FontSize', fs)
+axis tight
