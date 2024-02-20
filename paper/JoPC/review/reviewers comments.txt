@@ -1,0 +1,42 @@
+Editor: Two consistent reviews have been obtained for this manuscript.
+Reviewer #1 finds the manuscript generally well-written and interesting but he/she points out several issues to address. These include the applicability to multivariable systems, the effectiveness of the method based on two extreme controllers compared to a moderately tuned one, and the ability to deal with unmeasured disturbances. Furthermore, some figures can be removed.
+Reviewer #2 finds the contribution potentially interesting but points out that various ambiguous definitions, discussions, and descriptions are present. Then, he/she presents a detailed list of issues and comments to address, including the applicability to multivariable systems, the experimental setup being not clear and possibly ignoring the hot stream dynamics, among others.
+Based on these reviews, a major revision is recommended.
+
+Reviewer #1: The paper develops a method to automatically tune explicit MPC controllers, and demonstrates application of the proposed approach on a laboratory scale heat exchanger system. Overall, the paper is well written and the presented ideas and experimental results are clear. However, the following points should be addressed before publication:
+
+Comments:-
+
+1) The main motivation that a practitioner may want different controller tunings based on operating scenarios and different sizes of reference changes/disturbances does not clearly stand out in the introduction section. The initial few paragraphs can be revised to clearly emphasize the need of a "self-tunable" MPC controller in practice.
+
+2) The authors state, "The lower computational complexity makes the explicit MPC more suitable for a practical industrial implementation." in the introduction section. It should be noted, however, that the explicit MPC suffers from the curse of dimensionality, and the number of polytopic regions in the PWA control law can grow exponentially with the size of states, control inputs, and the MPC forecasting horizon. Thereby, making it not practically implementable for a large class of industrial systems.
+
+3) The main idea behind the self-tunable approximate explicit MPC controller is that two extreme controllers are designed with aggressive and slow tunings called the "boundary controllers", and a linear interpolation of those two controllers is taken to produce the final control input. How can this approach be applied to multivariable interacting systems with multiple control inputs?
+
+4) In the final simulation studies presented, the closed-loop performance of the self-tuned approximate MPC is compared only with the two extreme boundary controllers. However, a moderately tuned (E.g, Qy=500-600) "optimal" MPC controller may also provide a reasonable and potentially better performance than the two boundary controllers. I encourage the authors to comment on its performance and elaborate whether the control improvements reported in Table 2 still remain.
+
+5) The performance of the two boundary controllers shown in Figures 6 and 7 are also depicted in Figures 10 and 11. So some of the figures can be removed for a concise presentation of the results.
+
+6) Unmeasured disturbances are encountered in a large-class of industrial applications, and treating such disturbances is almost a required feature in the control algorithm to be considered for practical deployment. I recommend the authors to comment on how can the approach be applied to systems with unmeasured disturbances, or what complications may arise.
+
+
+Reviewer #2: A self-tuning explicit MPC scheme is presented and applied to a heat exchange process. The main contribution above the authors other work appears to be the self-tuning aspect. Overall, the paper would greatly benefit from a thorough revision, clarifying ambiguous definitions, discussions, and descriptions. Also, the experimental setup should be clarified, as important dynamics that seem relevant (hot stream dynamics) appear to be ignored, raising doubts about the repeatability and therefore, conclusions drawn from the experiments. My specific comments are listed below.
+
+- In the abstract, define what the term "properly tune the controller" means.
+- Optimize the phrasing of the second paragraph of the introduction. The phrasing makes it sounds like heat exchangers are energy demanding, but I assume the intended meaning is that the utility generation for heating/cooling is energy-demanding.
+- Define what is meant by asymmetric behavior.
+- What are the assumptions on the penalty matrices? Include an explicit statement of these assumptions Section 2.1 (e.g., must be diagonal matrices).
+- Similarly, for the two boundary controllers explain the assumptions on the penalty matrices. Clearly, if the "upper" boundary matrices are equivalent to the "lower" boundary matrices multiplied by a scalar, there will be no difference between the solutions obtained by solving either controller. Perhaps, this is what meant by statement: "The boundary explicit controllers have the same structure and setup, except for one of the penalty matrices - the tuned one", but this statement can be further clarified (which matrix is the tuned one referring to?).
+- Please clarify the last sentence on page 7, extending into page 8, which describes the tuning process as systematic, but the description appears to be ad hoc and depend on the system.
+- Does the method only support SISO or MIMO system with decoupled pairs of inputs/outputs? This seems to be suggested by the statement made on page 9. If so, this should be stated explicitly in the problem setup.
+- How is the aggressiveness of the controller being defined?
+- What are the properties of the reference values selected? Are they reachable?
+- In Eq. 7, there is a missing time dependence on rho and the "(k)" in y_ref should not be a subscript.
+- Please clarify the role of rho and dmax. What is the symbol |.| mean for a vector (element-wise absolute value)? It seems that dmax would need to be inherently conservative, in the sense that it is the maximum magnitude of all possible references values. If this is the case, it would seem that rho would mostly be less than 1. On the other hand, if dmax is not the maximum magnitude of all possible reference, there is a possibility of rho > 1. What happens in this case? Why is it appropriate to make rho closer to 1 for references with large magnitudes.
+- At the end of Section 2, it is mentioned that the positivity or negativity of the reference change could be considered. What does this mean? A precise mathematical description would be helpful.
+- Given the lack of clear definition of asymmetric behavior, the need for a modified self tuning technique (Section 3.2) is a bit unclear. A clear description of its need in the beginning of Section 3.2 would be helpful.
+- In Definition 3.1, is the domain of gamma indeed R?
+- Figure 4 seems out of place (should be after figure 1).
+- A diagram or schematic of the heat exchange process would be helpful. Also, referring to the cold water stream as the feed when the outlet temperature is regulated is a bit confusing.
+- How was it determined that Qy has the most significant effect in the heat exchange process? What constitutes "significant effect"?
+- In the heat exchange process, the dynamics of the hot stream appears to be neglected. Why is this the case? I am not sure about the explanation given on why different steady-state inputs are observed. The flow rate of the hot stream is adjusted so the cold stream outlet temperature is maintained at the reference value is done. It seems, though not shown, that the hot stream inlet temperature is maintained to be constant. Based on the results, it would seem that the steady-state hot stream temperature is free to vary. What about the cold stream inlet temperature? Please given the trajectories of all these variables, or at least, the temperatures. What is the impact of the repeatability of the experiments given that the hot stream temperature is allowed to vary? In any case, the metrics presented in Table 1 are reported for one experiment per scenario. I would encourage computing these metrics for several experiments to ensure repeatability of the experiments and make the results more convincing.

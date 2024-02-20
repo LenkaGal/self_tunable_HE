@@ -1,0 +1,186 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{a4wide}
+\usepackage{multicol}
+\usepackage[ansinew]{inputenc}
+\usepackage{color}
+\usepackage{url}
+%\usepackage{floatflt}
+\usepackage{multirow}
+\usepackage{rotating, graphicx}
+
+
+\newcommand{\opt}{^{\star}} % \opt
+\newcommand{\tr}{\intercal} % transpose
+
+
+
+% RESPONSE LETTER SYNTAX:
+% =====================================================
+\newcommand{\change}[1]{\textcolor{red}{#1}}
+
+\newcommand{\comment}[1]{
+	\begin{itemize}
+		\item \textbf{Comment:}\\ \sf{#1}
+	\end{itemize}
+}
+
+\newcommand{\answer}[1]{
+	\begin{itemize}
+		\item[] \textbf{Answer:}\\ #1
+	\end{itemize}
+}
+
+\newcommand{\pointout}[1]{\textcolor{blue}{#1}}
+\definecolor{YJ}{rgb}{0.0,0.5,0.0}
+
+% =====================================================
+
+
+\newcommand{\diam}[1]{\mathrm{diam}\left(#1\right)}
+
+% \newcommand {\mm}[1]{\textcolor{blue}{#1}}
+
+%opening
+\title{Response to the review comments}
+\author{}
+\date{}
+
+\sloppy
+\begin{document}
+	
+	\maketitle
+	
+	The authors would like to thank the reviewers for the constructive and thoughtful comments on our paper.
+	We have revised the document based on these comments and we provide point-to-point answers below.
+	All changes relative to our initial submission have been highlighted in \change{red}.
+	
+	\section*{Answer to Editor in Chief}
+	The authors would like to thank the Editor in chief for summarizing substantial and high-quality review comments, which helped us to improve our manuscript's quality. The authors revised the paper based on the reviewers' comments and incorporated the suggestions into our manuscript. The authors reformulated or added the corresponding statements to clarify the ideas. 
+	
+	\section*{Answer to Reviewer 1}
+	\comment{The paper develops a method to automatically tune explicit MPC controllers, and demonstrates application of the proposed approach on a laboratory scale heat exchanger system. Overall, the paper is well written and the presented ideas and experimental results are clear. However, the following points should be addressed before publication: \\
+	
+	The main motivation that a practitioner may want different controller tunings based on operating scenarios and different sizes of reference changes/disturbances does not clearly stand out in the introduction section. The initial few paragraphs can be revised to clearly emphasize the need of a "self-tunable" MPC controller in practice.
+	}
+
+	\comment{
+		The introduction section showed an overview of various control methods, but few studies discussed the embedded/industrial hardware. It is difficult to understand what control method is more suitable for embedded/industrial hardware applications. Related discussion is needed to be covered more in this section.
+	}
+	
+	\comment{
+		The authors state, "The lower computational complexity makes the explicit MPC more suitable for a practical industrial implementation." in the introduction section. It should be noted, however, that the explicit MPC suffers from the curse of dimensionality, and the number of polytopic regions in the PWA control law can grow exponentially with the size of states, control inputs, and the MPC forecasting horizon. Thereby, making it not practically implementable for a large class of industrial systems.
+	}
+	
+	\comment{
+		The main idea behind the self-tunable approximate explicit MPC controller is that two extreme controllers are designed with aggressive and slow tunings called the "boundary controllers", and a linear interpolation of those two controllers is taken to produce the final control input. How can this approach be applied to multivariable interacting systems with multiple control inputs?
+	}
+	
+	\comment{
+		In the final simulation studies presented, the closed-loop performance of the self-tuned approximate MPC is compared only with the two extreme boundary controllers. However, a moderately tuned (E.g, Qy=500-600) "optimal" MPC controller may also provide a reasonable and potentially better performance than the two boundary controllers. I encourage the authors to comment on its performance and elaborate whether the control improvements reported in Table 2 still remain.
+	}
+	\comment{
+		The performance of the two boundary controllers shown in Figures 6 and 7 are also depicted in Figures 10 and 11. So some of the figures can be removed for a concise presentation of the results.
+	}
+	
+	\comment{
+		Unmeasured disturbances are encountered in a large-class of industrial applications, and treating such disturbances is almost a required feature in the control algorithm to be considered for practical deployment. I recommend the authors to comment on how can the approach be applied to systems with unmeasured disturbances, or what complications may arise.
+	}
+	
+
+
+	
+	\section*{Answer to Reviewer 2}	
+
+	\comment{
+		A self-tuning explicit MPC scheme is presented and applied to a heat exchange process. The main contribution above the authors other work appears to be the self-tuning aspect. Overall, the paper would greatly benefit from a thorough revision, clarifying ambiguous definitions, discussions, and descriptions. Also, the experimental setup should be clarified, as important dynamics that seem relevant (hot stream dynamics) appear to be ignored, raising doubts about the repeatability and therefore, conclusions drawn from the experiments. My specific comments are listed below.
+		
+		In the abstract, define what the term "properly tune the controller" means.
+	}
+
+	\comment{
+		Optimize the phrasing of the second paragraph of the introduction. The phrasing makes it sounds like heat exchangers are energy demanding, but I assume the intended meaning is that the utility generation for heating/cooling is energy-demanding.
+	}
+
+	\comment{
+		Define what is meant by asymmetric behavior.
+	}
+
+	\comment{
+		What are the assumptions on the penalty matrices? Include an explicit statement of these assumptions Section 2.1 (e.g., must be diagonal matrices).
+	}
+	\comment{
+		Similarly, for the two boundary controllers explain the assumptions on the penalty matrices. Clearly, if the "upper" boundary matrices are equivalent to the "lower" boundary matrices multiplied by a scalar, there will be no difference between the solutions obtained by solving either controller. Perhaps, this is what meant by statement: "The boundary explicit controllers have the same structure and setup, except for one of the penalty matrices - the tuned one", but this statement can be further clarified (which matrix is the tuned one referring to?).
+	}
+
+	\comment{
+		Please clarify the last sentence on page 7, extending into page 8, which describes the tuning process as systematic, but the description appears to be ad hoc and depend on the system.
+	}
+
+	\comment{
+		Does the method only support SISO or MIMO system with decoupled pairs of inputs/outputs? This seems to be suggested by the statement made on page 9. If so, this should be stated explicitly in the problem setup.
+	}
+
+	\comment{
+		How is the aggressiveness of the controller being defined?
+	}
+
+	\comment{
+		What are the properties of the reference values selected? Are they reachable?
+	}
+
+	\comment{
+		In Eq. 7, there is a missing time dependence on rho and the "(k)" in $y_\mathrm{ref}$ should not be a subscript.
+	}
+
+	\comment{
+		Please clarify the role of rho and dmax. What is the symbol $\lvert.\rvert$ mean for a vector (element-wise absolute value)? It seems that dmax would need to be inherently conservative, in the sense that it is the maximum magnitude of all possible references values. If this is the case, it would seem that rho would mostly be less than 1. On the other hand, if dmax is not the maximum magnitude of all possible reference, there is a possibility of rho $>$ 1. What happens in this case? Why is it appropriate to make rho closer to 1 for references with large magnitudes.
+	}
+
+	\comment{
+		At the end of Section 2, it is mentioned that the positivity or negativity of the reference change could be considered. What does this mean? A precise mathematical description would be helpful.
+	}
+
+	\comment{
+	 	Given the lack of clear definition of asymmetric behavior, the need for a modified self tuning technique (Section 3.2) is a bit unclear. A clear description of its need in the beginning of Section 3.2 would be helpful.
+	}
+
+	\comment{
+		In Definition 3.1, is the domain of gamma indeed R?
+	}
+
+	\comment{
+		Figure 4 seems out of place (should be after figure 1).
+	}
+
+	\comment{
+		A diagram or schematic of the heat exchange process would be helpful. Also, referring to the cold water stream as the feed when the outlet temperature is regulated is a bit confusing.
+	}
+
+	\comment{
+		How was it determined that Qy has the most significant effect in the heat exchange process? What constitutes "significant effect"?
+	}
+
+	\comment{
+		In the heat exchange process, the dynamics of the hot stream appears to be neglected. Why is this the case? I am not sure about the explanation given on why different steady-state inputs are observed. The flow rate of the hot stream is adjusted so the cold stream outlet temperature is maintained at the reference value is done. It seems, though not shown, that the hot stream inlet temperature is maintained to be constant. Based on the results, it would seem that the steady-state hot stream temperature is free to vary. What about the cold stream inlet temperature? Please given the trajectories of all these variables, or at least, the temperatures. What is the impact of the repeatability of the experiments given that the hot stream temperature is allowed to vary? In any case, the metrics presented in Table 1 are reported for one experiment per scenario. I would encourage computing these metrics for several experiments to ensure repeatability of the experiments and make the results more convincing.
+	}
+
+	\answer{
+		This is a very important comment as it targets the main motivation of the paper---pointing out the benefits of the proposed control method from the implementation point of view. The implementation on the embedded platforms requires a memory-efficient and computationally tractable evaluation with minimum dependencies on the advanced software libraries. Therefore, we extended the corresponding part of the section Introduction which now reads as follows:
+			
+		\begin{quote}
+			Embedded hardware is becoming increasingly popular in many applications due to its low-cost, open architecture, and wide range of relevant applications. \change{However, the computational power and memory storage of the embedded hardware is still low compared to other devices used in the industry. As the consequence, there is a significant requirement to implement such control strategies that provide inexpensive and low-power consuming controllers. 
+			For instance, the well-known proportional-integral-derivative (PID) controllers.  In~\cite{HM14} a detailed case study analyzing the implementation of various PID controllers considering multiprocessor system-on-chip and multicore microcontrollers is conducted. The designed controllers are compared in terms of design time, design effort, and closed-loop control performance. The paper also summarizes the rules for handling the multiprocessor systems for embedded control design.}
+		\end{quote}	 		
+	}	
+
+	
+	\bibliographystyle{plain}
+	\bibliography{references}
+	
+\end{document}
+
+
