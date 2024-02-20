@@ -54,12 +54,12 @@
 	
 	\maketitle
 	
-	The authors would like to thank the reviewers for the constructive and thoughtful comments on our paper.
-	We have revised the document based on these comments and we provide point-to-point answers below.
-	All changes relative to our initial submission have been highlighted in \change{red}.
+	We would like to thank the reviewers for the constructive and thoughtful comments on our manuscript.
+	We revised the document based on these comments and we provide point-to-point answers below.
+	All changes relative to our initial submission are highlighted in \change{red}.
 	
-	\section*{Answer to Editor in Chief}
-	The authors would like to thank the Editor in chief for summarizing substantial and high-quality review comments, which helped us to improve our manuscript's quality. The authors revised the paper based on the reviewers' comments and incorporated the suggestions into our manuscript. The authors reformulated or added the corresponding statements to clarify the ideas. 
+	\section*{Answer to Editor}
+	We would like to thank the Editor for summarizing substantial and high-quality review comments, which helped us to improve our manuscript's quality. We revised the paper based on the reviewers' comments and incorporated the suggestions into our manuscript. We reformulated or added the corresponding statements to clarify the ideas. 
 	
 	\section*{Answer to Reviewer 1}
 	\comment{The paper develops a method to automatically tune explicit MPC controllers, and demonstrates application of the proposed approach on a laboratory scale heat exchanger system. Overall, the paper is well written and the presented ideas and experimental results are clear. However, the following points should be addressed before publication: \\
@@ -67,29 +67,60 @@
 	The main motivation that a practitioner may want different controller tunings based on operating scenarios and different sizes of reference changes/disturbances does not clearly stand out in the introduction section. The initial few paragraphs can be revised to clearly emphasize the need of a "self-tunable" MPC controller in practice.
 	}
 
-	\comment{
-		The introduction section showed an overview of various control methods, but few studies discussed the embedded/industrial hardware. It is difficult to understand what control method is more suitable for embedded/industrial hardware applications. Related discussion is needed to be covered more in this section.
+	\answer{
+		In order to clearly emphasize the need of a self-tunable technique, we revised the Introduction section in a following way:
+		\begin{quote}
+			The paper [27] pushes the idea of tunable explicit MPC further and deals with the issues of practical industrial-oriented implementation.
+		\end{quote}
 	}
-	
+
+
 	\comment{
 		The authors state, "The lower computational complexity makes the explicit MPC more suitable for a practical industrial implementation." in the introduction section. It should be noted, however, that the explicit MPC suffers from the curse of dimensionality, and the number of polytopic regions in the PWA control law can grow exponentially with the size of states, control inputs, and the MPC forecasting horizon. Thereby, making it not practically implementable for a large class of industrial systems.
+	}
+
+	\answer{
+		We thank the reviewer for an important comment. We reformulated the sentence as follows:
+		\begin{quote}
+			\change{If the MPC optimization problem can be pre-solved explicitly, the lower online computational complexity makes the explicit MPC more suitable for a practical industrial implementation.}
+		\end{quote}
 	}
 	
 	\comment{
 		The main idea behind the self-tunable approximate explicit MPC controller is that two extreme controllers are designed with aggressive and slow tunings called the "boundary controllers", and a linear interpolation of those two controllers is taken to produce the final control input. How can this approach be applied to multivariable interacting systems with multiple control inputs?
 	}
+
 	
 	\comment{
 		In the final simulation studies presented, the closed-loop performance of the self-tuned approximate MPC is compared only with the two extreme boundary controllers. However, a moderately tuned (E.g, Qy=500-600) "optimal" MPC controller may also provide a reasonable and potentially better performance than the two boundary controllers. I encourage the authors to comment on its performance and elaborate whether the control improvements reported in Table 2 still remain.
 	}
+
+	\answer{
+		We thank the reviewer for the question and comment. If a moderately tuned optimal MPC also provided a reasonable or potentially better performance than the two boundary controllers, the self-tunable technique would be out of scope for such control application. Nevertheless, there are situations, when using only one controller with a constant setup leads to just ''satisfactory'' control results, i.e., the reference value is achieved, but with worse control performance (e.g. high overshoots or settling time). When working on our case study results, different setups of penalty matrices were explored, also $Q_\mathrm{y} = 500$. In this scenario, the control performance was comparable with the tuned controller for the first two reference step changes (tracking the reference upwards). However, when the reference was tracked downwards, the undershoots similar to lower boundary controller, i.e., $Q_\mathrm{y} = 100$ were present. Therefore, it supports the fact that the general aim of the control, i.e., achieving the reference value, is satisfied, but the control performance could be improved by including the benefits of two boundary controllers.   
+	}
+
+
 	\comment{
 		The performance of the two boundary controllers shown in Figures 6 and 7 are also depicted in Figures 10 and 11. So some of the figures can be removed for a concise presentation of the results.
+	}
+
+	\answer{
+		We removed the Figure 6 and 7 in order to improve the concise presentation of the control results.
 	}
 	
 	\comment{
 		Unmeasured disturbances are encountered in a large-class of industrial applications, and treating such disturbances is almost a required feature in the control algorithm to be considered for practical deployment. I recommend the authors to comment on how can the approach be applied to systems with unmeasured disturbances, or what complications may arise.
 	}
 	
+	\answer{
+		We thank the reviewer for this important comment. We revisited the Conclusion section containing the comments on disturbances and incorporated also the answer on unmeasured disturbances. (Na zvazenie: As the thoughts and ideas remind discussion more than conclusion, this part was transferred to the section Results and discussion.)
+		\begin{quote}
+			Note, this strategy relies on a proper design of the two boundary controllers.
+			In case a non-negligible disturbance occurs, both boundary controllers
+			should be able to solve a disturbance rejection problem, as the final
+			value of the manipulated variables is interpolated between them. \change{It is also possible to include the disturbance into the design process of the MPC controller. In such case, e.g., a robust MPC strategy (REF?) would be beneficial, which would lead to more conservative control actions in order to create space for a disturbance. Nevertheless, if the problem is not large-scale and it is possible to obtain the explicit solution, it is still possible to interpolate between the control actions from the robust controllers.} The future work will focus on incorporating also the measurable disturbances into the self-tuning strategy. (Really?)
+		\end{quote}	
+	}
 
 
 	
@@ -169,12 +200,7 @@
 	}
 
 	\answer{
-		This is a very important comment as it targets the main motivation of the paper---pointing out the benefits of the proposed control method from the implementation point of view. The implementation on the embedded platforms requires a memory-efficient and computationally tractable evaluation with minimum dependencies on the advanced software libraries. Therefore, we extended the corresponding part of the section Introduction which now reads as follows:
-			
-		\begin{quote}
-			Embedded hardware is becoming increasingly popular in many applications due to its low-cost, open architecture, and wide range of relevant applications. \change{However, the computational power and memory storage of the embedded hardware is still low compared to other devices used in the industry. As the consequence, there is a significant requirement to implement such control strategies that provide inexpensive and low-power consuming controllers. 
-			For instance, the well-known proportional-integral-derivative (PID) controllers.  In~\cite{HM14} a detailed case study analyzing the implementation of various PID controllers considering multiprocessor system-on-chip and multicore microcontrollers is conducted. The designed controllers are compared in terms of design time, design effort, and closed-loop control performance. The paper also summarizes the rules for handling the multiprocessor systems for embedded control design.}
-		\end{quote}	 		
+		 		
 	}	
 
 	
