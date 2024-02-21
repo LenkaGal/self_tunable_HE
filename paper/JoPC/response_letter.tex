@@ -132,19 +132,59 @@
 		In the abstract, define what the term "properly tune the controller" means.
 	}
 
+	\answer{
+		We understand that this formulation might sound vague, so we reformulated the corresponding sentence as follows:
+		\begin{quote}
+			This paper provides a novel self-tunable control policy that does not require any interventions of the control engineer during operation in order to \change{retune the controller}.
+		\end{quote}	
+	}
+
 	\comment{
 		Optimize the phrasing of the second paragraph of the introduction. The phrasing makes it sounds like heat exchangers are energy demanding, but I assume the intended meaning is that the utility generation for heating/cooling is energy-demanding.
+	}
+
+	\answer{
+		We thank the Reviewer for this important comment. We utilized the Reviewer's suggested formulation in a following way:
+		\begin{quote}
+			\change{Simultaneously, the utility generation for heating/cooling is energy-demanding.}
+		\end{quote}	
 	}
 
 	\comment{
 		Define what is meant by asymmetric behavior.
 	}
 
+	\answer{
+		We revisited the Introduction section in order to define the asymmetric behavior at the place of its first occurrence.
+		\begin{quote}
+			From the control viewpoint, the controller design taking into account the nonlinear and asymmetric behavior \change{(i.e. different dynamics (behavior?) when the temperature is rising or decreasing)} of the heat exchangers is a challenging task [4].
+		\end{quote}	
+	}
+
+
 	\comment{
 		What are the assumptions on the penalty matrices? Include an explicit statement of these assumptions Section 2.1 (e.g., must be diagonal matrices).
 	}
+
+	\answer{
+		We revisited the Section 2.1 in order to define the assumptions on the penalty matrices. The corresponding part reads as:
+		\begin{quote}
+			The sets $\mathcal{U} \subseteq \mathbb{R}^{n_{\mathrm{u}}}$, $\mathcal{Y} \subseteq \mathbb{R}^{n_{\mathrm{y}}}$ are convex polytopic sets of physical constraints on inputs and outputs, respectively. These sets include the origin in their strict interiors. The penalty matrix $Q_\mathrm{y} \in \mathbb{R}^{n_{\mathrm{y}} \times n_{\mathrm{y}}}$ \change{$\succeq 0$} penalizes the squared control error, i.e., the deviation between the output and output reference value $y_\mathrm{ref}$. The matrix $R \in \mathbb{R}^{n_{\mathrm{u}} \times n_{\mathrm{u}}}$ \change{$\succ 0$} penalizes the squarred value of control inputs. 
+			%
+			The value of integrator is also penalized in the cost function with the penalty matrix $Q_\mathrm{I} \in \mathbb{R}^{n_{\mathrm{y}} \times n_{\mathrm{y}}}$ \change{$\succeq 0$}. \change{All the penalty matrices are considered to be diagonal due to the applicability of the tunable explicit MPC approach.}
+			The parameter $\theta \in \Theta$ in Eq.~(1f) represents the initial condition of the optimization problem for which it is parametrically pre-computed. 
+		\end{quote}	
+	}
+
 	\comment{
 		Similarly, for the two boundary controllers explain the assumptions on the penalty matrices. Clearly, if the "upper" boundary matrices are equivalent to the "lower" boundary matrices multiplied by a scalar, there will be no difference between the solutions obtained by solving either controller. Perhaps, this is what meant by statement: "The boundary explicit controllers have the same structure and setup, except for one of the penalty matrices - the tuned one", but this statement can be further clarified (which matrix is the tuned one referring to?).
+	}
+
+	\answer{
+		To explain the assumptions on the penalty matrices and specify the tuned matrix in the corresponding paragraph of the Section 2.2 in the following way:
+		\begin{quote}
+			The idea of approximated tunable explicit MPC comes from the work ~\cite{Klauco_tunable}, where the control action is calculated based on linear interpolation between two boundary control actions. These control actions result from evaluating two boundary explicit MPCs. The boundary explicit controllers have the same structure and setup, except for one of the penalty matrices -- the tuned one. \change{Based on the specific control application, any penalty matrix can be chosen as the tuned parameter, i.e., this approach is applicable for any tuning parameter. The boundary penalty matrices follow the assumptions on the penalty matrices from Section 2.1 and are diagonal matrices such that $\lambda_{i,\mathrm{L}} \le \lambda_{i,\mathrm{U}}$, $\forall i = 1,\dots,s$, where $\lambda$ denotes the vector of eigenvalues of the penalty matrix, $s$ is the rank of the tuned penalty matrix, and $L$, $U$ denote the lower and upper boundary setup respectively. }
+		\end{quote}	
 	}
 
 	\comment{
@@ -165,6 +205,18 @@
 
 	\comment{
 		In Eq. 7, there is a missing time dependence on rho and the "(k)" in $y_\mathrm{ref}$ should not be a subscript.
+	}
+
+	\answer{
+		We thank the Reviewer for a careful review. The equation was corrected as follows:
+		\begin{quote}
+			\change{
+			\begin{eqnarray*}				
+				\rho (k) = \frac{\vert y_{\mathrm{ref}}(k) \vert}{d_{\max}}.
+			\end{eqnarray*}
+		}
+		\end{quote} 
+	
 	}
 
 	\comment{
