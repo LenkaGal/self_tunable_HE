@@ -263,6 +263,13 @@
 		How was it determined that Qy has the most significant effect in the heat exchange process? What constitutes "significant effect"?
 	}
 
+	\answer{
+		\begin{quote}
+			The penalty matrices of the problem in Eq.~(1) were systematically tuned and the corresponding control was implemented on the laboratory heat exchanger for each of the considered explicit MPC setups. 
+			First, the aim of tuning was to determine, which penalty matrix is the most suitable for real-time tuning. \change{Based on the set of experimentally collected data, the penalty matrix $Q_\mathrm{y}$ was chosen as the tuned one.} Based on the set of experimentally collected data, the most significant effect on the control trajectories had tuning the penalty matrix $Q_\mathrm{y}$, while still preserving a satisfactory control performance, i.e., without steady-state control error and significant oscillations around the reference value. Next, the boundary values of the tunable matrix $Q_\mathrm{y}$ were tuned as $Q_\mathrm{y, L}$ = 100 and $Q_\mathrm{y, U}$ = 1\,000.
+		\end{quote}
+	}
+
 	\comment{
 		In the heat exchange process, the dynamics of the hot stream appears to be neglected. Why is this the case? I am not sure about the explanation given on why different steady-state inputs are observed. The flow rate of the hot stream is adjusted so the cold stream outlet temperature is maintained at the reference value is done. It seems, though not shown, that the hot stream inlet temperature is maintained to be constant. Based on the results, it would seem that the steady-state hot stream temperature is free to vary. What about the cold stream inlet temperature? Please given the trajectories of all these variables, or at least, the temperatures. What is the impact of the repeatability of the experiments given that the hot stream temperature is allowed to vary? In any case, the metrics presented in Table 1 are reported for one experiment per scenario. I would encourage computing these metrics for several experiments to ensure repeatability of the experiments and make the results more convincing.
 	}
