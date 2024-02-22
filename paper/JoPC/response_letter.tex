@@ -146,7 +146,7 @@
 	\answer{
 		We thank the Reviewer for this important comment. We utilized the Reviewer's suggested formulation in a following way:
 		\begin{quote}
-			\change{Simultaneously, the utility generation for heating/cooling is energy-demanding.}
+			\change{Simultaneously, the utility generation for heating or cooling is energy-demanding.}
 		\end{quote}	
 	}
 
@@ -203,6 +203,14 @@
 		What are the properties of the reference values selected? Are they reachable?
 	}
 
+	\answer{
+		We would like to divide the answer in two parts as the reference value is present in MPC optimization problem in Eq.~(1) and also in the calculation process of $\rho$ in Eq.~(7) and Eq.~(9). Regarding the MPC optimization problem, the reference signal is a parameter which is usually constrained such that it covers the operating range of the corresponding control application. Therefore, during the control, the reference can be set only as a value from the feasible set. If the MPC problem is precomputed also for non-reachable references, e.g., because it is not clear a priori which reference values will be set during control, this would ''only'' lead to larger explicit solution of MPC because of larger range of reference signal. Regarding the calculation of parameter $\rho$, the setup of reference value is more strict, i.e., the value should be reachable and from the operating range to ensure that $0 \le \rho \le 1 $. 
+		\begin{quote}
+			TODO
+		\end{quote} 
+		
+	}
+
 	\comment{
 		In Eq. 7, there is a missing time dependence on rho and the "(k)" in $y_\mathrm{ref}$ should not be a subscript.
 	}
@@ -235,8 +243,16 @@
 		In Definition 3.1, is the domain of gamma indeed R?
 	}
 
+	\answer{
+		The parameter $\gamma$ depends on the value of $\rho$, which is scalar. From this it follows, that the domain of $\gamma$ is $\mathbb{R}$.
+	}	
+
 	\comment{
 		Figure 4 seems out of place (should be after figure 1).
+	}
+
+	\answer{
+		We thank the reviewer for this attentive comment. We corrected the order of Figures.
 	}
 
 	\comment{

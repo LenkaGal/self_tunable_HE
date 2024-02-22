@@ -473,6 +473,14 @@
 
 The plant on which the control was implemented and analyzed is a laboratory-scaled counter-current liquid-to-liquid plate heat exchanger Armfield Process Plant Trainer PCT23~\cite{pct23}, see Figure~\ref{fig:HE}. The heat exchanger is 90\,mm wide, 103\,mm long, and 160\,mm high. The heat exchange is performed between the cold feed (water) and the hot medium (water). The cold feed as well as the heating medium are transported to the heat exchanger by two peristaltic pumps with flexible tubing from silicon rubber. The flow rate of the feed is constant, while the aim of control is to track the reference value of the feed temperature. Therefore, the controlled variable is the feed temperature $T$ at the outlet of the heat exchanger. The temperature of the heated feed in the outlet stream was measured by the type K thermocouple. The associated manipulated variable is the voltage $U$ corresponding to the power of the pump feeding the heat exchanger by the hot medium. The voltage is within the range of [$0-5$]\,V normalized into the relative values in percentage. The maximal voltage 5\,V or 100\% corresponds to volumetric flow rate 11.5\,$\mathrm{ml}\,\mathrm{s}^{-1}$. For further technical specifications of the laboratory heat exchanger, the reader is referred to~\cite{pct23}. As heat exchange is a nonlinear and asymmetric process~\cite{Liptak}, this heat exchanger represents a suitable candidate for the presented controller tuning strategy. The corresponding illustrative scheme of the implemented closed-loop control setup is in Figure~\ref{fig:CL}, where the ``Self-tuning'' block substitutes the more detailed scheme of the tuning procedure in Figure~\ref{fig:tuning}.  
 
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{images/HE}
+		\caption[Heat exchanger Armfield Process Plant Trainer PCT23]{Laboratory heat exchanger Armfield Process Plant Trainer PCT23: feed pump\,(1), heating medium pump\,(2), feed tanks\,(3), heater for heating medium\,(4), heat exchanger\,(5).}
+		\label{fig:HE}
+	\end{center}
+\end{figure}
+
 The system was identified by experimental identification. The aim was to work with linear nominal model in MPC optimization problem to decrease the numerical complexity. To avoid plant-model mismatch in order to ensure offset-free tracking, either disturbance observer or built-in integrator (Eq.~\eqref{eq:mpc_problem}) can be employed. Due to the ease of implementation, in this work, the built-in integrator was considered. The system was identified based on several measured step responses. The step changes were performed in the whole range of admissible values of manipulated variable and every step response was identified by transfer function. It was possible to identify every step response as a first-order system, while the nominal gain and time constant are respectively $K = 0.24\,^{\circ}\mathrm{C}$ and $\tau = 5.7$\,s. 
 %More specifically, several step responses were obtained in the whole range of the input variable steps. Every step response was identified as a first-order system and the nominal transfer function was calculated.
 Finally, the nominal transfer function was converted to the state-space model. The matrices of the discrete-time state-space model of the plant are
@@ -551,14 +559,6 @@ The control profiles generated for both considered boundary control setups are c
 Note, the constructed explicit MPC controller computed control inputs to respect the constraints on the control inputs and they need not be truncated afterward. 
 
 An interesting phenomenon can be observed during tracking the third reference value, i.e., $T_{\mathrm{ref}}$ = 50\,$^{\circ}\mathrm{C}$. Although the steady-state values of temperature have the same value, the values of the manipulated variable are different. To check the correctness of the results, the measurements were performed multiple times and led to the same behavior. The reason could be explained by the peak of the manipulated variable associated with the upper boundary controller at time 800\,s, see Figure~\ref{fig:MV_boundaries}, blue. After approximately 100\,s, the value of manipulated variable dropped and settled at a value that was lower than the value associated with the lower boundary controller, see Figure~\ref{fig:MV_boundaries}, red. This is a consequence of the heat accumulated inside the heat exchanger plates, and therefore less heating medium was necessary to heat the feed. This phenomenon does not happen when tracking the reference value $T_{\mathrm{ref}}$ = 45\,$^{\circ}\mathrm{C}$, which originates in the nonlinear nature of the heat transfer process. When working in higher temperature range, the gain of the heat transfer process decreases and the sensitivity to changes in the heating medium flow is lower. Therefore even different flow rates of the heating medium lead to the same temperature at the outlet. 		
-
-\begin{figure}
-	\begin{center}
-		\includegraphics[width=0.8\textwidth]{images/HE}
-		\caption[Heat exchanger Armfield Process Plant Trainer PCT23]{Laboratory heat exchanger Armfield Process Plant Trainer PCT23: feed pump\,(1), heating medium pump\,(2), feed tanks\,(3), heater for heating medium\,(4), heat exchanger\,(5).}
-		\label{fig:HE}
-	\end{center}
-\end{figure}
 
 \begin{figure}
 	\begin{center}

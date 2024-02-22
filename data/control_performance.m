@@ -1,4 +1,4 @@
-clc, close all, clear 
+% clc, close all, clear 
 load('ref_tracking25.mat')
 %% plots
 figure(11)
