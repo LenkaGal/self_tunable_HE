@@ -375,9 +375,16 @@
 	\comment{
 		In the heat exchange process, the dynamics of the hot stream appears to be neglected. Why is this the case? I am not sure about the explanation given on why different steady-state inputs are observed. The flow rate of the hot stream is adjusted so the cold stream outlet temperature is maintained at the reference value is done. It seems, though not shown, that the hot stream inlet temperature is maintained to be constant. Based on the results, it would seem that the steady-state hot stream temperature is free to vary. What about the cold stream inlet temperature? Please given the trajectories of all these variables, or at least, the temperatures. What is the impact of the repeatability of the experiments given that the hot stream temperature is allowed to vary? In any case, the metrics presented in Table 1 are reported for one experiment per scenario. I would encourage computing these metrics for several experiments to ensure repeatability of the experiments and make the results more convincing.
 	}
-
-
-
+	\answer{
+		\textcolor{blue}{We thank for very insightful comment on the experiment setup. We find this comments is composed of three, closely related, crucial issues to be answered one by one.}
+		
+		\textcolor{blue}{First, we agree with the reviewer that the hot stream temperature was considered to be constant. This assumption is supported by the implementation of the auxiliary PID controller dedicated to control the temperature in the boiler/retention tank of hot medium. Although the control profiles of the hot stream temperature ($T = 70^{\circ}$\,C) is not provided, the corresponding dynamics provided by the heat transfer were within the declared precision of the hot stream temperature sensor and hence negligible.}
+		
+		\textcolor{blue}{Next, we would like to make clear that the repeatability of the realized laboratory experiments was ensured by fixing all the relevant conditions, such as the cold medium dosed into the heat exchanger from the large retention tanks at the laboratory temperature, etc.}
+		
+		\textcolor{blue}{Finally, we would like to address the doubts related to the observation of the varying steady-state values of the control inputs corresponding to the same value of the controlled variable - the putlet temperature of heated medium. Although this performance may look as an error introduced during a single measurement, we realized a series of laboratory experiments to investigate this phenomenon with the analogous results. The steady-state value of control input settled either in the close neighborhood of $U = 45\,\%$ (e.g., for $Q_{\mathrm{y}} = XXX, XXX$), or close to the value of $U = 55\,\%$ (e.g., for $Q_{\mathrm{y}} = XXX, XXX$). Therefore, after the detailed analysis, we state that this phenomenon originates the physical construction of the heat exchanger in the consequence of the portion of heat releases from the plates for the (relatively high) reference value around $T = 50^{\circ}$\,C.}
+	}
+	
 	
 	\bibliographystyle{plain}
 	\bibliography{references}
