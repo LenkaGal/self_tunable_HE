@@ -68,6 +68,11 @@
 	}
 
 	\answer{
+		
+		\textcolor{blue}{ [ TODO: Odporú?am prida? po?akovanie na úvod prvej odpovede každému recenzentovi---nastaví sa tým úvodná (pozitívna) ``nálada'' komunikácie. ] }
+		
+		
+		\textcolor{blue}{ We thank the Reviewer for pointing out unclear motivation for self-tunable control approach in section Introduciton.} 
 		In order to clearly emphasize the need of a self-tunable technique, we revised the Introduction section in a following way:
 		\begin{quote}
 			TODO: Update the introduction
@@ -81,9 +86,17 @@
 	}
 
 	\answer{
+		
+		\textcolor{blue}{ [ TODO: Odporú?am po?akova? za konkrétnu vec, aby to nevyznelo len ako ``prázdne'' / všeobecné po?akovanie. ] }
+		
 		We thank the reviewer for an important comment. We reformulated the sentence as follows:
 		\begin{quote}
 			\change{If the MPC optimization problem can be pre-solved explicitly, the lower online computational complexity makes the explicit MPC more suitable for a practical industrial implementation.}
+		\end{quote}
+		
+		\textcolor{blue}{We thank the reviewer for an important comment on application range of the proposed control method. We reformulated the corresponding sentence to make the implementation limits clear}:
+		\begin{quote}
+			\change{If the MPC design problem can be addressed in a tractable form and pre-solved explicitly offline, the consequent reduced online computational complexity makes the explicit MPC more suitable for a practical industrial implementation.}
 		\end{quote}
 	}
 	
@@ -97,7 +110,11 @@
 	}
 
 	\answer{
-		We thank the reviewer for the question and comment. If a moderately tuned optimal MPC also provided a reasonable or potentially better performance than the two boundary controllers, the self-tunable technique would be out of scope for such control application. Nevertheless, there are situations, when using only one controller with a constant setup leads to just ''satisfactory'' control results, i.e., the reference value is achieved, but with worse control performance (e.g. high overshoots or settling time). When working on our case study results, different setups of penalty matrices were explored, also $Q_\mathrm{y} = 500$. In this scenario, the control performance was comparable with the tuned controller for the first two reference step changes (tracking the reference upwards). However, when the reference was tracked downwards, the undershoots similar to lower boundary controller, i.e., $Q_\mathrm{y} = 100$ were present. Therefore, it supports the fact that the general aim of the control, i.e., achieving the reference value, is satisfied, but the control performance could be improved by including the benefits of two boundary controllers.   
+		We thank the reviewer for the question and comment. If a moderately tuned optimal MPC also provided a reasonable or potentially better performance than the two boundary controllers, the self-tunable technique would be out of scope for such control application. Nevertheless, there are situations, when using only one controller with a constant setup leads to just ''satisfactory'' control results, i.e., the reference value is achieved, but with worse control performance (e.g. high overshoots or settling time). When working on our case study results, different setups of penalty matrices were explored, also $Q_\mathrm{y} = 500$. In this scenario, the control performance was comparable with the tuned controller for the first two reference step changes (tracking the reference upwards). However, when the reference was tracked downwards, the undershoots similar to lower boundary controller, i.e., $Q_\mathrm{y} = 100$ were present. Therefore, it supports the fact that the general aim of the control, i.e., achieving the reference value, is satisfied, but the control performance could be improved by including the benefits of two boundary controllers.  
+		
+		\textcolor{blue}{
+		We thank the reviewer for the comment on the performance of the proposed method. Obviously, if there exists a well-tuned (``universal'') controller that satisfies the requirements on the control performance in the whole range of the considered operating conditions, than implementation of the self-tuning procedure is out of scope for such control application. Nevertheless, there are numerous practical situations, when using only one controller with a constant setup leads to poor or just to ``satisfactory'' control results, i.e., the reference value is achieved, but with worse control performance, e.g., leading to high overshoots or settling times. When working on our laboratory case study, a set of different setups of penalty matrices were investigated, among them also the requested value of $Q_\mathrm{y} = 500$. In this control scenario, the control performance was comparable with the self-tuned controller for the first two step changes of the reference value (tracking the reference upwards). However, when the reference was tracked downwards, the significant undershoots were present---similar to the closed-loop performance of the lower boundary controller, i.e., $Q_\mathrm{y} = 100$. Therefore, these observations support the fact that the general aim of the control, i.e., achieving the reference value, is satisfied, but the closed-loop control performance is improved by introducing the benefits of the self-tuning based on the two boundary MPC controllers. 
+		} 
 	}
 
 
@@ -120,6 +137,14 @@
 			In case a non-negligible disturbance occurs, both boundary controllers
 			should be able to solve a disturbance rejection problem, as the final
 			value of the manipulated variables is interpolated between them. \change{It is also possible to include the disturbance into the design process of the MPC controller. In such case, e.g., a robust MPC strategy (REF!) would be beneficial, which would lead to more conservative control actions in order to create space for disturbances. Nevertheless, if the problem is not large-scale and it is possible to obtain the explicit solution, it is still possible to interpolate between the control actions from the robust controllers.} 
+		\end{quote}	
+		
+		\textcolor{blue}{We thank the reviewer for this important comment on the reliable implementation in the industrial applications. We revisited the corresponding text in section Conclusion containing the comments on disturbances and incorporated also the answer on unmeasured disturbances. As the revised extended text includes ideas and comments reminding discussion more than conclusion, this part was transferred to the section Results and discussion, and now reads as follows:}
+		\begin{quote}
+			Note, this strategy relies on a proper design of the two boundary controllers.
+			In case a non-negligible disturbance occurs, both boundary controllers
+			should be able to solve a disturbance rejection problem, as the final
+			value of the manipulated variables is interpolated between them. \change{To address the impact of the disturbances directly in the construction of the MPC controller design, a robust MPC strategy \cite{PR11} should be considered. Obviously, any robust MPC design method leads to conservative control actions as some portion of performance is scarified to compensate the impact of the disturbances. Nevertheless, if it is possible to obtain the explicit (multi-parametric) solution of robust explicit MPC offline, then exactly the same self-tuning procedure is applicable to interpolate between the control actions from the robust controllers.} 
 		\end{quote}	
 	}
 
