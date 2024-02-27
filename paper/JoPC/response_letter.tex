@@ -95,6 +95,11 @@
 		The main idea behind the self-tunable approximate explicit MPC controller is that two extreme controllers are designed with aggressive and slow tunings called the "boundary controllers", and a linear interpolation of those two controllers is taken to produce the final control input. How can this approach be applied to multivariable interacting systems with multiple control inputs?
 	}
 
+	\answer{
+		The approach of self-tunable technique can be extended also to multivariable systems by utilizing only single value of the tuning parameter $\rho$ for the interpolation of the value of every control input. It is suggested in Eq.~(8) that the tuning parameter $\rho$ can be calculated as the maximal value of all the tuning parameters computed for every output reference. However, this is straightforward to implement only for decoupled systems. If there are strong interactions between the system states, the self-tunable technique is difficult to design. (My mame decoupled system?). To give the reader a clear view on the apllicability of the proposed approach, we added the following explanation to the manuscript:
+		TODO
+	}
+
 	
 	\comment{
 		In the final simulation studies presented, the closed-loop performance of the self-tuned approximate MPC is compared only with the two extreme boundary controllers. However, a moderately tuned (E.g, Qy=500-600) "optimal" MPC controller may also provide a reasonable and potentially better performance than the two boundary controllers. I encourage the authors to comment on its performance and elaborate whether the control improvements reported in Table 2 still remain.
