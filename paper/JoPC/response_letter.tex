@@ -214,49 +214,24 @@
 	}
 
 	\answer{
-		The aggressiveness of the MPC controller is associated with the setup of penalty matrices, namely $Q_\mathrm{y}$, $Q_\mathrm{I}$, $R$, as it determines the aggressiveness of the final control input. In general, higher penalization of the controlled states or control error (higher values of the diagonal elements of matrices $Q_\mathrm{y}$ and $Q_\mathrm{I}$) leads to more aggressive control actions. This process is similar to increasing the proportional gain in PID controller. On the contrary, higher penalization of the input variable through the penalty matrix $R$ leads to more sluggish control, see e.g.~\cite{Maciejowski_MPC}. In order to make the notation of aggressive controller more clear for a reader, we added this description to the Section.
+		The aggressiveness of the MPC controller is associated with the setup of penalty matrices, namely $Q_\mathrm{y}$, $Q_\mathrm{I}$, $R$, as it determines the aggressiveness of the final control input. In general, followign the LQR design rules, higher penalization of the controlled states or control error (higher values of the diagonal elements of matrices $Q_\mathrm{y}$ and $Q_\mathrm{I}$) leads to more aggressive control actions. This process is similar to increasing the proportional gain in PID controller. On the contrary, higher penalization of the input variable through the penalty matrix $R$ leads to more sluggish control, see e.g.~\cite{Maciejowski_MPC}. In order to make the notation of aggressive controller more clear for a reader, we added this description to the Section.
 		
 		\begin{quote}
 			The paper~\cite{self_tunable} pushes the idea of tunable explicit MPC further and deals with the issues of practical industrial-oriented implementation. The procedure of the self-tunable controller technique is presented. The controller's aggressivity is tuned based on the difference between the reference value and the steady state corresponding to the model linearization point. \change{In the context of MPC, the aggressiveness is associated with the setup of the penalty matrices, as it determines the aggressiveness of the final control input. In general, higher penalization of the controlled states or control error in the cost function leads to more aggressive control actions. This process is similar to increasing the proportional gain in PID controller. On the contrary, higher penalization of the input variable leads to more sluggish control, see e.g.~\cite{Maciejowski_MPC}. The MPC tuning} based on the distance from the steady-state operating point represented a way how to compensate for the system's nonlinear behavior.
 		\end{quote} 
 	}
 	
-	\answer{
-		\textcolor{blue}{
-		The ``aggressiveness'' of the MPC controller is associated with the setup of penalty matrices, namely $Q_\mathrm{y}$, $Q_\mathrm{I}$, $R$, as it determines the aggressiveness of the final control input. In general, following the LQR design riles, higher penalization of the controlled states or control error (higher values of the diagonal elements of matrices $Q_\mathrm{y}$ and $Q_\mathrm{I}$) leads to more aggressive control actions. This tuning procedure is also similar to increasing the proportional gain of PID controller. On the contrary, higher penalization of the input variable through the penalty matrix $R$ leads to more sluggish control, e.g., see~\cite{Maciejowski_MPC}. In order to make the notation of aggressive controller more clear, we added the following description:
-		}
-		
-		\begin{quote}
-			The paper~\cite{self_tunable} pushes the idea of tunable explicit MPC further and deals with the issues of practical industrial-oriented implementation. The procedure of the self-tunable controller technique is presented. \change{The controller's aggressivity is tuned based on the difference between the reference value and the steady state corresponding to the considered linearization point of the model linearization point. In the context of MPC design, the aggressiveness is associated with the setup of the penalty matrices, as it determines the aggressiveness of the final control input. In general, higher penalization of the controlled states or control error in the cost function leads to more aggressive control actions. This tuning procedure is similar to increasing the proportional gain in PID controller. On the contrary, higher penalization of the input variable leads to more sluggish control, e.g., see~\cite{Maciejowski_MPC}. The MPC tuning based on the distance from the steady-state operating point represented an efficient way how to compensate for the nonlinear behavior of the controlled system.}
-		\end{quote} 
-		
-		\begin{quote}
-			The paper~\cite{self_tunable} pushes the idea of tunable explicit MPC further and deals with the issues of practical industrial-oriented implementation. The procedure of the self-tunable controller technique is presented. \change{The controller's aggressivity is tuned based on the difference between the reference value and the steady state corresponding to the considered linearization point of the model linearization point. In the context of MPC design, the aggressiveness is associated with the setup of the penalty matrices, as it determines the aggressiveness of the final control input. In general, higher penalization of the controlled states or control error in the cost function leads to more aggressive control actions. This tuning procedure is similar to increasing the proportional gain in PID controller. On the contrary, higher penalization of the input variable leads to more sluggish control, e.g., see~\cite{Maciejowski_MPC}. The MPC tuning based on the distance from the steady-state operating point represented an efficient way how to compensate for the nonlinear behavior of the controlled system.}
-		\end{quote} 
-	}
-
 	\comment{
 		What are the properties of the reference values selected? Are they reachable?
 	}
 
 	\answer{
-		We would like to divide the answer in two parts as the reference value is present in MPC optimization problem in Eq.~(1) and also in the calculation process of $\rho$ in Eq.~(7) and Eq.~(9). Regarding the MPC optimization problem, the reference signal is a parameter which is usually constrained such that it covers the operating range of the corresponding control application. Therefore, during the control, the reference can be set only as a value from the feasible set. If the MPC problem is precomputed also for non-reachable references, e.g., because it is not clear a priori which reference values will be set during control, this would ''only'' lead to larger explicit solution of MPC because of larger range of reference signal. Regarding the calculation of parameter $\rho$, the setup of reference value is more strict, i.e., the value should be reachable and from the operating range to ensure that $0 \le \rho \le 1 $. 
-		}
-	
-		\answer{
-			\textcolor{blue}{
-			We would like to divide the answer in two parts as the reference value is present in MPC optimization problem in Eq.~(1) and also in the procedure to determine the tuning parameter $\rho$ in Eq.~(7), (9). 
-			}
-			
-			\textcolor{blue}{
-			First, regarding the MPC optimization problem, the reference signal is a parameter which is usually constrained such that it covers the operating range of the corresponding control application. Therefore, during the real-time control, the reference value can be selected only as a value from the feasible set determined offline, when constructing explicit MPC controller. If the MPC problem is precomputed also for non-reachable references, e.g., because it is not clear a priori which reference values will be set during control, this would ``only'' lead to larger explicit solution of MPC, as the consequence of larger range of reference signal. 
-			}
+		We would like to divide the answer in two parts as the reference value is present in MPC optimization problem in Eq.~(1) and also in the calculation process of the tuning parameter $\rho$ in Eq.~(7) and Eq.~(9). 
 		
-			\textcolor{blue}{Next, regarding the calculation of parameter $\rho$, the setup of reference value is strict and the reference value is reachable from the operating range to ensure that $0 \le \rho \le 1 $ holds. Otherwise, the interpolated control action would be the ``extrapolation'' leading to the loss of guarantees on the input/state constraints satisfaction, etc.
-			}
-			
-			\textcolor{blue}{ [ TODO: Prosím ?a, pridaj 1-2 vety k tým dvom diskutovaným bodom aj do textu. ] }
-			
+		First, regarding the MPC optimization problem, the reference signal is a parameter which is usually constrained such that it covers the operating range of the corresponding control application. Therefore, during the real-time control, the reference value can be selected only as a value from the feasible set determined offline, when constructing explicit MPC controller. If the MPC problem is precomputed also for non-reachable references, e.g., because it is not clear a priori which reference values will be set during control, this would ``only'' lead to larger explicit solution of MPC, as the consequence of larger range of reference signal. 
+
+		Next, regarding the calculation of parameter $\rho$, the setup of reference value is strict and the reference value is reachable from the operating range to ensure that $0 \le \rho \le 1 $ holds. Otherwise, the interpolated control action would be the ``extrapolation'' leading to the loss of guarantees on the input/state constraints satisfaction, etc.		
+		
 			\begin{quote}
 				TODO: Somehow update text in manusctipt?
 			\end{quote}
@@ -267,7 +242,7 @@
 	}
 
 	\answer{
-		We thank the Reviewer for a careful review. The equation was corrected \textcolor{blue}{to remove a bug and now reads} as follows:
+		We thank the Reviewer for a careful review. The equation was corrected as follows:
 		\begin{quote}
 			\change{
 			\begin{eqnarray*}				
@@ -288,9 +263,9 @@
 	}
 
 	\answer{
-		To improve the readability of the manuscript, we added the mathematical description to the corresponding sentence. Moreover, based on the following comment, we added the description of asymmetric \textcolor{blue}{system} behavior in this paragraph as follows:
+		To improve the readability of the manuscript, we added the mathematical description to the corresponding sentence. Moreover, based on the following comment, we added the description of asymmetric system behavior in this paragraph as follows:
 		\begin{quote}
-			Note, the relations in Eq.~(7) and Eq.~(8) operate with the absolute value of the reference. \change{It is not taken into account, whether the reference \textcolor{blue}{value} changed upwards or downwards with respect to the system steady-state value placed in the origin, i.e., whether \textcolor{blue}{holds inequality:} $\Delta_\mathrm{ref}(k) = y_\mathrm{ref}(k)-y_\mathrm{ref}(k-1) > 0$ or $\Delta_\mathrm{ref}(k) < 0$. As many plants have nonlinear \textcolor{blue}{system} behavior with asymmetric nature (different behavior when the process variable is rising or decreasing), the positivity or negativity of the reference change could be considered in the controller \textcolor{blue}{self-tuning procedure} to improve the control performance.}
+			Note, the relations in Eq.~(7) and Eq.~(8) operate with the absolute value of the reference. \change{It is not taken into account, whether the reference value changed upwards or downwards with respect to the system steady-state value placed in the origin, i.e., whether holds the inequality: $\Delta_\mathrm{ref}(k) = y_\mathrm{ref}(k)-y_\mathrm{ref}(k-1) > 0$ or $\Delta_\mathrm{ref}(k) < 0$. As many plants have nonlinear behavior with asymmetric nature (different behavior when the process variable is rising or decreasing), the positivity or negativity of the reference change could be considered in the controller self-tuning procedure to improve the control performance.}
 		\end{quote}
 	}
 
@@ -299,7 +274,7 @@
 	}
 
 	\answer{
-		 \textcolor{blue}{Thank for this comment. Please, see the previous answer as} the incorporation of this comment into the manuscript was merged with the previous comment, as it corresponds to the thoughts in the same paragraph.
+		 We thank the Reviewer for this comment. Please, see the previous answer as the incorporation of this comment into the manuscript was merged with the previous comment, because it corresponds to the thoughts in the same paragraph.
 	}
 
 
@@ -308,7 +283,7 @@
 	}
 
 	\answer{
-		\textcolor{blue}{As this paper investigates laboratory implementation considering a SISO system, then} the parameter $\gamma$ depends on the value of $\rho$, which is \textcolor{blue}{also a} scalar. From this it follows, that the domain of $\gamma$ is $\mathbb{R}$.
+		\textcolor{blue}{As this paper investigates laboratory implementation considering a SISO system, then} the parameter $\gamma$ depends on the value of $\rho$, which is also a scalar. From this it follows, that the domain of $\gamma$ is $\mathbb{R}$.
 	}	
 
 	\comment{
@@ -316,7 +291,7 @@
 	}
 
 	\answer{
-		We thank the reviewer for this attentive comment. We corrected the order of Figures.
+		We thank the Reviewer for this attentive comment. We corrected the order of Figures.
 	}
 
 	\comment{
@@ -328,10 +303,10 @@
 	}
 
 	\answer{
-		\textcolor{blue}{Thanks for pointing out insufficient discussion on the selection of the tuning penalty matrix $Q_\mathrm{y}$. We have carefully revisited the corresponding paragraph to describe the tuning procedure.}
+		We thank the Reviewer for pointing out insufficient discussion on the selection of the tuning penalty matrix $Q_\mathrm{y}$. We revisited the corresponding paragraph to describe the tuning procedure.
 		
 		\begin{quote}
-			The penalty matrices of the problem in Eq.~(1) were systematically tuned and the corresponding control was implemented on the laboratory heat exchanger for each of the considered explicit MPC setups. 
+			The penalty matrices of the problem in Eq.~(1) were systematically tuned and the corresponding control setup was implemented on the laboratory heat exchanger for each of the considered explicit MPC setups. 
 			First, the aim of tuning was to determine, which penalty matrix is the most suitable for real-time tuning. \change{Based on the set of experimentally collected data, the penalty matrix $Q_\mathrm{y}$ was chosen as the tuned one.} Based on the set of experimentally collected data, the most significant effect on the control trajectories had tuning the penalty matrix $Q_\mathrm{y}$, while still preserving a satisfactory control performance, i.e., without steady-state control error and significant oscillations around the reference value. Next, the boundary values of the tunable matrix $Q_\mathrm{y}$ were tuned as $Q_\mathrm{y, L}$ = 100 and $Q_\mathrm{y, U}$ = 1\,000.
 		\end{quote}
 		
@@ -347,18 +322,16 @@
 		In the heat exchange process, the dynamics of the hot stream appears to be neglected. Why is this the case? I am not sure about the explanation given on why different steady-state inputs are observed. The flow rate of the hot stream is adjusted so the cold stream outlet temperature is maintained at the reference value is done. It seems, though not shown, that the hot stream inlet temperature is maintained to be constant. Based on the results, it would seem that the steady-state hot stream temperature is free to vary. What about the cold stream inlet temperature? Please given the trajectories of all these variables, or at least, the temperatures. What is the impact of the repeatability of the experiments given that the hot stream temperature is allowed to vary? In any case, the metrics presented in Table 1 are reported for one experiment per scenario. I would encourage computing these metrics for several experiments to ensure repeatability of the experiments and make the results more convincing.
 	}
 	\answer{
-		\textcolor{blue}{We thank for very insightful comment on the experiment setup. We find this comments is composed of three, closely related, crucial issues to be answered one by one.}
+		We thank the Reviewer for the very insightful comment on the experiment setup. We find this comment comprises three closely related points to be answered individually.
 		
-		\textcolor{blue}{First, we agree with the reviewer that the hot stream temperature was considered to be constant. This assumption is supported by the implementation of the auxiliary PID controller dedicated to control the temperature in the boiler/retention tank of hot medium. Although the control profiles of the hot stream temperature ($T = 70^{\circ}$\,C) is not provided, the corresponding dynamics provided by the heat transfer were within the declared precision of the hot stream temperature sensor and hence negligible.}
+		\textcolor{blue}{First, we confirm that the hot stream temperature is considered constant. This assumption is supported by the implementation of the auxiliary PID controller dedicated to controlling the temperature in the boiler/retention tank of the hot medium. Although the control profiles of the hot stream temperature ($T = 70^{\circ}$\,C) are not provided, the corresponding dynamics provided by the heat transfer were within the declared precision of the hot stream temperature sensor and hence negligible.}
 		
-		\textcolor{blue}{Next, we would like to make clear that the repeatability of the realized laboratory experiments was ensured by fixing all the relevant conditions, such as the cold medium dosed into the heat exchanger from the large retention tanks at the laboratory temperature, etc.}
+		Next, we would like to make clear that the repeatability of the realized laboratory experiments was ensured by fixing all the relevant conditions, such as the cold medium dosed into the heat exchanger from the large retention tanks at the laboratory temperature and the constant inlet temperature of the heating medium.
 		
-		\textcolor{blue}{Finally, we would like to address the doubts related to the observation of the varying steady-state values of the control inputs corresponding to the same value of the controlled variable - the putlet temperature of heated medium. Although this performance may look as an error introduced during a single measurement, we realized a series of laboratory experiments to investigate this phenomenon with the analogous results. The steady-state value of control input settled either in the close neighborhood of $U = 45\,\%$ (e.g., for $Q_{\mathrm{y}} = XXX, XXX$), or close to the value of $U = 55\,\%$ (e.g., for $Q_{\mathrm{y}} = XXX, XXX$). Therefore, after the detailed analysis, we state that this phenomenon originates the physical construction of the heat exchanger in the consequence of the portion of heat releases from the plates for the (relatively high) reference value around $T = 50^{\circ}$\,C.}
+		\textcolor{blue}{ Finally, we would like to address the doubts related to observing the varying steady-state values of the control inputs corresponding to the same value of the controlled variable - the outlet temperature of the heated medium. Although this performance may look like an error introduced during a single measurement, we realized a series of laboratory experiments to investigate this phenomenon with analogous results. The steady-state value of control input settled either in the close neighborhood of $U = 45\,\%$ (e.g., for $Q_{\mathrm{y}} = XXX, XXX$), or close to the value of $U = 55\,\%$ (e.g., for $Q_{\mathrm{y}} = XXX, XXX$). Therefore, after the detailed analysis, we state that this phenomenon originates from the physical construction of the heat exchanger due to the portion of heat released from the plates for the (relatively high) reference value around $T = 50^{\circ}$\,C.}
 		
 		\begin{quote}
-			\change{
-				\textcolor{blue}{ [ TODO: Zváži? možnos? prida? cca. 1 vetu ku každému bodu aj do textu ?lánku. ] }
-			}
+			TODO: Zapracovat do clanku. 			
 		\end{quote}
 	}
 	
