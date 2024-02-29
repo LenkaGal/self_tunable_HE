@@ -148,7 +148,7 @@
 	\answer{		
 		We agree that the used formulation sounds vague, therefore, we reformulated the corresponding sentence in Abstract as follows:
 		\begin{quote}
-			This paper provides a novel self-tunable control policy that does not require any interventions of the control engineer during operation in order to \change{retune the controller}.
+			This paper provides a novel self-tunable control policy that does not require any interventions of the control engineer during operation in order to \change{retune the controller parameters}.
 		\end{quote}			
 	}
 
@@ -191,22 +191,28 @@
 	}
 
 	\comment{
-		Similarly, for the two boundary controllers explain the assumptions on the penalty matrices. Clearly, if the "upper" boundary matrices are equivalent to the "lower" boundary matrices multiplied by a scalar, there will be no difference between the solutions obtained by solving either controller. Perhaps, this is what meant by statement: "The boundary explicit controllers have the same structure and setup, except for one of the penalty matrices - the tuned one", but this statement can be further clarified (which matrix is the tuned one referring to?).
+		Similarly, for the two boundary controllers explain the assumptions on the penalty matrices. \change{Clearly, if the "upper" boundary matrices are equivalent to the "lower" boundary matrices multiplied by a scalar, there will be no difference between the solutions obtained by solving either controller.} Perhaps, this is what meant by statement: "The boundary explicit controllers have the same structure and setup, except for one of the penalty matrices - the tuned one", but this statement can be further clarified (which matrix is the tuned one referring to?).
 	}
 
 	\answer{
 		To explain the assumptions on the penalty matrices and specify the tuned matrix, we revisited the text in the corresponding paragraph of the Section 2.2 in the following way:
 		\begin{quote}
-			The idea of approximated tunable explicit MPC comes from the work ~\cite{Klauco_tunable}, where the control action is calculated based on linear interpolation between two boundary control actions. These control actions result from evaluating two boundary explicit MPCs. The boundary explicit controllers \change{are constructed by solving the optimization problem having} the same structure and setup, except for one of the penalty matrices -- the tuned one. \change{Based on the specific control application, any penalty matrix can be chosen as the tuned parameter, i.e., this approach is applicable for any tuning parameter. The boundary penalty matrices follow the assumptions on the penalty matrices from Section 2.1 and are diagonal matrices such that $\lambda_{i,\mathrm{L}} \le \lambda_{i,\mathrm{U}}$, $\forall i = 1,\dots,s$, where $\lambda$ denotes the vector of eigenvalues of the penalty matrix, $s$ is the rank of the tuned penalty matrix, and $L$, $U$ denote the lower and upper boundary setup respectively. }
-		\end{quote}	
-		
-		\begin{quote}
-			The idea of approximated tunable explicit MPC comes from the work ~\cite{Klauco_tunable}, where the control action is calculated based on linear interpolation between two boundary control actions. These control actions result from evaluating two boundary explicit MPCs. The boundary explicit controllers \change{are constructed by solving the optimization problem having} the same structure and setup, except for one of the penalty matrices -- the tuned one. \textcolor{blue}{The tuned matrix is either the state penalty or the control input penalty matrix.} \change{Based on the specific control application, and following the well-known LQR-based tuning rules, any penalty matrix can be selected as the tuned parameter. Therefore, this approach is applicable for any tuning parameter. The boundary penalty matrices follow the assumptions on the penalty matrices from Section 2.1 and are diagonal matrices such that $\lambda_{i,\mathrm{L}} \le \lambda_{i,\mathrm{U}}$, $\forall i = 1,\dots,s$, where $\lambda$ denotes the vector of eigenvalues of the penalty matrix, $s$ is the rank of the tuned penalty matrix, and $L$, $U$ denote the lower and upper boundary setup respectively. }
-		\end{quote}	
+			The idea of approximated tunable explicit MPC comes from the work ~\cite{Klauco_tunable}, where the control action is calculated based on linear interpolation between two boundary control actions. These control actions result from evaluating two boundary explicit MPCs. The boundary explicit controllers \change{are constructed by solving the optimization problem having} the same structure and setup, except for one of the penalty matrices -- the tuned one. \change{Based on the specific control application, any penalty matrix can be chosen as the tuned parameter, i.e., this approach is applicable for any penalty matrix. The boundary penalty matrices follow the assumptions on the penalty matrices from Section 2.1 and are diagonal matrices such that $\lambda_{i,\mathrm{L}} \le \lambda_{i,\mathrm{U}}$, $\forall i = 1,\dots,s$, where $\lambda$ denotes the vector of eigenvalues of the penalty matrix, $s$ is the rank of the tuned penalty matrix, and $L$, $U$ denote the lower and upper boundary setup respectively. }
+		\end{quote}			
+
 	}
 
 	\comment{
 		Please clarify the last sentence on page 7, extending into page 8, which describes the tuning process as systematic, but the description appears to be ad hoc and depend on the system.
+	}
+
+	\answer{
+		We thank the Reviewer for the comment on systematic tuning. By systematic tuning we mean choosing one penalty matrix and observig the control results based on gradual increasing or decreasing of the diagonal elements of the penalty matrices. Then, the same procedure is performed for the rest of the penalty matrices. Regarding the initial setup of the penalty matrices, it is often based on balancing the orders of magnitude of the input and state variables. The aim is to compensate the contributions of all the terms of the cost function. Nevertheless, this procedure is not the aim of this work and we do not want to go into detail of the general MPC tuning. Therefore, we omitted the part mentioning judging the control performance subject to the specific system and reformulated the sentence as follows:
+		
+		\begin{quote}
+			To determine which penalty matrix in Eq.~(4) should be tuned, it is suggested to judge the control performance \change{by systematic tuning of all the penalty matrices. Systematic tuning involves selecting a specific penalty matrix and observing the control results by gradually increasing or decreasing the diagonal elements of the matrix. This process is then repeated for the remaining penalty matrices in a similar manner.}
+		\end{quote}
+
 	}
 
 	\comment{
@@ -234,10 +240,20 @@
 		
 		First, regarding the MPC optimization problem, the reference signal is a parameter which is usually constrained such that it covers the operating range of the corresponding control application. Therefore, during the real-time control, the reference value can be selected only as a value from the feasible set determined offline, when constructing explicit MPC controller. If the MPC problem is precomputed also for non-reachable references, e.g., because it is not clear a priori which reference values will be set during control, this would ``only'' lead to larger explicit solution of MPC, as the consequence of larger range of reference signal. 
 
-		Next, regarding the calculation of parameter $\rho$, the setup of reference value is strict and the reference value is reachable from the operating range to ensure that $0 \le \rho \le 1 $ holds. Otherwise, the interpolated control action would be the ``extrapolation'' leading to the loss of guarantees on the input/state constraints satisfaction, etc.		
+		Next, regarding the calculation of parameter $\rho$, the setup of reference value is strict and the reference value is reachable from the operating range to ensure that $0 \le \rho \le 1 $ holds. Otherwise, the interpolated control action would be the ``extrapolation'' leading to the loss of guarantees on the input/state constraints satisfaction, etc.	
+		
+		As only the second part of the answer is crucial for the proposed tuning technique, we incorporated the comment on selected reference value into manuscript as follows:	
 		
 			\begin{quote}
-				TODO: Somehow update text in manusctipt?
+				Using the information about the maximal possible deviation $d_{\max}$, the tuning parameter $\rho$ can be calculated as the ratio between the current reference value and the maximal deviation:  
+				\begin{equation} \tag{7}
+					\label{eq:rho_self_tunable}
+					\rho = \frac{\vert y_{\mathrm{ref}(k)} \vert}{d_{\max}}.
+				\end{equation}
+				
+				Based on Eq.~\eqref{eq:rho_self_tunable}, the property $0 \le \rho \le 1$ holds, as $\vert y_{\mathrm{ref}} \vert \le d_{\max}$. As a consequence, the parameter $\rho$ represents a way how to normalize the deviation from the steady-state value and is exploited to scale the control action or, implicitly, to tune the aggressiveness of the controller. 
+				
+				\change{Note, the reference value must be reachable from the operating range to ensure that $0 \le \rho \le 1 $ holds. Otherwise, the interpolated control action would be the ``extrapolation'' leading to the loss of guarantees on the input/state constraints satisfaction, etc.}
 			\end{quote}
 	}
 
@@ -287,7 +303,7 @@
 	}
 
 	\answer{
-		\textcolor{blue}{As this paper investigates laboratory implementation considering a SISO system, then} the parameter $\gamma$ depends on the value of $\rho$, which is also a scalar. From this it follows, that the domain of $\gamma$ is $\mathbb{R}$.
+		The parameter $\gamma$ depends on the value of $\rho$, which is also a scalar. From this it follows, that the domain of $\gamma$ is $\mathbb{R}$.
 	}	
 
 	\comment{
