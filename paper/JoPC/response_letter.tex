@@ -280,7 +280,49 @@
 	}
 
 	\answer{
+		We thank the reviewer for the comment on the tuning parameter. We would like to divide our answer in three parts.
 		
+		We explained the symbol $\lvert.\rvert$ in the corresponding part as follows:
+		
+		\begin{quote}
+			Another suggestion is to fit the maximal deviation $d_{\max}$ based on the constraints on system outputs: 
+			\begin{equation} \tag{6}
+				\label{eq:d_max}
+				d_{\max} = \max(\vert y_{\min} \vert, y_{\max}),
+			\end{equation}
+			where \change{the symbol $\lvert.\rvert$ in Eq.~\eqref{eq:d_max} and everywhere else in the paper denotes the element-wise absolute value}, $y_{\min}$ and $y_{\max}$ are respectively lower and upper bound on the output variable in the deviation form, i.e., zero (origin) corresponds to the system steady-state value. 
+		\end{quote}
+	
+		Regarding the conservativeness of the parameter $d_{\max}$, we confirm that it is requested for this parameter to be equal to the maximum magnitude of the reference values. It is necessary to ensure this condition in order to satisfy $0 \le \rho \le 1$. If the parameter $d_{\max}$ would not correspond to the maximum magnitude of the reference values, the tuning parameter $\rho > 1$ would lead to extrapolation of the control input, which could result in losing of all theoretical guarantees, i.e., constraints satisfaction etc. As the satisfaction of the condition $0 \le \rho \le 1$ was emphasized in the comment regarding the reachable reference values, we did not incorporate this part of answer into the manuscript to avoid repetitions in the text.
+		
+		Last but not least, we address the question about the parameter $\rho$ closer to value 1 for large magnitudes of references. 			
+		In the manuscript, it is suggested to increase the value of diagonal elements of the penalty matrix $Q_\mathrm{y}$ with increasing reference step change, i.e.:		
+		\begin{eqnarray*}
+			Q_\mathrm{y}(k) = (1-\rho(k)) \, Q_\mathrm{y,L} + \rho(k) \, Q_\mathrm{y,U}.
+		\end{eqnarray*}
+			
+		The aim is to obtain a controller with higher penalization of the control error, leading to more ``aggressive'' or ``active'' control inputs.
+		If opposite nature of controller is requested, it is possible to adapt the tuning such that 
+		\begin{eqnarray*}
+			Q_\mathrm{y}(k) = \rho(k) \, Q_\mathrm{y,L} + (1-\rho(k)) \, Q_\mathrm{y,U}
+		\end{eqnarray*}
+		holds. This change leads to adding more weight on the lower boundary controller with the increasing value of tuning parameter $\rho$. To give the reader a better insight into the context of relation between parameter $\rho$ and the penalty matrix, we added this answer into Section 3.1 in the following way:
+				
+		\begin{quote}			
+			Note, only the absolute value of $\Delta_{\mathrm{ref}}$ and $\Delta_{\max}$ are considered in this procedure to ensure $\rho \ge 0$. 
+			
+ 			\change{In Eq.~(9), it is suggested to increase the value of tuning parameter $\rho$ with increasing value of reference step change. Note, in this work the larger value of the tuning parameter leads to adding more weight on the penalty matrices associated with upper boundary controller, see Eq.~(4). If opposite logic of controller tuning is requested, it is possible to adapt the tuning such that 
+				\begin{eqnarray*}
+					\label{eq:tunable_R}
+					&~& R(k) = \rho(k) \, R_\mathrm{L} + (1-\rho(k)) \, R_\mathrm{U}, \\
+					\label{eq:tunable_Qx}
+					&~& Q_\mathrm{I}(k) = \rho(k) \, Q_\mathrm{I,L} + (1-\rho(k)) \, Q_\mathrm{I,U}, \\
+					\label{eq:tunable_Qy}
+					&~& Q_\mathrm{y}(k) = \rho(k) \, Q_\mathrm{y,L} + (1-\rho(k)) \, Q_\mathrm{y,U},
+				\end{eqnarray*}
+ 			holds. This change leads to adding more weight on the lower boundary controller with the increasing value of tuning parameter $\rho$. }
+		\end{quote}
+			
 	}
 
 
