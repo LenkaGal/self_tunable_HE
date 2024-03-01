@@ -106,9 +106,11 @@
 	}
 
 	\answer{		
-		We thank the reviewer for the comment on the performance of the proposed method. Obviously, if there exists a well-tuned (``universal'') controller that satisfies the requirements on the control performance in the whole range of the considered operating conditions, then the implementation of the self-tuning procedure is out of scope for such control application. Nevertheless, there are numerous practical situations, when using only one controller with a constant setup leads to poor or just ``satisfactory'' control results, i.e., the reference value is achieved, but with worse control performance, e.g., leading to high overshoots or settling times. When working on our laboratory case study, a set of different setups of penalty matrices was investigated, among them also the requested value of $Q_\mathrm{y} = 500$. In this control scenario, the control performance was comparable with the self-tuned controller for the first two step changes of the reference value (tracking the reference upwards). However, when the reference was tracked downwards, significant undershoots were present -- similar to the closed-loop performance of the lower boundary controller, i.e., $Q_\mathrm{y} = 100$. Therefore, these observations support the fact that the general aim of the control, i.e., achieving the reference value, is satisfied, but the closed-loop control performance is improved by introducing the benefits of the self-tuning based on the two boundary MPC controllers.
-		\begin{quote}
-			TODO
+		We thank the reviewer for the comment on the performance of the proposed method. Obviously, if there exists a well-tuned ``universal'' controller that satisfies the requirements on the control performance in the whole range of the considered operating conditions, then the implementation of the self-tuning procedure is out of scope for such control application. Nevertheless, there are numerous practical situations, when using only one controller with a constant setup leads to poor or just ``satisfactory'' control results, i.e., the reference value is achieved, but with worse control performance, e.g., leading to high overshoots or settling times. When working on our laboratory case study, a set of different setups of penalty matrices was investigated, among them also the requested value of $Q_\mathrm{y} = 500$. In this control scenario, the control performance was comparable with the lower boundary controller, i.e., $Q_\mathrm{y} = 100$, for the first two step changes of the reference value (tracking the reference upwards). However, when the reference was tracked downwards, significant undershoots were present. Therefore, these observations support the fact that the general aim of the control, i.e., achieving the reference value, is satisfied, but the closed-loop control performance is improved by introducing the benefits of the self-tuning based on the two boundary MPC controllers. To emphasize this benefit, we added the following comment to the end of the section Results and discussion: 
+		\begin{quote}			
+			In general, utilizing the proposed controller with a scalable aggressiveness according to the operating conditions leads to higher accuracy (lower SSE), lower value of the overshoots (reduced $\sigma_{\mathrm{max}}$), and faster achieving the reference value (decreased $t_{\epsilon}$).
+			
+			\change{Obviously, if there exists a well-tuned ``universal'' controller that satisfies the requirements on the control performance in the whole range of the considered operating conditions, then the implementation of the self-tuning procedure is out of scope for such control application. Nevertheless, in numerous practical situations, using only one controller with a constant setup leads to poor or just ``satisfactory'' control results, i.e., the reference value is achieved, but with worse control performance, e.g., leading to high overshoots or settling times. When working on our laboratory case study, a set of different setups of penalty matrices was investigated. In every control scenario, the setup was beneficial only in some working conditions (tracking the reference upwards or downwards). Therefore, the closed-loop control performance is improved by introducing the benefits of the self-tuning based on the two boundary MPC controllers.}
 		\end{quote}		
 	}
 
@@ -277,6 +279,10 @@
 		Please clarify the role of rho and dmax. What is the symbol $\lvert.\rvert$ mean for a vector (element-wise absolute value)? It seems that dmax would need to be inherently conservative, in the sense that it is the maximum magnitude of all possible references values. If this is the case, it would seem that rho would mostly be less than 1. On the other hand, if dmax is not the maximum magnitude of all possible reference, there is a possibility of rho $>$ 1. What happens in this case? Why is it appropriate to make rho closer to 1 for references with large magnitudes.
 	}
 
+	\answer{
+		
+	}
+
 
 	\comment{
 		At the end of Section 2, it is mentioned that the positivity or negativity of the reference change could be considered. What does this mean? A precise mathematical description would be helpful.
@@ -323,18 +329,12 @@
 	}
 
 	\answer{
-		We thank the Reviewer for pointing out insufficient discussion on the selection of the tuning penalty matrix $Q_\mathrm{y}$. We revisited the corresponding paragraph to describe the tuning procedure.
+		We thank the Reviewer for pointing out insufficient discussion on the selection of the tuning penalty matrix $Q_\mathrm{y}$. By significant effect we meant the direct association of the tuned penalty matrix with the tuning factor $\rho$, which is calculated based on the reference value. We revisited the corresponding paragraph to describe the tuning procedure.	
+
 		
-		\begin{quote}
-			The penalty matrices of the problem in Eq.~(1) were systematically tuned and the corresponding control setup was implemented on the laboratory heat exchanger for each of the considered explicit MPC setups. 
-			First, the aim of tuning was to determine, which penalty matrix is the most suitable for real-time tuning. \change{Based on the set of experimentally collected data, the penalty matrix $Q_\mathrm{y}$ was chosen as the tuned one.} Based on the set of experimentally collected data, the most significant effect on the control trajectories had tuning the penalty matrix $Q_\mathrm{y}$, while still preserving a satisfactory control performance, i.e., without steady-state control error and significant oscillations around the reference value. Next, the boundary values of the tunable matrix $Q_\mathrm{y}$ were tuned as $Q_\mathrm{y, L}$ = 100 and $Q_\mathrm{y, U}$ = 1\,000.
-		\end{quote}
-		
-		\begin{quote}
-			\change{
-			The penalty matrices of the problem in Eq.~(1) were systematically tuned and the corresponding control setup was implemented on the laboratory heat exchanger for each setup of the considered explicit MPC controllers. 
-			First, the aim of the tuning procedure was to determine, which penalty matrix is the most suitable for real-time tuning. Based on the whole set of experimentally collected data, the penalty matrix $Q_\mathrm{y}$ was determined as the most relevant tuned penalty, as this penalty matrix had the most significant effect on the control trajectories. Tuning of $Q_\mathrm{y}$ preserved a satisfactory control performance without steady-state control error and without significant oscillations around the reference value. Next, the boundary values of the tunable matrix $Q_\mathrm{y}$ were tuned until the following limit values were determined based on the measured closed-loop control data: $Q_\mathrm{y, L}$ = 100 and $Q_\mathrm{y, U}$ = 1\,000.
-			}
+		\begin{quote}			
+			\change{The penalty matrices of the problem in Eq.~(1) were systematically tuned, and the corresponding control setup was implemented on the laboratory heat exchanger for each setup of the considered explicit MPC controllers. 
+			First, the tuning procedure aimed to determine which penalty matrix is the most suitable for real-time tuning. The most relevant was the penalty matrix $Q_\mathrm{y}$ as the tuning is directly associated with a reference value, which takes place in the calculation of the tuning factor $\rho$. Moreover, the tuning of $Q_\mathrm{y}$ preserved a satisfactory control performance.} Next, the boundary values of the tunable matrix $Q_\mathrm{y}$ were tuned until the following limit values were determined based on the measured closed-loop control data: $Q_\mathrm{y, L}$ = 100 and $Q_\mathrm{y, U}$ = 1\,000.			
 		\end{quote}
 	}
 
