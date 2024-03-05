@@ -54,12 +54,12 @@
 	
 	\maketitle
 	
-	We would like to thank the reviewers for the constructive and thoughtful comments on our manuscript.
+	We would like to thank the Reviewers for the constructive and thoughtful comments on our manuscript.
 	We revised the document based on these comments and we provide point-to-point answers below.
 	All changes relative to our initial submission are highlighted in \change{red}.
 	
 	\section*{Answer to Editor}
-	We would like to thank the Editor for summarizing substantial and high-quality review comments, which helped us to improve our manuscript's quality. We revised the paper based on the reviewers' comments and incorporated the suggestions into our manuscript. We reformulated or added the corresponding statements to clarify the ideas. 
+	We would like to thank the Editor for summarizing substantial and high-quality review comments, which helped us to improve our manuscript's quality. We revised the paper based on the Reviewers' comments and incorporated the suggestions into our manuscript. We reformulated or added the corresponding statements to clarify the ideas. 
 
 	
 	\section*{Answer to Reviewer 1}
@@ -73,8 +73,11 @@
 		We thank the Reviewer for pointing out unclear motivation for self-tunable control approach in section Introduciton. 
 		In order to clearly emphasize the need of a self-tunable technique, we revised the Introduction section in a following way:
 		\begin{quote}
-			TODO: Update the introduction
-			%The paper~\cite{self_tunable} pushes the idea of tunable explicit MPC further and deals with the issues of practical industrial-oriented implementation.
+			The applicability of model predictive control expanded with the parametric solution of the MPC optimization problem, known as explicit MPC~\cite{Bemporad_automatica}. As the MPC optimization problem is pre-solved offline, it does not need to be solved in the online phase, i.e., in real-time control. Instead, a piece-wise affine (PWA) control law is evaluated to apply the optimal control action in each control step. The lower computational complexity makes the explicit MPC more suitable for practical industrial implementation. Nevertheless, the explicit MPC is not tunable in default as the conventional approach in~\cite{Bemporad_automatica} considers the penalty matrices with fixed structure and values. \change{The inability to tune the controller online can be a disadvantage due to varying operating conditions, when different setup of controller is beneficial.}
+			
+			...
+			
+			The paper~\cite{self_tunable} pushes the idea of tunable explicit MPC further and deals with the issues of practical industrial-oriented implementation. \change{In numerous practical applications, the reference value of the controlled variable is changed and acquires values from a wide range of operating conditions. The use of different controller setups can be helpful in handling the nonlinear behavior of the plant.} The procedure of the self-tunable controller technique is presented. The controller's aggressivity is tuned based on the difference between the reference value and the steady state corresponding to the model linearization point. 
 		\end{quote}
 	}
 
@@ -85,7 +88,7 @@
 
 	\answer{		
 		
-		We thank the reviewer for an important comment on application range of the proposed control method. We reformulated the corresponding sentence to make the implementation limits clear:
+		We thank the Reviewer for an important comment on application range of the proposed control method. We reformulated the corresponding sentence to make the implementation limits clear:
 		\begin{quote}
 			\change{If the MPC design problem can be pre-solved explicitly offline, the consequent reduced online computational complexity makes the explicit MPC more suitable for a practical industrial implementation.}
 		\end{quote}
@@ -106,7 +109,7 @@
 	}
 
 	\answer{		
-		We thank the reviewer for the comment on the performance of the proposed method. Obviously, if there exists a well-tuned ``universal'' controller that satisfies the requirements on the control performance in the whole range of the considered operating conditions, then the implementation of the self-tuning procedure is out of scope for such control application. Nevertheless, there are numerous practical situations, when using only one controller with a constant setup leads to poor or just ``satisfactory'' control results, i.e., the reference value is achieved, but with worse control performance, e.g., leading to high overshoots or settling times. When working on our laboratory case study, a set of different setups of penalty matrices was investigated, among them also the requested value of $Q_\mathrm{y} = 500$. In this control scenario, the control performance was comparable with the lower boundary controller, i.e., $Q_\mathrm{y} = 100$, for the first two step changes of the reference value (tracking the reference upwards). However, when the reference was tracked downwards, significant undershoots were present. Therefore, these observations support the fact that the general aim of the control, i.e., achieving the reference value, is satisfied, but the closed-loop control performance is improved by introducing the benefits of the self-tuning based on the two boundary MPC controllers. To emphasize this benefit, we added the following comment to the end of the section Results and discussion: 
+		We thank the Reviewer for the comment on the performance of the proposed method. Obviously, if there exists a well-tuned ``universal'' controller that satisfies the requirements on the control performance in the whole range of the considered operating conditions, then the implementation of the self-tuning procedure is out of scope for such control application. Nevertheless, there are numerous practical situations, when using only one controller with a constant setup leads to poor or just ``satisfactory'' control results, i.e., the reference value is achieved, but with worse control performance, e.g., leading to high overshoots or settling times. When working on our laboratory case study, a set of different setups of penalty matrices was investigated, among them also the requested value of $Q_\mathrm{y} = 500$. In this control scenario, the control performance was comparable with the lower boundary controller, i.e., $Q_\mathrm{y} = 100$, for the first two step changes of the reference value (tracking the reference upwards). However, when the reference was tracked downwards, significant undershoots were present. Therefore, these observations support the fact that the general aim of the control, i.e., achieving the reference value, is satisfied, but the closed-loop control performance is improved by introducing the benefits of the self-tuning based on the two boundary MPC controllers. To emphasize this benefit, we added the following comment to the end of the section Results and discussion: 
 		\begin{quote}			
 			In general, utilizing the proposed controller with a scalable aggressiveness according to the operating conditions leads to higher accuracy (lower SSE), lower value of the overshoots (reduced $\sigma_{\mathrm{max}}$), and faster achieving the reference value (decreased $t_{\epsilon}$).
 			
@@ -172,7 +175,7 @@
 	\answer{
 		We revisited the Introduction section in order to clearly define the asymmetric behavior at the place of its first occurrence.
 		\begin{quote}
-			\change{From the control viewpoint, the controller design for the heat exchangers is a challenging task due to the necessity to take into account the nonlinear and asymmetric behavior of the device, i.e. different plant behavior when the temperature is increasing, in contrast to the behavior when the temperature is decreasing, see~\cite{RL20}.}
+			The heat exchangers in their numerous variants are integrated into many industrial plants as the heat transfer represents the crucial phenomena for all thermal energy applications~\cite{KV18}. \change{Simultaneously, the utility generation for heating or cooling is energy-demanding. From the control viewpoint, the controller design for the heat exchangers is a challenging task due to the necessity to take into account the nonlinear and asymmetric behavior of the device, i.e. different plant behavior when the temperature is increasing, in contrast to the behavior when the temperature is decreasing, see~\cite{RL20}.}
 		\end{quote}	
 		
 	}
@@ -280,7 +283,7 @@
 	}
 
 	\answer{
-		We thank the reviewer for the comment on the tuning parameter. We would like to divide our answer in three parts.
+		We thank the Reviewer for the comment on the tuning parameter. We would like to divide our answer in three parts.
 		
 		We explained the symbol $\lvert.\rvert$ in the corresponding part as follows:
 		
