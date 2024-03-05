@@ -123,7 +123,7 @@
 	}
 
 	\answer{
-		We removed the Figure 6 and 7 in order to improve the concise presentation of the control results.
+		We understand that the data from Figures 6 and 7 are depicted also in Figures 10 and 11 and see the motivation to remove the Figures 6 and 7. However, the Figures 6 and 7 play an important role in maintaining the flow and coherence of the paper. Removing it could make it more difficult for readers to follow the presented ideas leading to the design of the tuning strategy. In the Figures 10 and 11, the third (green) trajectory was added, which is overlapping with the original (blue and red) trajectories in some time intervals. The intention was to bring the well-readable figures corresponding to the boundary controllers first, and then to add the last trajectory. We hope that this intention leads to better readability of the paper.
 	}
 	
 	\comment{
@@ -196,7 +196,7 @@
 	}
 
 	\comment{
-		Similarly, for the two boundary controllers explain the assumptions on the penalty matrices. \change{Clearly, if the "upper" boundary matrices are equivalent to the "lower" boundary matrices multiplied by a scalar, there will be no difference between the solutions obtained by solving either controller.} Perhaps, this is what meant by statement: "The boundary explicit controllers have the same structure and setup, except for one of the penalty matrices - the tuned one", but this statement can be further clarified (which matrix is the tuned one referring to?).
+		Similarly, for the two boundary controllers explain the assumptions on the penalty matrices. Clearly, if the "upper" boundary matrices are equivalent to the "lower" boundary matrices multiplied by a scalar, there will be no difference between the solutions obtained by solving either controller. Perhaps, this is what meant by statement: "The boundary explicit controllers have the same structure and setup, except for one of the penalty matrices - the tuned one", but this statement can be further clarified (which matrix is the tuned one referring to?).
 	}
 
 	\answer{
@@ -369,6 +369,20 @@
 		A diagram or schematic of the heat exchange process would be helpful. Also, referring to the cold water stream as the feed when the outlet temperature is regulated is a bit confusing.
 	}
 
+	\answer{
+		In order to improve the quality of the paper, we added the Figure~\ref{fig:HE_scheme} to the section Results and discussion:
+		
+		TODO: Nezabudnut pridat symboly to nomenklatury!
+		
+		\begin{figure}
+			\begin{center}
+				\includegraphics[width=0.8\textwidth]{images/HE_scheme}
+				\caption{Scheme of Armfield PCT23. Heat exchanger (I), peristaltic pump for cold feed (II), peristaltic pump for heating medium (III), tank for cold feed (IV), heater for heating medium (V), temperature sensors ($\mathrm{T}$ -- controlled temperature, $\mathrm{T}_\mathrm{C}$ -- cold feed temperature, $\mathrm{T}_\mathrm{H}$ -- heating medium temperature), and electric power for maintaining the temperature of the heating medium (W). }
+				\label{fig:HE_scheme}
+			\end{center}
+		\end{figure}
+	}
+
 	\comment{
 		How was it determined that Qy has the most significant effect in the heat exchange process? What constitutes "significant effect"?
 	}
@@ -389,11 +403,11 @@
 	\answer{
 		We thank the Reviewer for the very insightful comment on the experiment setup. We find this comment comprises three closely related points to be answered individually.
 		
-		\textcolor{blue}{First, we confirm that the hot stream temperature is considered constant. This assumption is supported by the implementation of the auxiliary PID controller dedicated to controlling the temperature in the boiler/retention tank of the hot medium. Although the control profiles of the hot stream temperature ($T = 70^{\circ}$\,C) are not provided, the corresponding dynamics provided by the heat transfer were within the declared precision of the hot stream temperature sensor and hence negligible.}
+		First, we confirm that the hot stream temperature is considered constant. This assumption is supported by the implementation of the auxiliary P controller dedicated to controlling the temperature in the heating tank for the hot medium. Although the control profiles of the hot stream temperature ($T = 70^{\circ}$\,C) are not provided, the corresponding dynamics was negligible and the steady-state values of the heating medium temperature were constant.
 		
 		Next, we would like to make clear that the repeatability of the realized laboratory experiments was ensured by fixing all the relevant conditions, such as the cold medium dosed into the heat exchanger from the large retention tanks at the laboratory temperature and the constant inlet temperature of the heating medium.
 		
-		\textcolor{blue}{ Finally, we would like to address the doubts related to observing the varying steady-state values of the control inputs corresponding to the same value of the controlled variable - the outlet temperature of the heated medium. Although this performance may look like an error introduced during a single measurement, we realized a series of laboratory experiments to investigate this phenomenon with analogous results. The steady-state value of control input settled either in the close neighborhood of $U = 45\,\%$ (e.g., for $Q_{\mathrm{y}} = XXX, XXX$), or close to the value of $U = 55\,\%$ (e.g., for $Q_{\mathrm{y}} = XXX, XXX$). Therefore, after the detailed analysis, we state that this phenomenon originates from the physical construction of the heat exchanger due to the portion of heat released from the plates for the (relatively high) reference value around $T = 50^{\circ}$\,C.}
+		Finally, we would like to address the doubts related to observing the varying steady-state values of the control inputs corresponding to the same value of the controlled variable - the outlet temperature of the heated medium. Although this performance may look like an error introduced during a single measurement, we realized a series of laboratory experiments to investigate this phenomenon with analogous results. The steady-state value of control input settled either in the close neighborhood of $U = 45\,\%$, or close to the value of $U = 55\,\%$. This phenomenon was even observed with different setup of weighting matrix $R = 100$ during the initial tuning and searching for the ``right'' setup of all penalty matrices. The input variable also settled close to $U = 45\,\%$ (e.g., for $Q_{\mathrm{y}} = 100$), or close to the value of $U = 55\,\%$ (e.g., for $Q_{\mathrm{y}} = 1000$). Therefore, after the detailed analysis, we state that this phenomenon originates from the physical construction of the heat exchanger due to the portion of heat released from the plates for the (relatively high) reference value around $T = 50^{\circ}$\,C.
 		
 		\begin{quote}
 			TODO: Zapracovat do clanku. 			
