@@ -99,8 +99,14 @@
 	}
 
 	\answer{
-		The approach of self-tunable technique can be extended also to multivariable systems by utilizing only single value of the tuning parameter $\rho$ for the interpolation of the value of every control input. It is suggested in Eq.~(8) that the tuning parameter $\rho$ can be calculated as the maximal value of all the tuning parameters computed for every output reference. However, this is straightforward to implement only for decoupled systems. If there are strong interactions between the system states, the self-tunable technique is challenging to design. To give the reader a clear view on the apllicability of the proposed approach, we added the following explanation to the manuscript:
-		TODO
+		The approach of self-tunable technique can be extended also to multivariable systems by utilizing only single value of the tuning parameter $\rho$ for the interpolation of the values of every control input. It is suggested in Eq.~(8) that the tuning parameter $\rho$ can be calculated as the maximal value of all the tuning parameters computed for every output reference. However, this is straightforward to implement only for decoupled systems. If there are strong interactions between the system states, the self-tunable technique is challenging to design. To give the reader a better view on the apllicability of the proposed approach, we added the following explanation to the Concusion of the manuscript:
+		
+		\begin{quote}
+			To investigate the control results properly, the control performance was judged also quantitatively using a set of quality criteria. The self-tunable control approach outperformed the conventional control strategy handling just a single controller, i.e., non-tunable controller, by minimizing the sum-of-squared control error up to 32\,\%, reducing maximal overshoots/undershoots up to 18\,\%, and decreasing settling time up to 24\,\%. 
+			
+			\change{The approach of self-tunable technique was investigated on a SISO system, but can be extended also to multivariable systems by utilizing only single value of the tuning parameter $\rho$ for the interpolation of the values of every control input. It is suggested in Eq.~(8) that the tuning parameter $\rho$ can be calculated as the maximal value of all the tuning parameters computed for every output reference. However, this is straightforward to implement only for decoupled systems. If there are strong interactions between the system states, the self-tunable technique is challenging to design. In such case, it is necessary to include expert knowledge about the system states interactions, and the resulting value of the tuning paramter $\rho$ could be computed, e.g., as a weighted average of the individual tuning parameters.}
+		\end{quote}
+
 	}
 
 	
@@ -123,7 +129,8 @@
 	}
 
 	\answer{
-		We understand that the data from Figures 6 and 7 are depicted also in Figures 10 and 11 and see the motivation to remove the Figures 6 and 7. However, the Figures 6 and 7 play an important role in maintaining the flow and coherence of the paper. Removing it could make it more difficult for readers to follow the presented ideas leading to the design of the tuning strategy. In the Figures 10 and 11, the third (green) trajectory was added, which is overlapping with the original (blue and red) trajectories in some time intervals. The intention was to bring the well-readable figures corresponding to the boundary controllers first, and then to add the last trajectory. We hope that this intention leads to better readability of the paper.
+		In order to bring a concise presentation of the results, we removed the Figures 6 and 7.
+		%We understand that the data from Figures 6 and 7 are depicted also in Figures 10 and 11 and see the motivation to remove the Figures 6 and 7. However, the Figures 6 and 7 play an important role in maintaining the flow and coherence of the paper. Removing it could make it more difficult for readers to follow the presented ideas leading to the design of the tuning strategy. In the Figures 10 and 11, the third (green) trajectory was added, which is overlapping with the original (blue and red) trajectories in some time intervals. The intention was to bring the well-readable figures corresponding to the boundary controllers first, and then to add the last trajectory. We hope that this intention leads to better readability of the paper.
 	}
 	
 	\comment{
@@ -222,6 +229,12 @@
 
 	\comment{
 		Does the method only support SISO or MIMO system with decoupled pairs of inputs/outputs? This seems to be suggested by the statement made on page 9. If so, this should be stated explicitly in the problem setup.
+	}
+
+	\answer{
+		We thank for the comment on the application range of the proposed method. Also Reviewer~1 suggested to address this issue. We kindly invite the Reviewer~2 to revise the answer to the third comment of Reviewer 1, as it addresses the same topic.
+		
+		Q: Staci to predsa len uviest do zaveru ako potencialne myslienky a riesenia MIMO problemov, ked tento reviewer to chce v problem setupe?
 	}
 
 	\comment{
@@ -370,9 +383,8 @@
 	}
 
 	\answer{
-		In order to improve the quality of the paper, we added the Figure~\ref{fig:HE_scheme} to the section Results and discussion:
+		To prevent confusion associated with the term ``feed'', we replaced the corresponding parts in manuscript with ``cold medium''. Moreover, in order to improve the quality of the paper, we added the Figure~\ref{fig:HE_scheme} to the section Results and discussion:
 		
-		TODO: Nezabudnut pridat symboly to nomenklatury!
 		
 		\begin{figure}
 			\begin{center}
@@ -401,17 +413,59 @@
 		In the heat exchange process, the dynamics of the hot stream appears to be neglected. Why is this the case? I am not sure about the explanation given on why different steady-state inputs are observed. The flow rate of the hot stream is adjusted so the cold stream outlet temperature is maintained at the reference value is done. It seems, though not shown, that the hot stream inlet temperature is maintained to be constant. Based on the results, it would seem that the steady-state hot stream temperature is free to vary. What about the cold stream inlet temperature? Please given the trajectories of all these variables, or at least, the temperatures. What is the impact of the repeatability of the experiments given that the hot stream temperature is allowed to vary? In any case, the metrics presented in Table 1 are reported for one experiment per scenario. I would encourage computing these metrics for several experiments to ensure repeatability of the experiments and make the results more convincing.
 	}
 	\answer{
-		We thank the Reviewer for the very insightful comment on the experiment setup. We find this comment comprises three closely related points to be answered individually.
-		
-		First, we confirm that the hot stream temperature is considered constant. This assumption is supported by the implementation of the auxiliary P controller dedicated to controlling the temperature in the heating tank for the hot medium. Although the control profiles of the hot stream temperature ($T = 70^{\circ}$\,C) are not provided, the corresponding dynamics was negligible and the steady-state values of the heating medium temperature were constant.
-		
-		Next, we would like to make clear that the repeatability of the realized laboratory experiments was ensured by fixing all the relevant conditions, such as the cold medium dosed into the heat exchanger from the large retention tanks at the laboratory temperature and the constant inlet temperature of the heating medium.
-		
-		Finally, we would like to address the doubts related to observing the varying steady-state values of the control inputs corresponding to the same value of the controlled variable - the outlet temperature of the heated medium. Although this performance may look like an error introduced during a single measurement, we realized a series of laboratory experiments to investigate this phenomenon with analogous results. The steady-state value of control input settled either in the close neighborhood of $U = 45\,\%$, or close to the value of $U = 55\,\%$. This phenomenon was even observed with different setup of weighting matrix $R = 100$ during the initial tuning and searching for the ``right'' setup of all penalty matrices. The input variable also settled close to $U = 45\,\%$ (e.g., for $Q_{\mathrm{y}} = 100$), or close to the value of $U = 55\,\%$ (e.g., for $Q_{\mathrm{y}} = 1000$). Therefore, after the detailed analysis, we state that this phenomenon originates from the physical construction of the heat exchanger due to the portion of heat released from the plates for the (relatively high) reference value around $T = 50^{\circ}$\,C.
+		We thank the Reviewer for the very insightful comment on the experiment setup. 
+		First, we would like to address the doubts related to the constant steady-state values of cold and heating medium temperatures. Regarding the temperature of the cold medium, it was not possible to measure the data continuously, store them, and plot the trajectory in a Figure. Nevertheless, the temperature of the cold medium was checked multiple times during experiment and was constant. The advantage is that there is no other factor affecting the temperature of the cold medium, except the room temperature, which was constant. We added the information about the inlet temperature of the cold medium into the manuscript:
 		
 		\begin{quote}
-			TODO: Zapracovat do clanku. 			
+			The heat exchanger is 90\,mm wide, 103\,mm long, and 160\,mm high. The heat exchange is performed between the cold medium (water) and the hot medium (water). \change{The cold medium as well as the heating medium are transported to the heat exchanger by two peristaltic pumps with flexible tubing from silicon rubber. The flow rate of the cold medium is constant, while the aim of control is to track the reference value of the outlet cold medium temperature. The inlet cold medium temperature was constant during the whole control, i.e., $T_\mathrm{C} = 19^{\circ}$\,C.}
 		\end{quote}
+
+		
+		Regarding the temperature of the heating medium, we provide the corresponding trajectories of the temperature in Figure~\ref{fig:Th}. Note that the legend corresponds to the specific setup of MPC, but the temperature of the heating medium was controlled with a simple P controller with the same proportional gain in every control scenario. It can be seen that the temperature of the heating medium remains relatively constant during the whole control, except for the undershoots in the scenario with upper boundary MPC, i.e., blue trajectory. The undershoots can be easily associated with the trajectory of the voltage on the pump dosing the heating medium (and ultimately the heating medium flow rate). As the upper boundary MPC calculated ``aggressive'' control inputs, the increased flow rate of heating medium led to slight declining of the heating medium temperature. After approximately 100 seconds, the heating medium warmed up to the reference value, i.e., $T_{\mathrm{H, ref}} = 70^{\circ}$\,C and remained constant within the accuracy of the temperature sensor. It can be seen, that although the temperature of the heating medium is constant and identical for all control scenarios (MPC setups), the value of the voltage on the pump dosing the heating medium is not the same when tracking the temperature $T_{\mathrm{ref}} = 50^{\circ}$\,C. Therefore, the same conditions for all control scenarios were fulfilled. We explain the different values of manipulated variable with the heat accumulated inside the heat exchanger plates, and therefore less heating medium was necessary to heat the feed. This phenomenon does not happen when tracking the reference value $T_{\mathrm{ref}}$ = 45\,$^{\circ}\mathrm{C}$, which originates in the nonlinear nature of the heat transfer process. When working in higher temperature range, the gain of the heat transfer process decreases and the sensitivity to changes in the heating medium flow is lower. Therefore, even different flow rates of the heating medium lead to the same temperature at the outlet.
+		
+		Next, we would like to make clear that the repeatability of the realized laboratory experiments was ensured by fixing all the relevant conditions, such as the cold medium dosed into the heat exchanger from the large retention tanks at the laboratory temperature and the constant inlet temperature of the heating medium. 
+		
+		Based on our answer to the Reviewer's comment, we added Figure~\ref{fig:Th} and Figure~\ref{fig:W} to the manuscript with the following explanation to give the reader an insight into the dynamics of the heating medium:
+		
+		\begin{quote}
+			An interesting phenomenon can be observed during tracking the third reference value, i.e., $T_{\mathrm{ref}}$ = 50\,$^{\circ}\mathrm{C}$. Although the steady-state values of temperature have the same value, the values of the manipulated variable are different. To check the correctness of the results, the measurements were performed multiple times and led to the same behavior. \change{Also, the inlet temperatures of the cold and heating medium were checked in order to exclude the effect of a disturbance. Regarding the temperature of the cold medium, it was not possible to measure the data continuously, store them, and plot the trajectory in a Figure. Nevertheless, the temperature of the cold medium was checked multiple times during experiment and was constant.} 
+				
+			\change{Regarding the temperature of the heating medium, the corresponding trajectories of the temperature can be seen in Figure~\ref{fig:Th} and the electric power, i.e., the corresponding manipulated variable, can be seen in Figure~\ref{fig:W}. Note that the legends correspond to the specific setup of MPC, but the temperature of the heating medium was controlled with a simple P controller with the same proportional gain in every control scenario.} 
+					
+			\change{It can be seen that the temperature of the heating medium remains relatively constant during the whole control, except for the undershoots in the scenario with upper boundary MPC, i.e., blue trajectory. The undershoots can be easily associated with the trajectory of the voltage on the pump dosing the heating medium (and ultimately the heating medium flow rate). As the upper boundary MPC calculated ``aggressive'' control inputs, the increased flow rate of heating medium led to slight declining of the heating medium temperature. After approximately 100 seconds, the heating medium warmed up to the reference value, i.e., $T_{\mathrm{H, ref}} = 70^{\circ}$\,C and remained constant within the accuracy of the temperature sensor. It can be seen, that although the temperature of the heating medium is constant and identical for all control scenarios (MPC setups), the value of the voltage on the pump dosing the heating medium is not the same when tracking the temperature $T_{\mathrm{ref}} = 50^{\circ}$\,C. Therefore, the same conditions for all control scenarios were fulfilled.} 
+		
+			\change{The reason of this behavior} could be explained by the peak of the manipulated variable associated with the upper boundary controller at time 800\,s, see Figure~(TODO), blue. After approximately 100\,s, the value of manipulated variable dropped and settled at a value that was lower than the value associated with the lower boundary controller, see Figure~(TODO), red. This is a consequence of the heat accumulated inside the heat exchanger plates, and therefore less heating medium was necessary to heat the feed. This phenomenon does not happen when tracking the reference value $T_{\mathrm{ref}}$ = 45\,$^{\circ}\mathrm{C}$, which originates in the nonlinear nature of the heat transfer process. When working in higher temperature range, the gain of the heat transfer process decreases and the sensitivity to changes in the heating medium flow is lower. Therefore even different flow rates of the heating medium lead to the same temperature at the outlet.
+		\end{quote}
+		
+
+		
+		  
+		%We find this comment comprises three closely related points to be answered individually.
+		
+		%First, we confirm that the hot stream temperature is considered constant. This assumption is supported by the implementation of the auxiliary P controller dedicated to controlling the temperature in the heating tank for the hot medium. Although the control profiles of the hot stream temperature ($T = 70^{\circ}$\,C) are not provided, the corresponding dynamics was negligible and the steady-state values of the heating medium temperature were constant.
+		
+		%Next, we would like to make clear that the repeatability of the realized laboratory experiments was ensured by fixing all the relevant conditions, such as the cold medium dosed into the heat exchanger from the large retention tanks at the laboratory temperature and the constant inlet temperature of the heating medium.
+		
+		%Finally, we would like to address the doubts related to observing the varying steady-state values of the control inputs corresponding to the same value of the controlled variable - the outlet temperature of the heated medium. Although this performance may look like an error introduced during a single measurement, we realized a series of laboratory experiments to investigate this phenomenon with analogous results.
+		
+		%The steady-state value of control input settled either in the close neighborhood of $U = 45\,\%$, or close to the value of $U = 55\,\%$. This phenomenon was even observed with different setup of weighting matrix $R = 100$ during the initial tuning and searching for the ``right'' setup of all penalty matrices. The input variable also settled close to $U = 52\,\%$ (e.g., for $Q_{\mathrm{y}} = 1000$), or close to the value of $U = 42-45\,\%$ (e.g., for $Q_{\mathrm{y}} = 100$). Therefore, after the detailed analysis, we state that this phenomenon originates from the physical construction of the heat exchanger due to the portion of heat released from the plates for the (relatively high) reference value around $T = 50^{\circ}$\,C.
+		
+		\begin{figure}
+			\begin{center}
+				\includegraphics[width=0.7\textwidth]{images/Th}
+				\caption{The trajectory of heating medium temperature control (P controller).}
+				\label{fig:Th}
+			\end{center}
+		\end{figure}
+	
+		\begin{figure}
+			\begin{center}
+				\includegraphics[width=0.7\textwidth]{images/W}
+				\caption{The trajectory of electric power controlling the heating medium temperature (P controller).}
+				\label{fig:W}
+			\end{center}
+		\end{figure}	
+
 	}
 	
 	
