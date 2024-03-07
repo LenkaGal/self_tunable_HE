@@ -51,8 +51,6 @@
 \usepackage{amsthm}
 \usepackage{amsmath}
 
-\newcommand{\change}[1]{\textcolor{red}{#1}}
-
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{lemma}{Lemma}[theorem]
@@ -473,21 +471,13 @@
 	
 	In this section, the results of the proposed self-tuning method are analyzed by an experimental implementation. The self-tuning strategy utilizes tuning parameter calculation based on the size of reference change (Section~\ref{sec:self_tunable_delta_ref}) and the scaling of tuning parameter based on splitting the interval of the parameter and assigning the interval parts to specific operating conditions (Section~\ref{sec:self_tunable_rho_scaling}).
 
-	The plant on which the control was implemented and analyzed is a laboratory-scaled counter-current liquid-to-liquid plate heat exchanger Armfield Process Plant Trainer PCT23~\cite{pct23}, see Figure~\ref{fig:HE}. The heat exchanger is 90\,mm wide, 103\,mm long, and 160\,mm high. The heat exchange is performed between the cold \change{medium} (water) and the hot medium (water). The cold medium as well as the heating medium are transported to the heat exchanger by two peristaltic pumps with flexible tubing from silicon rubber. The flow rate of the \change{cold medium} is constant, while the aim of control is to track the reference value of the \change{cold medium} temperature at the outlet of the heat exchanger. Therefore, the controlled variable is the \change{cold medium} temperature $T$ at the outlet of the heat exchanger. The temperature of the heated \change{cold medium} in the outlet stream was measured by the type K thermocouple. The associated manipulated variable is the voltage $U$ corresponding to the power of the pump feeding the heat exchanger by the hot medium. The voltage is within the range of [$0-5$]\,V normalized into the relative values in percentage. The maximal voltage 5\,V or 100\% corresponds to volumetric flow rate 11.5\,$\mathrm{ml}\,\mathrm{s}^{-1}$. For further technical specifications of the laboratory heat exchanger, the reader is referred to~\cite{pct23}. As heat exchange is a nonlinear and asymmetric process~\cite{Liptak}, this heat exchanger represents a suitable candidate for the presented controller tuning strategy. The corresponding illustrative scheme of the implemented closed-loop control setup is in Figure~\ref{fig:CL}, where the ``Self-tuning'' block substitutes the more detailed scheme of the tuning procedure in Figure~\ref{fig:tuning}.  
+	The plant on which the control was implemented and analyzed is a laboratory-scaled counter-current liquid-to-liquid plate heat exchanger Armfield Process Plant Trainer PCT23~\cite{pct23}, see Figure~\ref{fig:HE}. The heat exchanger is 90\,mm wide, 103\,mm long, and 160\,mm high. The heat exchange is performed between the cold feed (water) and the hot medium (water). The cold feed as well as the heating medium are transported to the heat exchanger by two peristaltic pumps with flexible tubing from silicon rubber. The flow rate of the feed is constant, while the aim of control is to track the reference value of the feed temperature. Therefore, the controlled variable is the feed temperature $T$ at the outlet of the heat exchanger. The temperature of the heated feed in the outlet stream was measured by the type K thermocouple. The associated manipulated variable is the voltage $U$ corresponding to the power of the pump feeding the heat exchanger by the hot medium. The voltage is within the range of [$0-5$]\,V normalized into the relative values in percentage. The maximal voltage 5\,V or 100\% corresponds to volumetric flow rate 11.5\,$\mathrm{ml}\,\mathrm{s}^{-1}$. For further technical specifications of the laboratory heat exchanger, the reader is referred to~\cite{pct23}. As heat exchange is a nonlinear and asymmetric process~\cite{Liptak}, this heat exchanger represents a suitable candidate for the presented controller tuning strategy. The corresponding illustrative scheme of the implemented closed-loop control setup is in Figure~\ref{fig:CL}, where the ``Self-tuning'' block substitutes the more detailed scheme of the tuning procedure in Figure~\ref{fig:tuning}.  
 
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=0.8\textwidth]{images/HE}
-		\caption[Heat exchanger Armfield Process Plant Trainer PCT23]{Laboratory heat exchanger Armfield Process Plant Trainer PCT23: \change{cold medium} pump\,(1), heating medium pump\,(2), \change{cold medium} tanks\,(3), heater for heating medium\,(4), heat exchanger\,(5).}
+		\caption[Heat exchanger Armfield Process Plant Trainer PCT23]{Laboratory heat exchanger Armfield Process Plant Trainer PCT23: feed pump\,(1), heating medium pump\,(2), feed tanks\,(3), heater for heating medium\,(4), heat exchanger\,(5).}
 		\label{fig:HE}
-	\end{center}
-\end{figure}
-
-\begin{figure}
-	\begin{center}
-		\includegraphics[width=0.8\textwidth]{images/HE_scheme}
-		\caption{Scheme of Armfield PCT23. Heat exchanger (I), peristaltic pump for cold medium (II), peristaltic pump for heating medium (III), tank for cold medium (IV), heater for heating medium (V), temperature sensors ($\mathrm{T}$ -- controlled temperature, $\mathrm{T}_\mathrm{C}$ -- cold outlet cold medium temperature, $\mathrm{T}_\mathrm{H}$ -- heating medium temperature), and electric power for maintaining the temperature of the heating medium (W). }
-		\label{fig:HE_scheme}
 	\end{center}
 \end{figure}
 
@@ -518,7 +508,7 @@ To respect the physical limitations of the operating conditions, the constraints
 	\label{eq:u_const}
 	-15\,\% \le u \le 65\,\%,
 \end{eqnarray}
-where the variable $u$ represents the control inputs in the deviation form. The values of \change{the heated cold medium} temperature and voltage of the heating medium pump corresponding to zero steady states are respectively $T^\mathrm{s}$~=~35\,$^{\circ}\mathrm{C}$ and $U^\mathrm{s}$~=~35\,\%. Therefore, the physical constraints on the manipulated variable are actually
+where the variable $u$ represents the control inputs in the deviation form. The values of feed temperature and voltage of the heating medium pump corresponding to zero steady states are respectively $T^\mathrm{s}$~=~35\,$^{\circ}\mathrm{C}$ and $U^\mathrm{s}$~=~35\,\%. Therefore, the physical constraints on the manipulated variable are actually
 \begin{eqnarray}
 	\label{eq:U_const}
 	20\,\% \le U \le 100\,\%.
@@ -565,10 +555,10 @@ For the initial 200 seconds, the reference temperature was the steady-state valu
 
 Besides the control design of two boundary explicit MPCs, it was necessary to keep the temperature of the heating medium constant. The heating medium was transported back to the heater after leaving the heat exchanger, i.e., the volume of the heating medium was recycled during the whole operation. The temperature of the heating medium was maintained on the value 70\,$^{\circ}\mathrm{C}$ with a simple proportional controller with proportional gain $P = 20$. The control input from the proportional controller was the electric power which could acquire the values in the range [$0-2$]\,kW and was also normalized to percentage.
 
-The control profiles generated for both considered boundary control setups are compared in Figure~\ref{fig:CV} for the controlled variable, and in Figure~\ref{fig:MV} for the control inputs. 
+The control profiles generated for both considered boundary control setups are compared in Figure~\ref{fig:CV_boundaries} for the controlled variable, and in Figure~\ref{fig:MV_boundaries} for the control inputs. 
 Note, the constructed explicit MPC controller computed control inputs to respect the constraints on the control inputs and they need not be truncated afterward. 
 
-An interesting phenomenon can be observed during tracking the third reference value, i.e., $T_{\mathrm{ref}}$ = 50\,$^{\circ}\mathrm{C}$. Although the steady-state values of temperature have the same value, the values of the manipulated variable are different. To check the correctness of the results, the measurements were performed multiple times and led to the same behavior. The reason could be explained by the peak of the manipulated variable associated with the upper boundary controller at time 800\,s, see Figure~\ref{fig:MV}, blue. After approximately 100\,s, the value of manipulated variable dropped and settled at a value that was lower than the value associated with the lower boundary controller, see Figure~\ref{fig:MV}, red. This is a consequence of the heat accumulated inside the heat exchanger plates, and therefore less heating medium was necessary to heat the \change{cold medium}. This phenomenon does not happen when tracking the reference value $T_{\mathrm{ref}}$ = 45\,$^{\circ}\mathrm{C}$, which originates in the nonlinear nature of the heat transfer process. When working in higher temperature range, the gain of the heat transfer process decreases and the sensitivity to changes in the heating medium flow is lower. Therefore even different flow rates of the heating medium lead to the same temperature at the outlet. 		
+An interesting phenomenon can be observed during tracking the third reference value, i.e., $T_{\mathrm{ref}}$ = 50\,$^{\circ}\mathrm{C}$. Although the steady-state values of temperature have the same value, the values of the manipulated variable are different. To check the correctness of the results, the measurements were performed multiple times and led to the same behavior. The reason could be explained by the peak of the manipulated variable associated with the upper boundary controller at time 800\,s, see Figure~\ref{fig:MV_boundaries}, blue. After approximately 100\,s, the value of manipulated variable dropped and settled at a value that was lower than the value associated with the lower boundary controller, see Figure~\ref{fig:MV_boundaries}, red. This is a consequence of the heat accumulated inside the heat exchanger plates, and therefore less heating medium was necessary to heat the feed. This phenomenon does not happen when tracking the reference value $T_{\mathrm{ref}}$ = 45\,$^{\circ}\mathrm{C}$, which originates in the nonlinear nature of the heat transfer process. When working in higher temperature range, the gain of the heat transfer process decreases and the sensitivity to changes in the heating medium flow is lower. Therefore even different flow rates of the heating medium lead to the same temperature at the outlet. 		
 
 \begin{figure}
 	\begin{center}
@@ -578,23 +568,23 @@ An interesting phenomenon can be observed during tracking the third reference va
 	\end{center}
 \end{figure}
 
-%\begin{figure}
-%	\begin{center}
-%		\includegraphics[width=0.8\textwidth]{images/CV_boundaries}
-%		\caption{Controlled variable trajectory for two boundary controllers. The solid lines represent the controlled temperature $T$ and the dashed line represents the reference value $T_{\mathrm{ref}}$.}
-%		\label{fig:CV_boundaries}
-%	\end{center}
-%\end{figure}
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{images/CV_boundaries}
+		\caption{Controlled variable trajectory for two boundary controllers. The solid lines represent the controlled temperature $T$ and the dashed line represents the reference value $T_{\mathrm{ref}}$.}
+		\label{fig:CV_boundaries}
+	\end{center}
+\end{figure}
 
-%\begin{figure}
-%	\begin{center}
-%		\includegraphics[width=0.8\textwidth]{images/MV_boundaries}
-%		\caption{Manipulated variable trajectory for two boundary controllers. The solid lines represent the voltage $U$ and the dashed lines represent the constraints.}
-%		\label{fig:MV_boundaries}
-%	\end{center}
-%\end{figure}
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{images/MV_boundaries}
+		\caption{Manipulated variable trajectory for two boundary controllers. The solid lines represent the voltage $U$ and the dashed lines represent the constraints.}
+		\label{fig:MV_boundaries}
+	\end{center}
+\end{figure}
 
-The trajectories in Figure~\ref{fig:CV} show the asymmetric nature of controlling the plant of plate heat exchanger mainly when observing the overshoots and undershoots. When applying the control inputs associated with the lower boundary penalty matrix $Q_\mathrm{y, L}$ in Eq.~\eqref{eq:mpc_problem_cost}, significant undershoots are present when tracking the reference downwards, i.e., when the reference change is negative. On the contrary, when implementing the controller associated with $Q_\mathrm{y, U}$ in Eq.~\eqref{eq:mpc_problem_cost}, the undershoots are negligible, but significant overshoots can be seen when tracking the reference upwards, see Figure~\ref{fig:CV}, blue.
+The trajectories in Figure~\ref{fig:CV_boundaries} show the asymmetric nature of controlling the plant of plate heat exchanger mainly when observing the overshoots and undershoots. When applying the control inputs associated with the lower boundary penalty matrix $Q_\mathrm{y, L}$ in Eq.~\eqref{eq:mpc_problem_cost}, significant undershoots are present when tracking the reference downwards, i.e., when the reference change is negative. On the contrary, when implementing the controller associated with $Q_\mathrm{y, U}$ in Eq.~\eqref{eq:mpc_problem_cost}, the undershoots are negligible, but significant overshoots can be seen when tracking the reference upwards, see Figure~\ref{fig:CV_boundaries}, blue.
 
 These main experimental observations established the base for the strategy of controller self-tuning. The strategy follows the ideas summarized in Section~\ref{sec:methodology}. Utilizing the nature of the boundary controller with the penalty matrix $Q_\mathrm{y, L}$ is preferred when the reference changes upwards. Therefore, in these operating conditions, the tuning factor is scaled in the first part of the whole interval, i.e., closer to the lower bound. On the contrary, tuning the controller closer to the upper boundary controller associated with $Q_\mathrm{y, U}$ is preferred for negative reference step changes. Therefore, in these operating conditions, the tuning factor is scaled above the splitting value $\rho_{\mathrm{s}}$, i.e., closer to the upper bound. The splitting value of the tuning parameter was chosen simply in the middle of the interval, i.e., $\rho_{\mathrm{s}} = 0.5$. The remaining parameter that needed to be set was the maximal admissible size of the reference step change $\Delta_{\max}$, which was determined to $15\,^{\circ}\mathrm{C}$ as the investigated range of controlled temperature was [$35-50$]\,$^{\circ}\mathrm{C}$. Based on the aforementioned parameters and real-time information about the current reference change, the tuning factor was updated during control. The evolution of the scaled tuning factor $\widetilde{\rho}$ can be seen in Figure~\ref{fig:rho}. When the positive reference changes are tracked, the tuning factor is scaled below the splitting value $\rho_{\mathrm{s}}$. On the contrary, when the reference changes are negative, the tuning factor is scaled above the splitting value $\rho_{\mathrm{s}}$.
 
@@ -624,7 +614,7 @@ The similarity with the boundary controllers can be seen also on the manipulated
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=0.8\textwidth]{images/CV}
-		\caption{Explicit MPC: Controlled variable trajectory for two boundary controllers and the tuned one. The solid lines represent the controlled temperature $T$ and the dashed line represents the reference value $^{\circ}\mathrm{C}$.}
+		\caption{Controlled variable trajectory for two boundary controllers and the tuned one. The solid lines represent the controlled temperature $T$ and the dashed line represents the reference value $^{\circ}\mathrm{C}$.}
 		\label{fig:CV}
 	\end{center}
 \end{figure}
@@ -632,24 +622,8 @@ The similarity with the boundary controllers can be seen also on the manipulated
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=0.8\textwidth]{images/MV}
-		\caption{Explicit MPC: Manipulated variable trajectory for two boundary controllers and the tuned one. The solid lines represent the voltage $U$ and the dashed lines represent the constraints.}
+		\caption{Manipulated variable trajectory for two boundary controllers and the tuned one. The solid lines represent the voltage $U$ and the dashed lines represent the constraints.}
 		\label{fig:MV}
-	\end{center}
-\end{figure}
-
-\begin{figure}
-	\begin{center}
-		\includegraphics[width=0.7\textwidth]{images/Th}
-		\caption{Auxiliary P controller: The trajectory of heating medium temperature control .}
-		\label{fig:Th}
-	\end{center}
-\end{figure}
-
-\begin{figure}
-	\begin{center}
-		\includegraphics[width=0.7\textwidth]{images/W}
-		\caption{Auxiliary P controller: The trajectory of electric power controlling the heating medium temperature.}
-		\label{fig:W}
 	\end{center}
 \end{figure}
 
@@ -823,9 +797,6 @@ In general, utilizing the proposed controller with a scalable aggressiveness acc
 			$t$ & time, s \\
 			$t_{\epsilon}$ & settling time, s \\
 			$T$ & temperature, $^{\circ}\mathrm{C}$ \\
-			\change{$T_{\mathrm{C}}$} & \change{cold medium temperature, $^{\circ}\mathrm{C}$} \\
-			\change{$T_{\mathrm{H}}$} & \change{heating medium temperature, $^{\circ}\mathrm{C}$} \\
-			\change{$T_{\mathrm{H, ref}}$} & \change{heating medium reference temperature, $^{\circ}\mathrm{C}$} \\
 			$T_{\mathrm{ref}}$ & reference temperature, $^{\circ}\mathrm{C}$ \\
 			$T_{\mathrm{s}}$ & sampling time, s \\
 			$T^{\mathrm{s}}$ & steady state of temperature, $^{\circ}\mathrm{C}$ \\
@@ -841,8 +812,7 @@ In general, utilizing the proposed controller with a scalable aggressiveness acc
 			$u_{\mathrm{U}}$ & control inputs associated with the upper boundary controller\\
 			$U$ & voltage, \% \\
 			$U^{\mathrm{s}}$ & steady state of voltage, \% \\
-			$\mathcal{U}$ & set of control inputs \\
-			\change{$W$} & \change{electric power, \%} \\			
+			$\mathcal{U}$ & set of control inputs \\			
 			$x$ & system states \\
 			$\widetilde{x}$ & augmented system states \\
 			$x_{\mathrm{I}}$ & system states corresponding to the built-in integrator \\
@@ -876,7 +846,6 @@ In general, utilizing the proposed controller with a scalable aggressiveness acc
 		\begin{tabular}{ l l }
 			eMPC & explicit model predictive control \\			
 			LTI  & linear time-invariant (system) \\
-			\change{LQR} & \change{linear-quadratic regulator} \\
 			MIMO & multiple-inputs and multiple-outputs (system) \\
 			MPC  & model predictive control \\
 			mp-QP& multi-parametric quadratic programming (problem) \\
