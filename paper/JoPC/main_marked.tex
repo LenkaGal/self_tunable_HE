@@ -322,7 +322,7 @@
 	}
 	Based on Eq.~\eqref{eq:rho_self_tunable}, the property $0 \le \rho \le 1$ holds, as $\vert y_{\mathrm{ref}} \vert \le d_{\max}$. As a consequence, the parameter $\rho$ represents a way how to normalize the deviation from the steady-state value and is exploited to scale the control action or, implicitly, to tune the aggressiveness of the controller. 
 	
-	\change{Note that the reference value must be reachable from the operating range to ensure that $0 \le \rho \le 1 $ holds. Otherwise, the interpolated control action would be the ``extrapolation'' leading to the loss of guarantees on the input, state constraints satisfaction, etc.} 
+	\change{Note that the reference value must be reachable from the operating range to ensure that $0 \le \rho \le 1 $ holds. Otherwise, the interpolated control action would be the ``extrapolation'' leading to the loss of guarantees on the input or state constraints satisfaction, etc.} 
 	
 	When considering tuning the control action based on Eq.~\eqref{eq:tunable_u}, a higher value of tuning parameter $\rho$ leads to approaching the upper boundary controller and vice versa. When tuning, e.g., the matrix $Q_\mathrm{y}$ penalizing the control error, a higher ratio $\rho$ would lead to more aggressive control actions. When operating with the reference value close to the system steady-state value, the parameter $\rho$ decreases and the control profiles become sluggish.
 	
@@ -356,7 +356,7 @@
 	
 	Note, only the absolute value of $\Delta_{\mathrm{ref}}$ and $\Delta_{\max}$ are considered in this procedure to ensure $\rho \ge 0$. 
 	
-	In Eq.~\eqref{eq:rho_delta_ref}, it is suggested to increase the value of tuning parameter $\rho$ with increasing value of reference step change. Note, in this work, the larger value of the tuning parameter leads to adding more weight on the penalty matrices associated with the upper boundary controller, see Eq.~\eqref{eq:tunable_matrices}. If the opposite logic of controller tuning is requested, it is possible to adapt the tuning such that 
+	\change{In Eq.~\eqref{eq:rho_delta_ref}, it is suggested to increase the value of tuning parameter $\rho$ with increasing value of reference step change. Note, in this work, the larger value of the tuning parameter leads to adding more weight on the penalty matrices associated with the upper boundary controller, see Eq.~\eqref{eq:tunable_matrices}. If the opposite logic of controller tuning is requested, it is possible to adapt the tuning such that 
 	\begin{eqnarray}
 		\label{eq:tunable_R_2}
 		&~& R(k) = \rho(k) \, R_\mathrm{L} + (1-\rho(k)) \, R_\mathrm{U}, \\
@@ -365,7 +365,7 @@
 		\label{eq:tunable_Qy_2}
 		&~& Q_\mathrm{y}(k) = \rho(k) \, Q_\mathrm{y,L} + (1-\rho(k)) \, Q_\mathrm{y,U},
 	\end{eqnarray}
-	hold. This change leads to adding more weight to the lower boundary controller with the increasing value of the tuning parameter $\rho$.
+	hold. This change leads to adding more weight to the lower boundary controller with the increasing value of the tuning parameter $\rho$.}
 	
 	\begin{remark}
 		The tuning parameter $\rho$ should be updated only when the reference changes. Updating the tuning parameter in the control steps when $\Delta_{\mathrm{ref}} = 0$ would lead to using tuning parameter $\rho$ with zero value, i.e., the control input would correspond to one boundary controller and would not be scaled.
@@ -487,7 +487,7 @@
 	
 	In this section, the results of the proposed self-tuning method are analyzed by an experimental implementation. The self-tuning strategy utilizes tuning parameter calculation based on the size of reference change (Section~\ref{sec:self_tunable_delta_ref}) and the scaling of tuning parameter based on splitting the interval of the parameter and assigning the interval parts to specific operating conditions (Section~\ref{sec:self_tunable_rho_scaling}).
 
-	The plant on which the control was implemented and analyzed is a laboratory-scaled counter-current liquid-to-liquid plate heat exchanger Armfield Process Plant Trainer PCT23~\cite{pct23}, see Figure~\ref{fig:HE}. The heat exchanger is 90\,mm wide, 103\,mm long, and 160\,mm high. The heat exchange is performed between the \change{cold medium} (water) and the hot medium (water). \change{The cold medium as well as the heating medium are transported to the heat exchanger by two peristaltic pumps with flexible tubing from silicon rubber. The flow rate of the cold medium is constant, while the aim of control is to track the reference value of the outlet cold medium temperature. Therefore, the controlled variable is the \change{cold medium} temperature $T$ at the outlet of the heat exchanger. The inlet cold medium temperature was constant during the whole control, i.e., $T_\mathrm{C} = 19^{\circ}$\,C.} The temperature of the heated \change{cold medium} in the outlet stream was measured by the type K thermocouple. The associated manipulated variable is the voltage $U$ corresponding to the power of the pump feeding the heat exchanger by the hot medium. The voltage is within the range of [$0-5$]\,V normalized into the relative values in percentage. The maximal voltage 5\,V or 100\% corresponds to volumetric flow rate 11.5\,$\mathrm{ml}\,\mathrm{s}^{-1}$. For further technical specifications of the laboratory heat exchanger, the reader is referred to~\cite{pct23}. As heat exchange is a nonlinear and asymmetric process~\cite{Liptak}, this heat exchanger represents a suitable candidate for the presented controller tuning strategy. The corresponding illustrative scheme of the implemented closed-loop control setup is in Figure~\ref{fig:CL}, where the ``Self-tuning'' block substitutes the more detailed scheme of the tuning procedure in Figure~\ref{fig:tuning}.  
+	The plant on which the control was implemented and analyzed is a laboratory-scaled counter-current liquid-to-liquid plate heat exchanger Armfield Process Plant Trainer PCT23~\cite{pct23}, see Figure~\ref{fig:HE}. \change{The schematic of the plant is depicted in Figure~\ref{fig:HE_scheme}.} The heat exchanger is 90\,mm wide, 103\,mm long, and 160\,mm high. The heat exchange is performed between the \change{cold medium} (water) and the hot medium (water). \change{The cold medium as well as the heating medium are transported to the heat exchanger by two peristaltic pumps with flexible tubing from silicon rubber. The flow rate of the cold medium is constant, while the aim of control is to track the reference value of the outlet cold medium temperature. Therefore, the controlled variable is the \change{cold medium} temperature $T$ at the outlet of the heat exchanger. The inlet cold medium temperature was constant during the whole control, i.e., $T_\mathrm{C} = 19^{\circ}$\,C.} The temperature of the heated \change{cold medium} in the outlet stream was measured by the type K thermocouple. The associated manipulated variable is the voltage $U$ corresponding to the power of the pump feeding the heat exchanger by the hot medium. The voltage is within the range of [$0-5$]\,V normalized into the relative values in percentage. The maximal voltage 5\,V or 100\% corresponds to volumetric flow rate 11.5\,$\mathrm{ml}\,\mathrm{s}^{-1}$. For further technical specifications of the laboratory heat exchanger, the reader is referred to~\cite{pct23}. As heat exchange is a nonlinear and asymmetric process~\cite{Liptak}, this heat exchanger represents a suitable candidate for the presented controller tuning strategy. The corresponding illustrative scheme of the implemented closed-loop control setup is in Figure~\ref{fig:CL}, where the ``Self-tuning'' block substitutes the more detailed scheme of the tuning procedure in Figure~\ref{fig:tuning}.  
 
 \begin{figure}
 	\begin{center}
@@ -851,11 +851,7 @@ The squared-error-based criterion (SSE) improved in every control scenario withi
 			$T$ & temperature, $^{\circ}\mathrm{C}$ \\
 			\change{$T_{\mathrm{C}}$} & \change{cold medium temperature, $^{\circ}\mathrm{C}$} \\
 			\change{$T_{\mathrm{H}}$} & \change{heating medium temperature, $^{\circ}\mathrm{C}$} \\
-			\change{$T_{\mathrm{H, ref}}$} & \change{heating medium reference temperature, $^{\circ}\mathrm{C}$} \\
-			$T_{\mathrm{ref}}$ & reference temperature, $^{\circ}\mathrm{C}$ \\
-			$T_{\mathrm{s}}$ & sampling time, s \\
-			$T^{\mathrm{s}}$ & steady state of temperature, $^{\circ}\mathrm{C}$ \\
-			$u$ & control inputs \\
+			\change{$T_{\mathrm{H, ref}}$} & \change{heating medium reference temperature, $^{\circ}\mathrm{C}$} \\			
 		\end{tabular}
 		%	\end{center}
 	
@@ -863,6 +859,10 @@ The squared-error-based criterion (SSE) improved in every control scenario withi
 	
 	%	\begin{center}
 		\begin{tabular}{ l l }
+			$T_{\mathrm{ref}}$ & reference temperature, $^{\circ}\mathrm{C}$ \\
+			$T_{\mathrm{s}}$ & sampling time, s \\
+			$T^{\mathrm{s}}$ & steady state of temperature, $^{\circ}\mathrm{C}$ \\
+			$u$ & control inputs \\
 			$u_{\mathrm{L}}$ & control inputs associated with the lower boundary controller\\
 			$u_{\mathrm{U}}$ & control inputs associated with the upper boundary controller\\
 			$U$ & voltage, \% \\

@@ -78,7 +78,7 @@
 			
 			...
 			
-			The paper~\cite{self_tunable} pushes the idea of tunable explicit MPC further and deals with the issues of practical industrial-oriented implementation. \change{In numerous practical applications, the reference value of the controlled variable is changed and acquires values from a wide range of operating conditions. The use of different controller setups can help handle the plant's nonlinear behavior.} The procedure of the self-tunable controller technique is presented. The controller's aggressivity is tuned based on the difference between the reference value and the steady state corresponding to the model linearization point.  
+			The paper~\cite{self_tunable} pushes the idea of tunable explicit MPC further and deals with the issues of practical industrial-oriented implementation. \change{In numerous practical applications, the reference value of the controlled variable is changed and acquires values from a wide range of operating conditions. The use of different controller setups can help handle the plant's nonlinear behavior. The paper~\cite{self_tunable} presents a procedure of the self-tunable controller technique.} The controller's aggressivity is tuned based on the difference between the reference value and the steady state corresponding to the model linearization point.  
 		\end{quote}
 	}
 
@@ -258,7 +258,7 @@
 		
 		First, regarding the MPC optimization problem, the reference signal is a parameter usually constrained such that it covers the operating range of the corresponding control application. Therefore, during the real-time control, the reference value can be selected only as a value from the feasible set determined offline when constructing an explicit MPC controller. Obviously, if the MPC problem is precomputed for a large range of reference values, e.g., because it is not clear a priori which reference values will be set during control, this would ``only'' lead to the larger explicit solution of MPC, as the consequence of a larger range of reference signal. 
 		
-		Next, regarding the calculation of parameter $\rho$, the setup of the reference value is strict, and the reference value is reachable from the operating range to ensure that $0 \le \rho \le 1 $ holds. Otherwise, the interpolated control action would be the ``extrapolation'' leading to the loss of guarantees on the input, state constraints satisfaction, etc.	
+		Next, regarding the calculation of parameter $\rho$, the setup of the reference value is strict, and the reference value is reachable from the operating range to ensure that $0 \le \rho \le 1 $ holds. Otherwise, the interpolated control action would be the ``extrapolation'' leading to the loss of guarantees on the input or state constraints satisfaction, etc.	
 		
 		To make clear the proposed tuning technique, we incorporated the comment on selected reference value into the manuscript as follows:	
 		
@@ -271,7 +271,7 @@
 				
 				Based on Eq.~\eqref{eq:rho_self_tunable}, the property $0 \le \rho \le 1$ holds, as $\vert y_{\mathrm{ref}} \vert \le d_{\max}$. As a consequence, the parameter $\rho$ represents a way how to normalize the deviation from the steady-state value and is exploited to scale the control action or, implicitly, to tune the aggressiveness of the controller. 
 				
-				\change{Note that the reference value must be reachable from the operating range to ensure that $0 \le \rho \le 1 $ holds. Otherwise, the interpolated control action would be the ``extrapolation'' leading to the loss of guarantees on the input, state constraints satisfaction, etc.}
+				\change{Note that the reference value must be reachable from the operating range to ensure that $0 \le \rho \le 1 $ holds. Otherwise, the interpolated control action would be the ``extrapolation'' leading to the loss of guarantees on the input or state constraints satisfaction, etc.}
 			\end{quote}
 	}
 
