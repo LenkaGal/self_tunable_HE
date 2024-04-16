@@ -1,0 +1,174 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{a4wide}
+\usepackage{multicol}
+\usepackage[ansinew]{inputenc}
+\usepackage{color}
+\usepackage{url}
+%\usepackage{floatflt}
+\usepackage{multirow}
+\usepackage{rotating, graphicx}
+
+
+\newcommand{\opt}{^{\star}} % \opt
+\newcommand{\tr}{\intercal} % transpose
+
+
+
+% RESPONSE LETTER SYNTAX:
+% =====================================================
+\newcommand{\change}[1]{\textcolor{red}{#1}}
+
+\newcommand{\comment}[1]{
+	\begin{itemize}
+		\item \textbf{Comment:}\\ \sf{#1}
+	\end{itemize}
+}
+
+\newcommand{\answer}[1]{
+	\begin{itemize}
+		\item[] \textbf{Answer:}\\ #1
+	\end{itemize}
+}
+
+\newcommand{\pointout}[1]{\textcolor{blue}{#1}}
+\definecolor{YJ}{rgb}{0.0,0.5,0.0}
+
+% =====================================================
+
+
+\newcommand{\diam}[1]{\mathrm{diam}\left(#1\right)}
+
+% \newcommand {\mm}[1]{\textcolor{blue}{#1}}
+
+%opening
+\title{Response to the review comments}
+\author{}
+\date{}
+
+\sloppy
+\begin{document}
+	
+	\maketitle
+	
+	We would like to thank the Reviewers for the constructive and thoughtful comments on our manuscript.
+	We revised the document based on these comments and we provide point-to-point answers below.
+	All changes relative to our initial submission are highlighted in \change{red}. TODO!
+	
+	\section*{Answer to Editor}
+	We would like to thank the Editor for summarizing substantial and high-quality review comments, which helped us to improve our manuscript's quality. We revised the paper based on the Reviewers' comments and incorporated the suggestions into our manuscript. We reformulated or added the corresponding statements to clarify the ideas.  TODO!
+
+	
+	\section*{Answer to Reviewer 1}
+	\comment{ The authors have not addressed some of my comments in the previous submission thoroughly. I have the following follow-up comments:\\ 
+	
+	 The control performance with Qy = 500 is not quantified, and whether the performance benefits of the proposed method reported in Table 2 still remain is not clarified. Since Qy =500 would give a moderately tuned controller, it can provide a better overall performance than the two boundary controllers chosen with "extreme" tuning.
+	}
+
+	\answer{		
+		We thank the Reviewer for pointing out...
+		
+	\begin{table}[h!]
+		\begin{center}
+			\caption{Control performance criteria.}
+			\label{tab:control_performance}
+			\begin{tabular}{c|c|c|c|c} 
+				Reference step change & $Q_\mathrm{y}$ & SSE [$^{\circ}\mathrm{C}^2$\,s] & $\sigma_{\mathrm{max}}$\,[\%] & $t_{\epsilon}$\,[s]  \\
+				\hline
+				\multirow{4}{*}{ 35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1\,000 & 714 & 33.5 & 16.5 \\
+				& 100 & 867 & 16.7 & 12.5 \\ 
+				& 500 & \textbf{583} & 17.6 & \textbf{7.5} \\
+				& self-tuned & \textbf{678} & \textbf{15.2} & \textbf{9.5}  \\ 
+				\hline
+				\multirow{4}{*}{ 45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C } & 1\,000 & 365 & 47.2 & \textbf{5} \\
+				& 100 & 606 & 23.3 & 26.5  \\ 
+				& 500 & \textbf{168} & \textbf{18.2} & \textbf{6.5} \\
+				& self-tuned & \textbf{248} & \textbf{19.1} & 9.5  \\ 
+				\hline
+				\multirow{4}{*}{ 50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1\,000 & 245 & \textbf{18.9} & \textbf{6.5}  \\
+				& 100 & 398 & 79.6 & 31  \\ 
+				& 500 & 211 & \textbf{22.3} & 8 \\
+				& self-tuned & \textbf{186} & 24.6 & \textbf{6.5}  \\ 
+				\hline
+				\multirow{4}{*}{ 45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C } & 1\,000 & 1\,024 & 18.4 & 22.5  \\
+				& 100 & 1\,402 & 41.9 & 90  \\ 
+				& 500 & 1064 & 25.6 & 67 \\
+				& self-tuned & \textbf{967} & \textbf{16.5} & \textbf{18.5}   
+			\end{tabular}
+		\end{center}
+	\end{table}
+		
+		
+%		\begin{quote}
+%			quote			
+%		\end{quote}
+	}
+
+	\comment{
+		For the metrics in Table 2, can the authors also report average values of the three metrics (relative improvements) obtained across the four set point changes considered? The average values would give an idea of the overall control performance. It seems that the overall performance for the settling time would be worse, and only little improvement in the overshoot metric?
+	}
+
+	\answer{
+		\begin{table}[h!]
+			\begin{center}
+				\caption{Relative improvement of the control performance using the self-tunable explicit MPC controller.}
+				\label{tab:improvement}
+				\begin{tabular}{c|c|c|c|c} 
+					Reference step change & Comparison subject to the $Q_\mathrm{y}$ setup & $\delta$ SSE\,[\%] & $\delta \sigma_{\mathrm{max}}$\,[\%] & $\delta t_{\epsilon}$\,[\%]  \\
+					\hline
+					\multirow{2}{*}{ 35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 121 &  9 & 74 \\
+					& 100 & 28 &  10 & 32 \\  
+					\hline
+					\multirow{2}{*}{45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C } & 1000 & 47 & 147 &$-47$  \\ 
+					& 100 & 144 &  22 & 179 \\ 
+					\hline
+					\multirow{2}{*}{50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 32 &$-23$& 0 \\ 
+					& 100 & 114 & 224 & 377 \\
+					\hline
+					\multirow{2}{*}{45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C } &  1000 & 6 & 12 & 22 \\
+					& 100 & 45 &  154 & 386 \\
+					\hline
+					\multirow{2}{*}{Average for all steps} &  1000 & 23 & 64 & 12 \\
+					& 100 & 83 &  102 & 243  
+				\end{tabular}
+			\end{center}
+		\end{table}
+	}
+	
+	\comment{
+		All the three performance metric are related to the controlled temperature variable. Why did the authors not consider any metric related to the control input?	
+	}
+	
+	
+	\comment{
+		In addition, the authors only summarize the best case performance improvements in the conclusions. This can be a bit misleading to readers since the proposed method also performs worse (significantly) in some parts of the simulations. So summarizing average values would be more appropriate to give a better picture of the overall performance.
+	}
+	
+	
+	\comment{
+		Based on the responses to my previous comments, it appears that the applicability of the proposed self-tunable explicit MPC method is limited to "small-scale multivariable systems, with decoupled dynamics"? If so, please mention this clearly in the abstract.
+	}
+
+	\section*{Answer to Reviewer 2}
+	\comment{My comments from the previous round have been fully address. I suggest publication.}
+	
+	\answer{		
+		We thank the Reviewer again for the review.		
+	}
+
+
+
+
+	
+
+	
+	
+	\bibliographystyle{plain}
+	\bibliography{references}
+	
+\end{document}
+
+
