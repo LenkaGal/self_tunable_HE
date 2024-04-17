@@ -54,12 +54,13 @@
 	
 	\maketitle
 	
-	We would like to thank the Reviewers for the constructive and thoughtful comments on our manuscript.
-	We revised the document based on these comments and we provide point-to-point answers below.
-	All changes relative to our initial submission are highlighted in \change{red}. TODO!
+	We thank the Reviewers for all comments and suggestions.
+	The document was revised according to these comments and we provide point-to-point answers below.
+	All changes relative to our initial submission are highlighted in \change{red}. 
 	
 	\section*{Answer to Editor}
-	We would like to thank the Editor for summarizing substantial and high-quality review comments, which helped us to improve our manuscript's quality. We revised the paper based on the Reviewers' comments and incorporated the suggestions into our manuscript. We reformulated or added the corresponding statements to clarify the ideas.  TODO!
+	The authors would like to thank the Editor for collecting the review comments. We revised the paper based on the Reviewers' comments, and incorporated the suggestions
+	into our manuscript.
 
 	
 	\section*{Answer to Reviewer 1}
@@ -69,7 +70,18 @@
 	}
 
 	\answer{		
-		We thank the Reviewer for pointing out...
+		We revisited Table~\ref{tab:control_performance} to evaluate the control performance criteria.
+		The values highlighted in \textbf{bold} represent the scenarios when the controller with the investigated setup $Q_\mathrm{y} = 500$ performed as the best one, excluding the self-tunable MPC. It can be seen, that the values are the best in 5 out of 12 performance criteria. On the contrary, the self-tuned controller acquired 10 best values out of 12 performance criteria thanks to the tuning based on the varying operating conditions. 
+		
+		When excluding the boundary controllers and comparing only the self-tunable controller with the setup $Q_\mathrm{y} = 500$, the moderate controller outperforms the self-tunable MPC in half of the performance criteria. It happens mostly in tracking the reference value upwards. Nevertheless, when the reference changes downwards, the self-tuned controller becomes beneficial. Therefore, it supports choosing the tunable control technique. 
+		
+		\textcolor{blue}{Pozn.: Zvazme teraz dva scenare - bud toto o 500vke zapracujem nejako do clanku, alebo to odbavime nasledovne:}
+		
+		To ensure a good readability of the paper, we incline not to branch the case study also in the direction of the moderate setup, i.e., $Q_\mathrm{y} = 500$. We prefer to emphasize the consideration of the self-tuning method based on the revised comment from the first round of review:
+		
+		\begin{quote}
+			Obviously, if there exists a well-tuned ``universal'' controller that satisfies the requirements on the control performance in the whole range of the considered operating conditions, then the implementation of the self-tuning procedure is out of scope for such control application. Nevertheless, in numerous practical situations, using only one controller with a constant setup leads to poor or just ``satisfactory'' control results, i.e., the reference value is achieved, but with worse control performance, e.g., leading to high overshoots or settling times. When working on our laboratory case study, a set of different setups of penalty matrices was investigated. In every control scenario, the setup was beneficial only in some working conditions (tracking the reference upwards or downwards). Therefore, the closed-loop control performance is improved by introducing the benefits of the self-tuning method based on the two boundary MPC controllers.
+		\end{quote}
 		
 	\begin{table}[h!]
 		\begin{center}
@@ -81,30 +93,26 @@
 				\multirow{4}{*}{ 35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1\,000 & 714 & 33.5 & 16.5 \\
 				& 100 & 867 & 16.7 & 12.5 \\ 
 				& 500 & \textbf{583} & 17.6 & \textbf{7.5} \\
-				& self-tuned & \textbf{678} & \textbf{15.2} & \textbf{9.5}  \\ 
+				& self-tuned & 678 & 15.2 & 9.5  \\ 
 				\hline
-				\multirow{4}{*}{ 45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C } & 1\,000 & 365 & 47.2 & \textbf{5} \\
+				\multirow{4}{*}{ 45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C } & 1\,000 & 365 & 47.2 & 5 \\
 				& 100 & 606 & 23.3 & 26.5  \\ 
-				& 500 & \textbf{168} & \textbf{18.2} & \textbf{6.5} \\
-				& self-tuned & \textbf{248} & \textbf{19.1} & 9.5  \\ 
+				& 500 & \textbf{168} & \textbf{18.2} & 6.5 \\
+				& self-tuned & 248 & 19.1 & 9.5  \\ 
 				\hline
-				\multirow{4}{*}{ 50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1\,000 & 245 & \textbf{18.9} & \textbf{6.5}  \\
+				\multirow{4}{*}{ 50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1\,000 & 245 & 18.9 & 6.5  \\
 				& 100 & 398 & 79.6 & 31  \\ 
-				& 500 & 211 & \textbf{22.3} & 8 \\
-				& self-tuned & \textbf{186} & 24.6 & \textbf{6.5}  \\ 
+				& 500 & \textbf{211} & 22.3 & 8 \\
+				& self-tuned & 186 & 24.6 & 6.5  \\ 
 				\hline
 				\multirow{4}{*}{ 45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C } & 1\,000 & 1\,024 & 18.4 & 22.5  \\
 				& 100 & 1\,402 & 41.9 & 90  \\ 
 				& 500 & 1064 & 25.6 & 67 \\
-				& self-tuned & \textbf{967} & \textbf{16.5} & \textbf{18.5}   
+				& self-tuned & 967 & 16.5 & 18.5  
 			\end{tabular}
 		\end{center}
-	\end{table}
-		
-		
-%		\begin{quote}
-%			quote			
-%		\end{quote}
+	\end{table}		
+
 	}
 
 	\comment{
@@ -112,27 +120,33 @@
 	}
 
 	\answer{
+		We would like to thank the Reviewer for the comment on the relative improvements. If the values in Table~2 were averaged, it is true that the average settling time would be worse, and the average relative improvement of the overshoot would be very low. However, considering the average of these values would be very strict because of the way how the relative improvements were calculated.
+		
+		The values in Table~2 are computed subject to the second best setup for each reference step change individually. The negative numbers represent deterioration compared to the best controller setup in the corresponding reference tracking. It means, that the base subject to which is every value calculated, changes. Therefore, averaging the values of the relative improvements would not be fair, as it would not reflect improvement subject to one controller with a constant setup.
+		
+		To avoid the ``unfair'' evaluation of the relative improvement, we extended Table~2 such that it provides the relative improvements subject to each boundary controller individually, see Table~\ref{tab:improvement}.
+		
 		\begin{table}[h!]
 			\begin{center}
 				\caption{Relative improvement of the control performance using the self-tunable explicit MPC controller.}
 				\label{tab:improvement}
 				\begin{tabular}{c|c|c|c|c} 
-					Reference step change & Comparison subject to the $Q_\mathrm{y}$ setup & $\delta$ SSE\,[\%] & $\delta \sigma_{\mathrm{max}}$\,[\%] & $\delta t_{\epsilon}$\,[\%]  \\
+					& Comparison subject to the $Q_\mathrm{y}$ setup & $\delta$ SSE\,[\%] & $\delta \sigma_{\mathrm{max}}$\,[\%] & $\delta t_{\epsilon}$\,[\%]  \\
 					\hline
-					\multirow{2}{*}{ 35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 121 &  9 & 74 \\
-					& 100 & 28 &  10 & 32 \\  
+					\multirow{2}{*}{ 35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 5 &  55 & 42 \\
+					& 100 & 22 &  9 & 24 \\  
 					\hline
-					\multirow{2}{*}{45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C } & 1000 & 47 & 147 &$-47$  \\ 
-					& 100 & 144 &  22 & 179 \\ 
+					\multirow{2}{*}{45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C } & 1000 & 32 & 59 &$-90$  \\ 
+					& 100 & 59 &  18 & 64 \\ 
 					\hline
-					\multirow{2}{*}{50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 32 &$-23$& 0 \\ 
-					& 100 & 114 & 224 & 377 \\
+					\multirow{2}{*}{50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 24 &$-30$& 0 \\ 
+					& 100 & 53 & 69 & 79 \\
 					\hline
-					\multirow{2}{*}{45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C } &  1000 & 6 & 12 & 22 \\
-					& 100 & 45 &  154 & 386 \\
+					\multirow{2}{*}{45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C } &  1000 & 6 & 11 & 18 \\
+					& 100 & 31 &  61 & 79 \\
 					\hline
-					\multirow{2}{*}{Average for all steps} &  1000 & 23 & 64 & 12 \\
-					& 100 & 83 &  102 & 243  
+					\multirow{2}{*}{Average across all steps} &  1000 & 17 & 24 & -7 \\
+					& 100 & 41 &  39 & 62  
 				\end{tabular}
 			\end{center}
 		\end{table}
@@ -156,7 +170,7 @@
 	\comment{My comments from the previous round have been fully address. I suggest publication.}
 	
 	\answer{		
-		We thank the Reviewer again for the review.		
+		We thank the Reviewer for reviewing our revised manuscript.		
 	}
 
 
