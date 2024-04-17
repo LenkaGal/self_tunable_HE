@@ -202,12 +202,23 @@
 	}
 
 	\answer{
-		We thank the Reviewer for pointing out the misleading communication of the control results...
+		We thank the Reviewer for pointing out the communication of the control performance improvements...
 	}
 	
 	
 	\comment{
 		Based on the responses to my previous comments, it appears that the applicability of the proposed self-tunable explicit MPC method is limited to "small-scale multivariable systems, with decoupled dynamics"? If so, please mention this clearly in the abstract.
+	}
+
+	\answer{
+		We incorporated the Reviewer's suggestion into the Abstract as follows:
+		
+		\begin{quote}
+			The tunable approximated explicit model predictive control (MPC) comes
+			with the benefits of real-time tunability without the necessity of solving the optimization problem online. This paper provides a novel self-tunable control policy that does not require any intervention from the control engineer during operation in order to retune the controller subject to the changed working conditions. Based on the current operating conditions, the autonomous tuning parameter scales the control input using linear interpolation between the boundary optimal control actions. The adjustment of the tuning parameter depends on the current reference value, which makes this strategy suitable for reference tracking problems. Furthermore, a novel technique for scaling the tuning parameter is proposed. This extension exploits different ranges of the tuning parameter assigned to specified operating conditions. \change{The self-tunable technique is suitable for SISO (single-input and single-output) systems or MIMO (multiple-input and multiple-output) systems with decoupled dynamics.} The self-tunable explicit MPC was implemented on a laboratory heat exchanger with nonlinear and asymmetric behavior. The asymmetric behavior of the plant was compensated by tuning the controller’s aggressiveness, as the negative or positive sign of reference change was considered in the tuning procedure. The designed self-tunable controller improved control performance by decreasing sum-of-squared control error, maximal overshoots/undershoots, and settling time compared to the conventional control strategy based on a single (non-tunable) controller.
+		\end{quote}
+	
+	TODO: Potom  vymazat vysvetlivky skratiek MIMO a SISO dalej v texte.
 	}
 
 	\section*{Answer to Reviewer 2}
@@ -224,8 +235,8 @@
 
 	
 	
-	\bibliographystyle{plain}
-	\bibliography{references}
+	%\bibliographystyle{plain}
+	%\bibliography{references}
 	
 \end{document}
 
