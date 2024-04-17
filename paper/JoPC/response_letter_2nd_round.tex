@@ -150,6 +150,38 @@
 				\end{tabular}
 			\end{center}
 		\end{table}
+	
+			\begin{table}[h!]
+		\begin{center}
+			\caption{Relative improvement of the control performance using the self-tunable explicit MPC controller.}
+			\label{tab:improvement2}
+			\begin{tabular}{c|c|c|c|c} 
+				& Comparison subject to the $Q_\mathrm{y}$ setup & $\delta$ SSE\,[\%] & $\delta \sigma_{\mathrm{max}}$\,[\%] & $\delta t_{\epsilon}$\,[\%]  \\
+				\hline
+				\multirow{3}{*}{ 35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 5 &  55 & 42 \\
+				& 100 & 22 &  9 & 24 \\ 
+				& 500 & -16 & 13 & -27 \\
+				\hline
+				\multirow{3}{*}{45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C } & 1000 & 32 & 59 &$-90$  \\ 
+				& 100 & 59 &  18 & 64 \\ 
+				& 500 & -48 & -5 & -46 \\
+				\hline
+				\multirow{3}{*}{50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 24 &$-30$& 0 \\ 
+				& 100 & 53 & 69 & 79 \\
+				& 500 & 12 & -10 & 19 \\
+				\hline
+				\multirow{3}{*}{45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C } &  1000 & 6 & 11 & 18 \\
+				& 100 & 31 &  61 & 79 \\
+				& 500 & 9 & 36 & 72 \\
+				\hline
+				\multirow{3}{*}{Average across all steps} &  1000 & 17 & 24 & -7 \\
+				& 100 & 41 &  39 & 62 \\ 
+				& 500 & -11 & 8 &  5
+			\end{tabular}
+		\end{center}
+	\end{table}
+	
+	
 	}
 	
 	\comment{
