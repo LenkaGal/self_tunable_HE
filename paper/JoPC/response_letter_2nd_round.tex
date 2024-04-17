@@ -187,10 +187,22 @@
 	\comment{
 		All the three performance metric are related to the controlled temperature variable. Why did the authors not consider any metric related to the control input?	
 	}
+
+	\answer{
+		We thank the Reviewer for commenting on the control performance criteria related to the control input. Although we considered such an evaluation, we chose not to include the criteria for the following reasons. This kind of criteria usually reflects some costs or energy demands associated with the control. 
+		
+		The first kind of criterium related to the control input could be intuitively some (potentially weighted) ISU (integral-of-squared input) or, in a discrete-time manner, SSU (sum-of-squared input). These criteria correspond to the summing of the control input, i.e., voltage, to set the operating speed of the pump. The operating speed of the pump itself does not play any significant role in the costs of the control. Therefore, it could be converted to the amount of liquid transported to the heat exchanger during the whole control experiment. Nevertheless, the heating medium is dosed to the heat exchanger plant as a recycle, i.e., the same amount of heating medium is re-used during operation, which would represent fictitious performance criteria not related to the actual plant setup. 
+		
+		Another criterion related to the control input we considered was the energy consumed to pre-heat the heating medium in the heater. However, this is not directly associated with the MPC's control inputs. The consumed energy corresponds to the control involving the proportional controller, which sets the electric power. Therefore, we decided not to include such a criterion as well.
+	}
 	
 	
 	\comment{
 		In addition, the authors only summarize the best case performance improvements in the conclusions. This can be a bit misleading to readers since the proposed method also performs worse (significantly) in some parts of the simulations. So summarizing average values would be more appropriate to give a better picture of the overall performance.
+	}
+
+	\answer{
+		We thank the Reviewer for pointing out the misleading communication of the control results...
 	}
 	
 	
