@@ -21,6 +21,10 @@
 % RESPONSE LETTER SYNTAX:
 % =====================================================
 \newcommand{\change}[1]{\textcolor{red}{#1}}
+\newcommand{\textblue}[1]{\textcolor{blue}{#1}}
+
+
+
 
 \newcommand{\comment}[1]{
 	\begin{itemize}
@@ -71,7 +75,7 @@
 
 	\answer{		
 		We revisited Table~\ref{tab:control_performance} to evaluate the control performance criteria.
-		The values highlighted in \textbf{bold} represent the scenarios when the controller with the investigated setup $Q_\mathrm{y} = 500$ performed as the best one, excluding the self-tunable MPC. It can be seen, that the values are the best in 5 out of 12 performance criteria. On the contrary, the self-tuned controller acquired 10 best values out of 12 performance criteria thanks to the tuning based on the varying operating conditions. 
+		The values highlighted in \textbf{bold} represent the scenarios when the controller with the investigated setup $Q_\mathrm{y} = 500$ performed as the best one, excluding the self-tunable MPC. It can be seen, that the values are the best in 5 out of 12 performance criteria, see Table~\ref{tab:control_performance}, blue. On the contrary, the self-tuned controller acquired 10 best values out of 12 performance criteria thanks to the tuning based on the varying operating conditions, see Table~\ref{tab:control_performance}, red. 
 		
 		When excluding the boundary controllers and comparing only the self-tunable controller with the setup $Q_\mathrm{y} = 500$, the moderate controller outperforms the self-tunable MPC in half of the performance criteria. It happens mostly in tracking the reference value upwards. Nevertheless, when the reference changes downwards, the self-tuned controller becomes beneficial. Therefore, it supports choosing the tunable control technique. To support our statement, the average control performance for all controllers was also elaborated. As the average control performance was the topic of the Reviewer's second comment, it can be found in the answer to the following comment.
 		
@@ -84,23 +88,23 @@
 					\hline
 					\multirow{4}{*}{ 35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1\,000 & 714 & 33.5 & 16.5 \\
 					& 100 & 867 & 16.7 & 12.5 \\ 
-					& 500 & \textbf{583} & 17.6 & \textbf{7.5} \\
-					& self-tuned & 678 & 15.2 & 9.5  \\ 
+					& 500 & \textblue{\textbf{583}} & 17.6 & \textblue{\textbf{7.5}} \\
+					& self-tuned & \change{\textbf{678}} & \change{\textbf{15.2}} & \change{\textbf{9.5}}  \\ 
 					\hline
 					\multirow{4}{*}{ 45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C } & 1\,000 & 365 & 47.2 & 5 \\
 					& 100 & 606 & 23.3 & 26.5  \\ 
-					& 500 & \textbf{168} & \textbf{18.2} & 6.5 \\
-					& self-tuned & 248 & 19.1 & 9.5  \\ 
+					& 500 & \textblue{\textbf{168}} & \textblue{\textbf{18.2}} & 6.5 \\
+					& self-tuned & \change{\textbf{248}} & \change{\textbf{19.1}} & 9.5  \\ 
 					\hline
 					\multirow{4}{*}{ 50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1\,000 & 245 & 18.9 & 6.5  \\
 					& 100 & 398 & 79.6 & 31  \\ 
-					& 500 & \textbf{211} & 22.3 & 8 \\
-					& self-tuned & 186 & 24.6 & 6.5  \\ 
+					& 500 & \textblue{\textbf{211}} & 22.3 & 8 \\
+					& self-tuned & \change{\textbf{186}} & 24.6 & \change{\textbf{6.5}}  \\ 
 					\hline
 					\multirow{4}{*}{ 45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C } & 1\,000 & 1\,024 & 18.4 & 22.5  \\
 					& 100 & 1\,402 & 41.9 & 90  \\ 
 					& 500 & 1064 & 25.6 & 67 \\
-					& self-tuned & 967 & 16.5 & 18.5  
+					& self-tuned & \change{\textbf{967}} & \change{\textbf{16.5}} & \change{\textbf{18.5}} 
 				\end{tabular}
 			\end{center}
 		\end{table}
@@ -123,111 +127,133 @@
 		
 		The values in Table~2 are computed subject to the second best setup for each reference step change individually. The negative numbers represent deterioration compared to the best controller setup in the corresponding reference tracking. It means, that the base subject to which is every value calculated, changes. Therefore, averaging the values of the relative improvements would not be fair, as it would not reflect improvement subject to one controller with a constant setup.
 		
-		To avoid the ``unfair'' evaluation of the relative improvement, we extended Table~2 such that it provides the relative improvements subject to each boundary controller individually, see Table~\ref{tab:improvement500}. Note, for the purposes of this response letter, we also added the evaluation of the controller with the moderate setup, i.e., $Q_\mathrm{y} = 500$ to support the statements from the answer to the previous comment.
+		To avoid the ``unfair'' evaluation of the relative improvement, we extended Table~2 such that every optimal MPC is compared subject to the self-tunable MPC, see Table~\ref{tab:improvement500}. In such way, the base subject to which the relative improvements are calculated, remains the same. Note, for the purposes of this response letter, we also added the evaluation of the controller with the moderate setup, i.e., $Q_\mathrm{y} = 500$ to support the statements from the answer to the previous comment.
 		
-		Regarding the average values of the relative improvements, simple average of the values for every controller across all reference changes would not properly map the overall improvement. For example, let us compare the 79\% improvement in the settling time subject to the MPC setup $Q_\mathrm{y} = 100$ during the third and fourth reference tracking. In the third reference step change, the relative improvement of 79\% corresponds to the settling time difference $31 - 6.5 = 24.5$\,s. In the fourth reference step change, the relative improvement of 79\% corresponds to the settling time difference $90 - 18.5 = 71.5$\,s. Although the values in Table~\ref{tab:improvement500} provide an extended overview of how better or worse the self-tunable controller performed in the specific operating conditions, averaging the values across the reference changes would give a somewhat distorted idea. Therefore, some kind of ``normalization'' would lead to a better vision of the average control performance. Our idea is to first average the values of the control performance criteria for every controller setup across the reference changes, and then calculate the relative improvements from the averaged values, see Table~\ref{tab:average_improvement500}. The symbol $\bar{(.)}$ represents an average value of the corresponding criterion.
+		%Regarding the average values of the relative improvements, simple average of the values for every controller across all reference changes would not properly map the overall improvement. For example, let us compare the 79\% improvement in the settling time subject to the MPC setup $Q_\mathrm{y} = 100$ during the third and fourth reference tracking. In the third reference step change, the relative improvement of 79\% corresponds to the settling time difference $31 - 6.5 = 24.5$\,s. In the fourth reference step change, the relative improvement of 79\% corresponds to the settling time difference $90 - 18.5 = 71.5$\,s. Although the values in Table~\ref{tab:improvement500} provide an extended overview of how better or worse the self-tunable controller performed in the specific operating conditions, averaging the values across the reference changes would give a somewhat distorted idea. Therefore, some kind of ``normalization'' would lead to a better vision of the average control performance. Our idea is to first average the values of the control performance criteria for every controller setup across the reference changes, and then calculate the relative improvements from the averaged values, see Table~\ref{tab:average_improvement500}. The symbol $\bar{(.)}$ represents an average value of the corresponding criterion.
 		
-		Based on this explanation of our idea of the average control performance, at this place we would like to return to the topic of the first comment—whether the moderate controller performs better in the overall metric. Let us compare the average relative control improvement of the moderate MPC and the self-tunable approximated MPC. The Table~\ref{tab:average_improvement500} shows that although in average the SSE criterion corresponding to the self-tunable MPC  was (not very significantly) worse, the rest of the criteria improved in average (the maximal overshoor improved by 11\% and the settling time improved by 102\%). Therefore, considering the tunable technique is beneficial.
+		Based on this explanation of our idea of the average control performance, at this place we would like to return to the topic of the first comment—whether the moderate controller performs better in the overall metric. Let us compare the average relative control improvement of the moderate MPC and the self-tunable approximated MPC. The Table~\ref{tab:improvement500} shows that although in average the SSE criterion corresponding to the self-tunable MPC  was 6\% worse, the rest of the criteria improved in average (the maximal overshoor improved by 14\% and the settling time improved by 58\%). Therefore, considering the tunable technique is beneficial.
 		
 		\begin{table}[h!]
 			\begin{center}
 				\caption{Relative improvement of the control performance using the self-tunable explicit MPC controller.}
 				\label{tab:improvement500}
 				\begin{tabular}{c|c|c|c|c} 
-					Reference change & Comparison with $Q_\mathrm{y}$ setup & $\delta$ SSE\,[\%] & $\delta \sigma_{\mathrm{max}}$\,[\%] & $\delta t_{\epsilon}$\,[\%]  \\
+					& Comparison with $Q_\mathrm{y}$ setup & $\delta$ SSE\,[\%] & $\delta \sigma_{\mathrm{max}}$\,[\%] & $\delta t_{\epsilon}$\,[\%]  \\
 					\hline
-					\multirow{3}{*}{ 35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 5 &  55 & 42 \\
-					& 100 & 22 &  9 & 24 \\ 
-					& 500 & $-16$ & 13 & $-27$ \\
+					\multirow{3}{*}{ 35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 5 &  121 & 74 \\
+					& 100 & 28 &  10 & 32 \\ 
+					& 500 & $-14$ & 16 & $-21$ \\
 					\hline
-					\multirow{3}{*}{45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C } & 1000 & 32 & 59 &$-90$  \\ 
-					& 100 & 59 &  18 & 64 \\ 
-					& 500 & $-48$ & $-5$ & $-46$ \\
+					\multirow{3}{*}{45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C } & 1000 & 47 & 147 &$-47$  \\ 
+					& 100 & 144 &  22 & 179 \\ 
+					& 500 & $-32$ & $-5$ & $-32$ \\
 					\hline
-					\multirow{3}{*}{50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 24 &$-30$& 0 \\ 
-					& 100 & 53 & 69 & 79 \\
-					& 500 & 12 & $-10$ & 19 \\
+					\multirow{3}{*}{50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 32 &$-23$& 0 \\ 
+					& 100 & 114 & 224 & 377 \\
+					& 500 & 13 & $-9$ & 23 \\
 					\hline
-					\multirow{3}{*}{45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C } &  1000 & 6 & 11 & 18 \\
-					& 100 & 31 &  61 & 79 \\
-					& 500 & 9 & 36 & 72 
+					\multirow{3}{*}{45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C } &  1000 & 6 & 12 & 22 \\
+					& 100 & 45 &  154 & 386 \\
+					& 500 & 10 & 55 & 262 \\
+					\hline					
+					\multirow{3}{*}{Average} &  1000 & 23 & 64 & 12 \\
+					& 100 & 83 &  102 & 244 \\
+					& 500 & $-6$ & 14 & 58 
 				\end{tabular}
 			\end{center}
 		\end{table}
 		
-		\begin{table}[h!]
-			\begin{center}
-				\caption{Average control performance criteria.}
-				\label{tab:average_improvement500}
-				\begin{tabular}{c|c|c|c|c|c|c} 
-					$Q_\mathrm{y}$ & $\overline{\mathrm{SSE}}$ [$^{\circ}\mathrm{C}^2$\,s] & $\delta \overline{\mathrm{SSE}}$\,[\%] & $\bar{\sigma}_{\mathrm{max}}$\,[\%] & $\delta \bar{\sigma}_{\mathrm{max}}$\,[\%] & $\bar{t}_{\epsilon}$\,[s] & $\delta \bar{t}_{\epsilon}$\,[\%] \\
-					\hline
-					1000 & 587 & 13 &  29.5 & 57 & 15 & 15 \\
-					100 & 818 & 57 & 40.4 & 114 & 40 & 264 \\ 
-					500 & 506.5 & $-3$ & 20.9 & 11 & 22.5 & 102 \\
-					self-tuned & 519.8 & - & 18.9 & - & 11 & - 			
-				\end{tabular}
-			\end{center}
-		\end{table}
+%		\begin{table}[h!]
+%			\begin{center}
+%				\caption{Average control performance criteria.}
+%				\label{tab:average_improvement500}
+%				\begin{tabular}{c|c|c|c|c|c|c} 
+%					$Q_\mathrm{y}$ & $\overline{\mathrm{SSE}}$ [$^{\circ}\mathrm{C}^2$\,s] & $\delta \overline{\mathrm{SSE}}$\,[\%] & $\bar{\sigma}_{\mathrm{max}}$\,[\%] & $\delta \bar{\sigma}_{\mathrm{max}}$\,[\%] & $\bar{t}_{\epsilon}$\,[s] & $\delta \bar{t}_{\epsilon}$\,[\%] \\
+%					\hline
+%					1000 & 587 & 13 &  29.5 & 57 & 15 & 15 \\
+%					100 & 818 & 57 & 40.4 & 114 & 40 & 264 \\ 
+%					500 & 506.5 & $-3$ & 20.9 & 11 & 22.5 & 102 \\
+%					self-tuned & 519.8 & - & 18.9 & - & 11 & - 			
+%				\end{tabular}
+%			\end{center}
+%		\end{table}
 		
 		As we incline not to branch the case study also in the direction of the moderate setup, i.e., $Q_\mathrm{y} = 500$, we prefer to include the original comparison subject to the boundary controllers as follows:
 		
 		\begin{quote}	
 		
-
+		As can be seen in Table~\ref{tab:control_performance}, the real-time self-tuning of the explicit MPC controller helped to improve two to three criteria when tracking each reference value. 	
+		\change{The relative improvement in the percentage, denoted by $\delta$, of using the self-tunable controller is summarized in Table~\ref{tab:improvement} for each reference step change separately. The values were computed as the difference between two criteria values corresponding to the optimal and self-tunable MPC, referred to the self-tunable MPC. The negative numbers represent deterioration of the specific performance criterion in the corresponding reference tracking.} 
 		
-			\begin{table}[h!]
-				\begin{center}
-					\caption{Relative improvement of the control performance using the self-tunable explicit MPC controller.}
-					\label{tab:improvement}
-					\begin{tabular}{c|c|c|c|c} 
-						Reference change & Comparison with $Q_\mathrm{y}$ setup & $\delta$ SSE\,[\%] & $\delta \sigma_{\mathrm{max}}$\,[\%] & $\delta t_{\epsilon}$\,[\%]  \\
-						\hline
-						\multirow{2}{*}{ 35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 5 &  55 & 42 \\
-						& 100 & 22 &  9 & 24 \\  
-						\hline
-						\multirow{2}{*}{45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C } & 1000 & 32 & 59 &$-90$  \\ 
-						& 100 & 59 &  18 & 64 \\ 
-						\hline
-						\multirow{2}{*}{50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 24 &$-30$& 0 \\ 
-						& 100 & 53 & 69 & 79 \\
-						\hline
-						\multirow{2}{*}{45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C } &  1000 & 6 & 11 & 18 \\
-						& 100 & 31 &  61 & 79 
-					\end{tabular}
-				\end{center}
-			\end{table}	
-	
-	
 		\begin{table}[h!]
-		\begin{center}
-			\caption{Average control performance criteria.}
-			\label{tab:average_improvement}
-			\begin{tabular}{c|c|c|c|c|c|c} 
-				$Q_\mathrm{y}$ & $\overline{\mathrm{SSE}}$ [$^{\circ}\mathrm{C}^2$\,s] & $\delta \overline{\mathrm{SSE}}$\,[\%] & $\bar{\sigma}_{\mathrm{max}}$\,[\%] & $\delta \bar{\sigma}_{\mathrm{max}}$\,[\%] & $\bar{t}_{\epsilon}$\,[s] & $\delta \bar{t}_{\epsilon}$\,[\%] \\
-				\hline
-				1000 & 587 & 13 &  29.5 & 57 & 15 & 15 \\
-				100 & 818 & 57 & 40.4 & 114 & 40 & 264 \\ 
-				self-tuned & 519.8 & - & 18.9 & - & 11 & - 		
-			\end{tabular}
-		\end{center}
-	\end{table}
+			\begin{center}
+				\caption{Relative improvement of the control performance using the self-tunable explicit MPC controller.}
+				\label{tab:improvement}
+				\begin{tabular}{c|c|c|c|c} 
+					Reference change & Comparison with $Q_\mathrm{y}$ setup & $\delta$ SSE\,[\%] & $\delta \sigma_{\mathrm{max}}$\,[\%] & $\delta t_{\epsilon}$\,[\%]  \\
+					\hline
+					\multirow{3}{*}{ 35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 5 &  121 & 74 \\
+					& 100 & 28 &  10 & 32 \\ 
+					\hline
+					\multirow{3}{*}{45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C } & 1000 & 47 & 147 &$-47$  \\ 
+					& 100 & 144 &  22 & 179 \\
+					\hline
+					\multirow{3}{*}{50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 32 &$-23$& 0 \\ 
+					& 100 & 114 & 224 & 377 \\
+					\hline
+					\multirow{3}{*}{45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C } &  1000 & 6 & 12 & 22 \\
+					& 100 & 45 &  154 & 386 \\
+					\hline
+					\multirow{3}{*}{Average} &  1000 & 23 & 64 & 12 \\
+					& 100 & 83 &  102 & 244
+				\end{tabular}
+			\end{center}
+		\end{table}	
+	
+	Compared to the considered non-self-tunable controllers, the control trajectories and the evaluated quality criteria confirmed the improved control performance for the reference tracking control problem of the heat exchanger with the non-linear and asymmetric behavior. Implementing a self-tunable explicit MPC controller leads to improved control performance in the most analyzed quality criteria, see Table~\ref{tab:improvement}.	
+	\change{In average, the control performance criteria improved compared to the upper and lower boundary MPC respectively as follows: the squared-error-based criterion (SSE) reduced by 23\% and 83\%, the maximal overshoot/undershoot $\sigma_{\mathrm{max}}$ reduced by 64\% and 102\%, and the settling time $t_{\epsilon}$ reduced by 12\% and 244\%.}
+	
 
-		\end{quote}
-
-%	\begin{table}[h!]
+% Relative improvement - subject to the specific investigated controller (old method)			
+%			\begin{table}[h!]
+%				\begin{center}
+%					\caption{Relative improvement of the control performance using the self-tunable explicit MPC controller.}
+%					\label{tab:improvement}
+%					\begin{tabular}{c|c|c|c|c} 
+%						Reference change & Comparison with $Q_\mathrm{y}$ setup & $\delta$ SSE\,[\%] & $\delta \sigma_{\mathrm{max}}$\,[\%] & $\delta t_{\epsilon}$\,[\%]  \\
+%						\hline
+%						\multirow{2}{*}{ 35\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 5 &  55 & 42 \\
+%						& 100 & 22 &  9 & 24 \\  
+%						\hline
+%						\multirow{2}{*}{45\,$^{\circ}$C $\rightarrow$ 50\,$^{\circ}$C } & 1000 & 32 & 59 &$-90$  \\ 
+%						& 100 & 59 &  18 & 64 \\ 
+%						\hline
+%						\multirow{2}{*}{50\,$^{\circ}$C $\rightarrow$ 45\,$^{\circ}$C } & 1000 & 24 &$-30$& 0 \\ 
+%						& 100 & 53 & 69 & 79 \\
+%						\hline
+%						\multirow{2}{*}{45\,$^{\circ}$C $\rightarrow$ 35\,$^{\circ}$C } &  1000 & 6 & 11 & 18 \\
+%						& 100 & 31 &  61 & 79 
+%					\end{tabular}
+%				\end{center}
+%			\end{table}	
+	
+% Average - subject to the specific investigated controller	(old method)
+%		\begin{table}[h!]
 %		\begin{center}
-%			\caption{Average relative improvement of the control performance using the self-tunable explicit MPC controller.}
-%			\label{tab:improvement4}
-%			\begin{tabular}{c|c|c|c} 
-%				Comparison subject to the $Q_\mathrm{y}$ setup & $\delta$ SSE\,[\%] & $\delta \sigma_{\mathrm{max}}$\,[\%] & $\delta t_{\epsilon}$\,[\%]  \\
+%			\caption{Average control performance criteria.}
+%			\label{tab:average_improvement}
+%			\begin{tabular}{c|c|c|c|c|c|c} 
+%				$Q_\mathrm{y}$ & $\overline{\mathrm{SSE}}$ [$^{\circ}\mathrm{C}^2$\,s] & $\delta \overline{\mathrm{SSE}}$\,[\%] & $\bar{\sigma}_{\mathrm{max}}$\,[\%] & $\delta \bar{\sigma}_{\mathrm{max}}$\,[\%] & $\bar{t}_{\epsilon}$\,[s] & $\delta \bar{t}_{\epsilon}$\,[\%] \\
 %				\hline
-%				1000 & 13 &  57 & 15 \\
-%				100 & 57 &  114 & 264 \\ 
-%				500 & $-3$ & 11 & 102 			
+%				1000 & 587 & 13 &  29.5 & 57 & 15 & 15 \\
+%				100 & 818 & 57 & 40.4 & 114 & 40 & 264 \\ 
+%				self-tuned & 519.8 & - & 18.9 & - & 11 & - 		
 %			\end{tabular}
 %		\end{center}
 %	\end{table}
+
+		\end{quote}
+
 	
 	
 	}
@@ -241,7 +267,7 @@
 		
 		The first kind of criterium related to the control input could be intuitively some (potentially weighted) ISI (integral-of-squared input) or, in a discrete-time manner, SSI (sum-of-squared input). These criteria correspond to the summing of the control input, i.e., voltage, to set the operating speed of the pump. The operating speed of the pump itself does not play any significant role in the costs of the control. Therefore, it could be converted to the amount of liquid transported to the heat exchanger during the whole control experiment. Nevertheless, the heating medium is dosed to the heat exchanger plant as a recycle, i.e., the same amount of heating medium is re-used during operation, which would represent fictitious performance criteria not related to the actual plant setup, see Figure 3 in the manuscript. 
 		
-		Another criterion related to the control input we considered was the energy consumed to pre-heat the heating medium in the heater. However, this is not directly associated with the MPC's control inputs. The consumed energy corresponds to the control involving the proportional controller, which sets the electric power. Therefore, any energy minimization should be primarily addressed by fine tuning of this auxiliary controller.	To conclude, we decided not to include such a criterion as well.
+		Another criterion related to the control input we considered was the energy consumed to pre-heat the heating medium in the heater. However, this is not directly associated with the MPC's control inputs. The consumed energy corresponds to the control involving the proportional controller, which sets the electric power. Therefore, any energy minimization should be primarily addressed by fine tuning of this auxiliary controller. To conclude, we decided not to include such a criterion as well.
 		
 	}
 	
@@ -254,7 +280,7 @@
 		We thank the Reviewer for pointing out the communication of the control performance improvements. Based on the answers to the comments related to relative improvements, we updated the Conclusion section: 
 		
 		\begin{quote}
-			To properly investigate the control results, the control performance was also judged quantitatively using a set of quality criteria. The self-tunable control approach outperformed the conventional control strategy handling just a single controller, i.e., non-tunable controller, by minimizing the sum-of-squared control error up to 32\,\%, reducing maximal overshoots/undershoots up to 18\,\%, and decreasing settling time up to 24\,\%.
+			To properly investigate the control results, the control performance was also judged quantitatively using a set of quality criteria. The self-tunable control approach outperformed the conventional control strategy handling just a single controller, i.e., non-tunable controller. \change{In average, the control performance criteria improved compared to the upper and lower boundary MPC respectively as follows: the squared-error-based criterion (SSE) reduced by 23\% and 83\%, the maximal overshoot/undershoot $\sigma_{\mathrm{max}}$ reduced by 64\% and 102\%, and the settling time $t_{\epsilon}$ reduced by 12\% and 244\%.}
 		\end{quote}
 	}
 	
