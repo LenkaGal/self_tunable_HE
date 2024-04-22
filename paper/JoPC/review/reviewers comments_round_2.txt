@@ -1,0 +1,55 @@
+Od: Journal of Process Control <em@editorialmanager.com>
+Date: so 13. 4. 2024 o 22:13
+Subject: Decision on submission to Journal of Process Control
+To: Lenka Galčíková <lenka.galcikova@stuba.sk>
+
+
+Manuscript Number: JPROCONT-D-23-00448R1 
+
+Self-tunable approximated explicit MPC: Heat exchanger implementation and analysis
+
+Dear Ms. Galčíková,
+
+Thank you for submitting your manuscript to Journal of Process Control.
+
+I have completed my evaluation of your manuscript. The reviewers recommend reconsideration of your manuscript following major revision. I invite you to resubmit your manuscript after addressing the comments below. Please resubmit your revised manuscript by May 04, 2024.
+
+When revising your manuscript, please consider all issues mentioned in the reviewers' comments carefully: please outline every change made in response to their comments and provide suitable rebuttals for any comments not addressed. Please note that your revised submission may need to be re-reviewed.
+
+To submit your revised manuscript, please log in as an author at https://www.editorialmanager.com/jprocont/, and navigate to the "Submissions Needing Revision" folder. 
+
+Research Elements (optional)
+This journal encourages you to share research objects - including your raw data, methods, protocols, software, hardware and more – which support your original research article in a Research Elements journal. Research Elements are open access, multidisciplinary, peer-reviewed journals which make the objects associated with your research more discoverable, trustworthy and promote replicability and reproducibility. As open access journals, there may be an Article Publishing Charge if your paper is accepted for publication. Find out more about the Research Elements journals at https://www.elsevier.com/authors/tools-and-resources/research-elements-journals?dgcid=ec_em_research_elements_email.
+
+
+Journal of Process Control values your contribution and I look forward to receiving your revised manuscript.
+
+Kind regards, 
+Gabriele Pannocchia 
+Senior Editor 
+
+Journal of Process Control
+
+Editor and Reviewer comments:
+
+
+
+Editor: The same reviewers of the first submission have evaluated the revised manuscript.
+Reviewer #1 finds that some of the comments of the first review round have not been properly addressed, in particular regarding the performance quantification and the applicability of the method.
+Reviewer #2 is satisfied with the revised manuscript.
+Based on these reviews, another review is recommended. The authors are warned that without a convincing resolution of the issues raised by the reviewers, the manuscript may be rejected at the next round.
+
+Reviewer #1: The authors have not addressed some of my comments in the previous submission thoroughly. I have the following follow-up comments:-
+
+1) The control performance with Qy = 500 is not quantified, and whether the performance benefits of the proposed method reported in Table 2 still remain is not clarified. Since Qy =500 would give a moderately tuned controller, it can provide a better overall performance than the two boundary controllers chosen with "extreme" tuning.
+
+2) For the metrics in Table 2, can the authors also report average values of the three metrics (relative improvements) obtained across the four set point changes considered? The average values would give an idea of the overall control performance. It seems that the overall performance for the settling time would be worse, and only little improvement in the overshoot metric?
+
+3) All the three performance metric are related to the controlled temperature variable. Why did the authors not consider any metric related to the control input?
+
+4) In addition, the authors only summarize the best case performance improvements in the conclusions. This can be a bit misleading to readers since the proposed method also performs worse (significantly) in some parts of the simulations. So summarizing average values would be more appropriate to give a better picture of the overall performance.
+
+5) Based on the responses to my previous comments, it appears that the applicability of the proposed self-tunable explicit MPC method is limited to "small-scale multivariable systems, with decoupled dynamics"? If so, please mention this clearly in the abstract.
+
+
+Reviewer #2: My comments from the previous round have been fully address. I suggest publication.
