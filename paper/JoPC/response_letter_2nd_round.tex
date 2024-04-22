@@ -74,7 +74,7 @@
 	}
 
 	\answer{
-		We apologize for providing answers that were considered not sufficient. We have carefully revisited our recent manuscript to appropriately address all the Reviewer's comments. 
+		We apologize for providing answers that were considered as not sufficient. We carefully revisited our recent manuscript to appropriately address all the Reviewer's comments. 
 				
 		First, we revisited Table~\ref{tab:control_performance} to evaluate the required control performance criteria for the moderate MPC setup $Q_\mathrm{y} = 500$.
 		The values highlighted in blue represent the scenarios when the controller with the investigated setup $Q_\mathrm{y} = 500$ performed as the best one, excluding the self-tunable MPC.
@@ -114,12 +114,10 @@
 			\end{center}
 		\end{table}
 		
-		To ensure a consistent flow and not to disturb the readability of the paper, we incline not to branch the case study also in the direction of the moderate setup, i.e., $Q_\mathrm{y} = 500$. We prefer to emphasize the consideration of the self-tuning method based on the carefully revised comment from the first round of review:
-		
-		\textcolor{blue}{[ TODO: in the following paragraph of the manuscript, there is missing a text in red color highlighting what has changed: ]}
+		To ensure a consistent flow and not to disturb the readability of the paper, we incline not to branch the case study also in the direction of the moderate setup, i.e., $Q_\mathrm{y} = 500$. We prefer to emphasize the consideration of the self-tuning method in the form of the revised comment from the first round of the review. The corresponding part in the manuscript reads as follows:		
 		
 		\begin{quote}
-			Obviously, if there exists a well-tuned ``universal'' controller that satisfies the requirements on the control performance in the whole range of the considered operating conditions, then the implementation of the self-tuning procedure is out of scope for such control application. Nevertheless, in numerous practical situations, using only one controller with a constant setup leads to poor or just ``satisfactory'' control results, i.e., the reference value is achieved, but with worse control performance, e.g., leading to high overshoots or settling times. When working on our laboratory case study, a set of different setups of penalty matrices was investigated. In each control scenario, the setup was beneficial only in some working conditions (tracking the reference upwards or downwards). Therefore, the closed-loop control performance is significantly improved by introducing the benefits of the self-tuning method based on the two well-tuned boundary MPC controllers.
+			\change{Obviously, if there exists a well-tuned ``universal'' controller that satisfies the requirements on the control performance in the whole range of the considered operating conditions, then the implementation of the self-tuning procedure is out of scope for such control application. Nevertheless, in numerous practical situations, using only one controller with a constant setup leads to poor or just ``satisfactory'' control results, i.e., the reference value is achieved, but with worse control performance, e.g., leading to high overshoots or settling times. When working on our laboratory case study, a set of different setups of penalty matrices was investigated. In every control scenario, the setup was beneficial only in some working conditions (tracking the reference upwards or downwards). Therefore, the closed-loop control performance is improved by introducing the benefits of the self-tuning method based on the two boundary MPC controllers.}
 		\end{quote}
 	
 
@@ -276,7 +274,7 @@
 		The first admissible kind of criterion related to the control input could be intuitively some, potentially weighted, integral-of-squared input (ISI) or, in a discrete-time manner, sum-of-squared input (SSI). These criteria correspond to the summing of the control input, i.e., voltage to set the operating speed of the pump. However, the operating speed of the pump itself does not play any significant role in the costs of the control and, hence, is negligible. 
 		Therefore, the control inputs could be converted to the amount of the heating medium transported to the heat exchanger during the whole control experiment. Nevertheless, the heating medium is dosed to the heat exchanger plant in a recycle setup, i.e., the same amount of heating medium is re-used during operation, see the corresponding setup scheme in Figure 3 of the manuscript. As such an evaluation would represent fictitious performance criteria not related to the actual plant setup, we prefer not to confuse the reader by such a criterion. 
 		
-		Another criterion related to the control input we considered was the energy consumed to pre-heat the heating medium in the heater. Although the energy consumption may sound as a relevant criterion, this is not directly associated with the MPC's control inputs. The reason is that the consumed energy corresponds to the control involving the auxiliary proportional controller, which sets the electric power. Therefore, any energy minimization should be primarily addressed by fine tuning of this auxiliary controller. To conclude, we prefer not to include this criterion that is unrelated to the MPC controller and keep the evaluation of the control inputs in the visual form of the profiles in Figure~10 in the manuscript.		
+		Another criterion related to the control input we considered was the energy consumed to pre-heat the heating medium in the heater. Although the energy consumption may sound as a relevant criterion, this is not directly associated with the MPC's control inputs. The reason is that the consumed energy corresponds to the control involving the auxiliary proportional controller, which sets the electric power. Therefore, any energy minimization should be primarily addressed by fine tuning of this auxiliary controller. To conclude, we prefer not to include this criterion that is unrelated to the MPC controller and keep the analysis of the control inputs in the visual form of the profiles in Figure~10 in the manuscript.		
 	}
 	
 	
