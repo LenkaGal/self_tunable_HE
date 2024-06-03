@@ -1,0 +1,105 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{a4wide}
+\usepackage{multicol}
+\usepackage[ansinew]{inputenc}
+\usepackage{color}
+\usepackage{url}
+%\usepackage{floatflt}
+\usepackage{multirow}
+\usepackage{rotating, graphicx}
+
+
+\newcommand{\opt}{^{\star}} % \opt
+\newcommand{\tr}{\intercal} % transpose
+
+
+
+% RESPONSE LETTER SYNTAX:
+% =====================================================
+\newcommand{\change}[1]{\textcolor{red}{#1}}
+\newcommand{\textblue}[1]{\textcolor{blue}{#1}}
+
+
+
+
+\newcommand{\comment}[1]{
+	\begin{itemize}
+		\item \textbf{Comment:}\\ \sf{#1}
+	\end{itemize}
+}
+
+\newcommand{\answer}[1]{
+	\begin{itemize}
+		\item[] \textbf{Answer:}\\ #1
+	\end{itemize}
+}
+
+\newcommand{\pointout}[1]{\textcolor{blue}{#1}}
+\definecolor{YJ}{rgb}{0.0,0.5,0.0}
+
+% =====================================================
+
+
+\newcommand{\diam}[1]{\mathrm{diam}\left(#1\right)}
+
+% \newcommand {\mm}[1]{\textcolor{blue}{#1}}
+
+%opening
+\title{Response to the review comments}
+\author{}
+\date{}
+
+\sloppy
+\begin{document}
+	
+	\maketitle
+	\section*{Answer to Editor}
+	The authors would like to thank the Editor for collecting the 3rd round of review comments. We revised the paper based on the Reviewer's comments, and incorporated the suggestions into our manuscript.
+
+	
+	\section*{Answer to Reviewer 1}
+	
+	
+	\comment{
+		The authors have addressed the remaining comments in a good manner. However, the comment about the method applying to MIMO systems with decoupled dynamics is vague. What does the author mean? For instance a system with N inputs and N outputs in which input u$_i$ affects only output y$_i$? If so, this is not a MIMO system, just N independent SISO systems.
+		Moreover, there is no practical evidence of applicability to MIMO system, so the comment placed in the abstract is also misleading.
+		It is recommended to delete the sentence from the abstract.
+	}
+
+	\answer{
+		We thank the Reviewer for the comment on the applicability of the proposed method. 		
+		We removed the sentence from the Abstract based on the Reviewer's suggestion. Now the Abstract reads as follows:
+		
+		\begin{quote}
+			The tunable approximated explicit model predictive control (MPC) comes
+			with the benefits of real-time tunability without the necessity of solving the optimization problem online. This paper provides a novel self-tunable control policy that does not require any intervention from the control engineer during operation in order to retune the controller subject to the changed working conditions. Based on the current operating conditions, the autonomous tuning parameter scales the control input using linear interpolation between the boundary optimal control actions. The adjustment of the tuning parameter depends on the current reference value, which makes this strategy suitable for reference tracking problems. Furthermore, a novel technique for scaling the tuning parameter is proposed. This extension exploits different ranges of the tuning parameter assigned to specified operating conditions. The self-tunable explicit MPC was implemented on a laboratory heat exchanger with nonlinear and asymmetric behavior. The asymmetric behavior of the plant was compensated by tuning the controller’s aggressiveness, as the negative or positive sign of reference change was considered in the tuning procedure. The designed self-tunable controller improved control performance by decreasing sum-of-squared control error, maximal overshoots/undershoots, and settling time compared to the conventional control strategy based on a single (non-tunable) controller.
+		\end{quote}
+	
+	\newpage
+	
+	Additionally, to avoid misunderstandings, we updated also the corresponding part from Section 2.3 mentioning MIMO systems, which now reads as follows:
+	
+	\begin{quote}
+		Consider a single-input and single-output (SISO) system or a system with completely decoupled pairs of the control inputs and the system outputs. 		
+	\end{quote}
+	}
+
+
+
+
+
+
+	
+
+	
+	
+	%\bibliographystyle{plain}
+	%\bibliography{references}
+	
+\end{document}
+
+
